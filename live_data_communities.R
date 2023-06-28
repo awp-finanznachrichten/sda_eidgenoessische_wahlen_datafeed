@@ -26,8 +26,6 @@ for (g in 1:length(gemeinde_nummern)) {
                       "<td style='text-align:center'><b>+/-</b></td></tr>")
     
     for (i in 1:nrow(ergebnisse_gemeinde)) {
-      
-      
       tabelle <- paste0(tabelle,
                         "<tr><td>",ergebnisse_gemeinde$shortname_de[i],"</td>",
       #                  "<td><div style='width:",round2(ergebnisse_gemeinde$partei_staerke[i]*1.5),
@@ -38,6 +36,17 @@ for (g in 1:length(gemeinde_nummern)) {
       )  
     }
     tabelle <- paste0(tabelle,"</table>")
+    
+    #Wahlbeteiligung verfügbar?
+    voter_turnout <- results_NR_communities_voterturnout %>%
+      filter(gemeinde_nummer == gemeinde_nummern[g],
+             is.na(wahlbeteiligung) == FALSE)
+    
+    if (nrow(voter_turnout) == 1) {
+    tabelle <- paste0(tabelle,"Wahlbeteiligung: ",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"% (",
+                      format(round2(voter_turnout$differenz_wahlbeteiligung,1),nsmall=1),"%)")  
+    }  
+
     tabelle <- gsub("[+]-","-",tabelle)
     tabelle <- gsub("[+]0[.]0%","unv.",tabelle)
     
