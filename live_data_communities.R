@@ -43,7 +43,7 @@ for (g in 1:length(gemeinde_nummern)) {
              is.na(wahlbeteiligung) == FALSE)
     
     if (nrow(voter_turnout) == 1) {
-    tabelle <- paste0(tabelle,"Wahlbeteiligung: ",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"% (",
+    tabelle <- paste0(tabelle,"<br>Wahlbeteiligung: <b>",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"%</b> (",
                       format(round2(voter_turnout$differenz_wahlbeteiligung,1),nsmall=1),"%)")  
     }  
 
