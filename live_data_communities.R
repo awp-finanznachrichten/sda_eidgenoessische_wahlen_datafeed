@@ -23,8 +23,7 @@ for (g in 1:length(gemeinde_nummern)) {
     tabelle <- paste0("<table><tr><td><b>Partei</b></td>",
                       #"<td><b></b></td>",
                       "<td><b>Wähleranteil</b></td>",
-                      "<td style='text-align:center'><b>+/-</b></td></tr>",
-                      "<tr></tr>")
+                      "<td style='text-align:center'><b>+/-</b></td></tr>")
     
     for (i in 1:nrow(ergebnisse_gemeinde)) {
       tabelle <- paste0(tabelle,
