@@ -3,7 +3,10 @@ setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde","Tabelle","no_data")
 colnames(nationalrat_gemeinden_dw) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
 
-gemeinde_nummern <- unique(results_NR_communities$gemeinde_nummer)
+gemeinde_nummern <- results_NR_communities %>%
+  filter(gemeinde_nummer < 9000) %>%
+  distinct(gemeinde_nummer)
+gemeinde_nummern <- gemeinde_nummern$gemeinde_nummer
 
 for (g in 1:length(gemeinde_nummern)) {
 
@@ -23,7 +26,7 @@ for (g in 1:length(gemeinde_nummern)) {
     tabelle <- paste0("<table><tr><td><b>Partei</td>",
                       #"<td><b></b></td>",
                       "<td><b>Anteil</td>",
-                      "<td style='text-align:center'><b>+/-</b></td></tr>")
+                      "cc<b>+/-</b></td></tr>")
     
     for (i in 1:nrow(ergebnisse_gemeinde)) {
       tabelle <- paste0(tabelle,
@@ -69,4 +72,3 @@ nationalrat_gemeinden_dw$Tabelle <- gsub("[>]","£",nationalrat_gemeinden_dw$Tab
 nationalrat_gemeinden_dw$Tabelle <- gsub(";","¢",nationalrat_gemeinden_dw$Tabelle)
 
 write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteien_gemeinden.csv",row.names = FALSE)
-
