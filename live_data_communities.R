@@ -23,9 +23,9 @@ for (g in 1:length(gemeinde_nummern)) {
   #Check: Daten schon da?
   if (nrow(ergebnisse_gemeinde) > 0) {
     staerkste_partei <- ergebnisse_gemeinde$shortname_de[1]
-    tabelle <- paste0("<table><tr><td><b>Partei</td>",
+    tabelle <- paste0("<table><tr><td><b>Partei</b></td>",
                       #"<td><b></b></td>",
-                      "<td><b>Wähleranteil</td>",
+                      "<td><b>Wähleranteil</b></td>",
                       "§<b>+/-</b></td></tr>")
     
     for (i in 1:nrow(ergebnisse_gemeinde)) {
