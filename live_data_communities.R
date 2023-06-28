@@ -22,8 +22,9 @@ for (g in 1:length(gemeinde_nummern)) {
     staerkste_partei <- ergebnisse_gemeinde$shortname_de[1]
     tabelle <- paste0("<table><tr><td><b>Partei</b></td>",
                       #"<td><b></b></td>",
-                      "<td><b>Anteil</b></td>",
-                      "<td style='text-align:center'><b>+/-</b></td></tr>")
+                      "<td><b>Wähleranteil</b></td>",
+                      "<td style='text-align:center'><b>+/-</b></td></tr>",
+                      "<tr></tr>")
     
     for (i in 1:nrow(ergebnisse_gemeinde)) {
       tabelle <- paste0(tabelle,
@@ -43,7 +44,7 @@ for (g in 1:length(gemeinde_nummern)) {
              is.na(wahlbeteiligung) == FALSE)
     
     if (nrow(voter_turnout) == 1) {
-    tabelle <- paste0(tabelle,"<br>Wahlbeteiligung: <b>",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"%</b> (",
+    tabelle <- paste0(tabelle,"<br>Wahlbeteiligung: <b>",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"%</b> (+",
                       format(round2(voter_turnout$differenz_wahlbeteiligung,1),nsmall=1),"%)")  
     }  
 
@@ -70,17 +71,3 @@ nationalrat_gemeinden_dw$Tabelle <- gsub(";","¢",nationalrat_gemeinden_dw$Tabel
 
 write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteien_gemeinden.csv",row.names = FALSE)
 
-#Datawrapper update
-#if (counted_nationalrat == 0) {
-#  intro_text <- paste0("Es sind noch keine Gemeinden ausgezählt.<br>")
-#} else if (counted_nationalrat == 174) {
-#  intro_text <- paste0("Endresultat: ",format(Sys.Date(),"%d.%m.%Y")," ",format(Sys.time(),"%H:%M Uhr<br>"))
-#} else {
-#  intro_text <- paste0("Letzte Live-Aktualisierung: <b>",format(Sys.time(),"%H:%M Uhr</b>. "),
-#                       "Es sind <b>",counted_nationalrat," (",round2(counted_percentage_nationalrat,1),"%)</b> der 174 Gemeinden/Stadtkreise ausgezählt.<br>")  
-#}  
-
-#chart_ID <- "kvDOy"
-#dw_data_to_chart(nationalrat_gemeinden_dw,chart_ID)
-#dw_edit_chart(chart_ID,intro=intro_text)
-#dw_publish_chart(chart_ID)
