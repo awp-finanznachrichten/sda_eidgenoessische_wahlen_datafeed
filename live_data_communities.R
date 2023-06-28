@@ -24,17 +24,21 @@ for (g in 1:length(gemeinde_nummern)) {
   if (nrow(ergebnisse_gemeinde) > 0) {
     staerkste_partei <- ergebnisse_gemeinde$shortname_de[1]
     tabelle <- paste0("<table><tr><td><b>Partei</b></td>",
-                      #"<td><b></b></td>",
-                      "<td><b>Wähleranteil</b></td>",
+                      "<td><b></b></td>",
+                      "<td><b>Anteil</b></td>",
                       "§<b>+/-</b></td></tr>")
+    
+    #l1 = <td><div style='width:
+    #l2 = px; height:15px; background-color:
+    #l3 = ; color:white; padding:4px 4px 0px 4px; vertical-align:bottom; font-weight:bold; display:inline-block;'></div></td>"
     
     for (i in 1:nrow(ergebnisse_gemeinde)) {
       tabelle <- paste0(tabelle,
                         "<tr><td>",ergebnisse_gemeinde$shortname_de[i],"</td>",
-      #                  "<td><div style='width:",round2(ergebnisse_gemeinde$partei_staerke[i]*1.5),
-      #                  "px; height:15px; background-color:",ergebnisse_gemeinde$party_color[i],
-      #                  "; color:white; padding:4px 4px 0px 4px; vertical-align:bottom; font-weight:bold; display:inline-block;'></div></td>",
-                        "§<b>",format(round2(ergebnisse_gemeinde$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
+                        "l1",round2(ergebnisse_gemeinde$partei_staerke[i]*1.5),
+                        "l2",ergebnisse_gemeinde$party_color[i],
+                        "l3",
+                        "<td><b>",format(round2(ergebnisse_gemeinde$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
                         "§+",format(round2(ergebnisse_gemeinde$differenz_partei_staerke[i],1),nsmall=1),"%</td></tr>"
       )  
     }
