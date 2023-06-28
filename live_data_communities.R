@@ -25,8 +25,8 @@ for (g in 1:length(gemeinde_nummern)) {
     staerkste_partei <- ergebnisse_gemeinde$shortname_de[1]
     tabelle <- paste0("<table><tr><td><b>Partei</td>",
                       #"<td><b></b></td>",
-                      "<td><b>Anteil</td>",
-                      "cc<b>+/-</b></td></tr>")
+                      "<b>Wähleranteil</td>",
+                      "§<b>+/-</b></td></tr>")
     
     for (i in 1:nrow(ergebnisse_gemeinde)) {
       tabelle <- paste0(tabelle,
@@ -34,8 +34,8 @@ for (g in 1:length(gemeinde_nummern)) {
       #                  "<td><div style='width:",round2(ergebnisse_gemeinde$partei_staerke[i]*1.5),
       #                  "px; height:15px; background-color:",ergebnisse_gemeinde$party_color[i],
       #                  "; color:white; padding:4px 4px 0px 4px; vertical-align:bottom; font-weight:bold; display:inline-block;'></div></td>",
-                        "<td><b>",format(round2(ergebnisse_gemeinde$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
-                        "<td style='text-align:center'>+",format(round2(ergebnisse_gemeinde$differenz_partei_staerke[i],1),nsmall=1),"%</td></tr>"
+                        "§<b>",format(round2(ergebnisse_gemeinde$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
+                        "§+",format(round2(ergebnisse_gemeinde$differenz_partei_staerke[i],1),nsmall=1),"%</td></tr>"
       )  
     }
     tabelle <- paste0(tabelle,"</table>")
