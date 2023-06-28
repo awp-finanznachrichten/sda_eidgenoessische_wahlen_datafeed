@@ -20,9 +20,9 @@ for (g in 1:length(gemeinde_nummern)) {
   #Check: Daten schon da?
   if (nrow(ergebnisse_gemeinde) > 0) {
     staerkste_partei <- ergebnisse_gemeinde$shortname_de[1]
-    tabelle <- paste0("<table><tr><td><b>Partei</b></td>",
+    tabelle <- paste0("<table><tr><td><b>Partei</td>",
                       #"<td><b></b></td>",
-                      "<td><b>Wähleranteil</b></td>",
+                      "<td><b>Anteil</td>",
                       "<td style='text-align:center'><b>+/-</b></td></tr>")
     
     for (i in 1:nrow(ergebnisse_gemeinde)) {
@@ -31,7 +31,7 @@ for (g in 1:length(gemeinde_nummern)) {
       #                  "<td><div style='width:",round2(ergebnisse_gemeinde$partei_staerke[i]*1.5),
       #                  "px; height:15px; background-color:",ergebnisse_gemeinde$party_color[i],
       #                  "; color:white; padding:4px 4px 0px 4px; vertical-align:bottom; font-weight:bold; display:inline-block;'></div></td>",
-                        "<td style='text-align:center'><b>",format(round2(ergebnisse_gemeinde$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
+                        "<td><b>",format(round2(ergebnisse_gemeinde$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
                         "<td style='text-align:center'>+",format(round2(ergebnisse_gemeinde$differenz_partei_staerke[i],1),nsmall=1),"%</td></tr>"
       )  
     }
