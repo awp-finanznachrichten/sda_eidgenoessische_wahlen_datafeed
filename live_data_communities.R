@@ -3,15 +3,14 @@ setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde","Tabelle","no_data")
 colnames(nationalrat_gemeinden_dw) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
 
-gemeinde_nummern <- results_NR_communities %>%
+gemeinden <- results_NR_communities %>%
   filter(gemeinde_nummer < 9000) %>%
-  distinct(gemeinde_nummer)
-gemeinde_nummern <- gemeinde_nummern$gemeinde_nummer
+  distinct(gemeinde_nummer,.keep_all = TRUE)
 
-for (g in 1:length(gemeinde_nummern)) {
+for (g in 1:nrow(gemeinden)) {
 
   ergebnisse_gemeinde <- results_NR_communities %>%
-    filter(gemeinde_nummer == gemeinde_nummern[g],
+    filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(partei_staerke) == FALSE,
            partei_staerke > 1,
            shortname_de != "weitere") %>%
@@ -24,15 +23,6 @@ for (g in 1:length(gemeinde_nummern)) {
   if (nrow(ergebnisse_gemeinde) > 0) {
     staerkste_partei <- ergebnisse_gemeinde$shortname_de[1]
     tabelle <- "tab_h"
-    
-    #tab_h = "<table><tr><td><b>Partei</b></td>",
-    #"<td><b></b></td>",
-    #"<td><b>Anteil</b></td>",
-    #"§<b>+/-</b></td></tr>"
-    #tab_r1 = <td><div style='width:
-    #tab_r2 = px; height:15px; background-color:
-    #tab_r3 = = ; color:white; padding:4px 4px 0px 4px; vertical-align:bottom; font-weight:bold; display:inline-block;'></div></td>"
-
     
     for (i in 1:nrow(ergebnisse_gemeinde)) {
       tabelle <- paste0(tabelle,
@@ -48,7 +38,7 @@ for (g in 1:length(gemeinde_nummern)) {
     
     #Wahlbeteiligung verfügbar?
     voter_turnout <- results_NR_communities_voterturnout %>%
-      filter(gemeinde_nummer == gemeinde_nummern[g],
+      filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
              is.na(wahlbeteiligung) == FALSE)
 
     if (nrow(voter_turnout) == 1) {
@@ -61,9 +51,9 @@ for (g in 1:length(gemeinde_nummern)) {
     tabelle <- gsub("[+]0[.]0%","unv.",tabelle)
     
   }
-  
-  new_entry <- data.frame(ergebnisse_gemeinde$gemeinde_nummer[1],
-                          ergebnisse_gemeinde$gemeinde_bezeichnung[1],
+
+  new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
+                          gemeinden$gemeinde_bezeichnung[g],
                           tabelle,
                           staerkste_partei)
   colnames(new_entry) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
@@ -79,3 +69,16 @@ nationalrat_gemeinden_dw$Tabelle <- gsub("[>]","£",nationalrat_gemeinden_dw$Tab
 nationalrat_gemeinden_dw$Tabelle <- gsub(";","¢",nationalrat_gemeinden_dw$Tabelle)
 
 write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteien_gemeinden.csv",row.names = FALSE)
+
+###INFO###
+##The following placeholders will be replaced directly in the datawrapper maps so the data file doesn't become too large (2 MB limit):
+
+#tab_h = "<table><tr><td><b>Partei</b></td>",
+#"<td><b></b></td>",
+#"<td><b>Anteil</b></td>",
+#"§<b>+/-</b></td></tr>"
+#tab_r1 = <td><div style='width:
+#tab_r2 = px; height:15px; background-color:
+#tab_r3 = = ; color:white; padding:4px 4px 0px 4px; vertical-align:bottom; font-weight:bold; display:inline-block;'></div></td>"
+
+View(nationalrat_gemeinden_dw)
