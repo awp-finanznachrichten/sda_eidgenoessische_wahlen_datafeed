@@ -23,21 +23,23 @@ for (g in 1:length(gemeinde_nummern)) {
   #Check: Daten schon da?
   if (nrow(ergebnisse_gemeinde) > 0) {
     staerkste_partei <- ergebnisse_gemeinde$shortname_de[1]
-    tabelle <- paste0("<table><tr><td><b>Partei</b></td>",
-                      "<td><b></b></td>",
-                      "<td><b>Anteil</b></td>",
-                      "§<b>+/-</b></td></tr>")
+    tabelle <- "tab_h"
     
-    #l1 = <td><div style='width:
-    #l2 = px; height:15px; background-color:
-    #l3 = ; color:white; padding:4px 4px 0px 4px; vertical-align:bottom; font-weight:bold; display:inline-block;'></div></td>"
+    #tab_h = "<table><tr><td><b>Partei</b></td>",
+    #"<td><b></b></td>",
+    #"<td><b>Anteil</b></td>",
+    #"§<b>+/-</b></td></tr>"
+    #tab_r1 = <td><div style='width:
+    #tab_r2 = px; height:15px; background-color:
+    #tab_r3 = = ; color:white; padding:4px 4px 0px 4px; vertical-align:bottom; font-weight:bold; display:inline-block;'></div></td>"
+
     
     for (i in 1:nrow(ergebnisse_gemeinde)) {
       tabelle <- paste0(tabelle,
                         "<tr><td>",ergebnisse_gemeinde$shortname_de[i],"</td>",
-                        "l1",round2(ergebnisse_gemeinde$partei_staerke[i]*1.5),
-                        "l2",ergebnisse_gemeinde$party_color[i],
-                        "l3",
+                        "tab_r1",round2(ergebnisse_gemeinde$partei_staerke[i]*1.5),
+                        "tab_r2",ergebnisse_gemeinde$party_color[i],
+                        "tab_r3",
                         "<td><b>",format(round2(ergebnisse_gemeinde$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
                         "§+",format(round2(ergebnisse_gemeinde$differenz_partei_staerke[i],1),nsmall=1),"%</td></tr>"
       )  
@@ -48,9 +50,10 @@ for (g in 1:length(gemeinde_nummern)) {
     voter_turnout <- results_NR_communities_voterturnout %>%
       filter(gemeinde_nummer == gemeinde_nummern[g],
              is.na(wahlbeteiligung) == FALSE)
-    
+
     if (nrow(voter_turnout) == 1) {
-    tabelle <- paste0(tabelle,"<br>Wahlbeteiligung: <b>",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"%</b> (+",
+    tabelle <- paste0(tabelle,"<br>","Gültige Wahlzettel: <b>",format(voter_turnout$gueltige_wahlzettel),"</b><br>",
+                      "<br>Wahlbeteiligung: <b>",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"%</b> (+",
                       format(round2(voter_turnout$differenz_wahlbeteiligung,1),nsmall=1),"%)")  
     }  
 
