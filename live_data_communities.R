@@ -52,8 +52,8 @@ for (g in 1:length(gemeinde_nummern)) {
              is.na(wahlbeteiligung) == FALSE)
 
     if (nrow(voter_turnout) == 1) {
-    tabelle <- paste0(tabelle,"<br>","Gültige Wahlzettel: <b>",format(voter_turnout$gueltige_wahlzettel),"</b><br>",
-                      "<br>Wahlbeteiligung: <b>",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"%</b> (+",
+    tabelle <- paste0(tabelle,"<br>Gültige Wahlzettel: <b>",format(voter_turnout$gueltige_wahlzettel,big.mark = "'"),"</b><br>",
+                      "Wahlbeteiligung: <b>",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"%</b> (+",
                       format(round2(voter_turnout$differenz_wahlbeteiligung,1),nsmall=1),"%)")  
     }  
 
