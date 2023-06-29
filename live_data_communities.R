@@ -81,4 +81,3 @@ write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteie
 #tab_r2 = px; height:15px; background-color:
 #tab_r3 = = ; color:white; padding:4px 4px 0px 4px; vertical-align:bottom; font-weight:bold; display:inline-block;'></div></td>"
 
-View(nationalrat_gemeinden_dw)
