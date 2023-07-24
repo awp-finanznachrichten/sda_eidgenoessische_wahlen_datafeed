@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
+  <header>
+    <sent>2023-07-20T11:12:06+02:00</sent>
+  </header>
+
+  <itemSet>
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="de" guid="urn:newsml:keystone-sda.ch:20230720:20230720111206248988950328537" version="1">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
+      <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
+
+      <itemMeta>
+        <itemClass qcode="ninat:text"/>
+        <provider qcode="nprov:KSDA">
+           <name>sda</name>
+        </provider>
+        <versionCreated>2023-07-20T11:12:06+02:00</versionCreated>
+        <pubStatus qcode="stat:withheld"/>
+        <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
+        <service qcode="sdasvc:bsd"></service>
+        <edNote role="sdanote:note">Diese Meldung wurde automatisch auf Grundlage der aktuellsten
+Daten vom Bundesamt für Statistik (BFS) erstellt und vor der Publikation überprüft.</edNote>
+        <edNote role="sdalena:memo">Dies ist ein Test</edNote>
+        
+      </itemMeta>
+
+      <contentMeta>
+        <urgency>3</urgency>
+        <contentCreated>2023-07-20T11:12:06+02:00</contentCreated>
+        <creator>
+          <name>sda-robot</name>
+        </creator>
+        <altId>248988950328537</altId>
+        <dateline>Sarnen</dateline>
+        <language tag="de"/>
+        <genre qcode="sdagenre:RES">
+        </genre>
+
+        <!--storytypes-->
+        <subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>
+        
+        <!--media topics-->
+        <subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:LOH"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:PRT"></subject>
+
+        <!--locations-->
+        <located type="loctype:city" qcode="sdamarsgeo:CH">
+<name>Schweiz</name>
+</located>
+  
+        <slugline>Wahlen 2023 - OW NR</slugline>
+        <headline>***TEST***Der gewählte Nationalrat aus dem Kanton Obwalden</headline>
+        <description role="drol:teaser"> </description>
+        <description role="drol:catchline"></description>
+      </contentMeta>
+
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+xml">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>***TEST***Der gewählte Nationalrat aus dem Kanton Obwalden</title>
+            </head>
+            <body>
+              <p class="lead"> </p>
+              <p class="paragraph">Das Stimmvolk des Kantons Obwalden hat folgende Person in den Nationalrat gewählt:</p>
+<table><tbody><tr><td></td><td></td><td></td><td>Anzahl Stimmen</td></tr><tr><td>Monika Rüegger-Hurschler</td><td>SVP</td><td>neu</td><td>5'412</td></tr></tbody></table>
+<p class="paragraph"></p>
+<p class="paragraph"></p>
+<p class="paragraph">Quelle: Bundesamt für Statistik (BFS)</p>
+
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>

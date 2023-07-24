@@ -83,7 +83,7 @@ for (c in 1:nrow(elections_metadata_selection)) {
 tabelle <- paste0("<table><tbody><tr><td></td>",
 "<td></td>",
 "<td></td>",
-"<td><b>Anzahl Stimmen</b></td></tr>")
+"<td>Anzahl Stimmen</td></tr>")
 
 for (e in 1:nrow(elected_candidates)) {
 tabelle <- paste0(tabelle,
@@ -114,7 +114,8 @@ overview_texts <- rbind(overview_texts,new_entry)
 print(texts_candidates)
 cat(tabelle)
 
+#source("create_mars_meldung_candidates_NR.R",encoding = "UTF-8")
 }
 
 overview_texts <- overview_texts[-1,]
-write.xlsx(overview_texts,"texte_candidates_NR.xlsx",row.names = FALSE)
+#write.xlsx(overview_texts,"texte_candidates_NR.xlsx",row.names = FALSE)

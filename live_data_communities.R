@@ -1,4 +1,5 @@
 setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+source("get_data_2023.R")
 
 nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde","Tabelle","no_data")
 colnames(nationalrat_gemeinden_dw) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
@@ -12,8 +13,10 @@ for (g in 1:nrow(gemeinden)) {
   ergebnisse_gemeinde <- results_NR_communities %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(partei_staerke) == FALSE,
-           partei_staerke > 1,
-           shortname_de != "weitere") %>%
+           partei_staerke > 1 |
+          differenz_partei_staerke < -3, 
+           shortname_de != "weitere",
+           shortname_de != "BDP") %>%
     arrange(desc(partei_staerke))
   
   tabelle <- "Resultat liegt noch nicht vor."
@@ -80,4 +83,3 @@ write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteie
 #tab_r1 = <td><div style='width:
 #tab_r2 = px; height:15px; background-color:
 #tab_r3 = = ; color:white; padding:4px 4px 0px 4px; vertical-align:bottom; font-weight:bold; display:inline-block;'></div></td>"
-

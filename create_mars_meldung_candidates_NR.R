@@ -56,6 +56,7 @@ setwd("./Output")
 filename <- paste0(format(Sys.Date(),"%Y%m%d"),"_",elections_metadata_selection$area_ID[c],"_NR_Candidates_Wahlen2023_de.xml")
 cat(vorlage, file = (con <- file(filename, "w", encoding="UTF-8"))); close(con)
 
+Sys.sleep(5)
 ###FTP-Upload
 ftpUpload(filename, paste0("ftp://awp-lena.sda-ats.ch/",filename),userpwd=Sys.getenv("ftp_sda"))
 

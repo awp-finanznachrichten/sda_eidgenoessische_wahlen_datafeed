@@ -60,10 +60,10 @@ texts_parties <- replace_variables(texts_parties,
 ##Create Table
 tabelle <- paste0("<table><tbody><tr>",
 "<td></td>",
-"<td><b>Sitze</b></td>",
-"<td><b>Veränderung zu 2019</b></td>",
-"<td><b>Wähleranteil</b></td>",
-"<td><b>Veränderung zu 2019</b></td>",
+"<td>Sitze</td>",
+"<td>Veränderung zu 2019</td>",
+"<td>Wähleranteil</td>",
+"<td>Veränderung zu 2019</td>",
 "</tr>")
 
 for (p in 1:nrow(results_parties)) {
@@ -97,6 +97,9 @@ new_entry <- data.frame(elections_metadata_selection$area_ID[c],
 colnames(new_entry) <- c("Kanton","Storyboard","Text","Tabelle")
 overview_texts <- rbind(overview_texts,new_entry)
 print(storyboard_parties)
+
+#source("create_mars_meldung_results_NR.R",encoding = "UTF-8")
+
 }
 
 overview_texts <- overview_texts[-1,]

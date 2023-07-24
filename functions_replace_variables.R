@@ -5,8 +5,6 @@ texts <- gsub("#Kanton_short_d",metadata$area_ID[c],texts)
 texts <- gsub("#Kanton_d",metadata$area_name_de[c],texts)
 texts <- gsub("#Sitze_NR",metadata$seats_available_NR[c],texts)
 
-
-
 #Gewinner Parteien
 if (grepl("#Parteien_Gewinner",texts[3]) == TRUE) {
 winners <- results %>%
@@ -23,7 +21,8 @@ texts <- gsub("#Parteien_Gewinner",text_winners,texts)
     
 } else if (grepl("#Partei_Gewinner",texts[3]) == TRUE) {
 winner <- results %>%
-  filter(seats_change > 0)
+  filter(seats_change > 0) %>%
+  arrange(desc(seats_change))
 texts <- gsub("#Partei_Gewinner",winner$shortname_de,texts)  
 } 
 
@@ -31,8 +30,8 @@ texts <- gsub("#Partei_Gewinner",winner$shortname_de,texts)
 if (grepl("#Parteien_Verlierer",texts[4]) == TRUE) {
   losers <- results %>%
     filter(seats_change < 0) %>%
-    arrange(seats)
-  
+    arrange(seats_change)
+
   text_losers <- ""
   for (p in 1:nrow(losers)) {
     text_losers <- paste0(text_losers,"die ",losers$shortname_de[p],", ")  
