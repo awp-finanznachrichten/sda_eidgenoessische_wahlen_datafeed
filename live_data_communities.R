@@ -34,7 +34,7 @@ for (g in 1:nrow(gemeinden)) {
                         "tab_r2",ergebnisse_gemeinde$party_color[i],
                         "tab_r3",
                         "<td><b>",format(round2(ergebnisse_gemeinde$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
-                        "§+",format(round2(ergebnisse_gemeinde$differenz_partei_staerke[i],1),nsmall=1),"%P</td></tr>"
+                        "§+",format(round2(ergebnisse_gemeinde$differenz_partei_staerke[i],1),nsmall=1),"</td></tr>"
       )  
     }
     tabelle <- paste0(tabelle,"</table>")
