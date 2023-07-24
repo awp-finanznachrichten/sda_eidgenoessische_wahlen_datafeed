@@ -15,8 +15,8 @@ for (g in 1:nrow(gemeinden)) {
            is.na(partei_staerke) == FALSE,
            partei_staerke > 1 |
           differenz_partei_staerke < -3, 
-           shortname_de != "weitere",
-           shortname_de != "BDP") %>%
+           shortname_de != "weitere") %>%
+          # shortname_de != "BDP") %>%
     arrange(desc(partei_staerke))
   
   tabelle <- "Resultat liegt noch nicht vor."
