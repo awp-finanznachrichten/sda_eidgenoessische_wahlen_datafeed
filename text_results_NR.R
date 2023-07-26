@@ -22,8 +22,8 @@ elections_metadata_selection <- elections_metadata_selection  %>%
 elections_metadata_selection <- elections_metadata_selection %>% 
   left_join(stand_cantons, join_by(bfs_ID==kanton_nummer))
 
-overview_texts <- data.frame("Kanton","Storyboard","Text","Tabelle")
-colnames(overview_texts) <- c("Kanton","Storyboard","Text","Tabelle")
+overview_texts <- data.frame("Kanton","Storyboard","Text")
+colnames(overview_texts) <- c("Kanton","Storyboard","Text")
 
 for (c in 1:nrow(elections_metadata_selection)) {
 
@@ -39,9 +39,10 @@ results_parties <- results_parties %>%
             by = join_by(party_ID == id))
 
 results_parties <- results_parties %>%
-  filter(seats != 0 |
+  filter(voter_share > 0,
+         seats != 0 |
           seats_change != 0 |
-           voter_share >= 3) %>%
+          voter_share >= 3) %>%
   arrange(desc(seats),
           desc(voter_share))
 
@@ -91,12 +92,12 @@ new_entry <- data.frame(elections_metadata_selection$area_ID[c],
                         toString(storyboard_parties),
                         paste0(texts_parties[1],"\n",texts_parties[2],"\n\n",
                                texts_parties[3]," ",texts_parties[4],"\n\n",
-                               texts_parties[5],"\n((Tabelle))\n",
-                               texts_parties[6]," ",texts_parties[7],"\n",
-                               texts_parties[8]
-                               ),
-                        tabelle)
-colnames(new_entry) <- c("Kanton","Storyboard","Text","Tabelle")
+                               texts_parties[5],
+                               tabelle,
+                               texts_parties[6]," ",texts_parties[7],"\n\n",
+                               texts_parties[8],"\n\n\n"
+                               ))
+colnames(new_entry) <- c("Kanton","Storyboard","Text")
 overview_texts <- rbind(overview_texts,new_entry)
 print(storyboard_parties)
 
@@ -106,3 +107,6 @@ print(storyboard_parties)
 
 overview_texts <- overview_texts[-1,]
 write.xlsx(overview_texts,"texte_results_NR.xlsx",row.names = FALSE)
+
+#HTML Output
+html_output <- gsub("\n","<br>",overview_texts$Text)
