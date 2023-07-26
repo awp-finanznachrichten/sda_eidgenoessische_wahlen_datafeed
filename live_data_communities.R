@@ -1,6 +1,7 @@
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 source("get_data_2023.R")
 
+#Dataframe Tabellen-Output
 nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde","Tabelle","no_data")
 colnames(nationalrat_gemeinden_dw) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
 
@@ -9,32 +10,36 @@ gemeinden <- results_NR_communities %>%
   distinct(gemeinde_nummer,.keep_all = TRUE)
 
 for (g in 1:nrow(gemeinden)) {
-
+  
   ergebnisse_gemeinde <- results_NR_communities %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
-           is.na(partei_staerke) == FALSE,
-           partei_staerke > 1 |
-          differenz_partei_staerke < -3, 
-           shortname_de != "weitere") %>%
-          # shortname_de != "BDP") %>%
-    arrange(desc(partei_staerke))
+           is.na(partei_staerke) == FALSE)
   
   tabelle <- "Resultat liegt noch nicht vor."
   staerkste_partei <- "no_data"
   
   #Check: Daten schon da?
   if (nrow(ergebnisse_gemeinde) > 0) {
-    staerkste_partei <- ergebnisse_gemeinde$shortname_de[1]
+    
+  #Filter Parteien für Tabelle: Stärker als 1% oder mehr als 3% verloren
+    ergebnisse_gemeinde_tabelle <- ergebnisse_gemeinde %>%
+      filter(partei_staerke > 1 |
+      differenz_partei_staerke < -3, 
+    shortname_de != "weitere") %>%
+  # shortname_de != "BDP") %>%
+  arrange(desc(partei_staerke))
+    
+    staerkste_partei <- ergebnisse_gemeinde_tabelle$shortname_de[1]
     tabelle <- "tab_h"
     
-    for (i in 1:nrow(ergebnisse_gemeinde)) {
+    for (i in 1:nrow(ergebnisse_gemeinde_tabelle)) {
       tabelle <- paste0(tabelle,
-                        "<tr><td>",ergebnisse_gemeinde$shortname_de[i],"</td>",
-                        "tab_r1",round2(ergebnisse_gemeinde$partei_staerke[i]*1.5),
-                        "tab_r2",ergebnisse_gemeinde$party_color[i],
+                        "<tr><td>",ergebnisse_gemeinde_tabelle$shortname_de[i],"</td>",
+                        "tab_r1",round2(ergebnisse_gemeinde_tabelle$partei_staerke[i]*1.5),
+                        "tab_r2",ergebnisse_gemeinde_tabelle$party_color[i],
                         "tab_r3",
-                        "<td><b>",format(round2(ergebnisse_gemeinde$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
-                        "§+",format(round2(ergebnisse_gemeinde$differenz_partei_staerke[i],1),nsmall=1),"</td></tr>"
+                        "<td><b>",format(round2(ergebnisse_gemeinde_tabelle$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
+                        "§+",format(round2(ergebnisse_gemeinde_tabelle$differenz_partei_staerke[i],1),nsmall=1),"</td></tr>"
       )  
     }
     tabelle <- paste0(tabelle,"</table>")
@@ -45,16 +50,19 @@ for (g in 1:nrow(gemeinden)) {
              is.na(wahlbeteiligung) == FALSE)
 
     if (nrow(voter_turnout) == 1) {
+    
+    #Ergänzung Tabelle
     tabelle <- paste0(tabelle,"<br>Gültige Wahlzettel: <b>",format(voter_turnout$gueltige_wahlzettel,big.mark = "'"),"</b><br>",
                       "Wahlbeteiligung: <b>",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"%</b> (+",
                       format(round2(voter_turnout$differenz_wahlbeteiligung,1),nsmall=1),"%)")  
     }  
 
     tabelle <- gsub("[+]-","-",tabelle)
-    tabelle <- gsub("[+]0[.]0%","unv.",tabelle)
+    tabelle <- gsub("[+]0[.]0%","-",tabelle)
     
   }
 
+  #Neuer Eintrag für Tabelle
   new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
                           gemeinden$gemeinde_bezeichnung[g],
                           tabelle,
@@ -64,14 +72,14 @@ for (g in 1:nrow(gemeinden)) {
   
 }
 
+#Final adaptions Tabelle
 nationalrat_gemeinden_dw <- nationalrat_gemeinden_dw[-1,]
-
-
 nationalrat_gemeinden_dw$Tabelle <- gsub("[<]","$",nationalrat_gemeinden_dw$Tabelle)
 nationalrat_gemeinden_dw$Tabelle <- gsub("[>]","£",nationalrat_gemeinden_dw$Tabelle)
 nationalrat_gemeinden_dw$Tabelle <- gsub(";","¢",nationalrat_gemeinden_dw$Tabelle)
-
 write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteien_gemeinden.csv",row.names = FALSE)
+
+#Final adaptions Texts
 
 ###INFO###
 ##The following placeholders will be replaced directly in the datawrapper maps so the data file doesn't become too large (2 MB limit):

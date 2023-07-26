@@ -41,7 +41,8 @@ results_parties <- results_parties %>%
 results_parties <- results_parties %>%
   filter(seats != 0 |
           seats_change != 0 ) %>%
-  arrange(desc(seats))
+  arrange(desc(seats),
+          desc(voter_share))
 
 ###Get Storyboard
 storyboard_parties <- get_story_NR_parties(results_parties,
@@ -79,8 +80,8 @@ tabelle <- paste0(tabelle,
 }                    
 tabelle <- paste0(tabelle,"</tbody></table>")
 tabelle <- gsub("[+]-","-",tabelle)
-tabelle <- gsub("[+]0[<]","unv.<",tabelle)
-tabelle <- gsub("[+]0,0","unv.",tabelle) #[+]0.0[%]P
+tabelle <- gsub("[+]0[<]","-<",tabelle)
+tabelle <- gsub("[+]0,0","-",tabelle) #[+]0.0[%]P
 
 print(texts_parties)
 print(tabelle)

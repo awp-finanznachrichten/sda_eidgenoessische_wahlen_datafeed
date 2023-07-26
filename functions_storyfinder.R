@@ -56,7 +56,7 @@ storyboard <- c(storyboard,"Outro_Tabelle_Special_BS")
 storyboard <- c(storyboard,"")   
 }  
 
-storyboard <- c(storyboard,"Quellenangabe","Disclaimer") 
+storyboard <- c(storyboard,"Disclaimer") 
 return(storyboard)
   
 }  
@@ -74,14 +74,7 @@ get_story_NR_candidates <- function(seats_available,
 
   #Headline and Intro
   if (seats_available > 1) {
-    if (count_women == 0) {
-      storyboard <- c(storyboard,"Headline_nur_Maenner","Intro_Tabelle","Outro_Tabelle")
-    } else if (count_men == 0) {
-      storyboard <- c(storyboard,"Headline_nur_Frauen","Intro_Tabelle","Outro_Tabelle")
-    } else {
-      storyboard <- c(storyboard,"Headline","Intro_Tabelle","Outro_Tabelle")
-    }  
-      
+    storyboard <- c(storyboard,"Headline","Intro_Tabelle","Outro_Tabelle")
   } else {
     if (count_women == 0) {
     storyboard <- c(storyboard,"Headline_ein_Sitz_Mann","Intro_Tabelle_ein_Sitz","")  
@@ -98,7 +91,7 @@ get_story_NR_candidates <- function(seats_available,
   } else {
   storyboard <- c(storyboard,"")
   }  
-  storyboard <- c(storyboard,"Quellenangabe","Disclaimer")
+  storyboard <- c(storyboard,"Disclaimer")
   return(storyboard)
   
 }  
