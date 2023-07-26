@@ -12,7 +12,7 @@ winners <- results %>%
 
 text_winners <- ""
 for (p in 1:nrow(winners)) {
-  text_winners <- paste0(text_winners,"die ",winners$shortname_de[p],", ")  
+  text_winners <- paste0(text_winners,"die ",winners$shortname_de[p]," (+",winners$seats_change[p],"), ")  
   }
 text_winners <- substr(text_winners,1,nchar(text_winners)-2)
 text_winners <- stri_replace_last(text_winners,fixed=","," und")
@@ -23,7 +23,8 @@ texts <- gsub("#Parteien_Gewinner",text_winners,texts)
 winner <- results %>%
   filter(seats_change > 0) %>%
   arrange(desc(seats_change))
-texts <- gsub("#Partei_Gewinner",winner$shortname_de,texts)  
+texts <- gsub("#Partei_Gewinner",winner$shortname_de,texts) 
+texts <- gsub("#Sitze_Gewinn",winner$seats_change,texts) 
 } 
 
 #Verlierer Parteien
@@ -34,7 +35,7 @@ if (grepl("#Parteien_Verlierer",texts[4]) == TRUE) {
 
   text_losers <- ""
   for (p in 1:nrow(losers)) {
-    text_losers <- paste0(text_losers,"die ",losers$shortname_de[p],", ")  
+    text_losers <- paste0(text_losers,"die ",losers$shortname_de[p]," (",losers$seats_change[p],"), ")   
   }
   text_losers <- substr(text_losers,1,nchar(text_losers)-2)
   text_losers <- stri_replace_last(text_losers,fixed=","," und")
@@ -44,7 +45,8 @@ if (grepl("#Parteien_Verlierer",texts[4]) == TRUE) {
 } else if (grepl("#Partei_Verlierer",texts[4]) == TRUE) {
   loser <- results %>%
     filter(seats_change < 0)
-texts <- gsub("#Partei_Verlierer",loser$shortname_de,texts)  
+texts <- gsub("#Partei_Verlierer",loser$shortname_de,texts)
+texts <- gsub("#Sitze_Verlust",loser$seats_change,texts) 
 } 
 
 #Text voted out candidates
@@ -68,6 +70,19 @@ texts <- gsub("hat die Grüne ","haben die Grünen ",texts)
 texts <- gsub("Die Grüne hat ","Die Grünen haben ",texts)
 texts <- gsub("die Grüne, ","die Grünen, ",texts)
 texts <- gsub("die Grüne ","die Grünen ",texts)
+
+#Adapt Numbers
+texts <- gsub(" 2 "," zwei ",texts)
+texts <- gsub(" 3 "," drei ",texts)
+texts <- gsub(" 4 "," vier ",texts)
+texts <- gsub(" 5 "," fünf ",texts)
+texts <- gsub(" 6 "," sechs ",texts)
+texts <- gsub(" 7 "," sieben ",texts)
+texts <- gsub(" 8 "," acht ",texts)
+texts <- gsub(" 9 "," neun ",texts)
+texts <- gsub(" 10 "," zehn ",texts)
+texts <- gsub(" 11 "," elf ",texts)
+texts <- gsub(" 12 "," zwölf ",texts)
 
 return(texts)  
 }  

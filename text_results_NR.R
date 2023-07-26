@@ -40,7 +40,8 @@ results_parties <- results_parties %>%
 
 results_parties <- results_parties %>%
   filter(seats != 0 |
-          seats_change != 0 ) %>%
+          seats_change != 0 |
+           voter_share >= 3) %>%
   arrange(desc(seats),
           desc(voter_share))
 
@@ -104,4 +105,4 @@ print(storyboard_parties)
 }
 
 overview_texts <- overview_texts[-1,]
-#write.xlsx(overview_texts,"texte_results_NR.xlsx",row.names = FALSE)
+write.xlsx(overview_texts,"texte_results_NR.xlsx",row.names = FALSE)

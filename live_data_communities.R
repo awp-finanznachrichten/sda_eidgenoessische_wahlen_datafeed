@@ -23,7 +23,8 @@ for (g in 1:nrow(gemeinden)) {
     
   #Filter Parteien für Tabelle: Stärker als 1% oder mehr als 3% verloren
     ergebnisse_gemeinde_tabelle <- ergebnisse_gemeinde %>%
-      filter(partei_staerke > 1 |
+      filter(!is.na(partei_staerke),
+        partei_staerke >= 3 |
       differenz_partei_staerke < -3, 
     shortname_de != "weitere") %>%
   # shortname_de != "BDP") %>%
