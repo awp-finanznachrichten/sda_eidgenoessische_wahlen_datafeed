@@ -23,8 +23,8 @@ elections_metadata_selection <- elections_metadata_selection  %>%
 elections_metadata_selection <- elections_metadata_selection %>% 
   left_join(stand_cantons, join_by(bfs_ID==kanton_nummer))
 
-overview_texts <- data.frame("Kanton","Storyboard","Text","Tabelle")
-colnames(overview_texts) <- c("Kanton","Storyboard","Text","Tabelle")
+overview_texts <- data.frame("Kanton","Storyboard","Text")
+colnames(overview_texts) <- c("Kanton","Storyboard","Text")
 
 for (c in 1:nrow(elections_metadata_selection)) {
 
@@ -99,23 +99,29 @@ tabelle <- paste0(tabelle,"</tbody></table>")
 
 new_entry <- data.frame(elections_metadata_selection$area_ID[c],
                         toString(storyboard_candidates),
-                        paste0(texts_candidates[1],"\n",texts_candidates[2],"\n\n",
-                               texts_candidates[3],"\n((Tabelle))\n",
+                        paste0("<b>",texts_candidates[1],"</b>\n",texts_candidates[2],"\n\n",
+                               texts_candidates[3],
+                               tabelle,"\n\n",
                                texts_candidates[4],"\n",
                                texts_candidates[5],"\n",
-                               texts_candidates[6]
-                        ),
-                        tabelle)
+                               texts_candidates[6],"\n\n\n"
+                        ))
 
 
-colnames(new_entry) <- c("Kanton","Storyboard","Text","Tabelle")
+colnames(new_entry) <- c("Kanton","Storyboard","Text")
 overview_texts <- rbind(overview_texts,new_entry)
 
-print(texts_candidates)
-cat(tabelle)
+#print(texts_candidates)
+#cat(tabelle)
 
 #source("create_mars_meldung_candidates_NR.R",encoding = "UTF-8")
 }
 
 overview_texts <- overview_texts[-1,]
 #write.xlsx(overview_texts,"texte_candidates_NR.xlsx",row.names = FALSE)
+
+#HTML Output
+html_output <- gsub("\n","<br>",overview_texts$Text)
+cat(html_output)
+
+
