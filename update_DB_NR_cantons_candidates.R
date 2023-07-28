@@ -1,8 +1,9 @@
 #Metadata NR
 ongoing_cantons_NR <- election_metadata %>%
   filter(council == "NR",
-         date == "2023-10-22")
-         #status != "finished")
+         date == "2023-10-22",
+         status != "candidates finished",
+         status != "finished")
 
 #Merge with area data
 ongoing_cantons_NR  <- ongoing_cantons_NR  %>%
@@ -44,7 +45,6 @@ results_canton <- results_NR_cantons_candidates %>%
 #rs <- dbSendQuery(mydb, sql_qry)
 #dbDisconnectAll()
 
-
 #Update party results
 mydb <- connectDB(db_name="sda_elections")
 for (p in 1:nrow(results_canton)) {
@@ -58,13 +58,21 @@ sql_qry <-paste0("UPDATE candidates_results SET ",
 rs <- dbSendQuery(mydb, sql_qry)
 }  
 
+if (ongoing_cantons_NR$status[c] == "parties finished") {
+  status <- "finished"
+  remarks <- "candidates and parties available"
+} else {
+  status <- "candidates finished"
+  remarks <- "parties not available yet"
+}  
+
 #Adapt Metadata
 sql_qry <-paste0("UPDATE elections_metadata SET ",
-                 " status = 'upcoming'",
+                 " status = '",status,"'",
                  ", source_update = 'BFS Testdata'",
+                 ", remarks = '",remarks,"'",
                  " WHERE election_ID = '",ongoing_cantons_NR$election_ID[c],"'")
 rs <- dbSendQuery(mydb, sql_qry)
-
 
 dbDisconnectAll()
 }  
