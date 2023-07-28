@@ -1,4 +1,4 @@
-setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 source("get_data_2023.R")
 
 #Dataframe Tabellen-Output
@@ -8,6 +8,12 @@ colnames(nationalrat_gemeinden_dw) <- c("ID","Gemeinde","Tabelle","Staerkste_Par
 gemeinden <- results_NR_communities %>%
   filter(gemeinde_nummer < 9000) %>%
   distinct(gemeinde_nummer,.keep_all = TRUE)
+
+#Merge with location data
+meta_gmd_kt <- read_csv("Data/MASTERFILE_GDE.csv")
+gemeinden <- gemeinden %>%
+  left_join(meta_gmd_kt,
+            by = join_by(gemeinde_nummer == Gemeinde_Nr))
 
 for (g in 1:nrow(gemeinden)) {
   
@@ -21,7 +27,7 @@ for (g in 1:nrow(gemeinden)) {
   #Check: Daten schon da?
   if (nrow(ergebnisse_gemeinde) > 0) {
     
-  #Filter Parteien für Tabelle: Stärker als 1% oder mehr als 3% verloren
+  #Filter Parteien für Tabelle: Stärker als 3% oder mehr als 3% verloren
     ergebnisse_gemeinde_tabelle <- ergebnisse_gemeinde %>%
       filter(!is.na(partei_staerke),
         partei_staerke >= 3 |
@@ -65,7 +71,7 @@ for (g in 1:nrow(gemeinden)) {
 
   #Neuer Eintrag für Tabelle
   new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
-                          gemeinden$gemeinde_bezeichnung[g],
+                          gemeinden$Gemeinde_KT_d[g],
                           tabelle,
                           staerkste_partei)
   colnames(new_entry) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")

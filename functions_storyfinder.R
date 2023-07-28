@@ -56,7 +56,7 @@ storyboard <- c(storyboard,"Outro_Tabelle_Special_BS")
 storyboard <- c(storyboard,"")   
 }  
 
-storyboard <- c(storyboard,"Disclaimer") 
+storyboard <- c(storyboard,"Explainer","Disclaimer") 
 return(storyboard)
   
 }  

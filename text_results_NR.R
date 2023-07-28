@@ -95,7 +95,8 @@ new_entry <- data.frame(elections_metadata_selection$area_ID[c],
                                texts_parties[5],
                                tabelle,"\n\n",
                                texts_parties[6]," ",texts_parties[7],"\n\n",
-                               texts_parties[8],"\n\n\n"
+                               texts_parties[8],"\n\n",
+                               texts_parties[9],"\n\n\n"
                                ))
 colnames(new_entry) <- c("Kanton","Storyboard","Text")
 overview_texts <- rbind(overview_texts,new_entry)

@@ -18,6 +18,7 @@ text <- paste0('<p class="paragraph">',paste0(texts_parties[3]," ",texts_parties
 text <- paste0(text,'<p class="paragraph">',texts_parties[5],"</p>\n")
 text <- paste0(text,tabelle,"\n")
 text <- paste0(text,'<p class="paragraph">',paste0(texts_parties[6]," ",texts_parties[7]),"</p>\n")
+text <- paste0(text,'<p class="paragraph">',texts_parties[8],"</p>\n")
 
 ###Daten einfügen
 vorlage <- gsub("INSERT_LONGID",ID_long,vorlage)
@@ -25,7 +26,7 @@ vorlage <- gsub("INSERT_TIME",date_and_time,vorlage)
 vorlage <- gsub("INSERT_PROVIDER","KSDA",vorlage)
 vorlage <- gsub("INSERT_STATUS","withheld",vorlage)
 vorlage <- gsub("INSERT_SERVICE","bsd",vorlage)
-vorlage <- gsub("INSERT_NOTE",texts_parties[8],vorlage)
+vorlage <- gsub("INSERT_NOTE",texts_parties[9],vorlage)
 vorlage <- gsub("INSERT_MEMO","Dies ist ein Test",vorlage)
 vorlage <- gsub("INSERT_HYPERLINK","",vorlage)
 vorlage <- gsub("INSERT_URGENCY","3",vorlage)
