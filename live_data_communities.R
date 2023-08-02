@@ -16,59 +16,37 @@ gemeinden <- gemeinden %>%
             by = join_by(gemeinde_nummer == Gemeinde_Nr))
 
 for (g in 1:nrow(gemeinden)) {
-  
+
+  #Filter Parteien: Stärker als 3% oder mehr als 3% verloren
   ergebnisse_gemeinde <- results_NR_communities %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(partei_staerke) == FALSE)
   
+  voter_turnout <- results_NR_communities_voterturnout %>%
+    filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
+           is.na(wahlbeteiligung) == FALSE)
+  
+  text <- "Resultat liegt noch nicht vor."
   tabelle <- "Resultat liegt noch nicht vor."
   staerkste_partei <- "no_data"
   
   #Check: Daten schon da?
   if (nrow(ergebnisse_gemeinde) > 0) {
     
-  #Filter Parteien für Tabelle: Stärker als 3% oder mehr als 3% verloren
-    ergebnisse_gemeinde_tabelle <- ergebnisse_gemeinde %>%
+  ergebnisse_gemeinde <- ergebnisse_gemeinde %>%
       filter(!is.na(partei_staerke),
-        partei_staerke >= 3 |
-      differenz_partei_staerke < -3, 
-    shortname_de != "weitere") %>%
-  # shortname_de != "BDP") %>%
-  arrange(desc(partei_staerke))
+             partei_staerke >= 3 |
+               differenz_partei_staerke < -3, 
+             shortname_de != "weitere") %>%
+      # shortname_de != "BDP") %>%
+      arrange(desc(partei_staerke))
     
-    staerkste_partei <- ergebnisse_gemeinde_tabelle$shortname_de[1]
-    tabelle <- "tab_h"
-    
-    for (i in 1:nrow(ergebnisse_gemeinde_tabelle)) {
-      tabelle <- paste0(tabelle,
-                        "<tr><td>",ergebnisse_gemeinde_tabelle$shortname_de[i],"</td>",
-                        "tab_r1",round2(ergebnisse_gemeinde_tabelle$partei_staerke[i]*1.5),
-                        "tab_r2",ergebnisse_gemeinde_tabelle$party_color[i],
-                        "tab_r3",
-                        "<td><b>",format(round2(ergebnisse_gemeinde_tabelle$partei_staerke[i],1),nsmall =1 ),"%</b></td>",
-                        "§+",format(round2(ergebnisse_gemeinde_tabelle$differenz_partei_staerke[i],1),nsmall=1),"</td></tr>"
-      )  
-    }
-    tabelle <- paste0(tabelle,"</table>")
-    
-    #Wahlbeteiligung verfügbar?
-    voter_turnout <- results_NR_communities_voterturnout %>%
-      filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
-             is.na(wahlbeteiligung) == FALSE)
-
-    if (nrow(voter_turnout) == 1) {
-    
-    #Ergänzung Tabelle
-    tabelle <- paste0(tabelle,"<br>Gültige Wahlzettel: <b>",format(voter_turnout$gueltige_wahlzettel,big.mark = "'"),"</b><br>",
-                      "Wahlbeteiligung: <b>",format(round2(voter_turnout$wahlbeteiligung,1),nsmall =1),"%</b> (+",
-                      format(round2(voter_turnout$differenz_wahlbeteiligung,1),nsmall=1),"%)")  
-    }  
-
-    tabelle <- gsub("[+]-","-",tabelle)
-    tabelle <- gsub("[+]0[.]0%","-",tabelle)
-    
-  }
-
+  staerkste_partei <- ergebnisse_gemeinde$shortname_de[1]
+  
+  #Create Table
+  tabelle <- create_table_communities(ergebnisse_gemeinde,
+                                      voter_turnout)
+  
   #Neuer Eintrag für Tabelle
   new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
                           gemeinden$Gemeinde_KT_d[g],
@@ -77,8 +55,10 @@ for (g in 1:nrow(gemeinden)) {
   colnames(new_entry) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
   nationalrat_gemeinden_dw <- rbind(nationalrat_gemeinden_dw,new_entry)
   
+  #Find Story
+  
 }
-
+}
 #Final adaptions Tabelle
 nationalrat_gemeinden_dw <- nationalrat_gemeinden_dw[-1,]
 nationalrat_gemeinden_dw$Tabelle <- gsub("[<]","$",nationalrat_gemeinden_dw$Tabelle)

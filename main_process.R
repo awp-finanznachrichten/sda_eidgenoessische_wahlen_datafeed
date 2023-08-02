@@ -47,8 +47,6 @@ source("update_DB_NR_cantons_candidates.R")
 
 ###STAENDERAT###
 
-#Get Data and Update DB
-
 #Text Candidates
 
 #Charts Candidates
@@ -61,3 +59,4 @@ source("update_DB_NR_cantons_candidates.R")
 #Output tables
 
 #Output texts
+
