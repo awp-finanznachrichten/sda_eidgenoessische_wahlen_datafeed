@@ -18,3 +18,9 @@ mydb <- connectDB(db_name="sda_elections")
 rs <- dbSendQuery(mydb, "SELECT * FROM areas_metadata")
 areas_metadata <- fetch(rs,n=-1)
 dbDisconnectAll()
+
+#Get texts
+mydb <- connectDB(db_name="sda_elections")
+rs <- dbSendQuery(mydb, "SELECT * FROM status_text")
+status_texts <- fetch(rs,n=-1)
+dbDisconnectAll()

@@ -1,0 +1,50 @@
+#Get parties results from Canton
+mydb <- connectDB(db_name = "sda_elections")
+rs <-
+  dbSendQuery(
+    mydb,
+    paste0(
+      "SELECT * FROM parties_results WHERE election_id = '",
+      counted_cantons$election_ID[c],
+      "'"
+    )
+  )
+results_parties <- fetch(rs, n = -1)
+dbDisconnectAll()
+
+#Merge with party_metadata
+results_parties <- results_parties %>%
+  left_join(parties_metadata,
+            by = join_by(party_ID == id))
+
+results_parties <- results_parties %>%
+  filter(voter_share > 0,
+         seats != 0 |
+           seats_change != 0 |
+           voter_share >= 3) %>%
+  arrange(desc(seats),
+          desc(voter_share)) %>%
+  select(shortname_de,
+         shortname_fr,
+         shortname_it,
+         voter_share,
+         voter_share_change,
+         seats,
+         seats_change,
+         party_color)
+
+results_parties$text_votes_de <- paste0("<b>",results_parties$shortname_de,"<br>",
+                             trimws(format(round2(results_parties$voter_share,1),nsmall=1)),"%",
+                             "<br>(+",trimws(format(round2(results_parties$voter_share_change,1),nsmall=1)),"%)")
+results_parties$text_votes_de <- gsub("[+]-","-",results_parties$text_votes_de)
+results_parties$text_votes_de <- gsub("[+]0[.]0%","-",results_parties$text_votes_de)  
+
+results_parties$text_seats_de <- paste0("<b>",results_parties$shortname_de,"<br>",
+                            results_parties$seats,
+                            "<br>(+",results_parties$seats_change,")")
+results_parties$text_seats_de <- gsub("[+]-","-",results_parties$text_seats_de)
+results_parties$text_seats_de <- gsub("[+]0","-",results_parties$text_seats_de)
+
+
+texts_chart <- get_text_charts(language="de",
+                               elections_metadata = counted_cantons[c,])
