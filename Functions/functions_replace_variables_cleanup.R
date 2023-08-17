@@ -15,7 +15,8 @@ texts <- gsub("die Grüne, ","die Grünen, ",texts)
 texts <- gsub("die Grüne ","die Grünen ",texts)
 texts <- gsub("die weitere","eine weitere Partei",texts)
 texts <- gsub("Die weitere","Eine weitere Partei",texts)
-
+texts <- gsub("die MCG","das MCG",texts)
+texts <- gsub("Die MCG","Das MCG",texts)
 
 #Adapt Numbers
 texts <- gsub(" 2 "," zwei ",texts)

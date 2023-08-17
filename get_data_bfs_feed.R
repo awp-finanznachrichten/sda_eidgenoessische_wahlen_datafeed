@@ -56,6 +56,15 @@ results_NR_cantons_candidates$source_person_id <- paste0(formatC(results_NR_cant
                                                          formatC(results_NR_cantons_candidates$kandidat_nummer,width = 2,flag = "0")
 )
 
+###Results over time
+results_parties_history <- fromJSON("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_2023/Testdaten/Testdata_NR_2023_Completed/sd-t-17.02-NRW2023-zeitreihen-parteien.json", flatten = TRUE)
+results_parties_history_cantons <- results_parties_history$level_kantone
+results_parties_history_CH <- results_parties_history$level_ch
+
+#Merge with parties metadata
+results_parties_history_cantons <- results_parties_history_cantons %>%
+  left_join(parties_metadata,
+            by = join_by(partei_id == bfs_id))
 
 ###Staenderat
 

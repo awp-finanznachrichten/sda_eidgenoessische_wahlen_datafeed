@@ -27,13 +27,13 @@ source("function_create_table_communities.R")
 setwd("..")
 source("./tools/Funktionen/Utils.R")
 
-#Databases
-source("load_databases.R")
-
 #Texts
 texts_spreadsheet <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Sitzverteilung")
 
 #####START LOOP#####
+
+#Load Databases
+source("load_databases.R")
 
 ###Get Data and update DB
 source("get_data_bfs_feed.R")
@@ -50,13 +50,13 @@ counted_cantons <- election_metadata %>%
          grepl("finished",status) == FALSE
          )
 
-#Merge with area and text data
+#Merge with area, text and output overview
 counted_cantons <- counted_cantons  %>%
   left_join(areas_metadata) %>%
   left_join(status_texts) %>%
+  left_join(output_overview) %>%
   filter(area_type == "canton")
 
-#Merge with output overview
 ###TO DO###
 
 for (c in 1:nrow(counted_cantons)) {
@@ -88,7 +88,9 @@ source("mars_meldung_results_NR_IT.R")
 #Generate Output
 source("prepare_results_charts_NR.R")
 source("publish_results_charts_NR.R")
-
+  
+source("prepare_results_charts_history_NR.R")
+source("publish_results_charts_history_NR.R")
   
 ##Charts Candidates##
 #Check output overview

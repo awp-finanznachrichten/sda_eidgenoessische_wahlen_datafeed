@@ -1,15 +1,27 @@
 ##Chart Overview DE
-chart_id <- "bY6b7"
+chart_id <- "I8Rq2"
 dw_data_to_chart(results_parties[c(1,4:7)],chart_id)
+
+#Farben anpassen
+chart_metadata <- dw_retrieve_chart_metadata(chart_id)
+adapted_list <- chart_metadata[["content"]][["metadata"]][["visualize"]]
+
+for ( i in 1:nrow(results_parties)) {
+  adapted_list$`custom-colors`[results_parties$shortname_de[i]] <- results_parties$party_color[i]
+  adapted_list$`highlighted-series`[[i]] <- results_parties$shortname_de[i]
+}
+
+
 dw_edit_chart(chart_id,
-              intro = texts_chart[1])
+              visualize = adapted_list,
+              intro = texts_chart[1]
+)
+
 dw_publish_chart(chart_id)
 print("Datawrapper-Chart updated")
 
-
-
 ##Chart Votes DE
-chart_id <- "7z51o"
+chart_id <- "pRDC5"
 dw_data_to_chart(results_parties[,c(9,4)],chart_id)
 
 #Farben anpassen
@@ -34,7 +46,7 @@ print("Datawrapper-Chart updated")
 
 
 ##Chart Seats DE
-chart_id <- "Ne3Wp"
+chart_id <- "MZJKi"
 dw_data_to_chart(results_parties[,c(10,6)],chart_id)
 
 #Farben anpassen
