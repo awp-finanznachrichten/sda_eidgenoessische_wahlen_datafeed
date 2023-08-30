@@ -69,8 +69,8 @@ get_story_NR_candidates <- function(seats_available,
                                     elected_candidates,
                                     voted_out_candidates) {
   storyboard <- c("Catchword")
-  count_men <- sum(grepl("M|m",elected_candidates$geschlecht))
-  count_women <- sum(grepl("F|f",elected_candidates$geschlecht))
+  count_men <- sum(grepl("M|m",elected_candidates$gender))
+  count_women <- sum(grepl("F|f",elected_candidates$gender))
 
   #Headline and Intro
   if (seats_available > 1) {

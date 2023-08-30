@@ -25,6 +25,14 @@ text_winners <- stri_replace_last(text_winners,fixed=","," et")
 text_winners <- sub(".","L",text_winners)
 texts <- gsub("#Parteien_Gewinner_f",text_winners,texts) 
 }  
+if (language == "it") {
+  for (p in 1:nrow(winners)) {
+    text_winners <- paste0(text_winners,winners$shortname_it[p]," (+",winners$seats_change[p],"), ")  
+  }
+  text_winners <- substr(text_winners,1,nchar(text_winners)-2)
+  text_winners <- stri_replace_last(text_winners,fixed=","," e")
+  texts <- gsub("#Parteien_Gewinner_i",text_winners,texts) 
+}  
 
     
 } else if (grepl("#Partei_Gewinner",texts[3]) == TRUE) {
@@ -37,6 +45,10 @@ texts <- gsub("#Partei_Gewinner_d",winner$shortname_de,texts)
 if (language == "fr") {
 texts <- gsub("#Partei_Gewinner_f",winner$shortname_fr,texts)
 }  
+if (language == "it") {
+  texts <- gsub("#Partei_Gewinner_i",winner$shortname_it,texts)
+} 
+
 texts <- gsub("#Sitze_Gewinn",winner$seats_change,texts) 
 } 
 
@@ -66,6 +78,15 @@ if (grepl("#Parteien_Verlierer",texts[4]) == TRUE) {
     text_losers <- stri_replace_last(text_losers,fixed=","," et")
     text_losers <- sub(".","L",text_losers)
     texts <- gsub("#Parteien_Verlierer_f",text_losers,texts)
+  }  
+  
+  if (language == "it") {
+    for (p in 1:nrow(losers)) {
+      text_losers <- paste0(text_losers,losers$shortname_it[p]," (",losers$seats_change[p],"), ")   
+    }
+    text_losers <- substr(text_losers,1,nchar(text_losers)-2)
+    text_losers <- stri_replace_last(text_losers,fixed=","," e")
+    texts <- gsub("#Parteien_Verlierer_i",text_losers,texts)
     
   }  
 
@@ -77,6 +98,9 @@ texts <- gsub("#Partei_Verlierer_d",loser$shortname_de,texts)
 } 
 if (language == "fr") {
 texts <- gsub("#Partei_Verlierer_f",loser$shortname_fr,texts) 
+}  
+if (language == "it") {
+texts <- gsub("#Partei_Verlierer_i",loser$shortname_it,texts) 
 }  
 texts <- gsub("#Sitze_Verlust",loser$seats_change,texts) 
 } 

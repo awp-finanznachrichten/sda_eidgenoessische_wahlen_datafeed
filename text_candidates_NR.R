@@ -14,16 +14,18 @@ dbDisconnectAll()
 
 
 #Merge with candidates metadata (to adapt!)
-people_metadata <- results_NR_cantons_candidates %>%
-  .[, c(38, 10, 9, 11)]
+#people_metadata <- results_NR_cantons_candidates %>%
+#  .[, c(38, 10, 9, 11)]
 
-people_metadata$source_person_id <-
-  as.numeric(people_metadata$source_person_id)
-results_candidates$source_person_id <-
-  as.numeric(results_candidates$source_person_id)
+#people_metadata$source_person_id <-
+#  as.numeric(people_metadata$source_person_id)
+#results_candidates$source_person_id <-
+#  as.numeric(results_candidates$source_person_id)
 
+#Merge with people data
 results_candidates <- results_candidates %>%
-  left_join(people_metadata)
+  left_join(people_metadata,
+            by = join_by(person_id==id))
 
 #Merge with party data
 results_candidates <- results_candidates %>%
@@ -56,12 +58,14 @@ storyboard_candidates <-
 
 ###Get Story pieces
 texts_candidates <- get_texts(storyboard_candidates,
-                              texts_spreadsheet,
+                              texts_spreadsheet_NR_candidates,
                               "de")
 texts_candidates_fr <- get_texts(storyboard_candidates,
-                                 texts_spreadsheet,
+                                 texts_spreadsheet_NR_candidates,
                                  "fr")
-
+texts_candidates_it <- get_texts(storyboard_candidates,
+                                 texts_spreadsheet_NR_candidates,
+                                 "it")
 
 #Get voted out candidates
 texts_candidates <- get_voted_out_candidates(texts_candidates,
@@ -71,6 +75,10 @@ texts_candidates_fr <-
   get_voted_out_candidates(texts_candidates_fr,
                            voted_out_candidates,
                            "fr")
+texts_candidates_it <-
+  get_voted_out_candidates(texts_candidates_it,
+                           voted_out_candidates,
+                           "it")
 
 #Replace Variables and cleanup
 texts_candidates <- replace_variables_cleanup(texts_candidates,
@@ -80,52 +88,23 @@ texts_candidates_fr <-
   replace_variables_cleanup(texts_candidates_fr,
                             counted_cantons,
                             "fr")
+texts_candidates_it <-
+  replace_variables_cleanup(texts_candidates_it,
+                            counted_cantons,
+                            "it")
 
 #Create tables
 tabelle <- create_table_NR_candidates(elected_candidates,
                                       "de")
 tabelle_fr <- create_table_NR_candidates(elected_candidates,
                                          "fr")
-
-new_entry <- data.frame(
-  counted_cantons$area_ID[c],
-  toString(storyboard_candidates),
-  paste0(
-    "<b>",
-    texts_candidates[1],
-    "</b>\n",
-    texts_candidates[2],
-    "\n\n",
-    texts_candidates[3],
-    tabelle,
-    "\n\n",
-    texts_candidates[4],
-    "\n",
-    texts_candidates[5],
-    "\n",
-    texts_candidates[6],
-    "\n\n\n"
-  ),
-  paste0(
-    "<b>",
-    texts_candidates_fr[1],
-    "</b>\n",
-    texts_candidates_fr[2],
-    "\n\n",
-    texts_candidates_fr[3],
-    tabelle_fr,
-    "\n\n",
-    texts_candidates_fr[4],
-    "\n",
-    texts_candidates_fr[5],
-    "\n",
-    texts_candidates_fr[6],
-    "\n\n\n"
-  )
-)
-
+tabelle_it <- create_table_NR_candidates(elected_candidates,
+                                         "it")
 
 print(texts_candidates)
 print(tabelle)
 print(texts_candidates_fr)
 print(tabelle_fr)
+print(texts_candidates_it)
+print(tabelle_it)
+

@@ -1,4 +1,4 @@
-###Nationalrat
+###NATIONALRAT###
 
 ###Results Parties
 data_NR_parties <- fromJSON("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_2023/Testdaten/Testdata_NR_2023_Completed/sd-t-17.02-NRW2023-parteien.json", flatten = TRUE)
@@ -55,6 +55,7 @@ results_NR_cantons_candidates$source_person_id <- paste0(formatC(results_NR_cant
                                                          formatC(results_NR_cantons_candidates$liste_nummer_bfs,width = 2,flag = "0"),
                                                          formatC(results_NR_cantons_candidates$kandidat_nummer,width = 2,flag = "0")
 )
+
 
 ###Results over time
 results_parties_history <- fromJSON("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_2023/Testdaten/Testdata_NR_2023_Completed/sd-t-17.02-NRW2023-zeitreihen-parteien.json", flatten = TRUE)

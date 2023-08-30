@@ -1,5 +1,24 @@
+###GET DATA COMMUNITIES
+
+#setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+#source("get_testdata_2023.R")
+
+
+###LOAD RESULT AND VOTERTURNOUT DATA
+setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
+data_NR_results <-
+  fromJSON("data_NR_results.json", flatten = TRUE)
+data_NR_voterturnout <-
+  fromJSON("data_NR_voterturnout.json", flatten = TRUE)
 setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
-source("get_data_2023.R")
+
+results_NR_communities <- data_NR_results$level_gemeinden
+results_NR_communities <- results_NR_communities %>%
+  left_join(parties_metadata,
+            by = join_by(partei_id == bfs_id))
+
+results_NR_communities_voterturnout <- data_NR_voterturnout$level_gemeinden
+results_NR_communities_voterturnout <- data_NR_voterturnout$level_gemeinden
 
 #Dataframe Tabellen-Output
 nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde","Tabelle","no_data")
@@ -47,18 +66,20 @@ for (g in 1:nrow(gemeinden)) {
   tabelle <- create_table_communities(ergebnisse_gemeinde,
                                       voter_turnout)
   
-  #Neuer Eintrag für Tabelle
+  #Find Story Ur-Lena
+  
+  }  
+  
+  #New Entry
   new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
                           gemeinden$Gemeinde_KT_d[g],
                           tabelle,
                           staerkste_partei)
   colnames(new_entry) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
   nationalrat_gemeinden_dw <- rbind(nationalrat_gemeinden_dw,new_entry)
-  
-  #Find Story
-  
 }
-}
+
+
 #Final adaptions Tabelle
 nationalrat_gemeinden_dw <- nationalrat_gemeinden_dw[-1,]
 nationalrat_gemeinden_dw$Tabelle <- gsub("[<]","$",nationalrat_gemeinden_dw$Tabelle)

@@ -1,4 +1,4 @@
-#Get Electiton Metadata
+#Get Election Metadata
 mydb <- connectDB(db_name="sda_elections")
 rs <- dbSendQuery(mydb, "SELECT * FROM elections_metadata")
 election_metadata <- fetch(rs,n=-1)
@@ -18,6 +18,15 @@ mydb <- connectDB(db_name="sda_elections")
 rs <- dbSendQuery(mydb, "SELECT * FROM areas_metadata")
 areas_metadata <- fetch(rs,n=-1)
 dbDisconnectAll()
+
+#Get people metadata
+
+mydb <- connectDB(db_name="sda_elections")
+rs <- dbSendQuery(mydb, "SELECT id,firstname,lastname,gender,birthdate,place FROM people_metadata")
+people_metadata <- fetch(rs,n=-1)
+dbDisconnectAll()
+
+
 
 #Get texts
 mydb <- connectDB(db_name="sda_elections")

@@ -33,6 +33,35 @@ results_parties <- results_parties %>%
          voter_share,
          party_color)
 
+###Get history data
+response <-
+  GET(BFS_API_URL)
+content <- content(response)$result$resources
+
+###GET CANDIDATES DATA###
+url_NR_history <-
+  as.data.frame(do.call(rbind, content))$download_url[[1]]
+
+#Download data
+setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
+download.file(url_NR_history ,
+              destfile = "data_NR_history.json",
+              method = "curl")
+results_parties_history <-
+  fromJSON("data_NR_history.json", flatten = TRUE)
+setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+  
+results_parties_history_cantons <- results_parties_history$level_kantone
+
+#Adapt CVP/Mitte
+results_parties_history_cantons$partei_id <- as.numeric(ifelse(results_parties_history_cantons$partei_id == 2,34,results_parties_history_cantons$partei_id))
+  
+#Merge with parties metadata
+results_parties_history_cantons <- results_parties_history_cantons %>%
+  left_join(parties_metadata,
+            by = join_by(partei_id == bfs_id))
+
+
 #Merge with history data
 parties_history <- results_parties_history_cantons %>%
   filter(kanton_nummer == counted_cantons$bfs_ID[c],

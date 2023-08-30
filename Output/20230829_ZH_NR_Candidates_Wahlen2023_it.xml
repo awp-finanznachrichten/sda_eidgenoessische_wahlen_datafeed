@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
+  <header>
+    <sent>2023-08-29T08:52:49+02:00</sent>
+  </header>
+
+  <itemSet>
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="it" guid="urn:newsml:keystone-sda.ch:20230829:20230829085249326537622195399" version="1">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
+      <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
+
+      <itemMeta>
+        <itemClass qcode="ninat:text"/>
+        <provider qcode="nprov:KSDA">
+           <name>sda</name>
+        </provider>
+        <versionCreated>2023-08-29T08:52:49+02:00</versionCreated>
+        <pubStatus qcode="stat:withheld"/>
+        <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
+        <service qcode="sdasvc:bsi"></service>
+        <edNote role="sdanote:note">Questa notizia è stata generata automaticamente in base ai dati dell'Ufficio federale di statistica (UST) e riletta prima della diffusione. </edNote>
+        <edNote role="sdalena:memo">Dies ist ein Test</edNote>
+        
+      </itemMeta>
+
+      <contentMeta>
+        <urgency>3</urgency>
+        <contentCreated>2023-08-29T08:52:49+02:00</contentCreated>
+        <creator>
+          <name>sda-robot</name>
+        </creator>
+        <altId>326537622195399</altId>
+        <dateline>Zurigo</dateline>
+        <language tag="it"/>
+        <genre qcode="sdagenre:RES">
+        </genre>
+
+        <!--storytypes-->
+        <subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>
+        
+        <!--media topics-->
+        <subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:LOH"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:PRT"></subject>
+
+        <!--locations-->
+        <located type="loctype:city" qcode="sdamarsgeo:CH">
+<name>Schweiz</name>
+</located>
+  
+        <slugline>Federali 2023 - ZH CN END</slugline>
+        <headline>***TEST***Gli eletti al Consiglio nazionale nel canton Zurigo</headline>
+        <description role="drol:teaser"> </description>
+        <description role="drol:catchline"></description>
+      </contentMeta>
+
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+xml">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>***TEST***Gli eletti al Consiglio nazionale nel canton Zurigo</title>
+            </head>
+            <body>
+              <p class="lead"> </p>
+              <p class="paragraph">Gli elettori del canton Zurigo hanno eletto i seguenti 36 candidati al Nazionale:</p>
+<table><tbody><tr><td></td><td></td><td></td><td>numero di voti</td></tr><tr><td>NA NA</td><td>UDC</td><td></td><td>121'098</td></tr><tr><td>NA NA</td><td>UDC</td><td></td><td>120'722</td></tr><tr><td>NA NA</td><td>UDC</td><td></td><td>118'987</td></tr><tr><td>NA NA</td><td>UDC</td><td></td><td>117'018</td></tr><tr><td>NA NA</td><td>UDC</td><td></td><td>115'138</td></tr><tr><td>NA NA</td><td>UDC</td><td></td><td>114'616</td></tr><tr><td>NA NA</td><td>UDC</td><td></td><td>111'037</td></tr><tr><td>NA NA</td><td>UDC</td><td></td><td>110'660</td></tr><tr><td>NA NA</td><td>UDC</td><td></td><td>110'490</td></tr><tr><td>NA NA</td><td>UDC</td><td></td><td>109'995</td></tr><tr><td>NA NA</td><td>PS</td><td></td><td>109'992</td></tr><tr><td>NA NA</td><td>PVL</td><td></td><td>90'226</td></tr><tr><td>NA NA</td><td>PS</td><td></td><td>89'270</td></tr><tr><td>NA NA</td><td>Verdi</td><td></td><td>89'015</td></tr><tr><td>NA NA</td><td>PS</td><td></td><td>88'371</td></tr><tr><td>NA NA</td><td>PS</td><td></td><td>88'221</td></tr><tr><td>NA NA</td><td>Verdi</td><td></td><td>85'677</td></tr><tr><td>NA NA</td><td>PS</td><td></td><td>83'219</td></tr><tr><td>NA NA</td><td>PS</td><td></td><td>81'905</td></tr><tr><td>NA NA</td><td>Verdi</td><td></td><td>79'744</td></tr><tr><td>NA NA</td><td>PS</td><td></td><td>76'598</td></tr><tr><td>NA NA</td><td>PVL</td><td></td><td>76'229</td></tr><tr><td>NA NA</td><td>PLR</td><td></td><td>71'977</td></tr><tr><td>NA NA</td><td>Verdi</td><td></td><td>70'499</td></tr><tr><td>NA NA</td><td>PLR</td><td></td><td>67'192</td></tr><tr><td>NA NA</td><td>PLR</td><td></td><td>66'673</td></tr><tr><td>NA NA</td><td>PLR</td><td></td><td>64'357</td></tr><tr><td>NA NA</td><td>PLR</td><td></td><td>60'538</td></tr><tr><td>NA NA</td><td>PVL</td><td></td><td>60'493</td></tr><tr><td>NA NA</td><td>Verdi</td><td></td><td>60'083</td></tr><tr><td>NA NA</td><td>PVL</td><td></td><td>55'718</td></tr><tr><td>NA NA</td><td>PVL</td><td></td><td>54'846</td></tr><tr><td>NA NA</td><td>PVL</td><td></td><td>54'179</td></tr><tr><td>NA NA</td><td>Centro</td><td></td><td>29'107</td></tr><tr><td>NA NA</td><td>PEV</td><td></td><td>26'059</td></tr></tbody></table>
+<p class="paragraph">Classifica in base ai voti ottenuti.</p>
+<p class="paragraph">Non sono stati rieletti: NA NA (UDC), NA NA (PS), NA NA (PS), NA NA (PLR), NA NA (PBD) e NA NA (Centro).</p>
+
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>

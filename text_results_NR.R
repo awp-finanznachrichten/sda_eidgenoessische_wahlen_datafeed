@@ -32,12 +32,16 @@ storyboard_parties <- get_story_NR_parties(results_parties,
 
 ###Get Story pieces
 texts_parties <- get_texts(storyboard_parties,
-                           texts_spreadsheet,
+                           texts_spreadsheet_NR_results,
                            "de")
 
 texts_parties_fr <- get_texts(storyboard_parties,
-                              texts_spreadsheet,
+                              texts_spreadsheet_NR_results,
                               "fr")
+
+texts_parties_it <- get_texts(storyboard_parties,
+                              texts_spreadsheet_NR_results,
+                              "it")
 
 #Get winners and losers
 texts_parties <- get_winners_losers(texts_parties,
@@ -46,7 +50,9 @@ texts_parties <- get_winners_losers(texts_parties,
 texts_parties_fr <- get_winners_losers(texts_parties_fr,
                                        results_parties,
                                        "fr")
-
+texts_parties_it <- get_winners_losers(texts_parties_it,
+                                       results_parties,
+                                       "it")
 
 #Replace Variables and cleanup
 texts_parties <- replace_variables_cleanup(texts_parties,
@@ -55,14 +61,21 @@ texts_parties <- replace_variables_cleanup(texts_parties,
 texts_parties_fr <- replace_variables_cleanup(texts_parties_fr,
                                               counted_cantons,
                                               "fr")
+texts_parties_it <- replace_variables_cleanup(texts_parties_it,
+                                              counted_cantons,
+                                              "it")
 
 #Create tables
 tabelle <- create_table_NR_results(results_parties,
                                    "de")
 tabelle_fr <- create_table_NR_results(results_parties,
                                       "fr")
+tabelle_it <- create_table_NR_results(results_parties,
+                                      "it")
 
 print(texts_parties)
 print(tabelle)
 print(texts_parties_fr)
 print(tabelle_fr)
+print(texts_parties_it)
+print(tabelle_it)
