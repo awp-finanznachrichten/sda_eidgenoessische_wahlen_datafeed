@@ -56,7 +56,6 @@ counted_cantons <- election_metadata %>%
          grepl("finished",status) == FALSE
          )
 
-
 #Merge with area, text and output overview
 counted_cantons <- counted_cantons  %>%
   left_join(areas_metadata) %>%
@@ -115,6 +114,7 @@ if (counted_cantons$analytics[c] == "pending") {
 ##Chart Overall##
 source("prepare_overview_cantons.R")
 source("publish_overview_charts.R")
+source("create_output_candidates_flourish.R")
 
 ###STAENDERAT###
 ##Text Candidates##

@@ -20,13 +20,20 @@ areas_metadata <- fetch(rs,n=-1)
 dbDisconnectAll()
 
 #Get people metadata
-
 mydb <- connectDB(db_name="sda_elections")
-rs <- dbSendQuery(mydb, "SELECT id,firstname,lastname,gender,birthdate,place FROM people_metadata")
+rs <- dbSendQuery(mydb, "SELECT id,firstname,lastname,gender,birthdate,place,picture FROM people_metadata")
 people_metadata <- fetch(rs,n=-1)
 dbDisconnectAll()
 
+#Get profession
+mydb <- connectDB(db_name="sda_elections")
+rs <- dbSendQuery(mydb, "SELECT person_id,title,category FROM people_profession WHERE source = 'BFS 2023'")
+people_profession <- fetch(rs,n=-1)
+dbDisconnectAll()
 
+people_profession <- people_profession %>%
+  group_by(person_id) %>%
+  summarise(title=paste(title,collapse=", "))
 
 #Get texts
 mydb <- connectDB(db_name="sda_elections")

@@ -12,20 +12,30 @@ rs <-
 results_candidates <- fetch(rs, n = -1)
 dbDisconnectAll()
 
+
 #Get elected candidates
 elected_candidates <- results_candidates %>%
   filter(is.na(source_update)) %>% #REMOVE!
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id)) %>%
-  filter(elected == 0) %>% #1 
-  .[1:12,] %>% #REMOVE!
-  arrange(lastname) 
+  filter(elected == 0) %>% #1
+  filter(is.na(picture) == FALSE) %>% #REMOVE!
+  .[1:12,] #REMOVE!
+
+#Frequency of party occurence for sorting 
+elected_candidates$frequency_party <- 0
+for (e in 1:nrow(elected_candidates)) {
+elected_candidates$frequency_party[e] <- sum(grepl(elected_candidates$shortname_de[e],elected_candidates$shortname_de)) 
+}  
+
+elected_candidates <- elected_candidates %>%
+  arrange(desc(frequency_party),
+          lastname)
 
 elected_candidates$status_de <- ifelse(elected_candidates$status == 2,"bisher","neu")
-elected_candidates$image_link <- "![](https://164.ch/grafiken_wahlen2023/Nationalrat/VD_NR_FDP_Mueller_Antoine.jpg)" #ADAPT!
+elected_candidates$image_link <- paste0("![](https://164.ch/grafiken_wahlen2023/Nationalrat/",elected_candidates$picture,")")
 elected_candidates$text_de <- paste0("<b>",elected_candidates$firstname,"<br>",elected_candidates$lastname,"</b><br>",
                                      elected_candidates$shortname_de,", ",elected_candidates$status_de)
-
 
 elected_candidates_images <- data.frame("1","2","3","4")
 colnames(elected_candidates_images) <- data.frame("col_1","col_2","col_3","col_4")
