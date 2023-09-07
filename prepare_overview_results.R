@@ -21,6 +21,18 @@ results_parties <- results_parties %>%
          council == "NR"
          )
 
+###OVERVIEW CH
+overview_ch <- results_parties %>%
+  #filter(status == "finished" |
+  #         status == "parties finished") %>%
+  group_by(party_ID) %>%
+  summarise(shortname_de = max(shortname_de),
+            shortname_fr = max(shortname_fr),
+            shortname_it = max(shortname_it),
+    seats_2023 = sum(seats,na.rm = TRUE),
+    seats_2019 = sum(seats,na.rm = TRUE) - sum(seats_change,na.rm = TRUE))
+
+###OVERVIEW CANTONS
 overview_cantons <- data.frame("area_ID","status","title_de","content_de","title_fr","content_fr","title_it","content_it")
 colnames(overview_cantons) <- c("area_ID","status","title_de","content_de","title_fr","content_fr","title_it","content_it")
 

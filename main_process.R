@@ -22,6 +22,7 @@ datawrapper_auth(Sys.getenv("DW_KEY"), overwrite = TRUE)
 #Functions
 setwd("./Functions")
 source("functions_storyfinder.R")
+source("functions_storyfinder_urlena.R")
 source("functions_storybuilder.R")
 source("functions_replace_variables_cleanup.R")
 source("functions_winners_losers.R")
@@ -36,6 +37,10 @@ source("./tools/Funktionen/Utils.R")
 #Texts
 texts_spreadsheet_NR_results <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Sitzverteilung")
 texts_spreadsheet_NR_candidates <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Gewaehlte")
+texts_spreadsheet_UrLena <- read.xlsx("./Texte/LENA Textbausteine Eidgenössische Wahlen 2023_ Gemeindeebene.xlsx", sheetName = "Textbausteine_Selektion")
+
+#Metadata Communities
+meta_gmd_kt <- read_csv("Data/MASTERFILE_GDE.csv")
 
 #####START LOOP#####
 
@@ -112,7 +117,7 @@ if (counted_cantons$analytics[c] == "pending") {
 }
 
 ##Chart Overall##
-source("prepare_overview_cantons.R")
+source("prepare_overview_results.R")
 source("publish_overview_charts.R")
 source("create_output_candidates_flourish.R")
 

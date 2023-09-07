@@ -4,7 +4,6 @@ replace_variables_cleanup <- function(texts,
 texts <- gsub("#Kanton_short",metadata$area_ID[c],texts)
 texts <- gsub("#Kanton_d",metadata$area_name_de[c],texts)
 texts <- gsub("#Kanton_f",metadata$area_name_fr[c],texts)
-texts <- gsub("#Kanton_i",metadata$area_name_it[c],texts)
 texts <- gsub("#Sitze_NR",metadata$seats_available_NR[c],texts)
 
 ###Deutsch
@@ -14,10 +13,11 @@ texts <- gsub("hat die Grüne ","haben die Grünen ",texts)
 texts <- gsub("Die Grüne hat ","Die Grünen haben ",texts)
 texts <- gsub("die Grüne, ","die Grünen, ",texts)
 texts <- gsub("die Grüne ","die Grünen ",texts)
+texts <- gsub("die MCG ","das MCG ",texts)
+texts <- gsub("Die MCG ","Das MCG ",texts)
 texts <- gsub("die weitere","eine weitere Partei",texts)
 texts <- gsub("Die weitere","Eine weitere Partei",texts)
-texts <- gsub("die MCG","das MCG",texts)
-texts <- gsub("Die MCG","Das MCG",texts)
+
 
 #Adapt Numbers
 texts <- gsub(" 2 "," zwei ",texts)
@@ -34,11 +34,10 @@ texts <- gsub(" 12 "," zwölf ",texts)
 }
 
 if (language == "fr") {
-texts <- gsub("Le Verts a","Les Verts ont",texts)
-texts <- gsub("le Verts","les Verts",texts)
-texts <- gsub("Le Verts ","Les Verts ",texts)
-texts <- gsub("le divers ","un autre parti ",texts)
-texts <- gsub("Le divers ","Un autre parti ",texts)
+texts <- gsub("Le Vert-e-s a","Les Vert-e-s ont",texts)
+texts <- gsub("le Vert-e-s","les Vert-e-s",texts)
+texts <- gsub("Le Vert-e-s ","Les Vert-e-s ",texts)
+texts <- gsub("Le autre ","Un autre parti ",texts)
   
 ##Französisch
 texts <- str_replace_all(texts,"de Henniez","d'Henniez")
@@ -106,25 +105,8 @@ texts <- str_replace_all(texts,"A Les ","Aux ")
 texts <- str_replace_all(texts,"à Le ","au ")
 texts <- str_replace_all(texts,"A Le ","Au ")
 texts <- str_replace_all(texts,"du Vaud","de Le Vaud")
-}
 
-if (language == "it") {
-  texts <- gsub("altro ","un altro partito ",texts)
-  
-  texts <- gsub(" 1 "," uno ",texts)
-  texts <- gsub(" 2 "," due ",texts)
-  texts <- gsub(" 3 "," tre ",texts)
-  texts <- gsub(" 4 "," quattro ",texts)
-  texts <- gsub(" 5 "," cinque ",texts)
-  texts <- gsub(" 6 "," sei ",texts)
-  texts <- gsub(" 7 "," sette ",texts)
-  texts <- gsub(" 8 "," otto ",texts)
-  texts <- gsub(" 9 "," nove ",texts)
-  texts <- gsub(" 10 "," dieci ",texts)
-  texts <- gsub(" 11 "," undici ",texts)
-  texts <- gsub(" 12 "," dodici ",texts)  
 }
-
 
 return(texts)  
 }  

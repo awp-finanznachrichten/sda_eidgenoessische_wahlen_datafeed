@@ -6,7 +6,7 @@ library(dplyr)
 library(readr)
 
 setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
-source("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_2023/tools/Funktionen/Utils.R")
+source("./tools/Funktionen/Utils.R")
 
 #Load Databases
 source("load_databases.R")

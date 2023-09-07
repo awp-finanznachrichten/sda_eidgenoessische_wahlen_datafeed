@@ -19,7 +19,7 @@ text_options <- texts_spreadsheet %>%
 if (nrow(text_options) > 0) {
 texts <- c(texts,text_options[sample(1:nrow(text_options),1),2])  
 } else {
-texts <- c(texts,"") 
+texts <- c(texts,story) 
 }  
 }  
 return(texts)
