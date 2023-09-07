@@ -27,6 +27,6 @@ overview_ch_flourish_it <- overview_ch %>%
   select(shortname_it,seats_2023,seats_2019) %>%
   rename(`numero di seggi 2023` = seats_2023,
          `numero di seggi 2019` = seats_2019,
-         Partei = shortname_it)
+         partito = shortname_it)
 
 write.csv(overview_ch_flourish_it,"./Output/parliament_NR_overview_it.csv",row.names = FALSE)
