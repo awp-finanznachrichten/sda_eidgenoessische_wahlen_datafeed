@@ -59,13 +59,13 @@ third_part_needed <- FALSE
   storyboard[3] <- ""
   third_part_needed <- FALSE 
 } else if (party_first$partei_id == 35) {
-storyboard[1] <- "Spec_Uebrige_first"
+storyboard[1] <- "Intro_Uebrige"
 first_part_needed <- FALSE
 } else if (party_second$partei_id == 35) {
-storyboard[2] <- "Spec_Uebrige_second"
+storyboard[2] <- "Second_Uebrige"
 second_part_needed <- FALSE
 }  else if (party_third$partei_id == 35) {
-storyboard[3] <- "Spec_Uebrige_third"
+storyboard[3] <- "Third_Uebrige"
 third_part_needed <- FALSE
 } 
 

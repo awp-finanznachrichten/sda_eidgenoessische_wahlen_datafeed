@@ -24,6 +24,7 @@ setwd("./Functions")
 source("functions_storyfinder.R")
 source("functions_storyfinder_urlena.R")
 source("functions_storybuilder.R")
+source("functions_add_texts.R")
 source("functions_replace_variables_cleanup.R")
 source("functions_winners_losers.R")
 source("functions_voted_out_candidates.R")
@@ -31,6 +32,8 @@ source("function_text_charts.R")
 source("functions_create_tables_NR.R")
 source("functions_create_tables_overview.R")
 source("function_create_table_communities.R")
+source("function_create_bilddaten.R")
+source("function_create_visual_data.R")
 setwd("..")
 source("./tools/Funktionen/Utils.R")
 
@@ -58,7 +61,7 @@ source("get_data_candidates_NR.R")
 counted_cantons <- election_metadata %>%
   filter(council == "NR",
          date == "2023-10-22",
-         grepl("finished",status) == FALSE
+         grepl("finished",status) == FALSE #CHANGE TO TRUE
          )
 
 #Merge with area, text and output overview

@@ -1,8 +1,6 @@
 ###GET TESTDATA COMMUNITIES
-
 setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 source("get_testdata_2023.R")
-
 
 ###LOAD RESULT AND VOTERTURNOUT DATA
 #setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_daten")
@@ -17,7 +15,13 @@ source("get_testdata_2023.R")
 #  left_join(parties_metadata,
 #            by = join_by(partei_id == bfs_id))
 
-#results_NR_communities_voterturnout <- data_NR_voterturnout$level_gemeinden
+#stand_ch <- data_NR_results$stand
+#stand_cantons <- data_NR_results$stand_kantone
+
+#results_NR_communities_voterturnout <- data_NR_voterturnout$level_gemeinden %>%
+#  filter(gemeinde_nummer < 9000)
+
+#results_NR_CH <- data_NR_results$level_ch
 
 #Dataframe Tabellen-Output
 nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde","Tabelle","no_data")
@@ -48,7 +52,7 @@ for (g in 1:nrow(gemeinden)) {
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(wahlbeteiligung) == FALSE)
   
-  text <- "Resultat liegt noch nicht vor."
+  text_urlena <- "Resultat liegt noch nicht vor."
   tabelle <- "Resultat liegt noch nicht vor."
   staerkste_partei <- "no_data"
   
@@ -75,15 +79,14 @@ for (g in 1:nrow(gemeinden)) {
   
   #Find Story Ur-Lena
   storyboard_urlena <- get_storyboard_urlena(ergebnisse_gemeinde_urlena)
-  print(storyboard_urlena)
+
+  #Seed mit Gemeinde-Nr -> So wird immer dieselbe Variante bei Gemeinde gewählt  
+  set.seed(gemeinden$gemeinde_nummer[g])
   text_urlena <- get_texts(storyboard_urlena,
                            texts_spreadsheet_UrLena,
                            "de")
-  print(text_urlena)
-
-  #storyboard_urlena_all <- c(storyboard_urlena_all,storyboard_urlena) #TEST
   }  
-
+ 
   #New Entry Tabelle
   new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
                           gemeinden$Gemeinde_KT_d[g],
@@ -102,15 +105,57 @@ for (g in 1:nrow(gemeinden)) {
   nationalrat_gemeinden_dw_urlena <- rbind(nationalrat_gemeinden_dw_urlena,new_entry)
 }
 
-#Final adaptions Tabelle
+nationalrat_gemeinden_dw_urlena <- nationalrat_gemeinden_dw_urlena[-1,]
+
+###SPECIAL TEXT PARTS###
+included_communities <- c()
+
+##Add special texts if CH counted
+if (stand_ch$wahl_abgeschlossen == TRUE) {
+  
+  #Parties
+  nationalrat_gemeinden_dw_urlena <- add_parties(nationalrat_gemeinden_dw_urlena,
+                      results_NR_communities,
+                      texts_spreadsheet_UrLena,
+                      area = "ch")
+
+  #Participation
+  nationalrat_gemeinden_dw_urlena <- add_participations(nationalrat_gemeinden_dw_urlena,
+                             results_NR_communities_voterturnout,
+                             texts_spreadsheet_UrLena,
+                             area = "ch")
+}  
+
+##Add special texts if Canton counted
+for (c in 1:nrow(stand_cantons)) {
+  if (stand_cantons$kanton_abgeschlossen[c] == TRUE) {
+  
+    #Parties
+    nationalrat_gemeinden_dw_urlena <- add_parties(nationalrat_gemeinden_dw_urlena,
+                                                   results_NR_communities,
+                                                   texts_spreadsheet_UrLena,
+                                                   area = "canton")
+    
+    #Participation
+    nationalrat_gemeinden_dw_urlena <- add_participations(nationalrat_gemeinden_dw_urlena,
+                                                          results_NR_communities_voterturnout,
+                                                          texts_spreadsheet_UrLena,
+                                                          area = "canton")
+    
+    #Nationalräte  
+    
+  }  
+}  
+
+###Final adaptions Tabelle
 nationalrat_gemeinden_dw <- nationalrat_gemeinden_dw[-1,]
 nationalrat_gemeinden_dw$Tabelle <- gsub("[<]","$",nationalrat_gemeinden_dw$Tabelle)
 nationalrat_gemeinden_dw$Tabelle <- gsub("[>]","£",nationalrat_gemeinden_dw$Tabelle)
 nationalrat_gemeinden_dw$Tabelle <- gsub(";","¢",nationalrat_gemeinden_dw$Tabelle)
 write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteien_gemeinden.csv",row.names = FALSE)
 
-#Final adaptions Texts
-nationalrat_gemeinden_dw_urlena <- nationalrat_gemeinden_dw_urlena[-1,]
+###Final adaptions Texts Urlena
+View(nationalrat_gemeinden_dw_urlena)
 
 #View(table(nationalrat_gemeinden_dw_urlena$Storyboard))
 #write.xlsx(nationalrat_gemeinden_dw_urlena,"./Texte/texts_urlena.xlsx",row.names = FALSE)
