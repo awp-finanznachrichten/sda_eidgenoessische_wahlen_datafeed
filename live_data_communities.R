@@ -85,8 +85,13 @@ for (g in 1:nrow(gemeinden)) {
   text_urlena <- get_texts(storyboard_urlena,
                            texts_spreadsheet_UrLena,
                            "de")
+  #Replace Variables
+  text_urlena <- replace_variables_urlena(text_urlena,
+                                          ergebnisse_gemeinde_urlena,
+                                          gemeinden
+                                          )
   }  
- 
+
   #New Entry Tabelle
   new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
                           gemeinden$Gemeinde_KT_d[g],
@@ -109,7 +114,7 @@ nationalrat_gemeinden_dw_urlena <- nationalrat_gemeinden_dw_urlena[-1,]
 
 ###SPECIAL TEXT PARTS###
 included_communities <- c()
-included_communities
+
 ##Add special texts if CH counted
 if (stand_ch$wahl_abgeschlossen == TRUE) {
   
