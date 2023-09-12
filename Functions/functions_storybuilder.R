@@ -15,7 +15,8 @@ get_texts <- function(storyboard,
   texts <- c()
   for (story in storyboard) {
     text_options <- texts_spreadsheet %>%
-      filter(Text_ID == story)
+      filter(Text_ID == story,
+             is.na(Text_d) == FALSE) 
     if (nrow(text_options) > 0) {
       texts <- c(texts,text_options[sample(1:nrow(text_options),1),2])  
     } else {

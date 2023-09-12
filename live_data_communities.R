@@ -109,7 +109,7 @@ nationalrat_gemeinden_dw_urlena <- nationalrat_gemeinden_dw_urlena[-1,]
 
 ###SPECIAL TEXT PARTS###
 included_communities <- c()
-
+included_communities
 ##Add special texts if CH counted
 if (stand_ch$wahl_abgeschlossen == TRUE) {
   
@@ -155,7 +155,7 @@ nationalrat_gemeinden_dw$Tabelle <- gsub(";","¢",nationalrat_gemeinden_dw$Tabel
 write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteien_gemeinden.csv",row.names = FALSE)
 
 ###Final adaptions Texts Urlena
-View(nationalrat_gemeinden_dw_urlena)
+write.csv(nationalrat_gemeinden_dw_urlena,file="./Output/nationalrat_ergebnisse_urlena.csv",row.names = FALSE)
 
 #View(table(nationalrat_gemeinden_dw_urlena$Storyboard))
 #write.xlsx(nationalrat_gemeinden_dw_urlena,"./Texte/texts_urlena.xlsx",row.names = FALSE)
