@@ -273,12 +273,12 @@ selection <- which(nationalrat_gemeinden_dw_urlena$ID == community_id)
 if (nrow(community) == 1) {
 elected_candidates <- elected_candidates_overall %>%
   filter(place_id == community_id)
- 
+str_sub("Zürich ZH",end=-4)
 if (nrow(elected_candidates) == 1) {
 if (elected_candidates$gender == "f") {
   text_one_f <- texts_spreadsheet_UrLena %>%
     filter(Text_ID == "Add_NR_im_Wohnort_one_f")
-  text_one_f$Text_d <- gsub("#Gemeinde_d",community$Gemeinde,text_one_f$Text_d)
+  text_one_f$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde,end=-4),text_one_f$Text_d)
   text_one_f$Text_d <- gsub("#Names_NR_pro_Ort",
                             paste0(elected_candidates$firstname," ",elected_candidates$lastname," (",elected_candidates$shortname_de,")")
                             ,text_one_f$Text_d) 
@@ -291,7 +291,7 @@ if (elected_candidates$gender == "f") {
 } else if (elected_candidates$gender == "m") {
   text_one_m <- texts_spreadsheet_UrLena %>%
     filter(Text_ID == "Add_NR_im_Wohnort_one_m")
-  text_one_m$Text_d <- gsub("#Gemeinde_d",community$Gemeinde,text_one_m$Text_d)
+  text_one_m$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde,end=-4),text_one_m$Text_d)
   text_one_m$Text_d <- gsub("#Names_NR_pro_Ort",
                             paste0(elected_candidates$firstname," ",elected_candidates$lastname," (",elected_candidates$shortname_de,")")
                             ,text_one_m$Text_d) 
@@ -305,7 +305,7 @@ if (elected_candidates$gender == "f") {
 } else if (nrow(elected_candidates) < 5) {
   text_few <- texts_spreadsheet_UrLena %>%
     filter(Text_ID == "Add_NR_im_Wohnort_few")
-  text_few$Text_d <- gsub("#Gemeinde_d",community$Gemeinde,text_few$Text_d)
+  text_few$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde,end=-4),text_few$Text_d)
   text_few$Text_d <- gsub("#Anzahl_NR_pro_Ort",nrow(elected_candidates),text_few$Text_d)
   text_elected <- ""
   for (l in 1:nrow(elected_candidates)) {
@@ -327,7 +327,7 @@ if (elected_candidates$gender == "f") {
 } else if (nrow(elected_candidates) >= 5) {
   text_many <- texts_spreadsheet_UrLena %>%
     filter(Text_ID == "Add_NR_im_Wohnort_many")
-  text_many$Text_d <- gsub("#Gemeinde_d",community$Gemeinde,text_many$Text_d)
+  text_many$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde,end=-4),text_many$Text_d)
   text_many$Text_d <- gsub("#Anzahl_NR_pro_Ort",nrow(elected_candidates),text_many$Text_d)
   nationalrat_gemeinden_dw_urlena$Text[selection] <- 
     paste0(nationalrat_gemeinden_dw_urlena$Text[selection],"<br><br>",
