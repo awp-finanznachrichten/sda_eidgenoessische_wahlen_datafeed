@@ -280,7 +280,7 @@ if (elected_candidates$gender == "f") {
     filter(Text_ID == "Add_NR_im_Wohnort_one_f")
   text_one_f$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde,end=-4),text_one_f$Text_d)
   text_one_f$Text_d <- gsub("#Names_NR_pro_Ort",
-                            paste0(elected_candidates$firstname," ",elected_candidates$lastname," (",elected_candidates$shortname_de,")")
+                            paste0("<b>",elected_candidates$firstname," ",elected_candidates$lastname," (",elected_candidates$shortname_de,")</b>")
                             ,text_one_f$Text_d) 
   nationalrat_gemeinden_dw_urlena$Text[selection] <- 
     paste0(nationalrat_gemeinden_dw_urlena$Text[selection],"<br><br>",
@@ -293,7 +293,7 @@ if (elected_candidates$gender == "f") {
     filter(Text_ID == "Add_NR_im_Wohnort_one_m")
   text_one_m$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde,end=-4),text_one_m$Text_d)
   text_one_m$Text_d <- gsub("#Names_NR_pro_Ort",
-                            paste0(elected_candidates$firstname," ",elected_candidates$lastname," (",elected_candidates$shortname_de,")")
+                            paste0("<b>",elected_candidates$firstname," ",elected_candidates$lastname," (",elected_candidates$shortname_de,")</b>")
                             ,text_one_m$Text_d) 
   nationalrat_gemeinden_dw_urlena$Text[selection] <- 
     paste0(nationalrat_gemeinden_dw_urlena$Text[selection],"<br><br>",
@@ -314,6 +314,7 @@ if (elected_candidates$gender == "f") {
   }
   text_elected <- substr(text_elected,1,nchar(text_elected)-2)
   text_elected <- stri_replace_last(text_elected,fixed=","," und")
+  text_elected <- paste0("<b>",text_elected,"</b>")
   
   text_few$Text_d <- gsub("#Names_NR_pro_Ort",
                             text_elected
