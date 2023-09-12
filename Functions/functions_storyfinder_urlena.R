@@ -93,7 +93,8 @@ storyboard[2] <- ""
 } 
 }  
 if (party_first$partei_staerke > 50) {
-storyboard[1] <- "Intro_majority"  
+storyboard[1] <- "Intro_majority" 
+second_part_needed <- TRUE
 } 
 
 } else {
