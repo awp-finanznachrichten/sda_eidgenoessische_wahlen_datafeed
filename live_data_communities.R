@@ -190,8 +190,8 @@ nationalrat_gemeinden_dw_urlena <- add_elected_candidates(elected_candidates_ove
                                                texts_spreadsheet_UrLena)
 
 ###Final adaptions Texts Urlena
-nationalrat_gemeinden_dw_urlena$Text <- gsub("<br><br><br><br><br><br>","",nationalrat_gemeinden_dw_urlena$Text)
-nationalrat_gemeinden_dw_urlena$Text <- gsub("<br><br><br><br>","",nationalrat_gemeinden_dw_urlena$Text)
+nationalrat_gemeinden_dw_urlena$Text <- gsub("<br><br><br><br><br><br>","<br><br>",nationalrat_gemeinden_dw_urlena$Text)
+nationalrat_gemeinden_dw_urlena$Text <- gsub("<br><br><br><br>","<br><br>",nationalrat_gemeinden_dw_urlena$Text)
 write.csv(nationalrat_gemeinden_dw_urlena[c(1:2,4:5)],file="./Output/nationalrat_ergebnisse_urlena.csv",row.names = FALSE)
 
 #View(table(nationalrat_gemeinden_dw_urlena$Storyboard))
