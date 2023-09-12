@@ -84,10 +84,12 @@ if (nrow(party_second) == 1) {
 if ((party_first$partei_staerke - party_second$partei_staerke)  > 20) { #10
 storyboard[1] <- "Intro_unchanged_big_gap"
 second_part_needed <- FALSE
+storyboard[2] <- ""
 }
 if ((party_first$partei_staerke - party_second$partei_staerke) < 3) { #2
 storyboard[1] <- "Intro_unchanged_small_gap"
 second_part_needed <- FALSE
+storyboard[2] <- ""
 } 
 }  
 if (party_first$partei_staerke > 50) {
