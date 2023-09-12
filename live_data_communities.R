@@ -60,9 +60,9 @@ for (g in 1:nrow(gemeinden)) {
   if (nrow(ergebnisse_gemeinde) > 0) {
     
   ergebnisse_gemeinde_tabelle <- ergebnisse_gemeinde %>%
-      filter(!is.na(partei_staerke),
-             partei_staerke >= 3 |
-               differenz_partei_staerke < -3) %>% 
+      filter(!is.na(partei_staerke)) %>%
+             #partei_staerke >= 3 |
+              # differenz_partei_staerke < -3) %>% 
              #shortname_de != "weitere") 
       # shortname_de != "BDP") %>%
       arrange(desc(partei_staerke))
@@ -164,7 +164,7 @@ write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteie
 ###Final adaptions Texts Urlena
 write.csv(nationalrat_gemeinden_dw_urlena[c(1:2,4:5)],file="./Output/nationalrat_ergebnisse_urlena.csv",row.names = FALSE)
 
-
+View(nationalrat_gemeinden_dw_urlena)
 #View(table(nationalrat_gemeinden_dw_urlena$Storyboard))
 #write.xlsx(nationalrat_gemeinden_dw_urlena,"./Texte/texts_urlena.xlsx",row.names = FALSE)
 

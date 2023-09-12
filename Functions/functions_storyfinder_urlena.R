@@ -73,7 +73,9 @@ third_part_needed <- FALSE
 #First Part
 if (first_part_needed == TRUE) {
 if (unchanged_check_first == TRUE) {
-  
+if (party_first$partei_staerke > 50) {
+storyboard[1] <- "Intro_majority" 
+} else {
 if (change_first > 8) {
 storyboard[1] <- "Intro_unchanged_big_jump_percentage"  
 }
@@ -92,10 +94,7 @@ second_part_needed <- FALSE
 storyboard[2] <- ""
 } 
 }  
-if (party_first$partei_staerke > 50) {
-storyboard[1] <- "Intro_majority" 
-second_part_needed <- TRUE
-} 
+}
 
 } else {
 storyboard[1] <- "Intro_changed_normal"
