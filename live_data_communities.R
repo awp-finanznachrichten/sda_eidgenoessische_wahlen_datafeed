@@ -23,6 +23,30 @@ source("get_testdata_2023.R")
 
 #results_NR_CH <- data_NR_results$level_ch
 
+#Get elected candidates
+mydb <- connectDB(db_name = "sda_elections")
+rs <-
+  dbSendQuery(
+    mydb,
+    paste0(
+      "SELECT * FROM candidates_results WHERE date = '2023-10-22' AND elected = 0" #CHANGE TO elected = 1
+    )
+  )
+elected_candidates_overall <- fetch(rs, n = -1)
+dbDisconnectAll()
+
+#Get elected candidates
+elected_candidates_overall <- elected_candidates_overall %>%
+  mutate(area_id = canton) %>%  #REMOVE
+  filter(is.na(source_update)) %>% #REMOVE!
+  filter(is.na(place_id) == FALSE) %>%
+  left_join(people_metadata, join_by(person_id == id)) %>%
+  left_join(parties_metadata, join_by (party_id == id))
+
+#Make random selection for Testing
+elected_candidates_overall <- elected_candidates_overall[sample(1:nrow(elected_candidates_overall),246),]
+
+
 #Dataframe Tabellen-Output
 nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde","Tabelle","no_data")
 colnames(nationalrat_gemeinden_dw) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
@@ -106,12 +130,21 @@ for (g in 1:nrow(gemeinden)) {
   new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
                           gemeinden$Gemeinde_KT_d[g],
                           paste(storyboard_urlena,collapse="; "),
-                          paste(text_urlena,collapse="<br>"),
+                          paste(text_urlena,collapse="<br><br>"),
                           staerkste_partei)
   colnames(new_entry) <- c("ID","Gemeinde","Storyboard","Text","Staerkste_Partei")
   nationalrat_gemeinden_dw_urlena <- rbind(nationalrat_gemeinden_dw_urlena,new_entry)
 }
 
+###Final adaptions Tabelle
+nationalrat_gemeinden_dw <- nationalrat_gemeinden_dw[-1,]
+nationalrat_gemeinden_dw$Tabelle <- gsub("[<]","$",nationalrat_gemeinden_dw$Tabelle)
+nationalrat_gemeinden_dw$Tabelle <- gsub("[>]","£",nationalrat_gemeinden_dw$Tabelle)
+nationalrat_gemeinden_dw$Tabelle <- gsub(";","¢",nationalrat_gemeinden_dw$Tabelle)
+write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteien_gemeinden.csv",row.names = FALSE)
+
+
+###Final adaptions Urlenda
 nationalrat_gemeinden_dw_urlena <- nationalrat_gemeinden_dw_urlena[-1,]
 
 ###SPECIAL TEXT PARTS###
@@ -148,23 +181,19 @@ for (c in 1:nrow(stand_cantons)) {
                                                           results_NR_communities_voterturnout,
                                                           texts_spreadsheet_UrLena,
                                                           area = "canton")
-    
-    #Nationalräte  
-    
   }  
 }  
 
-###Final adaptions Tabelle
-nationalrat_gemeinden_dw <- nationalrat_gemeinden_dw[-1,]
-nationalrat_gemeinden_dw$Tabelle <- gsub("[<]","$",nationalrat_gemeinden_dw$Tabelle)
-nationalrat_gemeinden_dw$Tabelle <- gsub("[>]","£",nationalrat_gemeinden_dw$Tabelle)
-nationalrat_gemeinden_dw$Tabelle <- gsub(";","¢",nationalrat_gemeinden_dw$Tabelle)
-write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteien_gemeinden.csv",row.names = FALSE)
+##Add Nationalräte
+nationalrat_gemeinden_dw_urlena <- add_elected_candidates(elected_candidates_overall,
+                                               nationalrat_gemeinden_dw_urlena,
+                                               texts_spreadsheet_UrLena)
 
 ###Final adaptions Texts Urlena
+nationalrat_gemeinden_dw_urlena$Text <- gsub("<br><br><br><br><br><br>","",nationalrat_gemeinden_dw_urlena$Text)
+nationalrat_gemeinden_dw_urlena$Text <- gsub("<br><br><br><br>","",nationalrat_gemeinden_dw_urlena$Text)
 write.csv(nationalrat_gemeinden_dw_urlena[c(1:2,4:5)],file="./Output/nationalrat_ergebnisse_urlena.csv",row.names = FALSE)
 
-View(nationalrat_gemeinden_dw_urlena)
 #View(table(nationalrat_gemeinden_dw_urlena$Storyboard))
 #write.xlsx(nationalrat_gemeinden_dw_urlena,"./Texte/texts_urlena.xlsx",row.names = FALSE)
 

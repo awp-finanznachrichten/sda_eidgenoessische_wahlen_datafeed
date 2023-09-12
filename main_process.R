@@ -125,6 +125,11 @@ source("prepare_overview_results.R")
 source("publish_overview_charts.R")
 source("create_output_candidates_flourish.R")
 
+###COMMUNITIES###
+##Output tables and texts##
+source("live_data_communities.R")
+
+
 ###STAENDERAT###
 ##Text Candidates##
 
@@ -132,6 +137,3 @@ source("create_output_candidates_flourish.R")
 
 ##Charts Overall##
 
-###COMMUNITIES###
-##Output tables and texts##
-source("live_data_communities.R")
