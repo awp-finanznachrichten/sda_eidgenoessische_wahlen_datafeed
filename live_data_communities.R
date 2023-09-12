@@ -77,6 +77,15 @@ for (g in 1:nrow(gemeinden)) {
   tabelle <- create_table_communities(ergebnisse_gemeinde_tabelle,
                                       voter_turnout)
   
+  #New Entry Tabelle
+  new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
+                          gemeinden$Gemeinde_KT_d[g],
+                          tabelle,
+                          staerkste_partei)
+  colnames(new_entry) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
+  nationalrat_gemeinden_dw <- rbind(nationalrat_gemeinden_dw,new_entry)
+  
+  
   #Find Story Ur-Lena
   storyboard_urlena <- get_storyboard_urlena(ergebnisse_gemeinde_urlena)
 
@@ -92,14 +101,7 @@ for (g in 1:nrow(gemeinden)) {
                                           )
   }  
 
-  #New Entry Tabelle
-  new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
-                          gemeinden$Gemeinde_KT_d[g],
-                          tabelle,
-                          staerkste_partei)
-  colnames(new_entry) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
-  nationalrat_gemeinden_dw <- rbind(nationalrat_gemeinden_dw,new_entry)
-  
+
   #New Entry Text Urlena
   new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
                           gemeinden$Gemeinde_KT_d[g],
@@ -161,6 +163,9 @@ write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteie
 
 ###Final adaptions Texts Urlena
 write.csv(nationalrat_gemeinden_dw_urlena[c(1:2,4:5)],file="./Output/nationalrat_ergebnisse_urlena.csv",row.names = FALSE)
+
+
+
 
 #View(table(nationalrat_gemeinden_dw_urlena$Storyboard))
 #write.xlsx(nationalrat_gemeinden_dw_urlena,"./Texte/texts_urlena.xlsx",row.names = FALSE)

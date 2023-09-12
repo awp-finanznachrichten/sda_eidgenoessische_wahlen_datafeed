@@ -143,6 +143,11 @@ add_parties <- function(nationalrat_gemeinden_dw_urlena,
                         texts_spreadsheet_UrLena,
                         area = "canton") {
 
+results_NR_communities_nosmall <- results_NR_communities %>%
+    group_by(gemeinde_nummer) %>%
+    mutate(small_community = ifelse(max(stimmen_partei,na.omit = TRUE) > 200,FALSE,TRUE)) %>%
+  filter(small_community == FALSE)
+  
 parties_ids <- c(2,1,56,70,75,3)
 parties_name_de <- c("SVP","SP","FDP","Mitte","Grüne","GLP")
 
@@ -153,12 +158,12 @@ for (i in 1:length(parties_ids)) {
     text_lowest <- texts_spreadsheet_UrLena %>%
       filter(Text_ID == "Add_lowest_in_canton")
 
-    results <- results_NR_communities %>%
+    results <- results_NR_communities_nosmall %>%
       filter(kanton_nummer == stand_cantons$kanton_nummer[c],
              is.na(partei_staerke) == FALSE,
              id == parties_ids[i]) %>%
       arrange(desc(partei_staerke))
-    
+
     if (nrow(results) > 10 ) {
       highest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[1])
       lowest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[nrow(results)])
@@ -207,7 +212,7 @@ for (i in 1:length(parties_ids)) {
     text_lowest <- texts_spreadsheet_UrLena %>%
       filter(Text_ID == "Add_lowest_in_CH")
     
-    results <- results_NR_communities %>%
+    results <- results_NR_communities_nosmall %>%
       filter(is.na(partei_staerke) == FALSE,
              id == parties_ids[i]) %>%
       arrange(desc(partei_staerke))
