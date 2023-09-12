@@ -223,27 +223,35 @@ for (i in 1:length(parties_ids)) {
     #Replace Variables
     
     ##DE##
+    if (sum(highest == included_communities) == 0) {
       text_highest$Text_d <- gsub("#Party_highest_de",parties_name_de[i],text_highest$Text_d)
       nationalrat_gemeinden_dw_urlena$Text[highest] <- 
         paste0(nationalrat_gemeinden_dw_urlena$Text[highest]," ",
                text_highest$Text_d
         )
       print(nationalrat_gemeinden_dw_urlena$Text[highest])
+      
+      ##FR##
+      
+      ##IT##
+        
       included_communities <<- c(included_communities,highest)
+    }
       
-      
+    if (sum(lowest == included_communities) == 0) {
       text_lowest$Text_d <- gsub("#Party_lowest_de",parties_name_de[i],text_lowest$Text_d) 
       nationalrat_gemeinden_dw_urlena$Text[lowest] <- 
         paste0(nationalrat_gemeinden_dw_urlena$Text[lowest]," ",
                text_lowest$Text_d
         )
       print(nationalrat_gemeinden_dw_urlena$Text[lowest])
-      
+
       ##FR##
       
       ##IT##
       
       included_communities <<- c(included_communities,lowest)
+    }
   }  
 }  
 return(nationalrat_gemeinden_dw_urlena)  

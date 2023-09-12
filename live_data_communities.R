@@ -164,9 +164,6 @@ write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteie
 ###Final adaptions Texts Urlena
 write.csv(nationalrat_gemeinden_dw_urlena[c(1:2,4:5)],file="./Output/nationalrat_ergebnisse_urlena.csv",row.names = FALSE)
 
-
-
-
 #View(table(nationalrat_gemeinden_dw_urlena$Storyboard))
 #write.xlsx(nationalrat_gemeinden_dw_urlena,"./Texte/texts_urlena.xlsx",row.names = FALSE)
 
