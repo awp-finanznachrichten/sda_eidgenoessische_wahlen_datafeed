@@ -48,7 +48,7 @@ text_urlena <- gsub("#Party_3_plus_minus",ifelse(grepl("[-]",ergebnisse_gemeinde
                     text_urlena)
 
 text_urlena <- gsub("#Party_1_distance_to_next",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$partei_staerke[1]-ergebnisse_gemeinde_urlena$partei_staerke[2],1)),text_urlena)
-
+text_urlena <- gsub("#Party_1_rank_in_commune_prev",ergebnisse_gemeinde_urlena$rank_last_election[1],text_urlena)
 
 
 return(text_urlena)  
