@@ -62,8 +62,8 @@ for (g in 1:nrow(gemeinden)) {
   ergebnisse_gemeinde_tabelle <- ergebnisse_gemeinde %>%
       filter(!is.na(partei_staerke),
              partei_staerke >= 3 |
-               differenz_partei_staerke < -3, 
-             shortname_de != "weitere") %>%
+               differenz_partei_staerke < -3) %>% 
+             #shortname_de != "weitere") 
       # shortname_de != "BDP") %>%
       arrange(desc(partei_staerke))
   

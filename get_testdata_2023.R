@@ -23,6 +23,8 @@ stand_cantons <- data_NR_parties$stand_kantone
 
 #Results
 results_NR_communities <- data_NR_parties$level_gemeinden
+results_NR_communities$partei_id <- ifelse(results_NR_communities$partei_id == 2,34,results_NR_communities$partei_id)
+
 results_NR_cantons <- data_NR_parties$level_kantone
 results_NR_CH <- data_NR_parties$level_ch
 
