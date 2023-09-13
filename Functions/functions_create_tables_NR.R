@@ -92,8 +92,8 @@ create_table_NR_candidates <- function(elected_candidates,
 if (language == "de") {  
 tabelle <- paste0("<table><tbody><tr><td></td>",
                   "<td></td>",
-                  "<td></td>",
-                  "<td>Anzahl Stimmen</td></tr>")
+                  "<td></td></tr>")
+                  #"<td>Anzahl Stimmen</td>")
 
 for (e in 1:nrow(elected_candidates)) {
   tabelle <- paste0(tabelle,
@@ -101,7 +101,7 @@ for (e in 1:nrow(elected_candidates)) {
                     "<td>",elected_candidates$firstname[e]," ",elected_candidates$lastname[e],"</td>",
                     "<td>",elected_candidates$shortname_de[e],"</td>",
                     "<td>",elected_candidates$status_text[e],"</td>",
-                    "<td>",format(elected_candidates$votes[e],big.mark = "'"),"</td>",
+                    #"<td>",format(elected_candidates$votes[e],big.mark = "'"),"</td>",
                     "</tr>")
 }                    
 }
@@ -109,8 +109,8 @@ for (e in 1:nrow(elected_candidates)) {
   if (language == "fr") {  
     tabelle <- paste0("<table><tbody><tr><td></td>",
                       "<td></td>",
-                      "<td></td>",
-                      "<td>nombre de voix</td></tr>")
+                      "<td></td></tr>")
+                      #"<td>nombre de voix</td>")
     
     for (e in 1:nrow(elected_candidates)) {
       tabelle <- paste0(tabelle,
@@ -118,7 +118,7 @@ for (e in 1:nrow(elected_candidates)) {
                         "<td>",elected_candidates$firstname[e]," ",elected_candidates$lastname[e],"</td>",
                         "<td>",elected_candidates$shortname_fr[e],"</td>",
                         "<td>",elected_candidates$status_text_fr[e],"</td>",
-                        "<td>",format(elected_candidates$votes[e],big.mark = "'"),"</td>",
+                        #"<td>",format(elected_candidates$votes[e],big.mark = "'"),"</td>",
                         "</tr>")
     }                    
   }
@@ -126,8 +126,8 @@ for (e in 1:nrow(elected_candidates)) {
   if (language == "it") {  
     tabelle <- paste0("<table><tbody><tr><td></td>",
                       "<td></td>",
-                      "<td></td>",
-                      "<td>numero di voti</td></tr>")
+                      "<td></td></tr>")
+                      #"<td>numero di voti</td>")
     
     for (e in 1:nrow(elected_candidates)) {
       tabelle <- paste0(tabelle,

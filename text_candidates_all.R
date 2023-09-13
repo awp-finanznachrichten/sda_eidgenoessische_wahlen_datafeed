@@ -34,7 +34,7 @@ for (c in 1:nrow(elections_metadata_selection)) {
 
   #Get candidates results from Canton
   mydb <- connectDB(db_name="sda_elections")
-  rs <- dbSendQuery(mydb, paste0("SELECT * FROM candidates_results WHERE election_id = '",elections_metadata_selection$election_ID[c],"'"))
+  rs <- dbSendQuery(mydb, paste0("SELECT * FROM candidates_results WHERE election_id = '",elections_metadata_selection$election_ID[c],"' AND source_update = 'BFS Testdata'"))
   results_candidates <- fetch(rs,n=-1)
   dbDisconnectAll()
 
@@ -149,7 +149,7 @@ new_entry <- data.frame(elections_metadata_selection$area_ID[c],
 colnames(new_entry) <- c("Kanton","Storyboard","Text","Text_fr","Text_it")
 overview_texts <- rbind(overview_texts,new_entry)
 
-cat(overview_texts$Text_it[c+1])
+cat(overview_texts$Text[c+1])
 
 #source("create_mars_meldung_candidates_NR_FR.R",encoding = "UTF-8")
 }
@@ -158,5 +158,5 @@ overview_texts <- overview_texts[-1,]
 #write.xlsx(overview_texts,"texte_candidates_NR.xlsx",row.names = FALSE)
 
 #HTML Output
-html_output <- gsub("\n","<br>",overview_texts$Text_it)
+html_output <- gsub("\n","<br>",overview_texts$Text)
 cat(html_output)

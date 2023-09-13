@@ -9,7 +9,7 @@ library(stringr)
 library(DatawRappr)
 
 #Working Directory
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 
 #Main Data URL from BFS
 BFS_API_URL <-
@@ -42,6 +42,8 @@ source("./tools/Funktionen/Utils.R")
 texts_spreadsheet_NR_results <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Sitzverteilung")
 texts_spreadsheet_NR_candidates <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Gewaehlte")
 texts_spreadsheet_UrLena <- read.xlsx("./Texte/LENA Textbausteine Eidgenössische Wahlen 2023_ Gemeindeebene.xlsx", sheetName = "Textbausteine_Selektion")
+texts_spreadsheet_UrLena <- texts_spreadsheet_UrLena %>%
+  filter(is.na(Text_d) == FALSE)
 
 #Metadata Communities
 meta_gmd_kt <- read_csv("Data/MASTERFILE_GDE.csv")

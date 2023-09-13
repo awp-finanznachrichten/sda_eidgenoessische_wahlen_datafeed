@@ -133,7 +133,7 @@ new_entry <- data.frame(elections_metadata_selection$area_ID[c],
 colnames(new_entry) <- c("Kanton","Storyboard","Text","Text_fr","Text_it")
 overview_texts <- rbind(overview_texts,new_entry)
 
-cat(overview_texts$Text_it[c+1])
+cat(overview_texts$Text[c+1])
 #source("mars_meldung_results_NR_IT.R",encoding = "UTF-8")
 
 }
@@ -142,5 +142,5 @@ overview_texts <- overview_texts[-1,]
 #write.xlsx(overview_texts,"texte_results_NR.xlsx",row.names = FALSE)
 
 #HTML Output
-html_output <- gsub("\n","<br>",overview_texts$Text_it)
+html_output <- gsub("\n","<br>",overview_texts$Text)
 cat(html_output)

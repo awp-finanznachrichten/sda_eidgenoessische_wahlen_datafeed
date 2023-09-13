@@ -1,5 +1,5 @@
 ###GET TESTDATA COMMUNITIES
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 source("get_testdata_2023.R")
 
 ###LOAD RESULT AND VOTERTURNOUT DATA
@@ -66,7 +66,7 @@ gemeinden <- gemeinden %>%
 
 #storyboard_urlena_all <- c() #TEST
 for (g in 1:nrow(gemeinden)) {
-
+  
   #Filter Parteien: Stärker als 3% oder mehr als 3% verloren
   ergebnisse_gemeinde <- results_NR_communities %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],

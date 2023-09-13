@@ -314,7 +314,6 @@ if (elected_candidates$gender == "f") {
   }
   text_elected <- substr(text_elected,1,nchar(text_elected)-2)
   text_elected <- stri_replace_last(text_elected,fixed=","," und")
-  text_elected <- paste0("<b>",text_elected,"</b>")
   
   text_few$Text_d <- gsub("#Names_NR_pro_Ort",
                             text_elected
