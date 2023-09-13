@@ -172,7 +172,7 @@ for (i in 1:length(parties_ids)) {
       if (sum(highest == included_communities) == 0) {
         
         ##DE##
-        text_highest$Text_d <- gsub("#Party_highest_in_canton_de",parties_name_de[i],text_highest$Text_d)
+        text_highest$Text_d <- gsub("#Party_highest_in_canton_d",parties_name_de[i],text_highest$Text_d)
         text_highest$Text_d <- gsub("Die Grüne hat","Die Grünen haben",text_highest$Text_d)
         nationalrat_gemeinden_dw_urlena$Text[highest] <- 
           paste0(nationalrat_gemeinden_dw_urlena$Text[highest],"<br><br>",
@@ -190,7 +190,7 @@ for (i in 1:length(parties_ids)) {
         
       if (sum(lowest == included_communities) == 0) {
         ##DE##
-        text_lowest$Text_d <- gsub("#Party_lowest_in_canton_de",parties_name_de[i],text_lowest$Text_d)
+        text_lowest$Text_d <- gsub("#Party_lowest_in_canton_d",parties_name_de[i],text_lowest$Text_d)
         text_lowest$Text_d <- gsub("war die Grüne","waren die Grünen",text_lowest$Text_d)
         nationalrat_gemeinden_dw_urlena$Text[lowest] <- 
           paste0(nationalrat_gemeinden_dw_urlena$Text[lowest],"<br><br>",
@@ -224,7 +224,7 @@ for (i in 1:length(parties_ids)) {
     
     ##DE##
     if (sum(highest == included_communities) == 0) {
-      text_highest$Text_d <- gsub("#Party_highest_de",parties_name_de[i],text_highest$Text_d)
+      text_highest$Text_d <- gsub("#Party_highest_d",parties_name_de[i],text_highest$Text_d)
       nationalrat_gemeinden_dw_urlena$Text[highest] <- 
         paste0(nationalrat_gemeinden_dw_urlena$Text[highest],"<br><br>",
                text_highest$Text_d
@@ -239,7 +239,7 @@ for (i in 1:length(parties_ids)) {
     }
       
     if (sum(lowest == included_communities) == 0) {
-      text_lowest$Text_d <- gsub("#Party_lowest_de",parties_name_de[i],text_lowest$Text_d) 
+      text_lowest$Text_d <- gsub("#Party_lowest_d",parties_name_de[i],text_lowest$Text_d) 
       nationalrat_gemeinden_dw_urlena$Text[lowest] <- 
         paste0(nationalrat_gemeinden_dw_urlena$Text[lowest],"<br><br>",
                text_lowest$Text_d

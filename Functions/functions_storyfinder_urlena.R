@@ -33,8 +33,7 @@ if (nrow(party_third) == 1) {
 unchanged_check_third <- party_third$rank_current_election == party_third$rank_last_election
 }
 
-
-if (party_first$stimmen_partei[1] < 200) {
+if ((party_first$stimmen_partei[1] < 200) & (nrow(party_first) == 1) & (nrow(party_second) == 1) & (nrow(party_third) == 1)) {
 storyboard <- c("Spec_small_community","","")
 first_part_needed <- FALSE
 second_part_needed <- FALSE

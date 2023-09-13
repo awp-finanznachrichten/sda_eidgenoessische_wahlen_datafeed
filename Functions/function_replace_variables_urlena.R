@@ -34,6 +34,11 @@ text_urlena <- gsub("#Party_1_partei_staerke",gsub("[.]",",",round2(ergebnisse_g
 text_urlena <- gsub("#Party_2_partei_staerke",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$partei_staerke[2],1)),text_urlena)
 text_urlena <- gsub("#Party_3_partei_staerke",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$partei_staerke[3],1)),text_urlena)
 
+text_urlena <- gsub("#Party_1_partei_stimmen",ergebnisse_gemeinde_urlena$stimmen_partei[1],text_urlena)
+text_urlena <- gsub("#Party_2_partei_stimmen",ergebnisse_gemeinde_urlena$stimmen_partei[2],text_urlena)
+text_urlena <- gsub("#Party_3_partei_stimmen",ergebnisse_gemeinde_urlena$stimmen_partei[3],text_urlena)
+
+ergebnisse_gemeinde_urlena
 text_urlena <- gsub("#Party_1_plus_minus",ifelse(grepl("[-]",ergebnisse_gemeinde_urlena$differenz_partei_staerke[1]),
                                              gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$differenz_partei_staerke[1],1)),
                                              paste0("+",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$differenz_partei_staerke[1],1)))),
