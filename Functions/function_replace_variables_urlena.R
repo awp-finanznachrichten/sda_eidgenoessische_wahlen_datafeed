@@ -14,40 +14,40 @@ ergebnisse_gemeinde_urlena  <- ergebnisse_gemeinde_urlena  %>%
          shortname_it = paste0("<b>",shortname_it,"</b>")
          )
 
-text_urlena <- gsub("#Party_1_partei_bezeichnung_d",ergebnisse_gemeinde_urlena$shortname_de[1],text_urlena)
-text_urlena <- gsub("#Party_1_partei_bezeichnung_f",ergebnisse_gemeinde_urlena$shortname_fr[1],text_urlena)
-text_urlena <- gsub("#Party_1_partei_bezeichnung_i",ergebnisse_gemeinde_urlena$shortname_it[1],text_urlena)
+text_urlena <- gsub("#Party1_name_d",ergebnisse_gemeinde_urlena$shortname_de[1],text_urlena)
+text_urlena <- gsub("#Party1_name_f",ergebnisse_gemeinde_urlena$shortname_fr[1],text_urlena)
+text_urlena <- gsub("#Party1_name_i",ergebnisse_gemeinde_urlena$shortname_it[1],text_urlena)
 
-text_urlena <- gsub("#Party_2_partei_bezeichnung_d",ergebnisse_gemeinde_urlena$shortname_de[2],text_urlena)
-text_urlena <- gsub("#Party_2_partei_bezeichnung_f",ergebnisse_gemeinde_urlena$shortname_fr[2],text_urlena)
-text_urlena <- gsub("#Party_2_partei_bezeichnung_i",ergebnisse_gemeinde_urlena$shortname_it[2],text_urlena)
+text_urlena <- gsub("#Party2_name_d",ergebnisse_gemeinde_urlena$shortname_de[2],text_urlena)
+text_urlena <- gsub("#Party2_name_f",ergebnisse_gemeinde_urlena$shortname_fr[2],text_urlena)
+text_urlena <- gsub("#Party2_name_i",ergebnisse_gemeinde_urlena$shortname_it[2],text_urlena)
 
-text_urlena <- gsub("#Party_3_partei_bezeichnung_d",ergebnisse_gemeinde_urlena$shortname_de[3],text_urlena)
-text_urlena <- gsub("#Party_3_partei_bezeichnung_f",ergebnisse_gemeinde_urlena$shortname_fr[3],text_urlena)
-text_urlena <- gsub("#Party_3_partei_bezeichnung_i",ergebnisse_gemeinde_urlena$shortname_it[3],text_urlena)
+text_urlena <- gsub("#Party3_name_d",ergebnisse_gemeinde_urlena$shortname_de[3],text_urlena)
+text_urlena <- gsub("#Party3_name_f",ergebnisse_gemeinde_urlena$shortname_fr[3],text_urlena)
+text_urlena <- gsub("#Party3_name_i",ergebnisse_gemeinde_urlena$shortname_it[3],text_urlena)
 
-text_urlena <- gsub("#Party_4_partei_bezeichnung_d",ergebnisse_gemeinde_urlena$shortname_de[4],text_urlena)
-text_urlena <- gsub("#Party_4_partei_bezeichnung_f",ergebnisse_gemeinde_urlena$shortname_fr[4],text_urlena)
-text_urlena <- gsub("#Party_4_partei_bezeichnung_i",ergebnisse_gemeinde_urlena$shortname_it[4],text_urlena)
+text_urlena <- gsub("#Party4_name_d",ergebnisse_gemeinde_urlena$shortname_de[4],text_urlena)
+text_urlena <- gsub("#Party4_name_f",ergebnisse_gemeinde_urlena$shortname_fr[4],text_urlena)
+text_urlena <- gsub("#Party4_name_i",ergebnisse_gemeinde_urlena$shortname_it[4],text_urlena)
 
-text_urlena <- gsub("#Party_1_partei_staerke",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$partei_staerke[1],1)),text_urlena)
-text_urlena <- gsub("#Party_2_partei_staerke",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$partei_staerke[2],1)),text_urlena)
-text_urlena <- gsub("#Party_3_partei_staerke",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$partei_staerke[3],1)),text_urlena)
+text_urlena <- gsub("#Party1_voter_share",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$partei_staerke[1],1)),text_urlena)
+text_urlena <- gsub("#Party2_voter_share",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$partei_staerke[2],1)),text_urlena)
+text_urlena <- gsub("#Party3_voter_share",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$partei_staerke[3],1)),text_urlena)
 
-text_urlena <- gsub("#Party_1_partei_stimmen",ergebnisse_gemeinde_urlena$stimmen_partei[1],text_urlena)
-text_urlena <- gsub("#Party_2_partei_stimmen",ergebnisse_gemeinde_urlena$stimmen_partei[2],text_urlena)
-text_urlena <- gsub("#Party_3_partei_stimmen",ergebnisse_gemeinde_urlena$stimmen_partei[3],text_urlena)
+text_urlena <- gsub("#Party1_votes",ergebnisse_gemeinde_urlena$stimmen_partei[1],text_urlena)
+text_urlena <- gsub("#Party2_votes",ergebnisse_gemeinde_urlena$stimmen_partei[2],text_urlena)
+text_urlena <- gsub("#Party3_votes",ergebnisse_gemeinde_urlena$stimmen_partei[3],text_urlena)
 
 ergebnisse_gemeinde_urlena
-text_urlena <- gsub("#Party_1_plus_minus",ifelse(grepl("[-]",ergebnisse_gemeinde_urlena$differenz_partei_staerke[1]),
+text_urlena <- gsub("#Party1_change",ifelse(grepl("[-]",ergebnisse_gemeinde_urlena$differenz_partei_staerke[1]),
                                              gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$differenz_partei_staerke[1],1)),
                                              paste0("+",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$differenz_partei_staerke[1],1)))),
                     text_urlena)
-text_urlena <- gsub("#Party_2_plus_minus",ifelse(grepl("[-]",ergebnisse_gemeinde_urlena$differenz_partei_staerke[2]),
+text_urlena <- gsub("#Party2_change",ifelse(grepl("[-]",ergebnisse_gemeinde_urlena$differenz_partei_staerke[2]),
                                                  gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$differenz_partei_staerke[2],1)),
                                                  paste0("+",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$differenz_partei_staerke[2],1)))),
                     text_urlena)
-text_urlena <- gsub("#Party_3_plus_minus",ifelse(grepl("[-]",ergebnisse_gemeinde_urlena$differenz_partei_staerke[3]),
+text_urlena <- gsub("#Party3_change",ifelse(grepl("[-]",ergebnisse_gemeinde_urlena$differenz_partei_staerke[3]),
                                                  gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$differenz_partei_staerke[3],1)),
                                                  paste0("+",gsub("[.]",",",round2(ergebnisse_gemeinde_urlena$differenz_partei_staerke[3],1)))),
                     text_urlena)
