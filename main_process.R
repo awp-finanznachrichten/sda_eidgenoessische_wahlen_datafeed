@@ -136,7 +136,7 @@ source("live_data_communities.R")
 ##Text Candidates##
 
 ##Charts Candidates##
-
+source("publish_candidates_charts_SR.R")
 
 ##Charts Overall##
 

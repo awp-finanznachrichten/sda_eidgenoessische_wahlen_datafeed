@@ -12,56 +12,57 @@ rs <-
 results_candidates <- fetch(rs, n = -1)
 dbDisconnectAll()
 
-
-#Get elected candidates
-elected_candidates <- results_candidates %>%
+#Get SR candidates
+SR_results <- results_candidates %>%
   filter(is.na(source_update)) %>% #REMOVE!
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id)) %>%
-  filter(elected == 0) %>% #1
   filter(is.na(picture) == FALSE) %>% #REMOVE!
-  .[1:12,] #REMOVE!
+  .[1:10,] %>%  #REMOVE!
+  mutate(votes = sample(1:10000,10)) #REMOVE!
 
-#Frequency of party occurence for sorting 
-elected_candidates$frequency_party <- 0
-for (e in 1:nrow(elected_candidates)) {
-elected_candidates$frequency_party[e] <- sum(grepl(elected_candidates$shortname_de[e],elected_candidates$shortname_de)) 
-}  
-
-elected_candidates <- elected_candidates %>%
-  arrange(desc(frequency_party),
+SR_results <- SR_results %>%
+  arrange(desc(votes),
           lastname)
 
-elected_candidates$status_de <- ifelse(elected_candidates$status == 2,"bisher","neu")
-elected_candidates$image_link <- paste0("![](https://164.ch/grafiken_wahlen2023/Nationalrat/",elected_candidates$picture,")")
-elected_candidates$text_de <- paste0("<b>",elected_candidates$firstname,"<br>",elected_candidates$lastname,"</b><br>",
-                                     elected_candidates$shortname_de,", ",elected_candidates$status_de)
+SR_results$elected[1:2] <- 1 #REMOVE!
 
-elected_candidates_images <- data.frame("1","2","3","4")
-colnames(elected_candidates_images) <- data.frame("col_1","col_2","col_3","col_4")
+SR_results <- SR_results %>%
+  mutate(image_link = paste0("![](https://164.ch/grafiken_wahlen2023/Nationalrat/",picture,")"),
+         status = ifelse(status == 2,"bisher","neu"),
+         name_text = paste0(firstname," ",lastname,
+                            "<br>(",status,")"),
+         elected = ifelse(elected == 1,"&#x2714;&#xFE0F;","")) %>%
+  select(image_link,name_text,shortname_de,votes,elected)
 
-for (e in seq(1,nrow(elected_candidates),4)) {
-  new_entry_pictures <- data.frame(elected_candidates$image_link[e],
-                                   elected_candidates$image_link[e+1],
-                                   elected_candidates$image_link[e+2],
-                                   elected_candidates$image_link[e+3])
-  colnames(new_entry_pictures) <- data.frame("col_1","col_2","col_3","col_4")
-  elected_candidates_images <- rbind(elected_candidates_images,new_entry_pictures)
-  
-  
-  new_entry_text <- data.frame(elected_candidates$text_de[e],
-                               elected_candidates$text_de[e+1],
-                               elected_candidates$text_de[e+2],
-                               elected_candidates$text_de[e+3])
-  colnames(new_entry_text) <- data.frame("col_1","col_2","col_3","col_4")
-  elected_candidates_images <- rbind(elected_candidates_images,new_entry_text)
+###Publish Chart DE###
+intro_text <- paste0("Das absolute Mehr liegt bei <b>",format(counted_cantons$absolute_majority[c],big.mark ="'")," Stimmen</b>. ")
+
+if (counted_cantons$other_election_needed[c] == "no") {
+  intro_text <- paste0(intro_text,"Es ist kein zweiter Wahlgang nötig.")  
+} else {
+  intro_text <- paste0(intro_text,"Es ist ein zweiter Wahlgang nötig.")  
 }  
-elected_candidates_images <- elected_candidates_images[-1,]
 
-##Chart Candidates DE
-chart_id <- "ZnWuJ"
-dw_data_to_chart(elected_candidates_images,chart_id)
-dw_publish_chart(chart_id)
+chart_ID <- "gmJb8"
+dw_data_to_chart(SR_results,chart_ID)
+
+chart_metadata <- dw_retrieve_chart_metadata(chart_ID)
+adapted_list <- chart_metadata[["content"]][["metadata"]][["visualize"]]
+
+#Make rows Green and Bold of elected candidates
+for (i in 1:nrow(SR_results)) {
+ if (SR_results$elected[i] == "&#x2714;&#xFE0F;") {
+  adapted_list$rows[[i]]$style$bold <- TRUE
+  adapted_list$rows[[i]]$style$background <- "#d1eec9"
+ }
+}
+
+dw_edit_chart(chart_ID,
+              intro = intro_text,
+              annotate = paste0("Endresultat vom ",format(Sys.Date(),"%d.%m.%Y")," ",format(Sys.time(),"%H:%M")," Uhr"),
+              visualize = adapted_list)
+dw_publish_chart(chart_ID)
 print("Datawrapper-Chart updated")
 
 
