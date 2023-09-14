@@ -33,7 +33,22 @@ if (nrow(party_third) == 1) {
 unchanged_check_third <- party_third$rank_current_election == party_third$rank_last_election
 }
 
-if ((party_first$stimmen_partei[1] < 200) & (nrow(party_first) == 1) & (nrow(party_second) == 1) & (nrow(party_third) == 1)) {
+
+if (ergebnisse_gemeinde$kanton_nummer[1] == 16 ) {
+storyboard <- c("Spec_small_canton_one_candidate","","")
+first_part_needed <- FALSE
+second_part_needed <- FALSE
+third_part_needed <- FALSE
+} else if (ergebnisse_gemeinde$kanton_nummer[1] == 15 ||
+  ergebnisse_gemeinde$kanton_nummer[1] == 8 ||
+  ergebnisse_gemeinde$kanton_nummer[1] == 7 ||
+  ergebnisse_gemeinde$kanton_nummer[1] == 6 ||
+  ergebnisse_gemeinde$kanton_nummer[1] == 4) {
+storyboard <- c("Spec_small_canton_several_candidates","","")
+first_part_needed <- FALSE
+second_part_needed <- FALSE
+third_part_needed <- FALSE
+}  else if ((party_first$stimmen_partei[1] < 200) & (nrow(party_first) == 1) & (nrow(party_second) == 1) & (nrow(party_third) == 1)) {
 storyboard <- c("Spec_small_community","","")
 first_part_needed <- FALSE
 second_part_needed <- FALSE

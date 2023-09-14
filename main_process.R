@@ -9,7 +9,7 @@ library(stringr)
 library(DatawRappr)
 
 #Working Directory
-setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 
 #Main Data URL from BFS
 BFS_API_URL <-
@@ -136,6 +136,7 @@ source("live_data_communities.R")
 ##Text Candidates##
 
 ##Charts Candidates##
+
 
 ##Charts Overall##
 

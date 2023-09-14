@@ -1,5 +1,5 @@
 ###GET TESTDATA COMMUNITIES
-setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 source("get_testdata_2023.R")
 
 ###LOAD RESULT AND VOTERTURNOUT DATA
