@@ -21,20 +21,20 @@ datawrapper_auth(Sys.getenv("DW_KEY"), overwrite = TRUE)
 
 #Functions
 setwd("./Functions")
-source("functions_storyfinder.R")
-source("functions_storyfinder_urlena.R")
-source("functions_storybuilder.R")
-source("functions_add_texts.R")
-source("function_replace_variables_urlena.R")
-source("functions_replace_variables_cleanup.R")
-source("functions_winners_losers.R")
-source("functions_voted_out_candidates.R")
-source("function_text_charts.R")
-source("functions_create_tables_NR.R")
-source("functions_create_tables_overview.R")
-source("function_create_table_communities.R")
-source("function_create_bilddaten.R")
-source("function_create_visual_data.R")
+source("storyfinder.R")
+source("storyfinder_urlena.R")
+source("storybuilder.R")
+source("add_texts.R")
+source("replace_variables_urlena.R")
+source("replace_variables_cleanup.R")
+source("winners_losers.R")
+source("voted_out_candidates.R")
+source("text_charts.R")
+source("create_tables_NR.R")
+source("create_tables_overview.R")
+source("create_table_communities.R")
+source("create_bilddaten.R")
+source("create_visual_data.R")
 setwd("..")
 source("./tools/Funktionen/Utils.R")
 
@@ -54,25 +54,31 @@ meta_gmd_kt <- read_csv("Data/MASTERFILE_GDE.csv")
 source("load_databases.R")
 
 ###Get BFS Data and update DB
-source("get_data_results_NR.R")
-source("get_data_candidates_NR.R")
+source("NR_get_data_results.R")
+source("NR_get_data_candidates.R")
+source("SR_get_data_candidates.R") #TO DO
 
-###NATIONALRAT###
+#Load Databases again
+source("load_databases.R")
 
 ##Check: Canton completed?
 #Get counted cantons
-counted_cantons <- election_metadata %>%
-  filter(council == "NR",
-         date == "2023-10-22",
+counted_cantons_all <- election_metadata %>%
+  filter(date == "2023-10-22",
          grepl("finished",status) == FALSE #CHANGE TO TRUE
          )
 
 #Merge with area, text and output overview
-counted_cantons <- counted_cantons  %>%
+counted_cantons_all <- counted_cantons_all  %>%
   left_join(areas_metadata) %>%
   left_join(status_texts) %>%
   left_join(output_overview) %>%
   filter(area_type == "canton")
+
+
+###NATIONALRAT###
+counted_cantons <- counted_cantons_all %>%
+  filter(council == "NR")
 
 ###TO DO###
 
@@ -81,37 +87,37 @@ for (c in 1:nrow(counted_cantons)) {
 ##Text Results##
 if (counted_cantons$texts_results[c] == "pending") {
 #Generate Output
-source("text_results_NR.R")
-source("mars_meldung_results_NR_DE.R")
-source("mars_meldung_results_NR_FR.R")
-source("mars_meldung_results_NR_IT.R")
+source("NR_text_results.R")
+source("NR_mars_meldung_results_DE.R")
+source("NR_mars_meldung_results_FR.R")
+source("NR_mars_meldung_results_IT.R")
 }
   
 ##Text Candidates##
 if (counted_cantons$texts_candidates[c] == "pending") {
 #Generate Output
-source("text_candidates_NR.R")
-source("mars_meldung_candidates_NR_DE.R")
-source("mars_meldung_candidates_NR_FR.R")
-source("mars_meldung_candidates_NR_IT.R")
+source("NR_text_candidates_NR.R")
+source("NR_mars_meldung_candidates_DE.R")
+source("NR_mars_meldung_candidates_FR.R")
+source("NR_mars_meldung_candidates_IT.R")
 }
   
 ##Charts Results##
 if (counted_cantons$charts_results[c] == "pending") {
 #Generate Output
-source("prepare_results_charts_NR.R")
-source("publish_results_charts_NR.R")
+source("NR_prepare_results_charts.R")
+source("NR_publish_results_charts.R")
 }
 ##Charts Results History##
 if (counted_cantons$charts_history[c] == "pending") {
-source("prepare_results_charts_history_NR.R")
-source("publish_results_charts_history_NR.R")
+source("NR_prepare_results_charts_history.R")
+source("NR_publish_results_charts_history.R")
 }
   
 ##Charts Candidates##
 if (counted_cantons$charts_candidates[c] == "pending") {
 #Generate Output
-source("publish_candidates_charts_NR.R")
+source("NR_publish_candidates_charts.R")
 }
 
 ##Analytics##
@@ -122,21 +128,40 @@ if (counted_cantons$analytics[c] == "pending") {
   
 }
 
-##Chart Overall##
-source("prepare_overview_results.R")
-source("publish_overview_charts.R")
-source("create_output_candidates_flourish.R")
+###STAENDERAT###
+#Get counted cantons SR
+counted_cantons <- counted_cantons_all %>%
+  filter(council == "SR")
+
+for (c in 1:nrow(counted_cantons)) {
+
+##Text Candidates##
+if (counted_cantons$texts_candidates[c] == "pending") {
+source("SR_text_candidates.R") #TO DO
+source("SR_mars_meldung_candidates_DE.R") #TO DO
+source("SR_mars_meldung_candidates_FR.R") #TO DO
+source("SR_mars_meldung_candidates_IT.R") #TO DO
+}
+  
+if (counted_cantons$charts_candidates[c] == "pending") {
+##Chart Candidates##
+source("SR_publish_candidates_charts.R")
+}
+}
+###GESAMTERGEBNIS###
+source("All_prepare_results.R")
+source("All_publish_charts.R")
+source("All_create_output_parliament_flourish.R")
+source("All_create_output_candidates_flourish.R")
+
+
+###ELECTION FINISHED###
+
 
 ###COMMUNITIES###
 ##Output tables and texts##
-source("live_data_communities.R")
+source("Communities_live_data.R")
 
 
-###STAENDERAT###
-##Text Candidates##
 
-##Charts Candidates##
-source("publish_candidates_charts_SR.R")
-
-##Charts Overall##
 
