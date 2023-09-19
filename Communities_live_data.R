@@ -218,7 +218,7 @@ nationalrat_gemeinden_dw$Text_it <- gsub("<br><br><br><br>","<br><br>",nationalr
 
 write.csv(nationalrat_gemeinden_dw[,c(1,2,5,11)],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_de.csv",row.names = FALSE)
 write.csv(nationalrat_gemeinden_dw[,c(1,3,6,11),],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_fr.csv",row.names = FALSE)
-write.csv(nationalrat_gemeinden_dw[,c(1,4,7,1),],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_it.csv",row.names = FALSE)
+write.csv(nationalrat_gemeinden_dw[,c(1,4,7,11),],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_it.csv",row.names = FALSE)
 
 
 #View(table(nationalrat_gemeinden_dw$Storyboard))
