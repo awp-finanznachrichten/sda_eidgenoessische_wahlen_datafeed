@@ -1,5 +1,5 @@
 "area_ID","status","title_de","content_de","title_fr","content_fr","title_it","content_it"
-"AG","no_data","Aargau","$b£Nationalrat (16 Sitze)$/b£$br£$br£$table£
+"AG","all_counted","Aargau","$b£Nationalrat (16 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -23,7 +23,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£SVP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£49.5%$/td£$td style='text-align: center¢ color: darkblue'£$b£+13.4$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£48.4%$/td£$td style='text-align: center¢ color: darkblue'£$b£+14.9$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (1 Sitz)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Appenzell Rhodes-Extérieures","","Appenzello Esterno",""
-"BE","all_counted","Bern","$b£Nationalrat (24 Sitze)$/b£$br£$br£$table£
+"BE","NR_counted","Bern","$b£Nationalrat (24 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -31,7 +31,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£SVP$/td£$td style='text-align: center'£7$/td£$td style='text-align: center¢ color: red'£$b£-2$/b£$/td£$td style='text-align: center'£30.0%$/td£$td style='text-align: center¢ color: red'£$b£-3.1$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£4$/td£$td style='text-align: center¢ color: red'£$b£-2$/b£$/td£$td style='text-align: center'£16.8%$/td£$td style='text-align: center¢ color: red'£$b£-2.9$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£4$/td£$td style='text-align: center¢ color: darkblue'£$b£+2$/b£$/td£$td style='text-align: center'£13.6%$/td£$td style='text-align: center¢ color: darkblue'£$b£+5.1$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£3$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£9.7%$/td£$td style='text-align: center¢ color: darkblue'£$b£+3.7$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£8.4%$/td£$td style='text-align: center¢ color: red'£$b£-1.0$/b£$/td£$/tr£$tr£$td£BDP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£8.0%$/td£$td style='text-align: center¢ color: red'£$b£-3.7$/b£$/td£$/tr£$tr£$td£EVP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£4.2%$/td£$td style='text-align: center¢ color: red'£$b£-0.1$/b£$/td£$/tr£$tr£$td£EDU$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£2.5%$/td£$td style='text-align: center¢ color: red'£$b£-0.4$/b£$/td£$/tr£$tr£$td£weitere$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£3.9%$/td£$td style='text-align: center¢ color: darkblue'£$b£+2.3$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Berne","","Berna",""
-"BL","NR_counted","Basel-Landschaft","$b£Nationalrat (7 Sitze)$/b£$br£$br£$table£
+"BL","no_data","Basel-Landschaft","$b£Nationalrat (7 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -39,7 +39,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£SVP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£25.1%$/td£$td style='text-align: center¢ color: red'£$b£-4.6$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£21.8%$/td£$td style='text-align: center¢ color: red'£$b£-0.4$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£18.0%$/td£$td style='text-align: center¢ color: darkblue'£$b£+3.8$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£16.5%$/td£$td style='text-align: center¢ color: darkblue'£$b£+0.7$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£8.5%$/td£$td style='text-align: center¢ color: red'£$b£-0.6$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£5.3%$/td£$td style='text-align: center¢ color: darkblue'£$b£+2.5$/b£$/td£$/tr£$tr£$td£EVP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£3.5%$/td£$td style='text-align: center¢ color: darkblue'£$b£+1.3$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (1 Sitz)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Bâle-Campagne","","Basilea Campagna",""
-"BS","all_counted","Basel-Stadt","$b£Nationalrat (4 Sitze)$/b£$br£$br£$table£
+"BS","no_data","Basel-Stadt","$b£Nationalrat (4 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -63,7 +63,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£3$/td£$td style='text-align: center¢ color: darkblue'£$b£+2$/b£$/td£$td style='text-align: center'£24.6%$/td£$td style='text-align: center¢ color: darkblue'£$b£+13.1$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£17.9%$/td£$td style='text-align: center¢ color: red'£$b£-2.6$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£14.7%$/td£$td style='text-align: center¢ color: red'£$b£-5.2$/b£$/td£$/tr£$tr£$td£SVP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£13.7%$/td£$td style='text-align: center¢ color: red'£$b£-4.0$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£7.7%$/td£$td style='text-align: center¢ color: red'£$b£-4.4$/b£$/td£$/tr£$tr£$td£PdA$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£7.4%$/td£$td style='text-align: center¢ color: darkblue'£$b£+1.4$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£5.4%$/td£$td style='text-align: center¢ color: darkblue'£$b£+3.2$/b£$/td£$/tr£$tr£$td£MCG$/td£$td style='text-align: center'£0$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£5.4%$/td£$td style='text-align: center¢ color: red'£$b£-2.5$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Genève","","Ginevra",""
-"GL","NR_counted","Glarus","$b£Nationalrat (1 Sitz)$/b£$br£$br£$table£
+"GL","SR_counted","Glarus","$b£Nationalrat (1 Sitz)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -71,7 +71,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£BDP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£63.0%$/td£$td style='text-align: center¢ color: darkblue'£$b£+11.6$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£28.2%$/td£$td style='text-align: center¢ color: red'£$b£-16.8$/b£$/td£$/tr£$tr£$td£weitere$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£6.0%$/td£$td style='text-align: center¢ color: darkblue'£$b£+2.5$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Glaris","","Glarona",""
-"GR","no_data","Graubünden","$b£Nationalrat (5 Sitze)$/b£$br£$br£$table£
+"GR","SR_counted","Graubünden","$b£Nationalrat (5 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -79,7 +79,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£SP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£17.1%$/td£$td style='text-align: center¢ color: red'£$b£-0.5$/b£$/td£$/tr£$tr£$td£SVP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£29.9%$/td£$td style='text-align: center¢ color: darkblue'£$b£+0.2$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£16.3%$/td£$td style='text-align: center¢ color: red'£$b£-0.5$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£13.6%$/td£$td style='text-align: center¢ color: darkblue'£$b£+0.4$/b£$/td£$/tr£$tr£$td£BDP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£9.1%$/td£$td style='text-align: center¢ color: red'£$b£-5.4$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£8.3%$/td£$td style='text-align: center¢ color: darkblue'£$b£+0.5$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£5.5%$/td£$td style='text-align: center¢ color: darkblue'£$b£+5.5$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Grisons","","Grigioni",""
-"JU","NR_counted","Jura","$b£Nationalrat (2 Sitze)$/b£$br£$br£$table£
+"JU","SR_counted","Jura","$b£Nationalrat (2 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -87,7 +87,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£SP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£27.0%$/td£$td style='text-align: center¢ color: darkblue'£$b£+3.3$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£22.8%$/td£$td style='text-align: center¢ color: red'£$b£-4.9$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£15.6%$/td£$td style='text-align: center¢ color: darkblue'£$b£+8.3$/b£$/td£$/tr£$tr£$td£SVP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£14.5%$/td£$td style='text-align: center¢ color: darkblue'£$b£+1.6$/b£$/td£$/tr£$tr£$td£CSP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£9.6%$/td£$td style='text-align: center¢ color: darkblue'£$b£+3.0$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£9.1%$/td£$td style='text-align: center¢ color: red'£$b£-7.7$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Jura","","Giura",""
-"LU","no_data","Luzern","$b£Nationalrat (9 Sitze)$/b£$br£$br£$table£
+"LU","all_counted","Luzern","$b£Nationalrat (9 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -95,7 +95,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£3$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£25.5%$/td£$td style='text-align: center¢ color: darkblue'£$b£+1.6$/b£$/td£$/tr£$tr£$td£SVP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£24.7%$/td£$td style='text-align: center¢ color: red'£$b£-3.8$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£15.6%$/td£$td style='text-align: center¢ color: red'£$b£-2.9$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£13.5%$/td£$td style='text-align: center'£-$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£12.2%$/td£$td style='text-align: center¢ color: darkblue'£$b£+5.2$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£7.1%$/td£$td style='text-align: center¢ color: darkblue'£$b£+1.3$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Lucerne","","Lucerna",""
-"NE","all_counted","Neuenburg","$b£Nationalrat (4 Sitze)$/b£$br£$br£$table£
+"NE","no_data","Neuenburg","$b£Nationalrat (4 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -103,7 +103,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£FDP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£22.3%$/td£$td style='text-align: center¢ color: red'£$b£-2.1$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£20.8%$/td£$td style='text-align: center¢ color: darkblue'£$b£+11.5$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£16.6%$/td£$td style='text-align: center¢ color: red'£$b£-7.0$/b£$/td£$/tr£$tr£$td£PdA$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£14.1%$/td£$td style='text-align: center¢ color: darkblue'£$b£+1.9$/b£$/td£$/tr£$tr£$td£SVP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£12.7%$/td£$td style='text-align: center¢ color: red'£$b£-7.7$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£9.1%$/td£$td style='text-align: center¢ color: darkblue'£$b£+5.7$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£4.2%$/td£$td style='text-align: center¢ color: darkblue'£$b£+0.6$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Neuchâtel","","Neuchâtel",""
-"NW","NR_counted","Nidwalden","$b£Nationalrat (1 Sitz)$/b£$br£$br£$table£
+"NW","SR_counted","Nidwalden","$b£Nationalrat (1 Sitz)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -111,7 +111,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£SVP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£64.2%$/td£$td style='text-align: center¢ color: red'£$b£-18.6$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£35.8%$/td£$td style='text-align: center¢ color: darkblue'£$b£+35.8$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (1 Sitz)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Nidwald","","Nidvaldo",""
-"OW","no_data","Obwalden","$b£Nationalrat (1 Sitz)$/b£$br£$br£$table£
+"OW","NR_counted","Obwalden","$b£Nationalrat (1 Sitz)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -135,7 +135,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£SVP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£39.5%$/td£$td style='text-align: center¢ color: red'£$b£-5.8$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£26.2%$/td£$td style='text-align: center¢ color: red'£$b£-2.7$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£11.0%$/td£$td style='text-align: center¢ color: red'£$b£-1.9$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£6.8%$/td£$td style='text-align: center¢ color: darkblue'£$b£+3.4$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£5.9%$/td£$td style='text-align: center¢ color: darkblue'£$b£+5.9$/b£$/td£$/tr£$tr£$td£EDU$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£3.4%$/td£$td style='text-align: center¢ color: red'£$b£-1.8$/b£$/td£$/tr£$tr£$td£FGA$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£3.2%$/td£$td style='text-align: center¢ color: red'£$b£-1.3$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Schaffhouse","","Sciaffusa",""
-"SO","SR_counted","Solothurn","$b£Nationalrat (6 Sitze)$/b£$br£$br£$table£
+"SO","all_counted","Solothurn","$b£Nationalrat (6 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -143,7 +143,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£SVP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£25.9%$/td£$td style='text-align: center¢ color: red'£$b£-2.9$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£18.5%$/td£$td style='text-align: center¢ color: red'£$b£-2.7$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£18.4%$/td£$td style='text-align: center¢ color: red'£$b£-1.6$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£14.2%$/td£$td style='text-align: center¢ color: red'£$b£-0.6$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£11.4%$/td£$td style='text-align: center¢ color: darkblue'£$b£+5.9$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£6.8%$/td£$td style='text-align: center¢ color: darkblue'£$b£+3.4$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Soleure","","Soletta",""
-"SZ","no_data","Schwyz","$b£Nationalrat (4 Sitze)$/b£$br£$br£$table£
+"SZ","all_counted","Schwyz","$b£Nationalrat (4 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -159,7 +159,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£SVP$/td£$td style='text-align: center'£3$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£36.7%$/td£$td style='text-align: center¢ color: red'£$b£-3.2$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£12.7%$/td£$td style='text-align: center¢ color: red'£$b£-0.4$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£12.6%$/td£$td style='text-align: center¢ color: red'£$b£-0.1$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£10.6%$/td£$td style='text-align: center¢ color: darkblue'£$b£+5.2$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£11.5%$/td£$td style='text-align: center¢ color: red'£$b£-1.6$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£8.1%$/td£$td style='text-align: center¢ color: darkblue'£$b£+2.0$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Thurgovie","","Turgovia",""
-"TI","no_data","Tessin","$b£Nationalrat (8 Sitze)$/b£$br£$br£$table£
+"TI","all_counted","Tessin","$b£Nationalrat (8 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -175,7 +175,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£39.2%$/td£$td style='text-align: center¢ color: darkblue'£$b£+12.4$/b£$/td£$/tr£$tr£$td£SVP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£36.3%$/td£$td style='text-align: center¢ color: red'£$b£-7.8$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£22.3%$/td£$td style='text-align: center¢ color: darkblue'£$b£+22.3$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Uri","","Uri",""
-"VD","NR_counted","Waadt","$b£Nationalrat (19 Sitze)$/b£$br£$br£$table£
+"VD","all_counted","Waadt","$b£Nationalrat (19 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -183,7 +183,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£FDP$/td£$td style='text-align: center'£5$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£23.3%$/td£$td style='text-align: center¢ color: red'£$b£-3.5$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£5$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£20.4%$/td£$td style='text-align: center¢ color: red'£$b£-1.8$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£4$/td£$td style='text-align: center¢ color: darkblue'£$b£+2$/b£$/td£$td style='text-align: center'£19.7%$/td£$td style='text-align: center¢ color: darkblue'£$b£+8.4$/b£$/td£$/tr£$tr£$td£SVP$/td£$td style='text-align: center'£3$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£17.4%$/td£$td style='text-align: center¢ color: red'£$b£-5.2$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£8.4%$/td£$td style='text-align: center¢ color: darkblue'£$b£+4.5$/b£$/td£$/tr£$tr£$td£PdA$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£4.1%$/td£$td style='text-align: center¢ color: darkblue'£$b£+1.2$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£0$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£2.4%$/td£$td style='text-align: center¢ color: red'£$b£-1.6$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Vaud","","Vaud",""
-"VS","NR_counted","Wallis","$b£Nationalrat (8 Sitze)$/b£$br£$br£$table£
+"VS","all_counted","Wallis","$b£Nationalrat (8 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£
@@ -199,7 +199,7 @@ $td£$b£+/-$/b£$/td£
 $td£$b£Wähleranteil$/b£$/td£
 $td style='text-align: center'£$b£+/-$/b£$/td£
 $/tr£$tr£$td£SVP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£26.6%$/td£$td style='text-align: center¢ color: red'£$b£-3.8$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£23.8%$/td£$td style='text-align: center¢ color: red'£$b£-2.7$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£19.2%$/td£$td style='text-align: center¢ color: darkblue'£$b£+12.1$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£14.7%$/td£$td style='text-align: center¢ color: red'£$b£-3.0$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£9.3%$/td£$td style='text-align: center¢ color: red'£$b£-4.4$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£5.5%$/td£$td style='text-align: center¢ color: darkblue'£$b£+2.0$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£$br£Es sind noch keine Resultate vorhanden.$br£$br£","Zoug","","Zugo",""
-"ZH","all_counted","Zürich","$b£Nationalrat (36 Sitze)$/b£$br£$br£$table£
+"ZH","no_data","Zürich","$b£Nationalrat (36 Sitze)$/b£$br£$br£$table£
 $tr£
 $td£$b£Partei$/b£$/td£
 $td£$b£Sitze$/b£$/td£

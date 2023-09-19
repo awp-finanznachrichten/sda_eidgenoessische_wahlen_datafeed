@@ -46,14 +46,9 @@ elected_candidates_overall <- elected_candidates_overall %>%
 #Make random selection for Testing
 elected_candidates_overall <- elected_candidates_overall[sample(1:nrow(elected_candidates_overall),246),]
 
-
-#Dataframe Tabellen-Output
-nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde","Tabelle","no_data")
-colnames(nationalrat_gemeinden_dw) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
-
-#Dataframe Text-Output
-nationalrat_gemeinden_dw_urlena <- data.frame(0,"Gemeinde","Storyboard","Text","no_data")
-colnames(nationalrat_gemeinden_dw_urlena) <- c("ID","Gemeinde","Storyboard","Text","Staerkste_Partei")
+#Dataframe Output
+nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde_de","Gemeinde_fr","Gemeinde_it","Text_de","Text_fr","Text_it","Tabelle_de","Tabelle_fr","Tabelle_it","no_data")
+colnames(nationalrat_gemeinden_dw) <- c("ID","Gemeinde_de","Gemeinde_fr","Gemeinde_it","Text_de","Text_fr","Text_it","Tabelle_de","Tabelle_fr","Tabelle_it","Staerkste_Partei")
 
 gemeinden <- results_NR_communities %>%
   filter(gemeinde_nummer < 9000) %>%
@@ -76,8 +71,12 @@ for (g in 1:nrow(gemeinden)) {
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(wahlbeteiligung) == FALSE)
   
-  text_urlena <- "Resultat liegt noch nicht vor."
-  tabelle <- "Resultat liegt noch nicht vor."
+  text_urlena_de <- "Resultat liegt noch nicht vor."
+  text_urlena_fr <- "Résultats non encore disponibles."
+  text_urlena_it <- "Risultato non ancora disponibile."
+  tabelle_de <- "Resultat liegt noch nicht vor."
+  tabelle_fr <- "Résultats non encore disponibles."
+  tabelle_it <- "Risultato non ancora disponibile."
   staerkste_partei <- "no_data"
   
   #Check: Daten schon da?
@@ -98,54 +97,74 @@ for (g in 1:nrow(gemeinden)) {
   staerkste_partei <- ergebnisse_gemeinde_tabelle$shortname_de[1]
   
   #Create Table
-  tabelle <- create_table_communities(ergebnisse_gemeinde_tabelle,
+  tabelle_de <- create_table_communities(ergebnisse_gemeinde_tabelle,
                                       voter_turnout)
-  
-  #New Entry Tabelle
-  new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
-                          gemeinden$Gemeinde_KT_d[g],
-                          tabelle,
-                          staerkste_partei)
-  colnames(new_entry) <- c("ID","Gemeinde","Tabelle","Staerkste_Partei")
-  nationalrat_gemeinden_dw <- rbind(nationalrat_gemeinden_dw,new_entry)
-  
+  tabelle_fr <- create_table_communities(ergebnisse_gemeinde_tabelle,
+                                         voter_turnout)
+  tabelle_it <- create_table_communities(ergebnisse_gemeinde_tabelle,
+                                         voter_turnout)
   
   #Find Story Ur-Lena
   storyboard_urlena <- get_storyboard_urlena(ergebnisse_gemeinde_urlena)
 
   #Seed mit Gemeinde-Nr -> So wird immer dieselbe Variante bei Gemeinde gewählt  
   set.seed(gemeinden$gemeinde_nummer[g])
-  text_urlena <- get_texts(storyboard_urlena,
+  text_urlena_de <- get_texts(storyboard_urlena,
                            texts_spreadsheet_UrLena,
                            "de")
+  text_urlena_fr <- get_texts(storyboard_urlena,
+                              texts_spreadsheet_UrLena,
+                              "fr")
+  text_urlena_it <- get_texts(storyboard_urlena,
+                              texts_spreadsheet_UrLena,
+                              "it")
   #Replace Variables
-  text_urlena <- replace_variables_urlena(text_urlena,
+  text_urlena_de <- replace_variables_urlena(text_urlena_de,
                                           ergebnisse_gemeinde_urlena,
                                           gemeinden
                                           )
+  text_urlena_fr <- replace_variables_urlena(text_urlena_fr,
+                                             ergebnisse_gemeinde_urlena,
+                                             gemeinden
+  )
+  text_urlena_it <- replace_variables_urlena(text_urlena_it,
+                                             ergebnisse_gemeinde_urlena,
+                                             gemeinden
+  )
+  
   }  
 
-
-  #New Entry Text Urlena
+  #New Entry
   new_entry <- data.frame(gemeinden$gemeinde_nummer[g],
                           gemeinden$Gemeinde_KT_d[g],
-                          paste(storyboard_urlena,collapse="; "),
-                          paste(text_urlena,collapse="<br><br>"),
+                          gemeinden$Gemeinde_KT_f[g],
+                          gemeinden$Gemeinde_KT_i[g],
+                          paste(text_urlena_de,collapse="<br><br>"),
+                          paste(text_urlena_fr,collapse="<br><br>"),
+                          paste(text_urlena_it,collapse="<br><br>"),
+                          tabelle_de,
+                          tabelle_fr,
+                          tabelle_it,
                           staerkste_partei)
-  colnames(new_entry) <- c("ID","Gemeinde","Storyboard","Text","Staerkste_Partei")
-  nationalrat_gemeinden_dw_urlena <- rbind(nationalrat_gemeinden_dw_urlena,new_entry)
+  colnames(new_entry) <- c("ID","Gemeinde_de","Gemeinde_fr","Gemeinde_it","Text_de","Text_fr","Text_it","Tabelle_de","Tabelle_fr","Tabelle_it","Staerkste_Partei")
+  nationalrat_gemeinden_dw <- rbind(nationalrat_gemeinden_dw,new_entry)
 }
 
 ###Final adaptions Tabelle
 nationalrat_gemeinden_dw <- nationalrat_gemeinden_dw[-1,]
-nationalrat_gemeinden_dw$Tabelle <- gsub("[<]","$",nationalrat_gemeinden_dw$Tabelle)
-nationalrat_gemeinden_dw$Tabelle <- gsub("[>]","£",nationalrat_gemeinden_dw$Tabelle)
-nationalrat_gemeinden_dw$Tabelle <- gsub(";","¢",nationalrat_gemeinden_dw$Tabelle)
-write.csv(nationalrat_gemeinden_dw,file="./Output/nationalrat_ergebnisse_parteien_gemeinden.csv",row.names = FALSE)
+nationalrat_gemeinden_dw$Tabelle_de <- gsub("[<]","$",nationalrat_gemeinden_dw$Tabelle_de)
+nationalrat_gemeinden_dw$Tabelle_de <- gsub("[>]","£",nationalrat_gemeinden_dw$Tabelle_de)
+nationalrat_gemeinden_dw$Tabelle_de <- gsub(";","¢",nationalrat_gemeinden_dw$Tabelle_de)
+nationalrat_gemeinden_dw$Tabelle_fr <- gsub("[<]","$",nationalrat_gemeinden_dw$Tabelle_fr)
+nationalrat_gemeinden_dw$Tabelle_fr <- gsub("[>]","£",nationalrat_gemeinden_dw$Tabelle_fr)
+nationalrat_gemeinden_dw$Tabelle_fr <- gsub(";","¢",nationalrat_gemeinden_dw$Tabelle_fr)
+nationalrat_gemeinden_dw$Tabelle_it <- gsub("[<]","$",nationalrat_gemeinden_dw$Tabelle_it)
+nationalrat_gemeinden_dw$Tabelle_it <- gsub("[>]","£",nationalrat_gemeinden_dw$Tabelle_it)
+nationalrat_gemeinden_dw$Tabelle_it <- gsub(";","¢",nationalrat_gemeinden_dw$Tabelle_it)
 
-
-###Final adaptions Urlenda
-nationalrat_gemeinden_dw_urlena <- nationalrat_gemeinden_dw_urlena[-1,]
+write.csv(nationalrat_gemeinden_dw[,c(1,2,8,11)],file="./Output/nationalrat_ergebnisse_gemeinden_tabelle_de.csv",row.names = FALSE)
+write.csv(nationalrat_gemeinden_dw[,c(1,3,9,11)],file="./Output/nationalrat_ergebnisse_gemeinden_tabelle_fr.csv",row.names = FALSE)
+write.csv(nationalrat_gemeinden_dw[,c(1,4,10,11)],file="./Output/nationalrat_ergebnisse_gemeinden_tabelle_it.csv",row.names = FALSE)
 
 ###SPECIAL TEXT PARTS###
 included_communities <- c()
@@ -154,13 +173,13 @@ included_communities <- c()
 if (stand_ch$wahl_abgeschlossen == TRUE) {
   
   #Parties
-  nationalrat_gemeinden_dw_urlena <- add_parties(nationalrat_gemeinden_dw_urlena,
+  nationalrat_gemeinden_dw <- add_parties(nationalrat_gemeinden_dw,
                       results_NR_communities,
                       texts_spreadsheet_UrLena,
                       area = "ch")
 
   #Participation
-  nationalrat_gemeinden_dw_urlena <- add_participations(nationalrat_gemeinden_dw_urlena,
+  nationalrat_gemeinden_dw <- add_participations(nationalrat_gemeinden_dw,
                              results_NR_communities_voterturnout,
                              texts_spreadsheet_UrLena,
                              area = "ch")
@@ -171,13 +190,13 @@ for (c in 1:nrow(stand_cantons)) {
   if (stand_cantons$kanton_abgeschlossen[c] == TRUE) {
   
     #Parties
-    nationalrat_gemeinden_dw_urlena <- add_parties(nationalrat_gemeinden_dw_urlena,
+    nationalrat_gemeinden_dw <- add_parties(nationalrat_gemeinden_dw,
                                                    results_NR_communities,
                                                    texts_spreadsheet_UrLena,
                                                    area = "canton")
     
     #Participation
-    nationalrat_gemeinden_dw_urlena <- add_participations(nationalrat_gemeinden_dw_urlena,
+    nationalrat_gemeinden_dw <- add_participations(nationalrat_gemeinden_dw,
                                                           results_NR_communities_voterturnout,
                                                           texts_spreadsheet_UrLena,
                                                           area = "canton")
@@ -185,17 +204,25 @@ for (c in 1:nrow(stand_cantons)) {
 }  
 
 ##Add Nationalräte
-nationalrat_gemeinden_dw_urlena <- add_elected_candidates(elected_candidates_overall,
-                                               nationalrat_gemeinden_dw_urlena,
+nationalrat_gemeinden_dw <- add_elected_candidates(elected_candidates_overall,
+                                               nationalrat_gemeinden_dw,
                                                texts_spreadsheet_UrLena)
 
 ###Final adaptions Texts Urlena
-nationalrat_gemeinden_dw_urlena$Text <- gsub("<br><br><br><br><br><br>","<br><br>",nationalrat_gemeinden_dw_urlena$Text)
-nationalrat_gemeinden_dw_urlena$Text <- gsub("<br><br><br><br>","<br><br>",nationalrat_gemeinden_dw_urlena$Text)
-write.csv(nationalrat_gemeinden_dw_urlena[c(1:2,4:5)],file="./Output/nationalrat_ergebnisse_urlena.csv",row.names = FALSE)
+nationalrat_gemeinden_dw$Text_de <- gsub("<br><br><br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_de)
+nationalrat_gemeinden_dw$Text_de <- gsub("<br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_de)
+nationalrat_gemeinden_dw$Text_fr <- gsub("<br><br><br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_fr)
+nationalrat_gemeinden_dw$Text_fr <- gsub("<br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_fr)
+nationalrat_gemeinden_dw$Text_it <- gsub("<br><br><br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_it)
+nationalrat_gemeinden_dw$Text_it <- gsub("<br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_it)
 
-#View(table(nationalrat_gemeinden_dw_urlena$Storyboard))
-#write.xlsx(nationalrat_gemeinden_dw_urlena,"./Texte/texts_urlena.xlsx",row.names = FALSE)
+write.csv(nationalrat_gemeinden_dw[,c(1,2,5,11)],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_de.csv",row.names = FALSE)
+write.csv(nationalrat_gemeinden_dw[,c(1,3,6,11),],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_fr.csv",row.names = FALSE)
+write.csv(nationalrat_gemeinden_dw[,c(1,4,7,1),],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_it.csv",row.names = FALSE)
+
+
+#View(table(nationalrat_gemeinden_dw$Storyboard))
+#write.xlsx(nationalrat_gemeinden_dw,"./Texte/texts_urlena.xlsx",row.names = FALSE)
 
 ###INFO###
 ##The following placeholders will be replaced directly in the datawrapper maps so the data file doesn't become too large (2 MB limit):

@@ -1,4 +1,4 @@
-add_participations <- function(nationalrat_gemeinden_dw_urlena,
+add_participations <- function(nationalrat_gemeinden_dw,
                                results_NR_communities_voterturnout,
                                texts_spreadsheet_UrLena,
                                area = "canton") {
@@ -16,19 +16,19 @@ add_participations <- function(nationalrat_gemeinden_dw_urlena,
     
     if (nrow(results) > 10 ) {
  
-    highest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[1])
-    lowest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[nrow(results)])
+    highest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[1])
+    lowest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[nrow(results)])
   
     #Replace Variables
     if (sum(highest == included_communities) == 0) {
 
     ##DE##
     text_highest$Text_d <- gsub("#Gemeinde_participation",gsub("[.]",",",round2(results$wahlbeteiligung[1],1)),text_highest$Text_d)
-    nationalrat_gemeinden_dw_urlena$Text[highest] <- 
-      paste0(nationalrat_gemeinden_dw_urlena$Text[highest],"<br><br>",
+    nationalrat_gemeinden_dw$Text_de[highest] <- 
+      paste0(nationalrat_gemeinden_dw$Text_de[highest],"<br><br>",
              text_highest$Text_d
       )
-    print(nationalrat_gemeinden_dw_urlena$Text[highest])
+    print(nationalrat_gemeinden_dw$Text_de[highest])
     
     ##FR##
     
@@ -42,11 +42,11 @@ add_participations <- function(nationalrat_gemeinden_dw_urlena,
         
       ##DE##
     text_lowest$Text_d <- gsub("#Gemeinde_participation",gsub("[.]",",",round2(results$wahlbeteiligung[nrow(results)],1)),text_lowest$Text_d) 
-    nationalrat_gemeinden_dw_urlena$Text[lowest] <- 
-      paste0(nationalrat_gemeinden_dw_urlena$Text[lowest],"<br><br>",
+    nationalrat_gemeinden_dw$Text_de[lowest] <- 
+      paste0(nationalrat_gemeinden_dw$Text_de[lowest],"<br><br>",
              text_lowest$Text_d
       )
-    print(nationalrat_gemeinden_dw_urlena$Text[lowest])
+    print(nationalrat_gemeinden_dw$Text_de[lowest])
     
     included_communities <<- c(included_communities,lowest)
     
@@ -69,17 +69,17 @@ add_participations <- function(nationalrat_gemeinden_dw_urlena,
       arrange(desc(wahlbeteiligung)
               )
    
-    highest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[1])
-    lowest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[nrow(results)])
+    highest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[1])
+    lowest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[nrow(results)])
 
     #Replace Variables
     ##DE##
       text_highest$Text_d <- gsub("#Gemeinde_participation",gsub("[.]",",",round2(results$wahlbeteiligung[1],1)),text_highest$Text_d)
-      nationalrat_gemeinden_dw_urlena$Text[highest] <- 
-        paste0(nationalrat_gemeinden_dw_urlena$Text[highest],"<br><br>",
+      nationalrat_gemeinden_dw$Text_de[highest] <- 
+        paste0(nationalrat_gemeinden_dw$Text_de[highest],"<br><br>",
                text_highest$Text_d
         )
-      print(nationalrat_gemeinden_dw_urlena$Text[highest])
+      print(nationalrat_gemeinden_dw$Text_de[highest])
       
     ##FR##
       
@@ -89,11 +89,11 @@ add_participations <- function(nationalrat_gemeinden_dw_urlena,
     
     ##DE##
       text_lowest$Text_d <- gsub("#Gemeinde_participation",gsub("[.]",",",round2(results$wahlbeteiligung[nrow(results)],1)),text_lowest$Text_d) 
-      nationalrat_gemeinden_dw_urlena$Text[lowest] <- 
-        paste0(nationalrat_gemeinden_dw_urlena$Text[lowest],"<br><br>",
+      nationalrat_gemeinden_dw$Text_de[lowest] <- 
+        paste0(nationalrat_gemeinden_dw$Text_de[lowest],"<br><br>",
                text_lowest$Text_d
         )
-      print(nationalrat_gemeinden_dw_urlena$Text[lowest])
+      print(nationalrat_gemeinden_dw$Text_de[lowest])
     ##FR##
       
     ##IT##     
@@ -102,16 +102,16 @@ included_communities <<- c(included_communities,lowest)
 
 
       for (i in 2:10) {
-      highest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[i])
-      lowest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[nrow(results)-(i-1)]) 
+      highest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[i])
+      lowest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[nrow(results)-(i-1)]) 
 
       ##DE##
         text_top10$Text_d <- gsub("#Gemeinde_participation",gsub("[.]",",",round2(results$wahlbeteiligung[1],1)),text_top10$Text_d)
-        nationalrat_gemeinden_dw_urlena$Text[highest] <- 
-          paste0(nationalrat_gemeinden_dw_urlena$Text[highest],"<br><br>",
+        nationalrat_gemeinden_dw$Text_de[highest] <- 
+          paste0(nationalrat_gemeinden_dw$Text_de[highest],"<br><br>",
                  text_top10$Text_d
           )
-        print(nationalrat_gemeinden_dw_urlena$Text[highest])
+        print(nationalrat_gemeinden_dw$Text_de[highest])
         
         ##FR##
         
@@ -121,11 +121,11 @@ included_communities <<- c(included_communities,lowest)
         
         ##DE##
         text_bottom10$Text_d <- gsub("#Gemeinde_participation",gsub("[.]",",",round2(results$wahlbeteiligung[nrow(results)],1)),text_bottom10$Text_d) 
-        nationalrat_gemeinden_dw_urlena$Text[lowest] <- 
-          paste0(nationalrat_gemeinden_dw_urlena$Text[lowest],"<br><br>",
+        nationalrat_gemeinden_dw$Text_de[lowest] <- 
+          paste0(nationalrat_gemeinden_dw$Text_de[lowest],"<br><br>",
                  text_bottom10$Text_d
           )
-        print(nationalrat_gemeinden_dw_urlena$Text[lowest])
+        print(nationalrat_gemeinden_dw$Text_de[lowest])
         
         ##FR##
         
@@ -135,10 +135,10 @@ included_communities <<- c(included_communities,lowest)
       }  
 }
 
-return(nationalrat_gemeinden_dw_urlena)  
+return(nationalrat_gemeinden_dw)  
 }  
 
-add_parties <- function(nationalrat_gemeinden_dw_urlena,
+add_parties <- function(nationalrat_gemeinden_dw,
                         results_NR_communities,
                         texts_spreadsheet_UrLena,
                         area = "canton") {
@@ -165,8 +165,8 @@ for (i in 1:length(parties_ids)) {
       arrange(desc(partei_staerke))
 
     if (nrow(results) > 10 ) {
-      highest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[1])
-      lowest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[nrow(results)])
+      highest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[1])
+      lowest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[nrow(results)])
       
       #Replace Variables
       if (sum(highest == included_communities) == 0) {
@@ -174,11 +174,11 @@ for (i in 1:length(parties_ids)) {
         ##DE##
         text_highest$Text_d <- gsub("#Party_highest_in_canton_d",parties_name_de[i],text_highest$Text_d)
         text_highest$Text_d <- gsub("Die Grüne hat","Die Grünen haben",text_highest$Text_d)
-        nationalrat_gemeinden_dw_urlena$Text[highest] <- 
-          paste0(nationalrat_gemeinden_dw_urlena$Text[highest],"<br><br>",
+        nationalrat_gemeinden_dw$Text_de[highest] <- 
+          paste0(nationalrat_gemeinden_dw$Text_de[highest],"<br><br>",
                  text_highest$Text_d
           )
-        print(nationalrat_gemeinden_dw_urlena$Text[highest])
+        print(nationalrat_gemeinden_dw$Text_de[highest])
         
         ##FR##
         
@@ -192,11 +192,11 @@ for (i in 1:length(parties_ids)) {
         ##DE##
         text_lowest$Text_d <- gsub("#Party_lowest_in_canton_d",parties_name_de[i],text_lowest$Text_d)
         text_lowest$Text_d <- gsub("war die Grüne","waren die Grünen",text_lowest$Text_d)
-        nationalrat_gemeinden_dw_urlena$Text[lowest] <- 
-          paste0(nationalrat_gemeinden_dw_urlena$Text[lowest],"<br><br>",
+        nationalrat_gemeinden_dw$Text_de[lowest] <- 
+          paste0(nationalrat_gemeinden_dw$Text_de[lowest],"<br><br>",
                  text_lowest$Text_d
           )
-        print(nationalrat_gemeinden_dw_urlena$Text[lowest])
+        print(nationalrat_gemeinden_dw$Text_de[lowest])
         
         ##FR##
         
@@ -217,19 +217,19 @@ for (i in 1:length(parties_ids)) {
              id == parties_ids[i]) %>%
       arrange(desc(partei_staerke))
     
-    highest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[1])
-    lowest <- which(nationalrat_gemeinden_dw_urlena$ID == results$gemeinde_nummer[nrow(results)])
+    highest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[1])
+    lowest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[nrow(results)])
     
     #Replace Variables
     
     ##DE##
     if (sum(highest == included_communities) == 0) {
       text_highest$Text_d <- gsub("#Party_highest_d",parties_name_de[i],text_highest$Text_d)
-      nationalrat_gemeinden_dw_urlena$Text[highest] <- 
-        paste0(nationalrat_gemeinden_dw_urlena$Text[highest],"<br><br>",
+      nationalrat_gemeinden_dw$Text_de[highest] <- 
+        paste0(nationalrat_gemeinden_dw$Text_de[highest],"<br><br>",
                text_highest$Text_d
         )
-      print(nationalrat_gemeinden_dw_urlena$Text[highest])
+      print(nationalrat_gemeinden_dw$Text_de[highest])
       
       ##FR##
       
@@ -240,11 +240,11 @@ for (i in 1:length(parties_ids)) {
       
     if (sum(lowest == included_communities) == 0) {
       text_lowest$Text_d <- gsub("#Party_lowest_d",parties_name_de[i],text_lowest$Text_d) 
-      nationalrat_gemeinden_dw_urlena$Text[lowest] <- 
-        paste0(nationalrat_gemeinden_dw_urlena$Text[lowest],"<br><br>",
+      nationalrat_gemeinden_dw$Text_de[lowest] <- 
+        paste0(nationalrat_gemeinden_dw$Text_de[lowest],"<br><br>",
                text_lowest$Text_d
         )
-      print(nationalrat_gemeinden_dw_urlena$Text[lowest])
+      print(nationalrat_gemeinden_dw$Text_de[lowest])
 
       ##FR##
       
@@ -254,21 +254,21 @@ for (i in 1:length(parties_ids)) {
     }
   }  
 }  
-return(nationalrat_gemeinden_dw_urlena)  
+return(nationalrat_gemeinden_dw)  
 }  
 
 add_elected_candidates <- function(elected_candidates_overall,
-                                   nationalrat_gemeinden_dw_urlena,
+                                   nationalrat_gemeinden_dw,
                                    texts_spreadsheet_UrLena) {
 
 communities_ids <- unique(elected_candidates_overall$place_id)  
 for (community_id in communities_ids) {
 
   
-community <- nationalrat_gemeinden_dw_urlena %>%
+community <- nationalrat_gemeinden_dw %>%
   filter(ID == community_id,
          Staerkste_Partei != "no_data")
-selection <- which(nationalrat_gemeinden_dw_urlena$ID == community_id)
+selection <- which(nationalrat_gemeinden_dw$ID == community_id)
 
 if (nrow(community) == 1) {
 elected_candidates <- elected_candidates_overall %>%
@@ -278,34 +278,34 @@ if (nrow(elected_candidates) == 1) {
 if (elected_candidates$gender == "f") {
   text_one_f <- texts_spreadsheet_UrLena %>%
     filter(Text_ID == "Add_NR_im_Wohnort_one_f")
-  text_one_f$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde,end=-4),text_one_f$Text_d)
+  text_one_f$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde_de,end=-4),text_one_f$Text_d)
   text_one_f$Text_d <- gsub("#Names_NR_pro_Ort",
                             paste0("<b>",elected_candidates$firstname," ",elected_candidates$lastname," (",elected_candidates$shortname_de,")</b>")
                             ,text_one_f$Text_d) 
-  nationalrat_gemeinden_dw_urlena$Text[selection] <- 
-    paste0(nationalrat_gemeinden_dw_urlena$Text[selection],"<br><br>",
+  nationalrat_gemeinden_dw$Text_de[selection] <- 
+    paste0(nationalrat_gemeinden_dw$Text_de[selection],"<br><br>",
            text_one_f$Text_d
     )
-  print(nationalrat_gemeinden_dw_urlena$Text[selection])  
+  print(nationalrat_gemeinden_dw$Text_de[selection])  
   
 } else if (elected_candidates$gender == "m") {
   text_one_m <- texts_spreadsheet_UrLena %>%
     filter(Text_ID == "Add_NR_im_Wohnort_one_m")
-  text_one_m$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde,end=-4),text_one_m$Text_d)
+  text_one_m$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde_de,end=-4),text_one_m$Text_d)
   text_one_m$Text_d <- gsub("#Names_NR_pro_Ort",
                             paste0("<b>",elected_candidates$firstname," ",elected_candidates$lastname," (",elected_candidates$shortname_de,")</b>")
                             ,text_one_m$Text_d) 
-  nationalrat_gemeinden_dw_urlena$Text[selection] <- 
-    paste0(nationalrat_gemeinden_dw_urlena$Text[selection],"<br><br>",
+  nationalrat_gemeinden_dw$Text_de[selection] <- 
+    paste0(nationalrat_gemeinden_dw$Text_de[selection],"<br><br>",
            text_one_m$Text_d
     )
-  print(nationalrat_gemeinden_dw_urlena$Text[selection]) 
+  print(nationalrat_gemeinden_dw$Text_de[selection]) 
 }  
   
 } else if (nrow(elected_candidates) < 5) {
   text_few <- texts_spreadsheet_UrLena %>%
     filter(Text_ID == "Add_NR_im_Wohnort_few")
-  text_few$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde,end=-4),text_few$Text_d)
+  text_few$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde_de,end=-4),text_few$Text_d)
   text_few$Text_d <- gsub("#Anzahl_NR_pro_Ort",nrow(elected_candidates),text_few$Text_d)
   text_elected <- ""
   for (l in 1:nrow(elected_candidates)) {
@@ -318,25 +318,25 @@ if (elected_candidates$gender == "f") {
   text_few$Text_d <- gsub("#Names_NR_pro_Ort",
                             text_elected
                             ,text_few$Text_d) 
-  nationalrat_gemeinden_dw_urlena$Text[selection] <- 
-    paste0(nationalrat_gemeinden_dw_urlena$Text[selection],"<br><br>",
+  nationalrat_gemeinden_dw$Text_de[selection] <- 
+    paste0(nationalrat_gemeinden_dw$Text_de[selection],"<br><br>",
            text_few$Text_d
     )
-  print(nationalrat_gemeinden_dw_urlena$Text[selection]) 
+  print(nationalrat_gemeinden_dw$Text_de[selection]) 
 
 } else if (nrow(elected_candidates) >= 5) {
   text_many <- texts_spreadsheet_UrLena %>%
     filter(Text_ID == "Add_NR_im_Wohnort_many")
-  text_many$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde,end=-4),text_many$Text_d)
+  text_many$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde_de,end=-4),text_many$Text_d)
   text_many$Text_d <- gsub("#Anzahl_NR_pro_Ort",nrow(elected_candidates),text_many$Text_d)
-  nationalrat_gemeinden_dw_urlena$Text[selection] <- 
-    paste0(nationalrat_gemeinden_dw_urlena$Text[selection],"<br><br>",
+  nationalrat_gemeinden_dw$Text_de[selection] <- 
+    paste0(nationalrat_gemeinden_dw$Text_de[selection],"<br><br>",
            text_many$Text_d
     )
-  print(nationalrat_gemeinden_dw_urlena$Text[selection]) 
+  print(nationalrat_gemeinden_dw$Text_de[selection]) 
 }
 }  
 }  
-return(nationalrat_gemeinden_dw_urlena)
+return(nationalrat_gemeinden_dw)
 }  
 

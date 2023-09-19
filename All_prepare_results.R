@@ -30,7 +30,11 @@ overview_ch <- results_parties %>%
             shortname_fr = max(shortname_fr),
             shortname_it = max(shortname_it),
     seats_2023 = sum(seats,na.rm = TRUE),
-    seats_2019 = sum(seats,na.rm = TRUE) - sum(seats_change,na.rm = TRUE))
+    seats_2019 = sum(seats,na.rm = TRUE) - sum(seats_change,na.rm = TRUE),
+    seats_change = sum(seats_change)) %>%
+  filter(seats_2023 != 0 |
+           seats_change != 0 ) %>%
+  arrange(desc(seats_change))
 
 ###OVERVIEW CANTONS
 overview_cantons <- data.frame("area_ID","status","title_de","content_de","title_fr","content_fr","title_it","content_it")

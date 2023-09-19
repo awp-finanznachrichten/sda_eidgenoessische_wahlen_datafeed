@@ -86,6 +86,89 @@ if (language == "it") {
 return(tabelle)    
 }    
 
+create_table_NR_overview <- function(results_ch,
+                                    language) {
+  
+  results_ch <- results_ch %>%
+    arrange(desc(seats_2023))
+  
+  if (language == "de") {  
+    ##Create Table DE
+    tabelle <- paste0("<table><tbody><tr>",
+                      "<td></td>",
+                      "<td>Sitze</td>",
+                      "<td>Veränderung zu 2019*</td>",
+                      "</tr>")
+    
+    for (p in 1:nrow(results_ch)) {
+      tabelle <- paste0(tabelle,
+                        "<tr>",
+                        "<td>",results_ch$shortname_de[p],"</td>",
+                        "<td>",results_ch$seats_2023[p],"</td>",
+                        "<td>+",results_ch$seats_change[p],"</td>",
+                        "</tr>")
+      
+    }                    
+    tabelle <- paste0(tabelle,"</tbody></table>")
+    tabelle <- gsub("[+]-","-",tabelle)
+    tabelle <- gsub("[+]0[<]","-<",tabelle)
+    tabelle <- gsub("[+]0,0","-",tabelle) #[+]0.0[%]P
+  }
+  
+  if (language == "fr") {  
+    ##Create Table FR
+    tabelle <- paste0("<table><tbody><tr>",
+                      "<td></td>",
+                      "<td>nombre de sièges</td>",
+                      "<td>différence par rapport à 2019*</td>",
+                      "</tr>")
+    
+    for (p in 1:nrow(results_ch)) {
+      tabelle <- paste0(tabelle,
+                        "<tr>",
+                        "<td>",results_ch$shortname_fr[p],"</td>",
+                        "<td>",results_ch$seats_2023[p],"</td>",
+                        "<td>+",results_ch$seats_change[p],"</td>",
+                        "</tr>")
+      
+    }                    
+    tabelle <- paste0(tabelle,"</tbody></table>")
+    tabelle <- gsub("[+]-","-",tabelle)
+    tabelle <- gsub("[+]0[<]","-<",tabelle)
+    tabelle <- gsub("[+]0,0","-",tabelle) #[+]0.0[%]P
+  }
+  
+  
+  if (language == "it") {  
+    ##Create Table FR
+    tabelle <- paste0("<table><tbody><tr>",
+                      "<td></td>",
+                      "<td>numero di seggi</td>",
+                      "<td>variazione rispetto al 2019*</td>",
+                      "</tr>")
+    
+    for (p in 1:nrow(results_ch)) {
+      tabelle <- paste0(tabelle,
+                        "<tr>",
+                        "<td>",results_ch$shortname_it[p],"</td>",
+                        "<td>",results_ch$seats_2023[p],"</td>",
+                        "<td>+",results_ch$seats_change[p],"</td>",
+                        "</tr>")
+      
+    }                    
+    tabelle <- paste0(tabelle,"</tbody></table>")
+    tabelle <- gsub("[+]-","-",tabelle)
+    tabelle <- gsub("[+]0[<]","-<",tabelle)
+    tabelle <- gsub("[+]0,0","-",tabelle) #[+]0.0[%]P
+  }  
+  
+  return(tabelle)    
+}    
+
+
+
+
+
 create_table_NR_candidates <- function(elected_candidates,
                                     language) {
 

@@ -7,6 +7,7 @@ library(readr)
 library(stringi)
 library(stringr)
 library(DatawRappr)
+library(lubridate)
 
 #Working Directory
 setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
@@ -35,12 +36,14 @@ source("create_tables_overview.R")
 source("create_table_communities.R")
 source("create_bilddaten.R")
 source("create_visual_data.R")
+source("function_reports.R")
 setwd("..")
 source("./tools/Funktionen/Utils.R")
 
 #Texts
 texts_spreadsheet_NR_results <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Sitzverteilung")
 texts_spreadsheet_NR_candidates <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Gewaehlte")
+texts_spreadsheet_NR_intermediate <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Zwischenstand")
 texts_spreadsheet_UrLena <- read.xlsx("./Texte/LENA Textbausteine Eidgenössische Wahlen 2023_ Gemeindeebene.xlsx", sheetName = "Textbausteine")
 texts_spreadsheet_UrLena <- texts_spreadsheet_UrLena %>%
   filter(is.na(Text_d) == FALSE)
@@ -123,27 +126,27 @@ source("NR_publish_candidates_charts.R")
 ##Analytics##
 if (counted_cantons$analytics[c] == "pending") {
 #Generate Output
-###TO DO###
+email_elected_report_nr(counted_cantons$area_ID[c])
 }
   
 }
 
 ###STAENDERAT###
 #Get counted cantons SR
-counted_cantons <- counted_cantons_all %>%
+counted_cantons_SR <- counted_cantons_all %>%
   filter(council == "SR")
 
-for (c in 1:nrow(counted_cantons)) {
+for (c in 1:nrow(counted_cantons_SR)) {
 
 ##Text Candidates##
-if (counted_cantons$texts_candidates[c] == "pending") {
+if (counted_cantons_SR$texts_candidates[c] == "pending") {
 source("SR_text_candidates.R") #TO DO
 source("SR_mars_meldung_candidates_DE.R") #TO DO
 source("SR_mars_meldung_candidates_FR.R") #TO DO
 source("SR_mars_meldung_candidates_IT.R") #TO DO
 }
   
-if (counted_cantons$charts_candidates[c] == "pending") {
+if (counted_cantons_SR$charts_candidates[c] == "pending") {
 ##Chart Candidates##
 source("SR_publish_candidates_charts.R")
 }
@@ -154,6 +157,11 @@ source("All_publish_charts.R")
 source("All_create_output_parliament_flourish.R")
 source("All_create_output_candidates_flourish.R")
 
+###ZWISCHENSTAND (jeweils um x.35 Uhr)
+source("NR_text_intermediate.R")
+source("NR_mars_meldung_intermediate_DE.R")
+#source("NR_mars_meldung_intermediate_FR.R")
+#source("NR_mars_meldung_intermediate_IT.R")
 
 ###ELECTION FINISHED###
 

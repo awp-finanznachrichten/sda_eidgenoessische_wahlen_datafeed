@@ -1,10 +1,23 @@
 replace_variables_cleanup <- function(texts,
                               metadata,
-                              language = "de") {
+                              language = "de",
+                              type = "canton") {
+  
+if (type == "canton") {  
 texts <- gsub("#Kanton_short",metadata$area_ID[c],texts)
 texts <- gsub("#Kanton_d",metadata$area_name_de[c],texts)
 texts <- gsub("#Kanton_f",metadata$area_name_fr[c],texts)
 texts <- gsub("#Sitze_NR",metadata$seats_available_NR[c],texts)
+}
+  
+if (type == "overview") {
+texts <- gsub("#Hour",hour(Sys.time()),texts) 
+texts <- gsub("#Cantons_counted_amount",nrow(metadata),texts)
+texts <- gsub("#Seats_distributed",sum(metadata$seats_available_NR),texts)
+texts <- gsub("#Cantons_counted_list_d",  paste(counted_cantons$area_name_de, collapse= ", "),texts)
+texts <- gsub("#Cantons_counted_list_f",  paste(counted_cantons$area_name_fr, collapse= ", "),texts)
+texts <- gsub("#Cantons_counted_list_i",  paste(counted_cantons$area_name_it, collapse= ", "),texts)
+}  
 
 ###Deutsch
 if (language == "de") {
