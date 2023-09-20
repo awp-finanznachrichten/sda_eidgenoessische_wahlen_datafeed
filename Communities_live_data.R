@@ -59,6 +59,7 @@ gemeinden <- gemeinden %>%
   left_join(meta_gmd_kt,
             by = join_by(gemeinde_nummer == Gemeinde_Nr))
 
+
 #storyboard_urlena_all <- c() #TEST
 for (g in 1:nrow(gemeinden)) {
   
@@ -219,6 +220,19 @@ nationalrat_gemeinden_dw$Text_it <- gsub("<br><br><br><br>","<br><br>",nationalr
 write.csv(nationalrat_gemeinden_dw[,c(1,2,5,11)],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_de.csv",row.names = FALSE)
 write.csv(nationalrat_gemeinden_dw[,c(1,3,6,11),],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_fr.csv",row.names = FALSE)
 write.csv(nationalrat_gemeinden_dw[,c(1,4,7,11),],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_it.csv",row.names = FALSE)
+
+
+#Create output for cantons
+for (canton in unique(gemeinden$Kanton_Short)) {
+selected_gemeinden <- gemeinden %>%
+  filter(Kanton_Short == canton)
+  
+selected_output <- nationalrat_gemeinden_dw %>%
+  filter(ID %in% selected_gemeinden$gemeinde_nummer)
+
+write.csv(selected_output,file="./Output/nationalrat_ergebnisse_gemeinden_urlena_de.csv",row.names = FALSE)
+
+}  
 
 
 #View(table(nationalrat_gemeinden_dw$Storyboard))

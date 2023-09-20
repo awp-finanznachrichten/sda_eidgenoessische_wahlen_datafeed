@@ -53,7 +53,7 @@ vorlage <- gsub("INSERT_CATCHLINE","",vorlage)
 vorlage <- gsub("INSERT_TEXT",text,vorlage)
 
 #Datei speichern
-setwd("./Output")
+setwd("./Output_Mars")
 filename <- paste0(format(Sys.Date(),"%Y%m%d"),"_NR_Intermediate_Wahlen2023_it.xml")
 cat(vorlage, file = (con <- file(filename, "w", encoding="UTF-8"))); close(con)
 
