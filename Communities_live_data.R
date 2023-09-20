@@ -230,8 +230,7 @@ selected_gemeinden <- gemeinden %>%
 selected_output <- nationalrat_gemeinden_dw %>%
   filter(ID %in% selected_gemeinden$gemeinde_nummer)
 
-write.csv(selected_output,file="./Output/nationalrat_ergebnisse_gemeinden_urlena_de.csv",row.names = FALSE)
-
+write.csv(selected_output,file=paste0("./Output_Cantons/nationalrat_ergebnisse_gemeinden_",canton,".csv"),row.names = FALSE)
 }  
 
 
