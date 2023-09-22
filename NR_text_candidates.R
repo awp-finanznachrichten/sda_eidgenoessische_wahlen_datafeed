@@ -41,6 +41,9 @@ elected_candidates$status_text <-
   ifelse(elected_candidates$status == 2, "bisher", "neu")
 elected_candidates$status_text_fr <-
   ifelse(elected_candidates$status == 2, "sortant", "nouveau")
+elected_candidates$status_text_it <-
+  ifelse(elected_candidates$status == 2, "uscente", "nuovo")
+
 
 #Voted out candidates
 voted_out_candidates <- results_candidates %>%

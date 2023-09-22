@@ -1,39 +1,46 @@
-replace_variables_cleanup <- function(texts,
+replace_variables_cleanup_SR <- function(texts,
                               metadata,
+                              elected_candidates,
                               language = "de",
                               type = "canton") {
   
-if (type == "canton") {  
+
 texts <- gsub("#Kanton_short",metadata$area_ID[c],texts)
 texts <- gsub("#Kanton_d",metadata$area_name_de[c],texts)
 texts <- gsub("#Kanton_f",metadata$area_name_fr[c],texts)
 texts <- gsub("#Kanton_i",metadata$area_name_it[c],texts)
-texts <- gsub("#Sitze_NR",metadata$seats_available_NR[c],texts)
-}
-  
-if (type == "overview") {
-texts <- gsub("#Hour",hour(Sys.time()),texts) 
-texts <- gsub("#Cantons_counted_amount",nrow(metadata),texts)
-texts <- gsub("#Seats_distributed",sum(metadata$seats_available_NR),texts)
-texts <- gsub("#Cantons_counted_list_d",  paste(counted_cantons$area_name_de, collapse= ", "),texts)
-texts <- gsub("#Cantons_counted_list_f",  paste(counted_cantons$area_name_fr, collapse= ", "),texts)
-texts <- gsub("#Cantons_counted_list_i",  paste(counted_cantons$area_name_it, collapse= ", "),texts)
-}  
 
+texts <- gsub("#Datum_SR_d",paste0(day(metadata$second_ballot_date[c]),". November"),texts)
+texts <- gsub("#Datum_SR_f",paste0(day(metadata$second_ballot_date[c])," novembre"),texts)
+texts <- gsub("#Datum_SR_i",paste0(day(metadata$second_ballot_date[c])," novembre"),texts)
+
+if (nrow(elected_candidates) > 0) {
+texts <- gsub("#Vorname_SR1",elected_candidates$firstname[1],texts)
+texts <- gsub("#Nachname_SR1",elected_candidates$lastname[1],texts)
+texts <- gsub("#Partei_SR1_d",elected_candidates$shortname_de[1],texts)
+texts <- gsub("#Status_SR1_d",elected_candidates$status_text[1],texts) 
+texts <- gsub("#Partei_SR1_f",elected_candidates$shortname_fr[1],texts)
+texts <- gsub("#Status_SR1_f",elected_candidates$status_text_fr[1],texts) 
+texts <- gsub("#Partei_SR1_i",elected_candidates$shortname_it[1],texts)
+texts <- gsub("#Status_SR1_i",elected_candidates$status_text_it[1],texts) 
+}
+if (nrow(elected_candidates) == 2) {
+texts <- gsub("#Vorname_SR2",elected_candidates$firstname[2],texts)
+texts <- gsub("#Nachname_SR2",elected_candidates$lastname[2],texts)
+texts <- gsub("#Partei_SR2_d",elected_candidates$shortname_de[2],texts)
+texts <- gsub("#Status_SR2_d",elected_candidates$status_text[2],texts) 
+texts <- gsub("#Partei_SR2_f",elected_candidates$shortname_fr[2],texts)
+texts <- gsub("#Status_SR2_f",elected_candidates$status_text_fr[2],texts) 
+texts <- gsub("#Partei_SR2_i",elected_candidates$shortname_it[2],texts)
+texts <- gsub("#Status_SR2_i",elected_candidates$status_text_it[2],texts) 
+}
+
+##TO DO##
+#Datum
 
 ###Deutsch
 if (language == "de") {
-#Adapt Grüne
-texts <- gsub("hat die Grüne ","haben die Grünen ",texts)
-texts <- gsub("Die Grüne hat ","Die Grünen haben ",texts)
-texts <- gsub("die Grüne, ","die Grünen, ",texts)
-texts <- gsub("die Grüne ","die Grünen ",texts)
-texts <- gsub("die MCG ","das MCG ",texts)
-texts <- gsub("Die MCG ","Das MCG ",texts)
-texts <- gsub("die weitere","eine weitere Partei",texts)
-texts <- gsub("Die weitere","Eine weitere Partei",texts)
-
-
+  
 #Adapt Numbers
 texts <- gsub(" 2 "," zwei ",texts)
 texts <- gsub(" 3 "," drei ",texts)
@@ -49,12 +56,7 @@ texts <- gsub(" 12 "," zwölf ",texts)
 }
 
 if (language == "fr") {
-texts <- gsub("Le Vert-e-s a","Les Vert-e-s ont",texts)
-texts <- gsub("le Vert-e-s","les Vert-e-s",texts)
-texts <- gsub("Le Vert-e-s ","Les Vert-e-s ",texts)
-texts <- gsub("Le autre ","Un autre parti ",texts)
-  
-##Französisch
+  ##Französisch
 texts <- str_replace_all(texts,"de Henniez","d'Henniez")
 texts <- str_replace_all(texts,"de Hermance","d'Hermance")
 texts <- str_replace_all(texts,"de Hermenches","d'Hermenches")

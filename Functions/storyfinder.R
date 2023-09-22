@@ -120,3 +120,33 @@ get_story_NR_candidates <- function(seats_available,
   return(storyboard)
   
 }  
+
+
+
+###Storyfinder Ständerat candidates
+
+get_story_SR_candidates <- function(seats_available,
+                                    elected_candidates,
+                                    voted_out_candidates) {
+
+  if (nrow(elected_candidates) == 2) {
+  if (nrow(voted_out_candidates) == 2) {
+  storyboard <- c("Catchword","Headline_TwoElected_Abgewählt_zwei","Lead_Abgewählt_zwei","Disclaimer")   
+  } else if (nrow(voted_out_candidates) == 1) {
+  storyboard <- c("Catchword","Headline_TwoElected_Abgewählt","Lead_Abgewählt","Disclaimer")   
+  } else {
+  storyboard <- c("Catchword","Headline_TwoElected","Lead_TwoElected","Disclaimer")  
+  }  
+    
+  } else if (nrow(elected_candidates) == 1) {
+  if (seats_available == 2) {
+  storyboard <- c("Catchword","Headline_OneElected","Lead_OneElected","Disclaimer")    
+  } else {
+  storyboard <- c("Catchword","Headline_OneElected_Halbkanton","Lead_OneElected_Halbkanton","Disclaimer")
+  }  
+  } else {
+  storyboard <- c("Catchword","Headline_NobodyElected","Lead_NobodyElected","Disclaimer")
+  }  
+  return(storyboard)
+}  
+

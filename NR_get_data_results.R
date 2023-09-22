@@ -16,7 +16,7 @@ timestamp_results_old <-
   read.csv("./Timestamps/timestamp_results.txt", header = FALSE)[1, 1]
 
 if (timestamp_results != timestamp_results_old) {
-  print("new results NR data downloaded!")
+
   #Download data
   setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
   download.file(url_NR_results,
@@ -25,7 +25,7 @@ if (timestamp_results != timestamp_results_old) {
   data_NR_results <-
     fromJSON("data_NR_results.json", flatten = TRUE)
   setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
-  
+  print("new results NR data downloaded!")
   #Timestamps
   stand_cantons_results <- data_NR_results$stand_kantone #%>%
     #rename(kanton_abgeschlossen_parties = kanton_abgeschlossen)

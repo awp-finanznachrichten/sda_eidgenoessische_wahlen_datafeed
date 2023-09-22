@@ -16,7 +16,7 @@ timestamp_candidates_old <-
   read.csv("./Timestamps/timestamp_candidates.txt", header = FALSE)[1, 1]
 
 if (timestamp_candidates != timestamp_candidates_old) {
-  print("new candidates NR data downloaded!")
+
   #Download data
   setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
   download.file(url_NR_candidates,
@@ -25,6 +25,7 @@ if (timestamp_candidates != timestamp_candidates_old) {
   data_NR_candidates <-
     fromJSON("data_NR_candidates.json", flatten = TRUE)
   setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+  print("new candidates NR data downloaded!")
   
   #Stand CH and Kantone
   timestamp_NR_candidates <- data_NR_candidates$timestamp
