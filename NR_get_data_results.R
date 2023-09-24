@@ -16,7 +16,10 @@ timestamp_results_old <-
   read.csv("./Timestamps/timestamp_results.txt", header = FALSE)[1, 1]
 
 if (timestamp_results != timestamp_results_old) {
-
+  
+#Set Flag
+new_results <- TRUE  
+  
   #Download data
   setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
   download.file(url_NR_results,
@@ -123,9 +126,11 @@ if (timestamp_results != timestamp_results_old) {
     }
   }
   
-  
   #Save Timestamp
   cat(timestamp_results, file = "./Timestamps/timestamp_results.txt")
+  
+  #Load Databases again
+  source("load_databases.R")
   
 } else {
   print("no new data for NR results found")

@@ -128,21 +128,46 @@ get_story_NR_candidates <- function(seats_available,
 get_story_SR_candidates <- function(seats_available,
                                     elected_candidates,
                                     voted_out_candidates) {
+  
+  count_men <- sum(grepl("M|m",elected_candidates$gender))
+  count_women <- sum(grepl("F|f",elected_candidates$gender))
+  count_men_voted_out <- sum(grepl("M|m",voted_out_candidates$gender))
+  count_women_voted_out <- sum(grepl("F|f",voted_out_candidates$gender))
 
   if (nrow(elected_candidates) == 2) {
   if (nrow(voted_out_candidates) == 2) {
-  storyboard <- c("Catchword","Headline_TwoElected_Abgewählt_zwei","Lead_Abgewählt_zwei","Disclaimer")   
+    if (count_women_voted_out == 2) {
+      storyboard <- c("Catchword","Headline_TwoElected_Abgewählt_zwei_FF","Lead_Abgewählt_zwei_FF","Disclaimer")
+    } else {
+    storyboard <- c("Catchword","Headline_TwoElected_Abgewählt_zwei","Lead_Abgewählt_zwei","Disclaimer")    
+    }  
   } else if (nrow(voted_out_candidates) == 1) {
-  storyboard <- c("Catchword","Headline_TwoElected_Abgewählt","Lead_Abgewählt","Disclaimer")   
+    if (count_women_voted_out == 1) {
+      storyboard <- c("Catchword","Headline_TwoElected_Abgewählt_F","Lead_Abgewählt_F","Disclaimer") 
+    } else {
+      storyboard <- c("Catchword","Headline_TwoElected_Abgewählt","Lead_Abgewählt","Disclaimer") 
+    }  
   } else {
-  storyboard <- c("Catchword","Headline_TwoElected","Lead_TwoElected","Disclaimer")  
+    if (count_women == 2) {
+      storyboard <- c("Catchword","Headline_TwoElected_FF","Lead_TwoElected","Disclaimer") 
+    } else {
+      storyboard <- c("Catchword","Headline_TwoElected","Lead_TwoElected","Disclaimer") 
+    }
   }  
     
   } else if (nrow(elected_candidates) == 1) {
   if (seats_available == 2) {
-  storyboard <- c("Catchword","Headline_OneElected","Lead_OneElected","Disclaimer")    
+    if (count_women == 1) {
+      storyboard <- c("Catchword","Headline_OneElected_F","Lead_OneElected","Disclaimer")
+    } else {
+      storyboard <- c("Catchword","Headline_OneElected_M","Lead_OneElected","Disclaimer")  
+    }  
   } else {
-  storyboard <- c("Catchword","Headline_OneElected_Halbkanton","Lead_OneElected_Halbkanton","Disclaimer")
+    if (count_women == 1) {
+  storyboard <- c("Catchword","Headline_OneElected_Halbkanton_M","Lead_OneElected_Halbkanton","Disclaimer")
+   } else {
+  storyboard <- c("Catchword","Headline_OneElected_Halbkanton_F","Lead_OneElected_Halbkanton","Disclaimer")
+   }
   }  
   } else {
   storyboard <- c("Catchword","Headline_NobodyElected","Lead_NobodyElected","Disclaimer")

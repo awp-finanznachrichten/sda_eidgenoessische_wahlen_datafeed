@@ -16,7 +16,9 @@ timestamp_candidates_old <-
   read.csv("./Timestamps/timestamp_candidates.txt", header = FALSE)[1, 1]
 
 if (timestamp_candidates != timestamp_candidates_old) {
-
+#Set Flag
+NR_new_elected <- TRUE
+  
   #Download data
   setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
   download.file(url_NR_candidates,

@@ -5,7 +5,7 @@ rs <-
     mydb,
     paste0(
       "SELECT * FROM candidates_results WHERE election_id = '",
-      counted_cantons_SR$election_ID[c],
+      counted_cantons_SR$election_ID[c], 
       "'"
     )
   )
@@ -49,6 +49,7 @@ storyboard_candidates <-
     elected_candidates,
     voted_out_candidates
   )
+
 
 ###Get Story pieces
 texts_candidates <- get_texts(storyboard_candidates,

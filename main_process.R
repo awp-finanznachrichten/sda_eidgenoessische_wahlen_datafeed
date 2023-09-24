@@ -8,6 +8,7 @@ library(stringi)
 library(stringr)
 library(DatawRappr)
 library(lubridate)
+library(git2r)
 
 #Working Directory
 setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
@@ -39,6 +40,7 @@ source("create_table_communities.R")
 source("create_bilddaten.R")
 source("create_visual_data.R")
 source("function_reports.R")
+source("github.R")
 setwd("..")
 source("./tools/Funktionen/Utils.R")
 
@@ -55,6 +57,11 @@ texts_spreadsheet_UrLena <- texts_spreadsheet_UrLena %>%
 meta_gmd_kt <- read_csv("Data/MASTERFILE_GDE.csv")
 
 #####START LOOP#####
+
+#Flags
+NR_new_results <- FALSE
+NR_new_elected <- FALSE
+SR_new_elected <- FALSE
 
 #Load Databases
 source("load_databases.R")
@@ -137,7 +144,7 @@ email_elected_report_nr(counted_cantons$area_ID[c])
 ###STAENDERAT###
 #Get counted cantons SR
 counted_cantons_SR <- counted_cantons_all %>%
-  filter(council == "SR")
+  filter(council == "NR") #ADAPT TO SR
 
 for (c in 1:nrow(counted_cantons_SR)) {
 
@@ -155,10 +162,13 @@ source("SR_publish_candidates_charts.R")
 }
 }
 ###GESAMTERGEBNIS###
+if (NR_new_results == TRUE || NR_new_elected == TRUE) {
 source("All_prepare_results.R")
 source("All_publish_charts.R")
 source("All_create_output_parliament_flourish.R")
 source("All_create_output_candidates_flourish.R")
+}
+
 
 ###ZWISCHENSTAND (jeweils um x.35 Uhr)
 source("NR_text_intermediate.R")
@@ -167,12 +177,19 @@ source("NR_mars_meldung_intermediate_DE.R")
 #source("NR_mars_meldung_intermediate_IT.R")
 
 ###ELECTION FINISHED###
-
+#TO DO#
 
 ###COMMUNITIES###
 ##Output tables and texts##
+if (NR_new_results == TRUE) {
 source("Communities_live_data.R")
+source("Communities_publish_charts.R") #TO DO
+}
 
-
-
+###COMMIT###
+token <- read.csv("C:/Users/simon/OneDrive/Github_Token/token.txt",header=FALSE)[1,1]
+git2r::cred_token(token)
+gitadd()
+gitcommit()
+gitpush()
 
