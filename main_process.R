@@ -186,12 +186,12 @@ source("NR_mars_meldung_intermediate_IT.R")
 ##Output tables and texts##
 if (NR_new_results == TRUE) {
 source("Communities_live_data.R")
-source("Communities_publish_charts.R") #TO DO
+source("Communities_publish_charts.R")
 }
 
 ###COMMIT###
 git2r::config(user.name = "awp-finanznachrichten",user.email = "sw@awp.ch")
-token <- read.csv("C:/Users/simon/OneDrive/Github_Token/token.txt",header=FALSE)[1,1]
+token <- read.csv("C:/Users/sw/OneDrive/Github_Token/token.txt",header=FALSE)[1,1]
 git2r::cred_token(token)
 gitadd()
 gitcommit()

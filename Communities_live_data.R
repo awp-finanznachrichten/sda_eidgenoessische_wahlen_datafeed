@@ -99,11 +99,14 @@ for (g in 1:nrow(gemeinden)) {
   
   #Create Table
   tabelle_de <- create_table_communities(ergebnisse_gemeinde_tabelle,
-                                      voter_turnout)
+                                      voter_turnout,
+                                      "de")
   tabelle_fr <- create_table_communities(ergebnisse_gemeinde_tabelle,
-                                         voter_turnout)
+                                         voter_turnout,
+                                         "fr")
   tabelle_it <- create_table_communities(ergebnisse_gemeinde_tabelle,
-                                         voter_turnout)
+                                         voter_turnout,
+                                         "it")
   
   #Find Story Ur-Lena
   storyboard_urlena <- get_storyboard_urlena(ergebnisse_gemeinde_urlena)
@@ -150,7 +153,6 @@ for (g in 1:nrow(gemeinden)) {
   colnames(new_entry) <- c("ID","Gemeinde_de","Gemeinde_fr","Gemeinde_it","Text_de","Text_fr","Text_it","Tabelle_de","Tabelle_fr","Tabelle_it","Staerkste_Partei")
   nationalrat_gemeinden_dw <- rbind(nationalrat_gemeinden_dw,new_entry)
 }
-
 
 ###Final adaptions Tabelle
 nationalrat_gemeinden_dw <- nationalrat_gemeinden_dw[-1,]

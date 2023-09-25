@@ -95,7 +95,7 @@ NR_new_elected <- TRUE
     ifelse(results_NR_cantons_candidates$flag_gewaehlt == TRUE, 1, 0)
 
   for (c in 1:nrow(ongoing_cantons_NR)) {
-    if (ongoing_cantons_NR$kanton_abgeschlossen[c] == FALSE) {
+    if (ongoing_cantons_NR$kanton_abgeschlossen[c] == TRUE) {
       
       print(paste0("new candidates results for canton ",ongoing_cantons_NR$area_ID[c]," found!"))
       

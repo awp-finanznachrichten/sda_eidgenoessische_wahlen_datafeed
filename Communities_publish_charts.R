@@ -1,43 +1,67 @@
+chart_id_text_de <- "3YqND"
+chart_id_tabelle_de <- "9qTxY"
+chart_id_text_fr <- "XQ32E"
+chart_id_tabelle_fr <- "1PjhW"
+chart_id_text_it <- "n1scm"
+chart_id_tabelle_it <- "a3EW0"
 
-  
-  if (sum(results$Gebiet_Ausgezaehlt) > 0 ) {
+undertitel_de <- paste0("Letzte Aktualisierung: ",format(Sys.time(),"%H:%M Uhr"),". ","Es sind <b>",stand_ch$gemeinden_abgeschlossen,"</b> von <b>",stand_ch$gemeinden_total,
+                            "</b> Gemeinden ausgezählt.")
+undertitel_fr <- paste0("dernière mise à jour: ",format(Sys.time(),"%Hh%M"),". ","Les résultats de <b>",stand_ch$gemeinden_abgeschlossen,"</b> des <b>",stand_ch$gemeinden_total,
+                            "</b> communes sont connus.")
+undertitel_it <- paste0("Ultimo aggiornamento: ",format(Sys.time(),"%H:%M"),". ","I risultati di <b>",stand_ch$gemeinden_abgeschlossen,"</b> dei <b>",stand_ch$gemeinden_total,
+                            "</b> comuni sono noti.")
     
-    undertitel_de <- paste0("Es sind <b>",sum(results$Gebiet_Ausgezaehlt),"</b> von <b>",nrow(results),
-                            "</b> Gemeinden ausgezählt. Stand: <b>",
-                            round(results_national$jaStimmenInProzent,1)," %</b> Ja, <b>",
-                            round(100-results_national$jaStimmenInProzent,1)," %</b> Nein")
-    
-    undertitel_fr <- paste0("Les résultats de <b>",sum(results$Gebiet_Ausgezaehlt),"</b> des <b>",nrow(results),
-                            "</b> communes sont connus. Etat: <b>",
-                            round(results_national$jaStimmenInProzent,1)," %</b> oui, <b>",
-                            round(100-results_national$jaStimmenInProzent,1)," %</b> non")
-    
-    undertitel_it <- paste0("I risultati di <b>",sum(results$Gebiet_Ausgezaehlt),"</b> dei <b>",nrow(results),
-                            "</b> comuni sono noti. Stato: <b>",
-                            round(results_national$jaStimmenInProzent,1)," %</b> sì, <b>",
-                            round(100-results_national$jaStimmenInProzent,1)," %</b> no")
-    
-  }  
-  
-  datawrapper_codes_vorlage <- datawrapper_codes[datawrapper_codes$Vorlage == vorlagen_short[i],]
-  
-  #Karten Gemeinden
-  dw_edit_chart(datawrapper_codes_vorlage[1,5],intro=undertitel_de,annotate=paste0("Letzte Aktualisierung: ",format(Sys.time(),"%d.%m.%Y %H:%M Uhr")))
-  dw_publish_chart(datawrapper_codes_vorlage[1,5])
-  
-  dw_edit_chart(datawrapper_codes_vorlage[3,5],intro=undertitel_fr,annotate=paste0("dernière mise à jour: ",format(Sys.time(),"%d.%m.%Y %Hh%M")))
-  dw_publish_chart(datawrapper_codes_vorlage[3,5])
-  
-  dw_edit_chart(datawrapper_codes_vorlage[5,5],intro=undertitel_it,annotate=paste0("Ultimo aggiornamento: ",format(Sys.time(),"%d.%m.%Y %H:%M")))
-  dw_publish_chart(datawrapper_codes_vorlage[5,5])
-  
-  #Karten Kantone
-  dw_edit_chart(datawrapper_codes_vorlage[2,5],intro=undertitel_de,annotate=paste0("Letzte Aktualisierung: ",format(Sys.time(),"%d.%m.%Y %H:%M Uhr")))
-  dw_publish_chart(datawrapper_codes_vorlage[2,5])
-  
-  dw_edit_chart(datawrapper_codes_vorlage[4,5],intro=undertitel_fr,annotate=paste0("dernière mise à jour: ",format(Sys.time(),"%d.%m.%Y %Hh%M")))
-  dw_publish_chart(datawrapper_codes_vorlage[4,5])
-  
-  dw_edit_chart(datawrapper_codes_vorlage[6,5],intro=undertitel_it,annotate=paste0("Ultimo aggiornamento: ",format(Sys.time(),"%d.%m.%Y %H:%M")))
-  dw_publish_chart(datawrapper_codes_vorlage[6,5])
-}  
+###DE###
+undertitel_de_text <- paste0(undertitel_de,'<br><span style="line-height:30px">
+  <a target="_self" href="https://datawrapper.dwcdn.net/3YqND/" style="background:#429ddd; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer">&nbsp;&nbsp;Texte&nbsp;&nbsp;</a> &nbsp;
+<a target="_self" href="https://datawrapper.dwcdn.net/9qTxY/" style="background:#808080; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer"> Tabellen</a> &nbsp;
+</span>')
+dw_edit_chart(chart_id_text_de,intro = undertitel_de_text)
+dw_publish_chart(chart_id_text_de)
+
+undertitel_de_tabelle <- paste0(undertitel_de,'<br>
+<span style="line-height:30px">
+<a target="_self" href="https://datawrapper.dwcdn.net/3YqND/" style="background:#808080; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer">&nbsp;&nbsp;Texte&nbsp;&nbsp;</a> &nbsp;
+<a target="_self" href="https://datawrapper.dwcdn.net/9qTxY/" style="background:#429ddd; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer"> Tabellen</a> &nbsp;
+</span>')
+dw_edit_chart(chart_id_tabelle_de,intro = undertitel_de_tabelle)
+dw_publish_chart(chart_id_tabelle_de)
+
+
+###FR###
+undertitel_fr_text <- paste0(undertitel_fr,'<br>
+<span style="line-height:30px">
+<a target="_self" href="https://datawrapper.dwcdn.net/XQ32E/" style="background:#429ddd; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer">&nbsp;&nbsp;textes&nbsp;&nbsp;</a> &nbsp;
+<a target="_self" href="https://datawrapper.dwcdn.net/1PjhW/" style="background:#808080; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer"> &nbsp;&nbsp;tables&nbsp;&nbsp;</a> &nbsp;
+</span>')
+dw_edit_chart(chart_id_text_fr,intro = undertitel_fr_text)
+dw_publish_chart(chart_id_text_fr)
+
+undertitel_fr_tabelle <- paste0(undertitel_fr,'<br>
+<span style="line-height:30px">
+<a target="_self" href="https://datawrapper.dwcdn.net/XQ32E/" style="background:#808080; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer">&nbsp;&nbsp;textes&nbsp;&nbsp;</a> &nbsp;
+<a target="_self" href="https://datawrapper.dwcdn.net/1PjhW/" style="background:#429ddd; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer"> &nbsp;&nbsp;tables&nbsp;&nbsp;</a> &nbsp;
+</span>')
+dw_edit_chart(chart_id_tabelle_fr,intro = undertitel_fr_tabelle)
+dw_publish_chart(chart_id_tabelle_fr)
+
+
+###IT###
+undertitel_it_text <- paste0(undertitel_it,'<br>
+<span style="line-height:30px">
+<a target="_self" href="https://datawrapper.dwcdn.net/XQ32E/" style="background:#429ddd; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer">&nbsp;&nbsp;testi&nbsp;&nbsp;</a> &nbsp;
+<a target="_self" href="https://datawrapper.dwcdn.net/1PjhW/" style="background:#808080; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer"> &nbsp;&nbsp;tavoli&nbsp;&nbsp;</a> &nbsp;
+</span>')
+dw_edit_chart(chart_id_text_it,intro = undertitel_it_text)
+dw_publish_chart(chart_id_text_it)
+
+undertitel_it_tabelle <- paste0(undertitel_it,'<br>
+<span style="line-height:30px">
+<a target="_self" href="https://datawrapper.dwcdn.net/XQ32E/" style="background:#808080; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer">&nbsp;&nbsp;
+testi&nbsp;&nbsp;</a> &nbsp;
+<a target="_self" href="https://datawrapper.dwcdn.net/1PjhW/" style="background:#429ddd; padding:4px 6px; border-radius:5px; color:#ffffff; font-weight:400; box-shadow:0px 0px 7px 2px rgba(0,0,0,0.07); cursor:pointer;" rel="nofollow noopener noreferrer"> &nbsp;&nbsp;tavoli&nbsp;&nbsp;</a> &nbsp;
+</span>')
+dw_edit_chart(chart_id_tabelle_it,intro = undertitel_it_tabelle)
+dw_publish_chart(chart_id_tabelle_it)
+
