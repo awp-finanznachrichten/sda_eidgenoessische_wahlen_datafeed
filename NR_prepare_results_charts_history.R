@@ -33,12 +33,11 @@ results_parties <- results_parties %>%
          voter_share,
          party_color)
 
-###Get history data
+###GET HISTORY DATA###
 response <-
   GET(BFS_API_URL)
 content <- content(response)$result$resources
 
-###GET CANDIDATES DATA###
 url_NR_history <-
   as.data.frame(do.call(rbind, content))$download_url[[1]]
 

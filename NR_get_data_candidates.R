@@ -5,7 +5,7 @@ content <- content(response)$result$resources
 
 ###GET CANDIDATES DATA###
 url_NR_candidates <-
-  as.data.frame(do.call(rbind, content))$download_url[[3]] #2
+  as.data.frame(do.call(rbind, content))$download_url[[2]] #2
 
 #Get timestamp
 timestamp_candidates <-
@@ -68,6 +68,9 @@ NR_new_elected <- TRUE
       )
     )
   
+  #Replace NA with 0
+  results_NR_cantons_candidates[is.na(results_NR_cantons_candidates)] <- 0
+
   ###UPDATE DATABASE###
   #Metadata NR
   ongoing_cantons_NR <- election_metadata %>%
@@ -86,19 +89,21 @@ NR_new_elected <- TRUE
   #Merge with status data
   ongoing_cantons_NR <- ongoing_cantons_NR %>%
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer))
-  
 
   #Set variable elected or not
   results_NR_cantons_candidates$flag_gewaehlt <-
     ifelse(results_NR_cantons_candidates$flag_gewaehlt == TRUE, 1, 0)
 
   for (c in 1:nrow(ongoing_cantons_NR)) {
-    if (ongoing_cantons_NR$kanton_abgeschlossen[c] == TRUE) {
+    if (ongoing_cantons_NR$kanton_abgeschlossen[c] == FALSE) {
       
-      #Get candidates results from canton
+      print(paste0("new candidates results for canton ",ongoing_cantons_NR$area_ID[c]," found!"))
+      
+      #Get elected candidates results from canton
       results_canton <- results_NR_cantons_candidates %>%
         filter(kanton_nummer == ongoing_cantons_NR$bfs_ID[c])
-   
+               #flag_gewaehlt == 1)
+
       #Update candidates results
       mydb <- connectDB(db_name = "sda_elections")
       for (p in 1:nrow(results_canton)) {
@@ -142,7 +147,7 @@ NR_new_elected <- TRUE
         ongoing_cantons_NR$election_ID[c],
         "'"
       )
-      rs <- dbSendQuery(mydb, sql_qry)
+      #rs <- dbSendQuery(mydb, sql_qry)
       
       dbDisconnectAll()
     }

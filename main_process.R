@@ -1,3 +1,4 @@
+library(git2r)
 library(httr)
 library(XML)
 library(xlsx)
@@ -8,7 +9,7 @@ library(stringi)
 library(stringr)
 library(DatawRappr)
 library(lubridate)
-library(git2r)
+
 
 #Working Directory
 setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
@@ -69,7 +70,7 @@ source("load_databases.R")
 ###Get BFS Data and update DB
 source("NR_get_data_results.R")
 source("NR_get_data_candidates.R")
-source("SR_get_data_candidates.R") #TO DO
+#source("SR_get_data_candidates.R") #TO DO
 
 #Load Databases again
 source("load_databases.R")
@@ -78,7 +79,7 @@ source("load_databases.R")
 #Get counted cantons
 counted_cantons_all <- election_metadata %>%
   filter(date == "2023-10-22",
-         grepl("finished",status) == FALSE #CHANGE TO TRUE
+         grepl("finished",status) == TRUE #CHANGE TO TRUE
          )
 
 #Merge with area, text and output overview
@@ -87,7 +88,6 @@ counted_cantons_all <- counted_cantons_all  %>%
   left_join(status_texts) %>%
   left_join(output_overview) %>%
   filter(area_type == "canton")
-
 
 ###NATIONALRAT###
 counted_cantons <- counted_cantons_all %>%
@@ -105,11 +105,11 @@ source("NR_mars_meldung_results_DE.R")
 source("NR_mars_meldung_results_FR.R")
 source("NR_mars_meldung_results_IT.R")
 }
-  
+
 ##Text Candidates##
 if (counted_cantons$texts_candidates[c] == "pending") {
 #Generate Output
-source("NR_text_candidates_NR.R")
+source("NR_text_candidates.R")
 source("NR_mars_meldung_candidates_DE.R")
 source("NR_mars_meldung_candidates_FR.R")
 source("NR_mars_meldung_candidates_IT.R")
@@ -150,15 +150,15 @@ for (c in 1:nrow(counted_cantons_SR)) {
 
 ##Text Candidates##
 if (counted_cantons_SR$texts_candidates[c] == "pending") {
-source("SR_text_candidates.R") #TO DO
-source("SR_mars_meldung_candidates_DE.R") #TO DO
-source("SR_mars_meldung_candidates_FR.R") #TO DO
-source("SR_mars_meldung_candidates_IT.R") #TO DO
+#source("SR_text_candidates.R") #TO DO
+#source("SR_mars_meldung_candidates_DE.R") #TO DO
+#source("SR_mars_meldung_candidates_FR.R") #TO DO
+#source("SR_mars_meldung_candidates_IT.R") #TO DO
 }
   
 if (counted_cantons_SR$charts_candidates[c] == "pending") {
 ##Chart Candidates##
-source("SR_publish_candidates_charts.R")
+#source("SR_publish_candidates_charts.R")
 }
 }
 ###GESAMTERGEBNIS###
@@ -167,14 +167,17 @@ source("All_prepare_results.R")
 source("All_publish_charts.R")
 source("All_create_output_parliament_flourish.R")
 source("All_create_output_candidates_flourish.R")
-}
-
-
+  
 ###ZWISCHENSTAND (jeweils um x.35 Uhr)
 source("NR_text_intermediate.R")
 source("NR_mars_meldung_intermediate_DE.R")
-#source("NR_mars_meldung_intermediate_FR.R")
-#source("NR_mars_meldung_intermediate_IT.R")
+source("NR_mars_meldung_intermediate_FR.R")
+source("NR_mars_meldung_intermediate_IT.R")  
+  
+}
+
+
+
 
 ###ELECTION FINISHED###
 #TO DO#
@@ -187,6 +190,7 @@ source("Communities_publish_charts.R") #TO DO
 }
 
 ###COMMIT###
+git2r::config(user.name = "awp-finanznachrichten",user.email = "sw@awp.ch")
 token <- read.csv("C:/Users/simon/OneDrive/Github_Token/token.txt",header=FALSE)[1,1]
 git2r::cred_token(token)
 gitadd()

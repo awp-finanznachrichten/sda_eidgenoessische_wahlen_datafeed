@@ -8,6 +8,7 @@ results_parties <- fetch(rs, n = -1)
 dbDisconnectAll()
 
 
+
 #Merge with metadata, location metadata, party metadata and make selections
 results_parties <- results_parties %>%
   select(election_ID,party_ID,seats,seats_change,voter_share,voter_share_change,final_results) %>%
@@ -23,18 +24,19 @@ results_parties <- results_parties %>%
 
 ###OVERVIEW CH
 overview_ch <- results_parties %>%
-  #filter(status == "finished" |
-  #         status == "parties finished") %>%
+  filter(status == "finished" |
+           status == "parties finished") %>%
   group_by(party_ID) %>%
-  summarise(shortname_de = max(shortname_de),
-            shortname_fr = max(shortname_fr),
-            shortname_it = max(shortname_it),
+  summarise(shortname_de = max(shortname_de,na.rm = TRUE),
+            shortname_fr = max(shortname_fr,na.rm = TRUE),
+            shortname_it = max(shortname_it,na.rm = TRUE),
     seats_2023 = sum(seats,na.rm = TRUE),
     seats_2019 = sum(seats,na.rm = TRUE) - sum(seats_change,na.rm = TRUE),
     seats_change = sum(seats_change)) %>%
   filter(seats_2023 != 0 |
            seats_change != 0 ) %>%
   arrange(desc(seats_change))
+
 
 ###OVERVIEW CANTONS
 overview_cantons <- data.frame("area_ID","status","title_de","content_de","title_fr","content_fr","title_it","content_it")
@@ -45,6 +47,9 @@ cantons <- unique(results_parties$area_ID)
 for (canton in cantons) {
 
 #Results Nationalrat
+data_canton_all <- results_parties %>%
+    filter(area_ID == canton)  
+  
 data_canton_NR <- results_parties %>%
   filter(area_ID == canton,
          voter_share > 0,
@@ -54,7 +59,7 @@ data_canton_NR <- results_parties %>%
   arrange(desc(seats),
           desc(voter_share))
 
-content_de <- paste0("<b>Nationalrat (",data_canton_NR$seats_available_NR[1]," Sitze)</b><br><br>")
+content_de <- paste0("<b>Nationalrat (",data_canton_all$seats_available_NR[1]," Sitze)</b><br><br>")
 content_fr <- ""
 content_it <- ""
 
@@ -63,7 +68,7 @@ content_it <- ""
 
 check_NR <- FALSE
 check_SR <- FALSE
-if (data_canton_NR$status[1] != "finished" | data_canton_NR$status[1] != "parties finished") { #ADAPT
+if (data_canton_all$status[1] == "finished" | data_canton_all$status[1] == "parties finished") { 
 check_NR <- TRUE
 tabelle_de <- create_table_overview(data_canton_NR,"de")
 content_de <- paste0(content_de,tabelle_de,"<br>")
@@ -72,7 +77,7 @@ content_de  <- paste0(content_de,"<br>Es sind noch keine Resultate vorhanden.<br
 }  
 
 #Results Ständerat
-content_de <- paste0(content_de,"<b>Ständerat (",data_canton_NR$seats_available_SR[1]," Sitze)</b><br>")
+content_de <- paste0(content_de,"<b>Ständerat (",data_canton_all$seats_available_SR[1]," Sitze)</b><br>")
 
 #if (data_canton_SR$status[1] == "finished") {
 #check_SR <- TRUE
@@ -93,17 +98,16 @@ status <- "no_data"
 }  
 
 #Simulation Status
-status_all <- c("all_counted","NR_counted","SR_counted","no_data")
-status <- status_all[sample(1:4,1)]
-
+#status_all <- c("all_counted","NR_counted","SR_counted","no_data")
+#status <- status_all[sample(1:4,1)]
 
 new_entry <- data.frame(canton,
                         status,
-                        data_canton_NR$area_name_de[1],
+                        data_canton_all$area_name_de[1],
                         content_de,
-                        data_canton_NR$area_name_fr[1],
+                        data_canton_all$area_name_fr[1],
                         content_fr,
-                        data_canton_NR$area_name_it[1],
+                        data_canton_all$area_name_it[1],
                         content_it)
 colnames(new_entry) <- c("area_ID","status","title_de","content_de","title_fr","content_fr","title_it","content_it")
 overview_cantons <- rbind(overview_cantons,new_entry)
