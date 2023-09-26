@@ -1,11 +1,11 @@
 #Get URLs from API
 response <-
   GET(BFS_API_URL)
-content <- httr::content(response)$result$resources
+content <- content(response)$result$resources
 
 ###GET RESULTS DATA###
 url_NR_results <-
-  as.data.frame(do.call(rbind, content))$download_url[[1]]
+  as.data.frame(do.call(rbind, content))$download_url[[4]]
 
 #Get timestamp
 timestamp_results <-
@@ -18,7 +18,7 @@ timestamp_results_old <-
 if (timestamp_results != timestamp_results_old) {
   
 #Set Flag
-NR_new_results <- TRUE  
+new_results <- TRUE  
   
   #Download data
   setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
@@ -41,9 +41,6 @@ NR_new_results <- TRUE
     left_join(parties_metadata,
               by = join_by(partei_id == bfs_id))
   
-#Replace NA with 0
-results_NR_cantons[is.na(results_NR_cantons)] <- 0
-
   ###UPDATE DATABASE###
   #Metadata NR
   ongoing_cantons_NR <- election_metadata %>%
@@ -63,26 +60,12 @@ results_NR_cantons[is.na(results_NR_cantons)] <- 0
   ongoing_cantons_NR <- ongoing_cantons_NR %>%
     left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer))
   
+
   for (c in 1:nrow(ongoing_cantons_NR)) {
     if (ongoing_cantons_NR$kanton_abgeschlossen[c] == TRUE) {
-      
-      print(paste0("new party results for canton ",ongoing_cantons_NR$area_ID[c]," found!"))
-      
       #Get party results from canton
       results_canton <- results_NR_cantons %>%
         filter(kanton_nummer == ongoing_cantons_NR$bfs_ID[c])
-      
-      #Make initial party entries
-     #mydb <- connectDB(db_name="sda_elections")
-     #sql_qry <- paste0("INSERT IGNORE INTO parties_results(election_ID,area_ID,party_ID) VALUES")
-     #sql_qry <- paste0(sql_qry, paste(sprintf("('%s','%s','%s')",
-    #                                           ongoing_cantons_NR$election_ID[c],
-    #                                           ongoing_cantons_NR$area_ID[c],
-    #                                           results_canton$id
-    #                                           ), collapse = ","))
-    #  rs <- dbSendQuery(mydb, sql_qry)
-    #  dbDisconnectAll()
-      
 
       #Update party results
       mydb <- connectDB(db_name = "sda_elections")
@@ -155,7 +138,7 @@ results_NR_cantons[is.na(results_NR_cantons)] <- 0
 
 ###GET VOTERTURNOUT DATA###
 url_NR_voterturnout <-
-  as.data.frame(do.call(rbind, content))$download_url[[4]]
+  as.data.frame(do.call(rbind, content))$download_url[[2]]
 
 #Get timestamp
 timestamp_voterturnout <-
@@ -169,10 +152,11 @@ if (timestamp_voterturnout != timestamp_voterturnout_old) {
   print("new voterturnout NR data downloaded!")
   #Download data
   setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
-  download.file(url_NR_voterturnout,
+  download.file(url_NR_results,
                 destfile = "data_NR_voterturnout.json",
                 method = "curl")
   setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+  
 } else {
   print("no new data for NR voterturnout found")
 }

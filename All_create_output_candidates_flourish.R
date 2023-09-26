@@ -4,7 +4,7 @@ rs <-
   dbSendQuery(
     mydb,
     paste0(
-      "SELECT * FROM candidates_results WHERE date = '2023-10-22' AND elected = 1" #CHANGE TO elected = 1
+      "SELECT * FROM candidates_results WHERE date = '2023-10-22' AND elected = 0" #CHANGE TO elected = 1
     )
   )
 elected_candidates_overall <- fetch(rs, n = -1)
@@ -12,21 +12,16 @@ dbDisconnectAll()
 
 #Get elected candidates
 elected_candidates_overall <- elected_candidates_overall %>%
-  #mutate(area_id = canton) %>%  #REMOVE!
-  #filter(is.na(source_update)) %>% #REMOVE!
+  mutate(area_id = canton) %>%  #REMOVE!
+  filter(is.na(source_update)) %>% #REMOVE!
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id)) %>%
   left_join(people_profession, join_by (person_id == person_id)) %>%
   left_join(areas_metadata, join_by (area_id == area_ID)) %>%
-  mutate(picture = ifelse(is.na(picture),
-                          "Replacement.jpg",
-                          picture
-                          ))
-
-  #filter(is.na(picture) == FALSE) #REMOVE!
+  filter(is.na(picture) == FALSE) #REMOVE!
 
 #Make random selection for Testing
-#elected_candidates_overall <- elected_candidates_overall[sample(1:nrow(elected_candidates_overall),246),] #REMOVE!
+elected_candidates_overall <- elected_candidates_overall[sample(1:nrow(elected_candidates_overall),246),] #REMOVE!
 
 #Transform Data
 elected_candidates_overall <- elected_candidates_overall %>%
@@ -43,7 +38,7 @@ elected_candidates_overall <- elected_candidates_overall %>%
          ) %>%
   select(Name,Bild,Kanton,`Bisher/Neu`,Beruf,Wohnort,Alter,Partei,Rat)
 
-#elected_candidates_overall$Rat[201:246] <- "Ständerat" #REMOVE
+elected_candidates_overall$Rat[201:246] <- "Ständerat" #REMOVE
 
 write.csv(elected_candidates_overall,"./Output/elected_candidates_overall.csv",row.names = FALSE)
 

@@ -16,3 +16,5 @@ dw_edit_chart(chart_id,
 )
 dw_publish_chart(chart_id)
 print("Datawrapper-Chart updated")
+
+overview_cantons$content_de[1]
