@@ -2,7 +2,7 @@
 parties_ergebnisse_2019 <- c(16.84,25.59,7.8,15.11,11.38,13.2)
 parties_ids <- c(1,2,3,56,70,75)
 
-results_NR_communities$letzte_wahl_partei_staerke <- results_NR_communities$partei_staerke #REMOVE!!!
+#results_NR_communities$letzte_wahl_partei_staerke <- results_NR_communities$partei_staerke #REMOVE!!!
 
 differences_parties <- results_NR_communities %>%
   arrange(gemeinde_nummer,
@@ -33,4 +33,4 @@ differences_parties <- results_NR_communities %>%
   arrange(overall_difference_abs) %>%
   filter(is.na(overall_difference_abs) == FALSE)
 
-View(differences_parties)
+write.xlsx(differences_parties,"most_average_communities.xlsx")

@@ -15,12 +15,10 @@ dbDisconnectAll()
 
 #Get elected candidates
 elected_candidates <- results_candidates %>%
-  filter(is.na(source_update)) %>% #REMOVE!
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id)) %>%
-  filter(elected == 0) %>% #1
-  filter(is.na(picture) == FALSE) %>% #REMOVE!
-  .[1:12,] #REMOVE!
+  filter(elected == 1) %>%
+  mutate(picture = ifelse(is.na(picture) == FALSE,picture,"Replacement.jpg"))
 
 #Frequency of party occurence for sorting 
 elected_candidates$frequency_party <- 0
@@ -57,9 +55,15 @@ for (e in seq(1,nrow(elected_candidates),4)) {
   elected_candidates_images <- rbind(elected_candidates_images,new_entry_text)
 }  
 elected_candidates_images <- elected_candidates_images[-1,]
+elected_candidates_images[is.na(elected_candidates_images)] <- "&nbsp;"
+
 
 ##Chart Candidates DE
-chart_id <- "ZnWuJ"
+chart_id <- datawrapper_codes %>%
+  filter(election_ID == counted_cantons$election_ID[c],
+         chart_type == "proporz_elected",
+         language == "de") %>%
+  .[,4]
 dw_data_to_chart(elected_candidates_images,chart_id)
 dw_publish_chart(chart_id)
 print("Datawrapper-Chart updated")

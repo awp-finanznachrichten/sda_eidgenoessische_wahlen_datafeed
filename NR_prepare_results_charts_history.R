@@ -20,6 +20,7 @@ results_parties <- results_parties %>%
   left_join(parties_metadata,
             by = join_by(party_ID == id))
 
+
 results_parties <- results_parties %>%
   filter(voter_share > 0,
          seats != 0 |
@@ -33,14 +34,15 @@ results_parties <- results_parties %>%
          voter_share,
          party_color)
 
-###Get history data
+results_parties[results_parties == 0] <- NA
+
+###GET HISTORY DATA###
 response <-
   GET(BFS_API_URL)
 content <- content(response)$result$resources
 
-###GET CANDIDATES DATA###
 url_NR_history <-
-  as.data.frame(do.call(rbind, content))$download_url[[1]]
+  as.data.frame(do.call(rbind, content))$download_url[[8]]
 
 #Download data
 setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")

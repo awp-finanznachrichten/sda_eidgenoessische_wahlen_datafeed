@@ -1,5 +1,9 @@
 ##Chart History DE
-chart_id <- "v8tV6"
+chart_id <- datawrapper_codes %>%
+  filter(election_ID == counted_cantons$election_ID[c],
+         chart_type == "proporz_history",
+         language == "de") %>%
+  .[,4]
 dw_data_to_chart(results_history,chart_id)
 
 #Farben anpassen

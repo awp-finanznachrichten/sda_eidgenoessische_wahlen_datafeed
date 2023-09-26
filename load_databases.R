@@ -50,3 +50,9 @@ dbDisconnectAll()
 output_overview <- output_overview %>%
   select(!last_update)
 
+#Get Datawrapper Codes
+mydb <- connectDB(db_name="sda_elections")
+rs <- dbSendQuery(mydb, "SELECT * FROM datawrapper_codes")
+datawrapper_codes <- fetch(rs,n=-1)
+dbDisconnectAll()
+

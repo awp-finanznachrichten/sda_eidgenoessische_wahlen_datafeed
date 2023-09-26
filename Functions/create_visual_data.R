@@ -32,3 +32,4 @@ create_bilddaten(chart_id,
 setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 print("visual data created")
 }
+

@@ -1,27 +1,27 @@
 ###GET TESTDATA COMMUNITIES
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
-source("get_testdata_2023.R")
+#setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+#source("get_testdata_2023.R")
 
 ###LOAD RESULT AND VOTERTURNOUT DATA
-#setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_daten")
-#data_NR_results <-
-#  fromJSON("data_NR_results.json", flatten = TRUE)
-#data_NR_voterturnout <-
-#  fromJSON("data_NR_voterturnout.json", flatten = TRUE)
-#setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
+data_NR_results <-
+  fromJSON("data_NR_results.json", flatten = TRUE)
+data_NR_voterturnout <-
+  fromJSON("data_NR_voterturnout.json", flatten = TRUE)
+setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
 
-#results_NR_communities <- data_NR_results$level_gemeinden
-#results_NR_communities <- results_NR_communities %>%
-#  left_join(parties_metadata,
-#            by = join_by(partei_id == bfs_id))
+results_NR_communities <- data_NR_results$level_gemeinden
+results_NR_communities <- results_NR_communities %>%
+  left_join(parties_metadata,
+            by = join_by(partei_id == bfs_id))
 
-#stand_ch <- data_NR_results$stand
-#stand_cantons <- data_NR_results$stand_kantone
+stand_ch <- data_NR_results$stand
+stand_cantons <- data_NR_results$stand_kantone
 
-#results_NR_communities_voterturnout <- data_NR_voterturnout$level_gemeinden %>%
-#  filter(gemeinde_nummer < 9000)
+results_NR_communities_voterturnout <- data_NR_voterturnout$level_gemeinden %>%
+  filter(gemeinde_nummer < 9000)
 
-#results_NR_CH <- data_NR_results$level_ch
+results_NR_CH <- data_NR_results$level_ch
 
 #Get elected candidates
 mydb <- connectDB(db_name = "sda_elections")
@@ -29,7 +29,7 @@ rs <-
   dbSendQuery(
     mydb,
     paste0(
-      "SELECT * FROM candidates_results WHERE date = '2023-10-22' AND elected = 0" #CHANGE TO elected = 1
+      "SELECT * FROM candidates_results WHERE date = '2023-10-22' AND elected = 1" #CHANGE TO elected = 1
     )
   )
 elected_candidates_overall <- fetch(rs, n = -1)
@@ -37,14 +37,14 @@ dbDisconnectAll()
 
 #Get elected candidates
 elected_candidates_overall <- elected_candidates_overall %>%
-  mutate(area_id = canton) %>%  #REMOVE
-  filter(is.na(source_update)) %>% #REMOVE!
+  #mutate(area_id = canton) %>%  #REMOVE
+  #filter(is.na(source_update)) %>% #REMOVE!
   filter(is.na(place_id) == FALSE) %>%
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id))
 
 #Make random selection for Testing
-elected_candidates_overall <- elected_candidates_overall[sample(1:nrow(elected_candidates_overall),246),]
+#elected_candidates_overall <- elected_candidates_overall[sample(1:nrow(elected_candidates_overall),246),]
 
 #Dataframe Output
 nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde_de","Gemeinde_fr","Gemeinde_it","Text_de","Text_fr","Text_it","Tabelle_de","Tabelle_fr","Tabelle_it","no_data")
@@ -99,11 +99,14 @@ for (g in 1:nrow(gemeinden)) {
   
   #Create Table
   tabelle_de <- create_table_communities(ergebnisse_gemeinde_tabelle,
-                                      voter_turnout)
+                                      voter_turnout,
+                                      "de")
   tabelle_fr <- create_table_communities(ergebnisse_gemeinde_tabelle,
-                                         voter_turnout)
+                                         voter_turnout,
+                                         "fr")
   tabelle_it <- create_table_communities(ergebnisse_gemeinde_tabelle,
-                                         voter_turnout)
+                                         voter_turnout,
+                                         "it")
   
   #Find Story Ur-Lena
   storyboard_urlena <- get_storyboard_urlena(ergebnisse_gemeinde_urlena)
@@ -232,8 +235,6 @@ selected_output <- nationalrat_gemeinden_dw %>%
 
 write.csv(selected_output,file=paste0("./Output_Cantons/nationalrat_ergebnisse_gemeinden_",canton,".csv"),row.names = FALSE)
 }  
-
-
 #View(table(nationalrat_gemeinden_dw$Storyboard))
 #write.xlsx(nationalrat_gemeinden_dw,"./Texte/texts_urlena.xlsx",row.names = FALSE)
 
