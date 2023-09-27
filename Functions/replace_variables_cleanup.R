@@ -31,8 +31,8 @@ texts <- gsub("die Grüne ","die Grünen ",texts)
 texts <- gsub("Die Grüne ","Die Grünen ",texts)
 texts <- gsub("die MCG ","das MCG ",texts)
 texts <- gsub("Die MCG ","Das MCG ",texts)
-texts <- gsub("die weitere","eine weitere Partei",texts)
-texts <- gsub("Die weitere","Eine weitere Partei",texts)
+texts <- gsub("die weitere","weitere Parteien/Listen",texts)
+texts <- gsub("Die weitere","Weitere Parteien/Listen",texts)
 
 
 #Adapt Numbers
@@ -53,7 +53,8 @@ if (language == "fr") {
 texts <- gsub("Le Vert-e-s a","Les Vert-e-s ont",texts)
 texts <- gsub("le Vert-e-s","les Vert-e-s",texts)
 texts <- gsub("Le Vert-e-s ","Les Vert-e-s ",texts)
-texts <- gsub("Le autre ","Un autre parti ",texts)
+texts <- gsub("Le divers ","Autres partis/listes ",texts)
+texts <- gsub("le divers ","autres partis/listes ",texts)
   
 ##Französisch
 texts <- str_replace_all(texts,"de Henniez","d'Henniez")
@@ -123,6 +124,11 @@ texts <- str_replace_all(texts,"A Le ","Au ")
 texts <- str_replace_all(texts,"du Vaud","de Le Vaud")
 
 }
+  
+if (language == "it") {  
+texts <- gsub("Altro ","Altri partiti/liste ",texts)
+texts <- gsub("altro ","altri partiti/liste ",texts)
+}    
 
 return(texts)  
 }  

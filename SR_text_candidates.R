@@ -12,25 +12,22 @@ rs <-
 results_candidates <- fetch(rs, n = -1)
 dbDisconnectAll()
 
-#Merge with people data
 results_candidates <- results_candidates %>%
-  left_join(people_metadata,
-            by = join_by(person_id==id))
-
-#Merge with party data
-results_candidates <- results_candidates %>%
-  .[1:2,] %>%  ###REMOVE
-  left_join(parties_metadata,
-            by = join_by(party_id == id)) %>%
-  arrange(desc(votes))
-
-
-results_candidates$status_text <-
-  ifelse(results_candidates$status == 2, "bisher", "neu")
-results_candidates$status_text_fr <-
-  ifelse(results_candidates$status == 2, "sortant", "nouveau")
-results_candidates$status_text_it <-
-  ifelse(results_candidates$status == 2, "uscente", "nuovo")
+  left_join(people_metadata, join_by(person_id == id)) %>%
+  left_join(parties_metadata, join_by (party_id == id)) %>%
+  arrange(desc(votes),
+          lastname) %>%
+  mutate(status_text = ifelse(status == 2,"bisher","neu"),
+         status_text_fr = ifelse(status == 2,"sortant", "nouveau"),
+         status_text_it = ifelse(status == 2,"uscente", "nuovo"),
+         lastname = ifelse(grepl("Vereinzelte",lastname),"Vereinzelte",lastname),
+         shortname_de = ifelse(grepl("Vereinzelte",lastname),"-",shortname_de),
+         shortname_fr = ifelse(grepl("Vereinzelte",lastname),"-",shortname_fr),
+         shortname_it = ifelse(grepl("Vereinzelte",lastname),"-",shortname_it),
+         status_text = ifelse(grepl("Vereinzelte",lastname),"-",status_text),
+         status_text_fr = ifelse(grepl("Vereinzelte",lastname),"-",status_text_fr),
+         status_text_it = ifelse(grepl("Vereinzelte",lastname),"-",status_text_it)
+         )
 
 #Elected candidates
 elected_candidates <- results_candidates %>%

@@ -194,7 +194,7 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
                     "<h2>Old top jobs</h2>",
                     report_jobs_comp)
     #htmlbody <- "C:/Automatisierungen/sda_eidgenoessische_wahlen_2023/Reports/email_report.html"
-    htmlbody <- "C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed/Reports/email_report.html"
+    htmlbody <- paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Reports/email_report.html")
     subject <- paste0("Report elected National councillors ", canton)
     
     cat(report, file=file(htmlbody))

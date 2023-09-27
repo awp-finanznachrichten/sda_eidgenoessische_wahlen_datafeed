@@ -16,7 +16,7 @@ vorlage <- read_file("./tools/SDA/Vorlage_SDA_Meldungen.txt")
 #Abschnitte kreieren
 text <- paste0('<p class="paragraph">',paste0(texts_intermediate_fr[3]," ",texts_intermediate_fr[4]),"</p>\n")
 text <- paste0(text,'<p class="paragraph">',texts_intermediate_fr[5],"</p>\n")
-text <- paste0(text,tabelle,"\n")
+text <- paste0(text,tabelle_fr,"\n")
 text <- paste0(text,'<p class="paragraph">',texts_intermediate_fr[6],"</p>\n")
 text <- paste0(text,'<p class="paragraph">',texts_intermediate_fr[7],"</p>\n")
 text <- paste0(text,'<p class="paragraph">',texts_intermediate_fr[8],"</p>\n")
@@ -34,9 +34,9 @@ vorlage <- gsub("INSERT_URGENCY","3",vorlage)
 vorlage <- gsub("INSERT_ID",ID,vorlage)
 vorlage <- gsub("INSERT_DATELINE","Berne",vorlage)
 vorlage <- gsub("INSERT_LANGUAGE","fr",vorlage)
-vorlage <- gsub("INSERT_GENRE","RES",vorlage)
+vorlage <- gsub("INSERT_GENRE","CUR",vorlage)
 vorlage <- gsub("INSERT_STORYTYPES",
-                '<subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>',
+                '<subject type="cpnat:abstract" qcode="sdastorytype:over"></subject>',
                 vorlage)
 vorlage <- gsub("INSERT_CHANNELS",
                 paste0('<subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>\n',

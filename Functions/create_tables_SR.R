@@ -17,15 +17,15 @@ for (e in 1:nrow(results_candidates)) {
                     "<td>",results_candidates$status_text[e],"</td>",
                     "<td>",format(results_candidates$votes[e],big.mark = "'"),"</td>",
                     "</tr>")
-}                    
+}      
 }
 
   if (language == "fr") {  
     tabelle <- paste0("<table><tbody><tr>",
-                      "<td>Stimmen haben erhalten</td>",
+                      "<td>Ont obtenu des voix</td>",
                       "<td></td>",
                       "<td></td>",
-                      "<td>Anzahl Stimmen</td>",
+                      "<td>Total des voix</td>",
                       "</tr>")
     
     for (e in 1:nrow(results_candidates)) {
@@ -36,7 +36,8 @@ for (e in 1:nrow(results_candidates)) {
                         "<td>",results_candidates$status_text_fr[e],"</td>",
                         "<td>",format(results_candidates$votes[e],big.mark = "'"),"</td>",
                         "</tr>")
-    }                    
+    }
+    tabelle <- gsub("Vereinzelte","Autres",tabelle)
   }
   
   if (language == "it") {  
@@ -54,7 +55,8 @@ for (e in 1:nrow(results_candidates)) {
                         "<td>",results_candidates$status_text_it[e],"</td>",
                         "<td>",format(results_candidates$votes[e],big.mark = "'"),"</td>",
                         "</tr>")
-    }                    
+    }
+    tabelle <- gsub("Vereinzelte","Altri",tabelle)
   }
 tabelle <- paste0(tabelle,"</tbody></table>")
 

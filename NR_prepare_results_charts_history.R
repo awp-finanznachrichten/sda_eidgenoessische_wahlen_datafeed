@@ -45,14 +45,14 @@ url_NR_history <-
   as.data.frame(do.call(rbind, content))$download_url[[8]]
 
 #Download data
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
+setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
 download.file(url_NR_history ,
               destfile = "data_NR_history.json",
               method = "curl")
 results_parties_history <-
   fromJSON("data_NR_history.json", flatten = TRUE)
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
-  
+setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
+
 results_parties_history_cantons <- results_parties_history$level_kantone
 
 #Adapt CVP/Mitte

@@ -7,13 +7,11 @@ content <- httr::content(response)$result$resources
 url_NR_results <-
   as.data.frame(do.call(rbind, content))$download_url[[1]]
 
-#Get timestamp
-timestamp_results <-
-  toString(as.POSIXlt(HEAD(url_NR_results)$date))
-
-#Compare with old timestamp
+#Get timestamp and compare with old one
+timestamp_results <- headers(HEAD(url_NR_results))$`last-modified`
 timestamp_results_old <-
-  read.csv("./Timestamps/timestamp_results.txt", header = FALSE)[1, 1]
+  read.csv("./Timestamps/timestamp_results.txt", header = FALSE,sep = ";")[1, 1]
+
 
 if (timestamp_results != timestamp_results_old) {
   
@@ -21,13 +19,14 @@ if (timestamp_results != timestamp_results_old) {
 NR_new_results <- TRUE  
   
   #Download data
-  setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
+
+  setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   download.file(url_NR_results,
                 destfile = "data_NR_results.json",
                 method = "curl")
   data_NR_results <-
     fromJSON("data_NR_results.json", flatten = TRUE)
-  setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+  setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
   print("new results NR data downloaded!")
   #Timestamps
   stand_cantons_results <- data_NR_results$stand_kantone #%>%
@@ -157,22 +156,23 @@ results_NR_cantons[is.na(results_NR_cantons)] <- 0
 url_NR_voterturnout <-
   as.data.frame(do.call(rbind, content))$download_url[[4]]
 
-#Get timestamp
-timestamp_voterturnout <-
-  toString(as.POSIXlt(HEAD(url_NR_voterturnout)$date))
-
-#Compare with old timestamp
+#Get timestamp and compare with old one
+timestamp_voterturnout <- headers(HEAD(url_NR_voterturnout))$`last-modified`
 timestamp_voterturnout_old <-
-  read.csv("./Timestamps/timestamp_voterturnout.txt", header = FALSE)[1, 1]
+  read.csv("./Timestamps/timestamp_voterturnout.txt", header = FALSE,sep = ";")[1, 1]
 
 if (timestamp_voterturnout != timestamp_voterturnout_old) {
   print("new voterturnout NR data downloaded!")
   #Download data
-  setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
+  setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   download.file(url_NR_voterturnout,
                 destfile = "data_NR_voterturnout.json",
                 method = "curl")
-  setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+  setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
+  
+  #Save Timestamp
+  cat(timestamp_voterturnout, file = "./Timestamps/timestamp_voterturnout.txt")
+      
 } else {
   print("no new data for NR voterturnout found")
 }

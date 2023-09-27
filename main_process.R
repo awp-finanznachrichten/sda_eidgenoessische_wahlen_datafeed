@@ -14,9 +14,9 @@ library(magick)
 library(zip)
 library(RCurl)
 
-
 #Working Directory
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+MAIN_PATH <- "C:/Users/simon/OneDrive/"
+setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 #Main Data URL from BFS
 BFS_API_URL <-
@@ -83,7 +83,7 @@ source("load_databases.R")
 #Get counted cantons
 counted_cantons_all <- election_metadata %>%
   filter(date == "2023-10-22",
-         grepl("finished",status) == TRUE #CHANGE TO TRUE
+         grepl("finished",status) == TRUE
          )
 
 #Merge with area, text and output overview
@@ -97,8 +97,6 @@ counted_cantons_all <- counted_cantons_all  %>%
 counted_cantons <- counted_cantons_all %>%
   filter(council == "NR")
 
-###TO DO###
-
 for (c in 1:nrow(counted_cantons)) {
 
 ##Text Results##
@@ -108,6 +106,11 @@ source("NR_text_results.R")
 source("NR_mars_meldung_results_DE.R")
 source("NR_mars_meldung_results_FR.R")
 source("NR_mars_meldung_results_IT.R")
+#Set Status Done
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE output_overview SET texts_results = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll()  
 }
 
 ##Text Candidates##
@@ -117,6 +120,11 @@ source("NR_text_candidates.R")
 source("NR_mars_meldung_candidates_DE.R")
 source("NR_mars_meldung_candidates_FR.R")
 source("NR_mars_meldung_candidates_IT.R")
+#Set Status Done
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE output_overview SET texts_candidates = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll() 
 }
   
 ##Charts Results##
@@ -124,23 +132,44 @@ if (counted_cantons$charts_results[c] == "pending") {
 #Generate Output
 source("NR_prepare_results_charts.R")
 source("NR_publish_results_charts.R")
+#Set Status Done
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE output_overview SET charts_results = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll() 
 }
+  
 ##Charts Results History##
 if (counted_cantons$charts_history[c] == "pending") {
 source("NR_prepare_results_charts_history.R")
 source("NR_publish_results_charts_history.R")
+#Set Status Done  
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE output_overview SET charts_history = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll() 
 }
   
 ##Charts Candidates##
 if (counted_cantons$charts_candidates[c] == "pending") {
 #Generate Output
 source("NR_publish_candidates_charts.R")
+#Set Status Done
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE output_overview SET charts_candidates = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll() 
 }
 
 ##Analytics##
 if (counted_cantons$analytics[c] == "pending") {
 #Generate Output
 email_elected_report_nr(counted_cantons$area_ID[c])
+#Set Status Done
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE output_overview SET analytics = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll() 
 }
   
 }
@@ -154,31 +183,45 @@ for (c in 1:nrow(counted_cantons_SR)) {
 
 ##Text Candidates##
 if (counted_cantons_SR$texts_candidates[c] == "pending") {
-source("SR_text_candidates.R") #TO DO
-#source("SR_mars_meldung_candidates_DE.R") #TO DO
-#source("SR_mars_meldung_candidates_FR.R") #TO DO
-#source("SR_mars_meldung_candidates_IT.R") #TO DO
+source("SR_text_candidates.R")
+source("SR_mars_meldung_candidates_DE.R") 
+source("SR_mars_meldung_candidates_FR.R") 
+source("SR_mars_meldung_candidates_IT.R") 
+#Set Status Done
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE output_overview SET texts_candidates = 'done' WHERE election_ID = '",counted_cantons_SR$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll() 
 }
   
 if (counted_cantons_SR$charts_candidates[c] == "pending") {
 ##Chart Candidates##
-#source("SR_publish_candidates_charts.R")
+source("SR_publish_candidates_charts.R")
+#Set Status Done
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE output_overview SET charts_candidates = 'done' WHERE election_ID = '",counted_cantons_SR$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll() 
 }
 }
+
 ###GESAMTERGEBNIS###
-if (NR_new_results == TRUE || NR_new_elected == TRUE) {
+if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) {
+source("load_databases.R")
 source("All_prepare_results.R")
 source("All_publish_charts.R")
 source("All_create_output_parliament_flourish.R")
 source("All_create_output_candidates_flourish.R")
-  
-###ZWISCHENSTAND (jeweils um x.35 Uhr)
+}
+
+if (minute(Sys.time()) == 25) {
+source("load_databases.R")
+source("All_prepare_results.R")
 source("NR_text_intermediate.R")
 source("NR_mars_meldung_intermediate_DE.R")
 source("NR_mars_meldung_intermediate_FR.R")
 source("NR_mars_meldung_intermediate_IT.R")  
-  
-}
+}  
 
 ###ELECTION FINISHED###
 #TO DO#
@@ -192,7 +235,7 @@ source("Communities_publish_charts.R")
 
 ###COMMIT###
 git2r::config(user.name = "awp-finanznachrichten",user.email = "sw@awp.ch")
-token <- read.csv("C:/Users/sw/OneDrive/Github_Token/token.txt",header=FALSE)[1,1]
+token <- read.csv(paste0(MAIN_PATH,"Github_Token/token.txt"),header=FALSE)[1,1]
 git2r::cred_token(token)
 gitadd()
 gitcommit()
@@ -200,4 +243,4 @@ gitpush()
 
 ###CREATE VISUAL###
 source("NR_create_visual_data.R")
-
+source("SR_create_visual_data.R")

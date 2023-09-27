@@ -36,8 +36,6 @@ create_visual_data(selected_charts$datawrapper_ID[s],
   )
   rs <- dbSendQuery(mydb, sql_qry)
   dbDisconnectAll()  
-
-      
 }  
 } else {
 print(paste0("No pending charts for canton ",counted_cantons$area_ID[c]," found"))

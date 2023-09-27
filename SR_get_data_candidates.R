@@ -7,26 +7,23 @@ content <- content(response)$result$resources
 url_SR_candidates <-
   as.data.frame(do.call(rbind, content))$download_url[[9]]
 
-#Get timestamp
-timestamp_candidates_SR <-
-  toString(as.POSIXlt(HEAD(url_SR_candidates)$date))
+#Get timestamp and compare with old one
+timestamp_SR_candidates <- headers(HEAD(url_SR_candidates))$`last-modified`
+timestamp_SR_candidates_old <-
+  read.csv("./Timestamps/timestamp_SR_candidates.txt", header = FALSE,sep = ";")[1, 1]
 
-#Compare with old timestamp
-timestamp_candidates_SR_old <-
-  read.csv("./Timestamps/timestamp_candidates_SR.txt", header = FALSE)[1, 1]
-
-if (timestamp_candidates_SR != timestamp_candidates_SR_old) {
+if (timestamp_SR_candidates != timestamp_SR_candidates_old) {
 #Set Flag
 SR_new_elected <- TRUE
   
   #Download data
-  setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
+setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   download.file(url_SR_candidates,
                 destfile = "data_SR_candidates.json",
                 method = "curl")
   data_SR_candidates <-
     fromJSON("data_SR_candidates.json", flatten = TRUE)
-  setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+  setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
   print("new candidates SR data downloaded!")
   
   #Stand CH and Kantone
@@ -78,10 +75,11 @@ SR_new_elected <- TRUE
   results_SR_cantons_candidates$flag_gewaehlt <-
     ifelse(results_SR_cantons_candidates$flag_gewaehlt == TRUE, 1, 0)
 
+
   for (c in 1:nrow(ongoing_cantons_SR)) {
-    if (ongoing_cantons_SR$wahlgang_abgeschlossen[c] == FALSE) {
+    if (ongoing_cantons_SR$wahlgang_abgeschlossen[c] == TRUE) {
       
-      print(paste0("new candidates results for canton ",ongoing_cantons_SR$area_ID[c]," found!"))
+      print(paste0("new SR candidates results for canton ",ongoing_cantons_SR$area_ID[c]," found!"))
       
       #Get elected candidates results from canton
       results_canton <- results_SR_cantons_candidates %>%
@@ -108,12 +106,15 @@ SR_new_elected <- TRUE
         rs <- dbSendQuery(mydb, sql_qry)
       }
       
+      other_election_needed <- ifelse(ongoing_cantons_SR$zweiter_wahlgang_noetig[c] == TRUE,"yes","no")
+
       #Adapt Metadata
       sql_qry <- paste0(
         "UPDATE elections_metadata SET ",
         " status = 'finished'",
         ", source_update = 'BFS'",
-        " WHERE election_ID = '",
+        ", other_election_needed = '",other_election_needed,
+        "' WHERE election_ID = '",
         ongoing_cantons_SR$election_ID[c],
         "'"
       )
@@ -124,10 +125,9 @@ SR_new_elected <- TRUE
   }
   
 #Save Timestamp
-cat(timestamp_candidates_SR, file = "./Timestamps/timestamp_candidates_SR.txt")  
+cat(timestamp_SR_candidates, file = "./Timestamps/timestamp_SR_candidates.txt")
   
 } else {
-  print("no new data for NR candidates found")
+  print("no new data for SR candidates found")
 }
 
-View(results_SR_cantons_candidates)

@@ -7,26 +7,23 @@ content <- content(response)$result$resources
 url_NR_candidates <-
   as.data.frame(do.call(rbind, content))$download_url[[2]] #2
 
-#Get timestamp
-timestamp_candidates <-
-  toString(as.POSIXlt(HEAD(url_NR_candidates)$date))
-
-#Compare with old timestamp
+#Get timestamp and compare with old one
+timestamp_candidates <- headers(HEAD(url_NR_candidates))$`last-modified`
 timestamp_candidates_old <-
-  read.csv("./Timestamps/timestamp_candidates.txt", header = FALSE)[1, 1]
+  read.csv("./Timestamps/timestamp_candidates.txt", header = FALSE,sep = ";")[1, 1]
 
 if (timestamp_candidates != timestamp_candidates_old) {
 #Set Flag
 NR_new_elected <- TRUE
   
   #Download data
-  setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
+setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   download.file(url_NR_candidates,
                 destfile = "data_NR_candidates.json",
                 method = "curl")
   data_NR_candidates <-
     fromJSON("data_NR_candidates.json", flatten = TRUE)
-  setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+  setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
   print("new candidates NR data downloaded!")
   
   #Stand CH and Kantone
@@ -101,8 +98,8 @@ NR_new_elected <- TRUE
       
       #Get elected candidates results from canton
       results_canton <- results_NR_cantons_candidates %>%
-        filter(kanton_nummer == ongoing_cantons_NR$bfs_ID[c])
-               #flag_gewaehlt == 1)
+        filter(kanton_nummer == ongoing_cantons_NR$bfs_ID[c],
+               flag_gewaehlt == 1)
 
       #Update candidates results
       mydb <- connectDB(db_name = "sda_elections")
@@ -154,7 +151,7 @@ NR_new_elected <- TRUE
   }
   
 #Save Timestamp
-cat(timestamp_candidates, file = "./Timestamps/timestamp_candidates.txt")  
+cat(timestamp_candidates, file = "./Timestamps/timestamp_candidates.txt") 
   
 } else {
   print("no new data for NR candidates found")

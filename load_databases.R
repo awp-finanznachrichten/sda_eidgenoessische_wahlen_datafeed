@@ -6,7 +6,7 @@ dbDisconnectAll()
 
 #Get Party Metadata
 mydb <- connectDB(db_name="sda_elections")
-rs <- dbSendQuery(mydb, "SELECT id,shortname_de,shortname_fr,shortname_it,bfs_id,party_color FROM parties_metadata")
+rs <- dbSendQuery(mydb, "SELECT id,shortname_de,shortname_fr,shortname_it,bfs_id,party_color,position_parliament FROM parties_metadata")
 parties_metadata <- fetch(rs,n=-1)
 dbDisconnectAll()
 
