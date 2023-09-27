@@ -116,7 +116,8 @@ sql_qry <- paste0("UPDATE output_overview SET texts_results = 'done' WHERE elect
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll()  
 #Send Mail
-send_mail(type="NR_Results")
+send_mail(type="NR_Results",
+          recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
 }
 
 ##Text Candidates##
@@ -132,7 +133,8 @@ sql_qry <- paste0("UPDATE output_overview SET texts_candidates = 'done' WHERE el
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 #Send Mail
-send_mail(type="NR_Candidates")
+send_mail(type="NR_Candidates",
+          recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
 }
   
 ##Charts Results##
@@ -201,7 +203,8 @@ sql_qry <- paste0("UPDATE output_overview SET texts_candidates = 'done' WHERE el
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll()
 #Send Mail
-send_mail(type="SR_Candidates")
+send_mail(type="SR_Candidates",
+          recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
 }
   
 if (counted_cantons_SR$charts_candidates[c] == "pending") {
@@ -224,7 +227,8 @@ if ((minute(Sys.time()) >= 25) & (intermediate_done == FALSE)) {
   source("NR_mars_meldung_intermediate_FR.R")
   source("NR_mars_meldung_intermediate_IT.R")
   #Send Mail
-  #send_mail(type="NR_Overview")
+  send_mail(type="NR_Overview",
+            recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
   intermediate_done <- TRUE
 }  
 

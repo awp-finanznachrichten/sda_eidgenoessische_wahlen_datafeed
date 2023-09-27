@@ -21,7 +21,7 @@ if (type == "NR_Results") {
                  "Sitzverteilung: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[3],"/\n",
                  "Historische Parteistärke: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[1],"/\n\n",
                  "Es sind bereits folgende Kantone ausgezählt: ",paste(counted_cantons$area_name_de, collapse= ", "),"\n\n",
-                 "Die aktualisierten CSVs für die Flourish-Parlamentsgrafik findet ihr unter folgenden Links (zum Download Rechtsklick und 'speichern unter'):\n",
+                 "Die aktualisierten CSVs für die Flourish-Parlamentsgrafik findet ihr unter folgenden Links (zum Download Rechtsklick und 'Speichern unter' wählen):\n",
                  "DE: https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/parliament_NR_overview_de.csv\n",
                  "FR: https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/parliament_NR_overview_fr.csv\n",
                  "IT: https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/parliament_NR_overview_it.csv\n\n",
@@ -40,7 +40,7 @@ if (type == "NR_Candidates") {
                  "Die gewählten Nationalratsmitglieder des Kantons ",counted_cantons$area_name_de[c]," sind bekannt. Ihr findet die Meldungen dazu im Mars.\n\n",
                  "Es wurde folgende Grafik erstellt:\n",
                  "Gewählte Nationalratsmitglieder: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[1],"/\n\n",
-                 "Das aktualisierte CSV für die Flourish-Grafik der Gewählten findet ihr unter folgenden Link (zum Download Rechtsklick und 'speichern unter'):\n",
+                 "Das aktualisierte CSV für die Flourish-Grafik der Gewählten findet ihr unter folgenden Link (zum Download Rechtsklick und 'Speichern unter' wählen):\n",
                  "https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/elected_candidates_overall.csv\n\n",
                  "Liebe Grüsse\n\nLENA")
   send_notification(Subject,Body,recipients)

@@ -48,7 +48,8 @@ storyboard <- c("Spec_small_canton_several_candidates","","")
 first_part_needed <- FALSE
 second_part_needed <- FALSE
 third_part_needed <- FALSE
-}  else if ((party_first$stimmen_partei[1] < 200) & (nrow(party_first) == 1) & (nrow(party_second) == 1) & (nrow(party_third) == 1)) {
+}  else if ((party_first$stimmen_partei[1] < 200) & (nrow(party_first) == 1) & (nrow(party_second) == 1) & (nrow(party_third) == 1) &
+            (party_first$partei_id != 35) & (party_second$partei_id != 35) & (party_third$partei_id != 35) ) {
 storyboard <- c("Spec_small_community","","")
 first_part_needed <- FALSE
 second_part_needed <- FALSE
