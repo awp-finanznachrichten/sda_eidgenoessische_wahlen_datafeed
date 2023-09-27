@@ -75,7 +75,6 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   results_SR_cantons_candidates$flag_gewaehlt <-
     ifelse(results_SR_cantons_candidates$flag_gewaehlt == TRUE, 1, 0)
 
-
   for (c in 1:nrow(ongoing_cantons_SR)) {
     if (ongoing_cantons_SR$wahlgang_abgeschlossen[c] == TRUE) {
       

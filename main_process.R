@@ -215,7 +215,20 @@ dbDisconnectAll()
 }
 }
 
-###GESAMTERGEBNIS###
+###INTERMEDIATE RESULTS NATIONALRAT###
+if ((minute(Sys.time()) >= 25) & (intermediate_done == FALSE)) {
+  source("load_databases.R")
+  source("All_prepare_results.R")
+  source("NR_text_intermediate.R")
+  source("NR_mars_meldung_intermediate_DE.R")
+  source("NR_mars_meldung_intermediate_FR.R")
+  source("NR_mars_meldung_intermediate_IT.R")
+  #Send Mail
+  #send_mail(type="NR_Overview")
+  intermediate_done <- TRUE
+}  
+
+###OVERVIEW RESULTS###
 if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) {
 source("load_databases.R")
 source("All_prepare_results.R")
@@ -224,22 +237,10 @@ source("All_create_output_parliament_flourish.R")
 source("All_create_output_candidates_flourish.R")
 }
 
-if ((minute(Sys.time()) >= 25) & (intermediate_done == FALSE)) {
-source("load_databases.R")
-source("All_prepare_results.R")
-source("NR_text_intermediate.R")
-source("NR_mars_meldung_intermediate_DE.R")
-source("NR_mars_meldung_intermediate_FR.R")
-source("NR_mars_meldung_intermediate_IT.R")
-#Send Mail
-send_mail(type="NR_Overview")
-intermediate_done <- TRUE
-}  
-
 ###ELECTION FINISHED###
 #TO DO#
 
-###COMMUNITIES###
+###COMMUNITIES UR-LENA###
 ##Output tables and texts##
 if (NR_new_results == TRUE) {
 source("Communities_live_data.R")
@@ -257,3 +258,6 @@ gitpush()
 ###CREATE VISUAL###
 source("NR_create_visual_data.R")
 source("SR_create_visual_data.R")
+
+###ENTER ALL CANDIDATES RESULTS
+##TO DO##

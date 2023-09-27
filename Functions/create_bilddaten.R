@@ -9,10 +9,12 @@ create_bilddaten <- function(chart_id,
                              ) {
 
   #Create Folder
-  folder_name <- paste0(format(Sys.Date(),"%Y%m%d"),"_",short_name,"_",toupper(language))
+  folder_name <- paste0(format(Sys.time(),"%H%M"),"_",gsub("[-]","",selected_charts$election_ID[s]),"_",selected_charts$chart_type[s],"_",toupper(language))
   dir.create(folder_name)
   
   setwd(paste0("./",folder_name))
+  
+
   
   #Als JPEG
   map <- dw_export_chart(chart_id, plain=FALSE,border_width = 20)

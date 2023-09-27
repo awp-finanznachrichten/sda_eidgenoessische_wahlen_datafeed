@@ -2,8 +2,7 @@ create_visual_data <- function(chart_id,
                                upload = "no",
                                eps = "yes") {
 
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_charts")
-
+setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_charts"))
 chart_metadata <- dw_retrieve_chart_metadata(chart_id)
 
 metadata_language <- substr(chart_metadata[["content"]][["language"]],1,2)
@@ -29,7 +28,7 @@ create_bilddaten(chart_id,
                  eps = eps
 )
 
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 print("visual data created")
 }
 
