@@ -8,7 +8,7 @@ url_SR_candidates <-
   as.data.frame(do.call(rbind, content))$download_url[[9]]
 
 #Get timestamp and compare with old one
-timestamp_SR_candidates <- headers(HEAD(url_SR_candidates))$`last-modified`
+timestamp_SR_candidates <- headers(HEAD(url_SR_candidates))$`last-modified` 
 timestamp_SR_candidates_old <-
   read.csv("./Timestamps/timestamp_SR_candidates.txt", header = FALSE,sep = ";")[1, 1]
 

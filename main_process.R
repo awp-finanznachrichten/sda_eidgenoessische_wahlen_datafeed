@@ -45,6 +45,7 @@ source("create_table_communities.R")
 source("create_bilddaten.R")
 source("create_visual_data.R")
 source("function_reports.R")
+source("send_mail.R")
 source("github.R")
 setwd("..")
 source("./tools/Funktionen/Utils.R")
@@ -67,6 +68,9 @@ meta_gmd_kt <- read_csv("Data/MASTERFILE_GDE.csv")
 NR_new_results <- FALSE
 NR_new_elected <- FALSE
 SR_new_elected <- FALSE
+if (minute(Sys.time()) < 25) {
+intermediate_done <- FALSE  
+}  
 
 #Load Databases
 source("load_databases.R")
@@ -111,6 +115,8 @@ mydb <- connectDB(db_name = "sda_elections")
 sql_qry <- paste0("UPDATE output_overview SET texts_results = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll()  
+#Send Mail
+send_mail(type="NR_Results")
 }
 
 ##Text Candidates##
@@ -125,6 +131,8 @@ mydb <- connectDB(db_name = "sda_elections")
 sql_qry <- paste0("UPDATE output_overview SET texts_candidates = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
+#Send Mail
+send_mail(type="NR_Candidates")
 }
   
 ##Charts Results##
@@ -191,7 +199,9 @@ source("SR_mars_meldung_candidates_IT.R")
 mydb <- connectDB(db_name = "sda_elections")  
 sql_qry <- paste0("UPDATE output_overview SET texts_candidates = 'done' WHERE election_ID = '",counted_cantons_SR$election_ID[c],"'")
 rs <- dbSendQuery(mydb, sql_qry)
-dbDisconnectAll() 
+dbDisconnectAll()
+#Send Mail
+send_mail(type="SR_Candidates")
 }
   
 if (counted_cantons_SR$charts_candidates[c] == "pending") {
@@ -214,13 +224,16 @@ source("All_create_output_parliament_flourish.R")
 source("All_create_output_candidates_flourish.R")
 }
 
-if (minute(Sys.time()) == 25) {
+if ((minute(Sys.time()) >= 25) & (intermediate_done == FALSE)) {
 source("load_databases.R")
 source("All_prepare_results.R")
 source("NR_text_intermediate.R")
 source("NR_mars_meldung_intermediate_DE.R")
 source("NR_mars_meldung_intermediate_FR.R")
-source("NR_mars_meldung_intermediate_IT.R")  
+source("NR_mars_meldung_intermediate_IT.R")
+#Send Mail
+send_mail(type="NR_Overview")
+intermediate_done <- TRUE
 }  
 
 ###ELECTION FINISHED###

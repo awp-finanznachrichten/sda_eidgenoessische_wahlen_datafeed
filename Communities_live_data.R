@@ -3,12 +3,12 @@
 #source("get_testdata_2023.R")
 
 ###LOAD RESULT AND VOTERTURNOUT DATA
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_daten")
+setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
 data_NR_results <-
   fromJSON("data_NR_results.json", flatten = TRUE)
 data_NR_voterturnout <-
   fromJSON("data_NR_voterturnout.json", flatten = TRUE)
-setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 results_NR_communities <- data_NR_results$level_gemeinden
 results_NR_communities <- results_NR_communities %>%
