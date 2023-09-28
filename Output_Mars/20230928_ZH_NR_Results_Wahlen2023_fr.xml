@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
+  <header>
+    <sent>2023-09-28T11:46:30+02:00</sent>
+  </header>
+
+  <itemSet>
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="fr" guid="urn:newsml:keystone-sda.ch:20230928:20230928114630923243106160450" version="1">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
+      <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
+
+      <itemMeta>
+        <itemClass qcode="ninat:text"/>
+        <provider qcode="nprov:KSDA">
+           <name>sda</name>
+        </provider>
+        <versionCreated>2023-09-28T11:46:30+02:00</versionCreated>
+        <pubStatus qcode="stat:withheld"/>
+        <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
+        <service qcode="sdasvc:bsf"></service>
+        <edNote role="sdanote:note">Cette dépêche a été générée automatiquement sur la base des données de l'Office fédéral de la statistique (OFS) et relue avant diffusion.</edNote>
+        <edNote role="sdalena:memo">Dies ist ein Test</edNote>
+        
+      </itemMeta>
+
+      <contentMeta>
+        <urgency>3</urgency>
+        <contentCreated>2023-09-28T11:46:30+02:00</contentCreated>
+        <creator>
+          <name>sda-robot</name>
+        </creator>
+        <altId>923243106160450</altId>
+        <dateline>Zurich</dateline>
+        <language tag="fr"/>
+        <genre qcode="sdagenre:RES">
+        </genre>
+
+        <!--storytypes-->
+        <subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>
+        
+        <!--media topics-->
+        <subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:LOH"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:PRT"></subject>
+
+        <!--locations-->
+        <located type="loctype:city" qcode="sdamarsgeo:CH">
+<name>Schweiz</name>
+</located>
+  
+        <slugline>Fédérales 2023 - ZH CN</slugline>
+        <headline>***TEST***La répartition des 36 sièges dans le canton de Zurich</headline>
+        <description role="drol:teaser"> </description>
+        <description role="drol:catchline"></description>
+      </contentMeta>
+
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+xml">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>***TEST***La répartition des 36 sièges dans le canton de Zurich</title>
+            </head>
+            <body>
+              <p class="lead"> </p>
+              <p class="paragraph">La répartition des sièges reste inchangée dans le canton de Zurich. </p>
+<p class="paragraph">Les résultats des élections au Conseil national dans le canton de Zurich:</p>
+<table><tbody><tr><td></td><td>nombre de sièges</td><td>différence par rapport à 2019</td><td>pourcentages des voix</td><td>différence par rapport à 2019</td></tr><tr><td>NA</td><td>NA</td><td>+NA</td><td>NA%</td><td>+NA</td></tr><tr><td></td><td></td><td>+</td><td>%</td><td>+</td></tr></tbody></table>
+<p class="paragraph">Nombre de siège(s) en 2023: 36. Le canton compte un siège de plus qu'en 2019.</p>
+<p class="paragraph">Tous les partis ayant obtenu au moins 3% ont été pris en compte.</p>
+
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>

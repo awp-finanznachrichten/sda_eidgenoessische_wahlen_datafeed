@@ -30,7 +30,7 @@ NR_new_results <- TRUE
   #Timestamps
   stand_cantons_results <- data_NR_results$stand_kantone #%>%
     #rename(kanton_abgeschlossen_parties = kanton_abgeschlossen)
-  
+
   #Results
   results_NR_cantons <- data_NR_results$level_kantone
 
