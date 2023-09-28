@@ -49,7 +49,7 @@ vorlage <- gsub("INSERT_TEXT",text,vorlage)
 
 #Datei speichern
 setwd("./Output_Mars")
-filename <- paste0(format(Sys.Date(),"%Y%m%d"),"_",counted_cantons$area_ID[c],"_SR_Candidates_Wahlen2023_it.xml")
+filename <- paste0(format(Sys.Date(),"%Y%m%d"),"_",counted_cantons_SR$area_ID[c],"_SR_Candidates_Wahlen2023_it.xml")
 cat(vorlage, file = (con <- file(filename, "w", encoding="UTF-8"))); close(con)
 
 Sys.sleep(5)
