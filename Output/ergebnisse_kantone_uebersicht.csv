@@ -21,7 +21,14 @@ $/tr£$tr£$td£GLP$/td£$td style='text-align: center'£1$/td£$td style='text-
 "NE","no_data","Neuenburg","$b£Nationalrat (4 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (2 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.","Neuchâtel","","Neuchâtel",""
 "NW","no_data","Nidwalden","$b£Nationalrat (1 Sitz)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (1 Sitz)$/b£$br£Es sind noch keine Resultate vorhanden.","Nidwald","","Nidvaldo",""
 "OW","SR_counted","Obwalden","$b£Nationalrat (1 Sitz)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (1 Sitz)$/b£$br£Gewählt ist Erich Ettlin (Mitte, bisher)","Obwald","","Obvaldo",""
-"SG","no_data","St. Gallen","$b£Nationalrat (12 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (2 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.","Saint-Gall","","San Gallo",""
+"SG","NR_counted","St. Gallen","$b£Nationalrat (12 Sitze)$/b£$br£$table£
+$tr£
+$td£$b£Partei$/b£$/td£
+$td£$b£Sitze$/b£$/td£
+$td£$b£+/-$/b£$/td£
+$td£$b£Wähleranteil$/b£$/td£
+$td style='text-align: center'£$b£+/-$/b£$/td£
+$/tr£$tr£$td£SVP$/td£$td style='text-align: center'£4$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£30.1%$/td£$td style='text-align: center¢ color: red'£$b£-1.2$/b£$/td£$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£3$/td£$td style='text-align: center¢ color: darkblue'£$b£+1$/b£$/td£$td style='text-align: center'£24.3%$/td£$td style='text-align: center¢ color: darkblue'£$b£+4.9$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£2$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£13.8%$/td£$td style='text-align: center¢ color: darkblue'£$b£+1.1$/b£$/td£$/tr£$tr£$td£Grüne$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£10.4%$/td£$td style='text-align: center¢ color: red'£$b£-0.1$/b£$/td£$/tr£$tr£$td£FDP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£9.2%$/td£$td style='text-align: center¢ color: red'£$b£-5.8$/b£$/td£$/tr£$tr£$td£GLP$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£8.1%$/td£$td style='text-align: center¢ color: darkblue'£$b£+0.8$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.","Saint-Gall","","San Gallo",""
 "SH","no_data","Schaffhausen","$b£Nationalrat (2 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (2 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.","Schaffhouse","","Sciaffusa",""
 "SO","no_data","Solothurn","$b£Nationalrat (6 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (2 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.","Soleure","","Soletta",""
 "SZ","no_data","Schwyz","$b£Nationalrat (4 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (2 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.","Schwyz","","Svitto",""
