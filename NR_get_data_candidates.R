@@ -5,7 +5,7 @@ content <- content(response)$result$resources
 
 ###GET CANDIDATES DATA###
 url_NR_candidates <-
-  as.data.frame(do.call(rbind, content))$download_url[[2]] #2
+  as.data.frame(do.call(rbind, content))$download_url[[2]]
 
 #Get timestamp and compare with old one
 timestamp_candidates <- headers(HEAD(url_NR_candidates))$`last-modified`

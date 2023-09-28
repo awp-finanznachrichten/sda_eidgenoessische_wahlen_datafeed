@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
+  <header>
+    <sent>2023-09-28T10:00:24+02:00</sent>
+  </header>
+
+  <itemSet>
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="it" guid="urn:newsml:keystone-sda.ch:20230928:20230928100024521323483153567" version="1">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
+      <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
+
+      <itemMeta>
+        <itemClass qcode="ninat:text"/>
+        <provider qcode="nprov:KSDA">
+           <name>sda</name>
+        </provider>
+        <versionCreated>2023-09-28T10:00:24+02:00</versionCreated>
+        <pubStatus qcode="stat:withheld"/>
+        <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
+        <service qcode="sdasvc:bsi"></service>
+        <edNote role="sdanote:note">Questa notizia è stata generata automaticamente in base ai dati dell'Ufficio federale di statistica (UST) e riletta prima della diffusione. </edNote>
+        <edNote role="sdalena:memo">Dies ist ein Test</edNote>
+        
+      </itemMeta>
+
+      <contentMeta>
+        <urgency>3</urgency>
+        <contentCreated>2023-09-28T10:00:24+02:00</contentCreated>
+        <creator>
+          <name>sda-robot</name>
+        </creator>
+        <altId>521323483153567</altId>
+        <dateline>Frauenfeld</dateline>
+        <language tag="it"/>
+        <genre qcode="sdagenre:RES">
+        </genre>
+
+        <!--storytypes-->
+        <subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>
+        
+        <!--media topics-->
+        <subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:LOH"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:PRT"></subject>
+
+        <!--locations-->
+        <located type="loctype:city" qcode="sdamarsgeo:CH">
+<name>Schweiz</name>
+</located>
+  
+        <slugline>Federali 2023 - TG CN</slugline>
+        <headline>***TEST***La ripartizione dei 6 seggi nel canton Turgovia</headline>
+        <description role="drol:teaser"> </description>
+        <description role="drol:catchline"></description>
+      </contentMeta>
+
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+xml">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>***TEST***La ripartizione dei 6 seggi nel canton Turgovia</title>
+            </head>
+            <body>
+              <p class="lead"> </p>
+              <p class="paragraph">Nel canton Turgovia hanno guadagnato seggi PEV (+2) e altri partiti/liste (+1). Hanno perso seggi Verdi (-1), Centro (-1) e PS (-1).</p>
+<p class="paragraph">I risultati delle elezioni al Consiglio nazionale nel canton Turgovia:</p>
+<table><tbody><tr><td></td><td>numero di seggi</td><td>variazione rispetto al 2019</td><td>percentuali di voto</td><td>variazione rispetto al 2019</td></tr><tr><td>UDC</td><td>3</td><td>-</td><td>42,2%</td><td>+5,6</td></tr><tr><td>PEV</td><td>2</td><td>+2</td><td>36,4%</td><td>+33,8</td></tr><tr><td>altro</td><td>1</td><td>+1</td><td>19,4%</td><td>+19,4</td></tr><tr><td>Verdi</td><td>0</td><td>-1</td><td>0,7%</td><td>-9,9</td></tr><tr><td>Centro</td><td>0</td><td>-1</td><td>0,6%</td><td>-14,4</td></tr><tr><td>PS</td><td>0</td><td>-1</td><td>0,3%</td><td>-12,4</td></tr></tbody></table>
+<p class="paragraph">Numero di seggi 2023: 6. </p>
+<p class="paragraph">Tutti i partiti che hanno ottenuto almeno il 3% sono stati presi in considerazione. </p>
+
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>

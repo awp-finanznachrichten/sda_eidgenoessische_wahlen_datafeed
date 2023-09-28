@@ -10,11 +10,19 @@ if (type == "NR_Results") {
              chart_type == "proporz_votes" | 
              chart_type == "proporz_seats" |
              chart_type == "proporz_history")
-  
-  
+ 
+  weitere_text <- ""
+  weitere_check <- results_parties %>%
+    filter(party_ID == 84,
+           seats > 0)
+  if (nrow(weitere_check) > 0) {
+  weitere_text <- "\n\nACHTUNG: Mindestens ein Sitz ging an 'weitere' Parteien/Listen. Bitte prüfen und allenfalls Meldungen/Grafiken anpassen.\n\n"  
+  }  
+
   Subject <- paste0("Kanton ",counted_cantons$area_name_de[c],": Endergebnis Sitzverteilung/Wähleranteil")
   Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
                  "Die definitive Sitzverteilung und der Wähleranteile des Kantons ",counted_cantons$area_name_de[c]," sind bekannt. Ihr findet die Meldungen dazu im Mars.\n\n",
+                 weitere_text,
                  "Es wurden folgende Grafiken erstellt:\n",
                  "Ergebnisse: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[2],"/\n",
                  "Wähleranteile: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[4],"/\n",
@@ -34,10 +42,19 @@ if (type == "NR_Candidates") {
     filter(election_ID == counted_cantons$election_ID[c],
            language == "de",
            chart_type == "proporz_elected")
-  
+
+  weitere_text <- ""
+  weitere_check <- elected_candidates %>%
+    filter(party_id == 84
+          )
+  if (nrow(weitere_check) > 0) {
+    weitere_text <- paste0("\n\nACHTUNG: Folgende Nationalräte wurden von einer Liste/Partei unter 'weitere' gewählt: ",toString(paste(paste0(weitere_check$firstname," ",weitere_check$lastname),sep = ", ")),"\n\n")  
+  }  
+
   Subject <- paste0("Kanton ",counted_cantons$area_name_de[c],": Endergebnis gewählte Nationalratsmitglieder")
   Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
                  "Die gewählten Nationalratsmitglieder des Kantons ",counted_cantons$area_name_de[c]," sind bekannt. Ihr findet die Meldungen dazu im Mars.\n\n",
+                 weitere_text,
                  "Es wurde folgende Grafik erstellt:\n",
                  "Gewählte Nationalratsmitglieder: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[1],"/\n\n",
                  "Das aktualisierte CSV für die Flourish-Grafik der Gewählten findet ihr unter folgenden Link (zum Download Rechtsklick und 'Speichern unter' wählen):\n",

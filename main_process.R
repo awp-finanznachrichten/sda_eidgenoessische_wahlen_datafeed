@@ -69,7 +69,7 @@ NR_new_results <- FALSE
 NR_new_elected <- FALSE
 SR_new_elected <- FALSE
 if (minute(Sys.time()) < 25) {
-intermediate_done <- FALSE  
+intermediate_done <- FALSE 
 }  
 
 #Load Databases
@@ -174,7 +174,8 @@ dbDisconnectAll()
 ##Analytics##
 if (counted_cantons$analytics[c] == "pending") {
 #Generate Output
-email_elected_report_nr(counted_cantons$area_ID[c])
+email_elected_report_nr(counted_cantons$area_ID[c],
+                        recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
 #Set Status Done
 mydb <- connectDB(db_name = "sda_elections")  
 sql_qry <- paste0("UPDATE output_overview SET analytics = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")

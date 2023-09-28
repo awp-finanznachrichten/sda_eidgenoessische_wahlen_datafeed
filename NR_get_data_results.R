@@ -12,7 +12,6 @@ timestamp_results <- headers(HEAD(url_NR_results))$`last-modified`
 timestamp_results_old <-
   read.csv("./Timestamps/timestamp_results.txt", header = FALSE,sep = ";")[1, 1]
 
-
 if (timestamp_results != timestamp_results_old) {
   
 #Set Flag
