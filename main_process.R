@@ -104,6 +104,7 @@ counted_cantons <- counted_cantons_all %>%
 
 for (c in 1:nrow(counted_cantons)) {
 
+if (counted_cantons$status[c] != "candidates finished") {
 ##Text Results##
 if (counted_cantons$texts_results[c] == "pending") {
 #Generate Output
@@ -120,7 +121,8 @@ dbDisconnectAll()
 send_mail(type="NR_Results",
           recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
 }
-
+}
+if (counted_cantons$status[c] != "parties finished") {  
 ##Text Candidates##
 if (counted_cantons$texts_candidates[c] == "pending") {
 #Generate Output
@@ -137,7 +139,8 @@ dbDisconnectAll()
 send_mail(type="NR_Candidates",
           recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
 }
-  
+}
+if (counted_cantons$status[c] != "candidates finished") {
 ##Charts Results##
 if (counted_cantons$charts_results[c] == "pending") {
 #Generate Output
@@ -160,7 +163,8 @@ sql_qry <- paste0("UPDATE output_overview SET charts_history = 'done' WHERE elec
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 }
-  
+}
+if (counted_cantons$status[c] != "parties finished") { 
 ##Charts Candidates##
 if (counted_cantons$charts_candidates[c] == "pending") {
 #Generate Output
@@ -171,7 +175,9 @@ sql_qry <- paste0("UPDATE output_overview SET charts_candidates = 'done' WHERE e
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 }
-
+}
+  
+if (counted_cantons$status[c] != "candidates finished") {  
 ##Analytics##
 if (counted_cantons$analytics[c] == "pending") {
 #Generate Output
@@ -183,7 +189,7 @@ sql_qry <- paste0("UPDATE output_overview SET analytics = 'done' WHERE election_
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 }
-  
+}  
 }
 
 ###STAENDERAT###

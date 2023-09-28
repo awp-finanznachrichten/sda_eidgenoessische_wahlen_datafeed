@@ -12,6 +12,7 @@ rs <-
 results_parties <- fetch(rs, n = -1)
 dbDisconnectAll()
 
+
 #Merge with party_metadata
 results_parties <- results_parties %>%
   left_join(parties_metadata,
