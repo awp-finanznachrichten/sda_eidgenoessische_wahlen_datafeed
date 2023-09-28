@@ -33,8 +33,12 @@ if (nrow(party_third) == 1) {
 unchanged_check_third <- party_third$rank_current_election == party_third$rank_last_election
 }
 
-
-if (ergebnisse_gemeinde$kanton_nummer[1] == 16 ) {
+if (nrow(party_first) > 2) {
+storyboard <- c("Spec_three_parties_same","","")
+first_part_needed <- FALSE
+second_part_needed <- FALSE
+third_part_needed <- FALSE
+} else if (ergebnisse_gemeinde$kanton_nummer[1] == 16 ) {
 storyboard <- c("Spec_small_canton_one_candidate","","")
 first_part_needed <- FALSE
 second_part_needed <- FALSE
@@ -64,6 +68,7 @@ third_part_needed <- FALSE
 } else if (nrow(party_second) == 0) {
   storyboard[2] <- ""
   second_part_needed <- FALSE
+  third_part_needed <- FALSE
 } else if (nrow(party_third) == 0) {
   storyboard[3] <- ""
   third_part_needed <- FALSE 
@@ -81,7 +86,7 @@ third_part_needed <- FALSE
   first_part_needed <- FALSE
   second_part_needed <- FALSE
   third_part_needed <- FALSE
-}
+} 
 
 #First Part
 if (first_part_needed == TRUE) {

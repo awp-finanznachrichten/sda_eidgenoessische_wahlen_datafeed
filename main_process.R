@@ -103,7 +103,6 @@ counted_cantons <- counted_cantons_all %>%
   filter(council == "NR")
 
 for (c in 1:nrow(counted_cantons)) {
-
 if (counted_cantons$status[c] != "candidates finished") {
 ##Text Results##
 if (counted_cantons$texts_results[c] == "pending") {

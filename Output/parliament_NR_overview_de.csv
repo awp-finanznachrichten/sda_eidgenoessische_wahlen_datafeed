@@ -1,7 +1,11 @@
 "Partei","Sitze 2023","Sitze 2019"
-"Grüne",0,1
-"SP",0,1
+"Grüne",1,3
+"SP",1,4
 "EVP",2,0
-"Mitte",0,1
-"SVP",3,3
+"GLP",1,1
+"Mitte",2,5
+"LDP",1,1
+"FDP",3,2
+"SVP",6,4
+"Lega",1,2
 "weitere",1,0
