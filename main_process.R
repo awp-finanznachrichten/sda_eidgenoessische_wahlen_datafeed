@@ -262,8 +262,10 @@ gitcommit()
 gitpush()
 
 ###CREATE VISUAL###
-#source("NR_create_visual_data.R")
-#source("SR_create_visual_data.R")
+counted_cantons <- counted_cantons_all %>%
+  filter(council == "NR")
+source("NR_create_visual_data.R")
+source("SR_create_visual_data.R")
 
 ###ENTER ALL CANDIDATES RESULTS
 ##TO DO##
