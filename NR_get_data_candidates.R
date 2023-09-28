@@ -31,7 +31,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   stand_ch_candidates <- data_NR_candidates$stand
   stand_cantons_candidates <- data_NR_candidates$stand_kantone %>%
     rename(kanton_abgeschlossen_candidates = kanton_abgeschlossen)
-  
+
 
   #Results
   results_NR_cantons_candidates <- data_NR_candidates$level_kantone

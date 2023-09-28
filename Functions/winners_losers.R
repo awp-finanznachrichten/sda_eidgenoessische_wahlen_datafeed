@@ -102,7 +102,7 @@ texts <- gsub("#Partei_Verlierer_f",loser$shortname_fr,texts)
 if (language == "it") {
 texts <- gsub("#Partei_Verlierer_i",loser$shortname_it,texts) 
 }  
-texts <- gsub("#Sitze_Verlust",loser$seats_change,texts) 
+texts <- gsub("#Sitze_Verlust",abs(loser$seats_change),texts) 
 } 
 
 return(texts)  

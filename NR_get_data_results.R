@@ -60,7 +60,7 @@ results_NR_cantons[is.na(results_NR_cantons)] <- 0
   #Merge with status data
   ongoing_cantons_NR <- ongoing_cantons_NR %>%
     left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer))
-  
+ 
   for (c in 1:nrow(ongoing_cantons_NR)) {
     if (ongoing_cantons_NR$kanton_abgeschlossen[c] == TRUE) {
       
@@ -69,7 +69,7 @@ results_NR_cantons[is.na(results_NR_cantons)] <- 0
       #Get party results from canton
       results_canton <- results_NR_cantons %>%
         filter(kanton_nummer == ongoing_cantons_NR$bfs_ID[c])
-      
+
       #Make initial party entries
      #mydb <- connectDB(db_name="sda_elections")
      #sql_qry <- paste0("INSERT IGNORE INTO parties_results(election_ID,area_ID,party_ID) VALUES")
