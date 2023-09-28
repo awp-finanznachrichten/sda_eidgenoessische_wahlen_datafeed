@@ -68,6 +68,7 @@ meta_gmd_kt <- read_csv("Data/MASTERFILE_GDE.csv")
 NR_new_results <- FALSE
 NR_new_elected <- FALSE
 SR_new_elected <- FALSE
+intermediate_done <- FALSE 
 if (minute(Sys.time()) < 25) {
 intermediate_done <- FALSE 
 }  
