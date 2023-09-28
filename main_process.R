@@ -151,7 +151,8 @@ if (counted_cantons$analytics[c] == "pending") {
     sql_qry <- paste0("UPDATE output_overview SET analytics = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
-  }
+}
+  
 }  
 if (counted_cantons$status[c] != "parties finished") {
   ##Text Candidates##
