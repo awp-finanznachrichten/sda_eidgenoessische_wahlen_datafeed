@@ -50,16 +50,21 @@ dbDisconnectAll()
 
 #Get candidates SR
 results_candidates_SR <- candidates_overall_SR %>%
+  left_join(people_metadata, join_by(person_id == id)) %>%
   mutate(status_text = ifelse(status == 2,"bisher","neu"),
-         status_text_fr = ifelse(status == 2,"sortant", "nouveau"),
+         status_text_fr = ifelse(status == 2,
+                                 ifelse(gender == "m","sortant","sortante"),
+                                 ifelse(gender == "m","nouveau","nouvelle")),
          status_text_it = ifelse(status == 2,"uscente", "nuovo")) %>%
+  left_join(people_metadata, join_by(person_id == id)) %>%
   select(person_id,election_id,area_id,party_id,votes,elected,status_text,status_text_fr,status_text_it) %>%
   left_join(election_metadata, join_by(election_id == election_ID)) %>%
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id)) %>%
   left_join(areas_metadata, join_by (area_id == area_ID)) %>%
-  arrange(desc(votes),
-          lastname)
+    arrange(desc(votes),
+            lastname)
+
 
 ###OVERVIEW CANTONS
 overview_cantons <- data.frame("area_ID","status","title_de","content_de","title_fr","content_fr","title_it","content_it")
@@ -83,8 +88,8 @@ data_canton_NR <- results_parties %>%
           desc(voter_share))
 
 content_de <- paste0("<b>Nationalrat (",data_canton_all$seats_available_NR[1]," Sitze)</b><br>")
-content_fr <- ""
-content_it <- ""
+content_fr <- paste0("<b>Conseil national (",data_canton_all$seats_available_NR[1]," sièges)</b><br>")
+content_it <- paste0("<b>Consiglio nazionale (",data_canton_all$seats_available_NR[1]," seggi)</b><br>")
 
 #Results Ständerat
 data_canton_all_SR <- results_candidates_SR %>%
@@ -100,12 +105,20 @@ if (data_canton_all$status[1] == "finished" | data_canton_all$status[1] == "part
 check_NR <- TRUE
 tabelle_de <- create_table_overview(data_canton_NR,"de")
 content_de <- paste0(content_de,tabelle_de,"<br>")
+tabelle_fr <- create_table_overview(data_canton_NR,"fr")
+content_fr <- paste0(content_fr,tabelle_fr,"<br>")
+tabelle_it <- create_table_overview(data_canton_NR,"it")
+content_it <- paste0(content_it,tabelle_it,"<br>")
 } else {
 content_de  <- paste0(content_de,"Es sind noch keine Resultate vorhanden.<br><br>")
+content_fr  <- paste0(content_fr,"Aucun résultat n'est encore disponible.<br><br>")
+content_it  <- paste0(content_it,"Non ci sono ancora risultati.<br><br>")
 }  
 
 #Results Ständerat
 content_de <- paste0(content_de,"<b>Ständerat (",data_canton_all$seats_available_SR[1]," Sitze)</b><br>")
+content_fr <- paste0(content_fr,"<b>Conseil des Etats (",data_canton_all$seats_available_SR[1]," sièges)</b><br>")
+content_it <- paste0(content_it,"<b>Consiglio degli Stati (",data_canton_all$seats_available_SR[1]," seggi)</b><br>")
 
 if (data_canton_all_SR$status[1] == "finished") {
 check_SR <- TRUE
@@ -116,18 +129,40 @@ content_de <- paste0(content_de,"Gewählt sind:<br>",
                        " (",elected_candidates_SR$shortname_de[1],", ",elected_candidates_SR$status_text[1],")<br>",
                      elected_candidates_SR$firstname[2]," ",elected_candidates_SR$lastname[2],
                      " (",elected_candidates_SR$shortname_de[2],", ",elected_candidates_SR$status_text[2],")")  
+content_fr <- paste0(content_fr,"Sont élu(e)s:<br>",
+                     elected_candidates_SR$firstname[1]," ",elected_candidates_SR$lastname[1],
+                     " (",elected_candidates_SR$shortname_fr[1],", ",elected_candidates_SR$status_text_fr[1],")<br>",
+                     elected_candidates_SR$firstname[2]," ",elected_candidates_SR$lastname[2],
+                     " (",elected_candidates_SR$shortname_fr[2],", ",elected_candidates_SR$status_text_fr[2],")")  
+content_it <- paste0(content_it,"Sono eletti:<br>",
+                     elected_candidates_SR$firstname[1]," ",elected_candidates_SR$lastname[1],
+                     " (",elected_candidates_SR$shortname_it[1],", ",elected_candidates_SR$status_text_it[1],")<br>",
+                     elected_candidates_SR$firstname[2]," ",elected_candidates_SR$lastname[2],
+                     " (",elected_candidates_SR$shortname_it[2],", ",elected_candidates_SR$status_text_it[2],")")  
 } else if (nrow(elected_candidates_SR) == 1) {
-content_de <- paste0(content_de,"Gewählt ist ",
+content_de <- paste0(content_de,"Gewählt:<br>",
                      elected_candidates_SR$firstname[1]," ",elected_candidates_SR$lastname[1],
                      " (",elected_candidates_SR$shortname_de[1],", ",elected_candidates_SR$status_text[1],")")
+content_fr <- paste0(content_fr,"Elu(e):<br>",
+                     elected_candidates_SR$firstname[1]," ",elected_candidates_SR$lastname[1],
+                     " (",elected_candidates_SR$shortname_fr[1],", ",elected_candidates_SR$status_text_fr[1],")")
+content_it <- paste0(content_it,"Eletto:<br>",
+                     elected_candidates_SR$firstname[1]," ",elected_candidates_SR$lastname[1],
+                     " (",elected_candidates_SR$shortname_it[1],", ",elected_candidates_SR$status_text_it[1],")")
 if (elected_candidates_SR$seats_available_SR[1] != 1) {
 content_de <- paste0(content_de,"<br><br>Es ist ein zweiter Wahlgang nötig.")  
+content_fr <- paste0(content_fr,"<br><br>Un deuxième tour sera nécessaire.")  
+content_de <- paste0(content_it,"<br><br>Il ballottaggio si svolgerà.")  
 }  
 } else {
 content_de <- paste0(content_de,"Im ersten Wahlgang wurde niemand in den Ständerat gewählt. Es ist ein zweiter Wahlgang nötig.")
+content_fr <- paste0(content_fr,"Aucun candidat n'a été élu lors du premier tour. Un deuxième tour sera nécessaire")
+content_it <- paste0(content_it,"Nessuno è stato eletto agli Stati al primo turno. Il ballottaggio si svolgerà.")
 }  
 } else {
 content_de  <- paste0(content_de,"Es sind noch keine Resultate vorhanden.")
+content_fr  <- paste0(content_fr,"Aucun résultat n'est encore disponible.")
+content_it  <- paste0(content_it,"Non ci sono ancora risultati.")
 }  
 
 #Status
