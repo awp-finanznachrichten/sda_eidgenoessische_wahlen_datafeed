@@ -16,7 +16,9 @@ for (e in 1:nrow(results_candidates)) {
                     "<td>",results_candidates$firstname[e]," ",results_candidates$lastname[e],"</td>",
                     "<td>",results_candidates$shortname_de[e],"</td>",
                     "<td>",results_candidates$status_text[e],"</td>",
-                    "<td>",format(results_candidates$votes[e],big.mark = "'"),"</td>",
+                    "<td>",ifelse(results_candidates$votes[e] > 9999,
+                                  format(results_candidates$votes[e],big.mark = "'"),
+                                  results_candidates$votes[e]),"</td>",
                     "<td>",ifelse(results_candidates$elected[e] == 1,"ja","nein"),"</td>",
                     "</tr>")
 }      
@@ -37,7 +39,9 @@ for (e in 1:nrow(results_candidates)) {
                         "<td>",results_candidates$firstname[e]," ",results_candidates$lastname[e],"</td>",
                         "<td>",results_candidates$shortname_fr[e],"</td>",
                         "<td>",results_candidates$status_text_fr[e],"</td>",
-                        "<td>",format(results_candidates$votes[e],big.mark = "'"),"</td>",
+                        "<td>",ifelse(results_candidates$votes[e] > 9999,
+                                      format(results_candidates$votes[e],big.mark = "'"),
+                                      results_candidates$votes[e]),"</td>",
                         "<td>",ifelse(results_candidates$elected[e] == 1,"oui","non"),"</td>",
                         "</tr>")
     }
@@ -58,7 +62,9 @@ for (e in 1:nrow(results_candidates)) {
                         "<td>",results_candidates$firstname[e]," ",results_candidates$lastname[e],"</td>",
                         "<td>",results_candidates$shortname_it[e],"</td>",
                         "<td>",results_candidates$status_text_it[e],"</td>",
-                        "<td>",format(results_candidates$votes[e],big.mark = "'"),"</td>",
+                        "<td>",ifelse(results_candidates$votes[e] > 9999,
+                                      format(results_candidates$votes[e],big.mark = "'"),
+                                      results_candidates$votes[e]),"</td>",
                         "<td>",ifelse(results_candidates$elected[e] == 1,"sì","no"),"</td>",
                         "</tr>")
     }
