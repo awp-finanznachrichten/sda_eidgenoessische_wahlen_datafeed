@@ -18,7 +18,9 @@ results_candidates <- results_candidates %>%
   arrange(desc(votes),
           lastname) %>%
   mutate(status_text = ifelse(status == 2,"bisher","neu"),
-         status_text_fr = ifelse(status == 2,"sortant", "nouveau"),
+         status_text_fr = ifelse(status == 2,
+                                 ifelse(gender == "m","sortant","sortante"),
+                                 ifelse(gender == "m","nouveau","nouvelle")),
          status_text_it = ifelse(status == 2,"uscente", "nuovo"),
          lastname = ifelse(grepl("Vereinzelte",lastname),"Vereinzelte",lastname),
          shortname_de = ifelse(grepl("Vereinzelte",lastname),"-",shortname_de),

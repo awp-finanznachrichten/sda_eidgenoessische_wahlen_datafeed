@@ -1,8 +1,8 @@
 ###CANDIDATES
 
 ###Grafiken erstellen und Daten speichern
-grafiken_uebersicht <- data.frame("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
-colnames(grafiken_uebersicht) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
+#grafiken_uebersicht <- data.frame("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
+#colnames(grafiken_uebersicht) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
 
 for (c in 1:nrow(counted_cantons)) {
   #Get parties results from Canton
@@ -53,30 +53,39 @@ for (c in 1:nrow(counted_cantons)) {
   elected_candidates_images[is.na(elected_candidates_images)] <- "&nbsp;"
 
   ##Chart Candidates DE
-  data_chart <- dw_copy_chart("YS5Cf")
-  dw_edit_chart(data_chart$id,
-                title=paste0("Wahlen 2023: Die gewählten Nationalratsmitglieder im Kanton ",counted_cantons$area_name_de[c]),
-                folderId = folders_NR[c])
-  dw_data_to_chart(elected_candidates_images,data_chart$id)
-  dw_publish_chart(data_chart$id)
+  #data_chart <- dw_copy_chart("YS5Cf")
+  #chart_id <- data_chart$id
+  
+  #Get id 
+  chart_id <- datawrapper_codes %>%
+    filter(election_ID == counted_cantons$election_ID[c],
+           chart_type == "proporz_elected",
+           language == "de") %>%
+    .[,4]
+
+  dw_edit_chart(chart_id,
+                title=paste0("Wahlen 2023: Die gewählten Nationalratsmitglieder im Kanton ",counted_cantons$area_name_de[c]))
+                #folderId = folders_NR[c])
+  dw_data_to_chart(elected_candidates_images,chart_id)
+  dw_publish_chart(chart_id)
   print("Datawrapper-Chart updated")
   
-  metadata_chart <- dw_retrieve_chart_metadata(data_chart$id)
+  metadata_chart <- dw_retrieve_chart_metadata(chart_id)
   
-new_entry <- data.frame("Nationalrat gewählte Nationalratsmitglieder",
-                          counted_cantons$area_ID[c],
-                          metadata_chart$content$title,
-                          metadata_chart$content$language,
-                          metadata_chart$id,
-                          metadata_chart$content$publicUrl,
-                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-responsive`,
-                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-web-component`)
-  colnames(new_entry) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
-  grafiken_uebersicht <- rbind(grafiken_uebersicht,new_entry)
+#new_entry <- data.frame("Nationalrat gewählte Nationalratsmitglieder",
+#                          counted_cantons$area_ID[c],
+#                          metadata_chart$content$title,
+#                          metadata_chart$content$language,
+#                          metachart_id,
+#                          metadata_chart$content$publicUrl,
+#                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-responsive`,
+#                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-web-component`)
+#  colnames(new_entry) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
+#  grafiken_uebersicht <- rbind(grafiken_uebersicht,new_entry)
 }
 
-saveRDS(grafiken_uebersicht,"grafiken_uebersicht_elected.RDS")
-write.xlsx(grafiken_uebersicht,"grafiken_uebersicht_elected.xlsx",row.names = FALSE)
+#saveRDS(grafiken_uebersicht,"grafiken_uebersicht_elected.RDS")
+#write.xlsx(grafiken_uebersicht,"grafiken_uebersicht_elected.xlsx",row.names = FALSE)
 #grafiken_uebersicht_old <- readRDS("grafiken_uebersicht.RDS")
 #folders_NR <- readRDS("folders_NR.RDS")
 

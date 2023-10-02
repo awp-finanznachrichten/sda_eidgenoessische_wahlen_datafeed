@@ -41,6 +41,7 @@ vorlage <- gsub("INSERT_STORYTYPES",
 vorlage <- gsub("INSERT_CHANNELS",
                 paste0('<subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>\n',
                        '<subject type="cpnat:abstract" qcode="sdamarschannel:LOH"></subject>\n',
+                       '<subject type="cpnat:abstract" qcode="sdamarschannel:ESU"></subject>\n',
                        '<subject type="cpnat:abstract" qcode="sdamarschannel:PRT"></subject>'),
                 vorlage)
 vorlage <- gsub("INSERT_LOCATIONS",

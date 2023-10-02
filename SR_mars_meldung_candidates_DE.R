@@ -36,10 +36,11 @@ vorlage <- gsub("INSERT_STORYTYPES",
                 vorlage)
 vorlage <- gsub("INSERT_CHANNELS",
                 paste0('<subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>\n',
+                       '<subject type="cpnat:abstract" qcode="sdamarschannel:ESU"></subject>\n',
                        '<subject type="cpnat:abstract" qcode="sdamarschannel:UPH"></subject>'),
                 vorlage)
 vorlage <- gsub("INSERT_LOCATIONS",
-                paste0('<located type="loctype:city" qcode="sdamarsgeo:CH">\n<name>Schweiz</name>\n</located>'),
+                paste0('<located type="loctype:city" qcode="sdamarsgeo:',counted_cantons_SR$hauptort_mars_code[c],'">\n<name>',counted_cantons_SR$hauptort_de[c],'</name>\n</located>'),
                 vorlage)
 vorlage <- gsub("INSERT_CATCHWORD",texts_candidates[1],vorlage)
 vorlage <- gsub("INSERT_HEADLINE",paste0("***TEST***",texts_candidates[2]),vorlage)

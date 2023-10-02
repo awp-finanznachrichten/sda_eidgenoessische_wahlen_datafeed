@@ -34,7 +34,7 @@ texts <- gsub("Die MCG ","Das MCG ",texts)
 texts <- gsub("die weitere","weitere Parteien/Listen",texts)
 texts <- gsub("Die weitere","Weitere Parteien/Listen",texts)
 
-
+if (type == "canton") { 
 #Adapt Numbers
 texts <- gsub(" 2 "," zwei ",texts)
 texts <- gsub(" 3 "," drei ",texts)
@@ -47,6 +47,7 @@ texts <- gsub(" 9 "," neun ",texts)
 texts <- gsub(" 10 "," zehn ",texts)
 texts <- gsub(" 11 "," elf ",texts)
 texts <- gsub(" 12 "," zwölf ",texts)
+}
 }
 
 if (language == "fr") {
@@ -74,6 +75,7 @@ texts <- str_replace_all(texts,"canton de Grisons","canton des Grisons")
 texts <- str_replace_all(texts,"canton de Obwald","canton d'Obwald")
 texts <- str_replace_all(texts,"canton de Uri","canton d'Uri")
 
+if (type == "canton") { 
 texts <- gsub(" 1 "," un ",texts)
 texts <- gsub(" 2 "," deux ",texts)
 texts <- gsub(" 3 "," trois ",texts)
@@ -86,12 +88,14 @@ texts <- gsub(" 9 "," neuf ",texts)
 texts <- gsub(" 10 "," dix ",texts)
 texts <- gsub(" 11 "," onze ",texts)
 texts <- gsub(" 12 "," douze ",texts)  
-  
+}  
+
 texts <- str_replace_all(texts,"de A","d'A") 
 texts <- str_replace_all(texts,"de E","d'E")
 texts <- str_replace_all(texts,"de I","d'I") 
 texts <- str_replace_all(texts,"de O","d'O") 
 texts <- str_replace_all(texts,"de U","d'U")
+texts <- str_replace_all(texts,"de u","d'u")
 texts <- str_replace_all(texts,"de Yv","d'Yv")
 
 texts <- str_replace_all(texts,"De A","d'A") 
@@ -126,6 +130,23 @@ texts <- str_replace_all(texts,"du Vaud","de Le Vaud")
 }
   
 if (language == "it") {  
+  
+if (type == "canton") { 
+    texts <- gsub(" 1 "," uno ",texts)
+    texts <- gsub(" 2 "," due ",texts)
+    texts <- gsub(" 3 "," tre ",texts)
+    texts <- gsub(" 4 "," quattro ",texts)
+    texts <- gsub(" 5 "," cinque ",texts)
+    texts <- gsub(" 6 "," sei ",texts)
+    texts <- gsub(" 7 "," sette ",texts)
+    texts <- gsub(" 8 "," otto ",texts)
+    texts <- gsub(" 9 "," nove ",texts)
+    texts <- gsub(" 10 "," dieci ",texts)
+    texts <- gsub(" 11 "," undici ",texts)
+    texts <- gsub(" 12 "," dodici ",texts)  
+}    
+  
+  
 texts <- gsub("Altro ","Altri partiti/liste ",texts)
 texts <- gsub("altro ","altri partiti/liste ",texts)
 }    

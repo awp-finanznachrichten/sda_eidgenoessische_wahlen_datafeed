@@ -35,15 +35,19 @@ results_candidates <- results_candidates %>%
 #Elected candidates
 elected_candidates <- results_candidates %>%
   filter(elected == 1) %>%
-  arrange(desc(votes))
+  group_by(party_id) %>%
+  mutate(amount_elected = n()) %>%
+  ungroup() %>%
+  arrange(desc(amount_elected),
+    desc(votes))
 
 elected_candidates$status_text <-
   ifelse(elected_candidates$status == 2, "bisher", "neu")
-elected_candidates$status_text_fr <-
-  ifelse(elected_candidates$status == 2, "sortant", "nouveau")
+elected_candidates$status_text_fr = ifelse(elected_candidates$status == 2,
+                ifelse(elected_candidates$gender == "m","sortant","sortante"),
+                ifelse(elected_candidates$gender == "m","nouveau","nouvelle"))
 elected_candidates$status_text_it <-
   ifelse(elected_candidates$status == 2, "uscente", "nuovo")
-
 
 #Voted out candidates
 voted_out_candidates <- results_candidates %>%

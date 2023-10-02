@@ -173,9 +173,10 @@ create_table_NR_candidates <- function(elected_candidates,
                                     language) {
 
 if (language == "de") {  
-tabelle <- paste0("<table><tbody><tr><td></td>",
-                  "<td></td>",
-                  "<td></td></tr>")
+tabelle <- paste0("<table><tbody>")
+                  #"<tr><td></td>",
+                  #"<td></td>",
+                  #"<td></td></tr>")
                   #"<td>Anzahl Stimmen</td>")
 
 for (e in 1:nrow(elected_candidates)) {
@@ -190,9 +191,10 @@ for (e in 1:nrow(elected_candidates)) {
 }
 
   if (language == "fr") {  
-    tabelle <- paste0("<table><tbody><tr><td></td>",
-                      "<td></td>",
-                      "<td></td></tr>")
+    tabelle <- paste0("<table><tbody>")
+                      #"<tr><td></td>",
+                      #"<td></td>",
+                      #"<td></td></tr>")
                       #"<td>nombre de voix</td>")
     
     for (e in 1:nrow(elected_candidates)) {
@@ -207,9 +209,10 @@ for (e in 1:nrow(elected_candidates)) {
   }
   
   if (language == "it") {  
-    tabelle <- paste0("<table><tbody><tr><td></td>",
-                      "<td></td>",
-                      "<td></td></tr>")
+    tabelle <- paste0("<table><tbody>")
+                      #"<tr><td></td>",
+                      #"<td></td>",
+                      #"<td></td></tr>")
                       #"<td>numero di voti</td>")
     
     for (e in 1:nrow(elected_candidates)) {
@@ -218,68 +221,13 @@ for (e in 1:nrow(elected_candidates)) {
                         "<td>",elected_candidates$firstname[e]," ",elected_candidates$lastname[e],"</td>",
                         "<td>",elected_candidates$shortname_it[e],"</td>",
                         "<td>",elected_candidates$status_text_it[e],"</td>",
-                        "<td>",format(elected_candidates$votes[e],big.mark = "'"),"</td>",
+                        #"<td>",format(elected_candidates$votes[e],big.mark = "'"),"</td>",
                         "</tr>")
     }                    
   }
 tabelle <- paste0(tabelle,"</tbody></table>")
 
 return(tabelle)    
-}    
-
-
-create_table_overview <- function(data_canton,
-                                    language) {
-  
-  if (language == "de") {  
-    ##Create Table DE
-    tabelle <- "<table>
-<tr>
-<td><b>Partei</b></td>
-<td><b>Sitze</b></td>
-<td><b>+/-</b></td>
-<td><b>Wähleranteil</b></td>
-<td style='text-align: center'><b>+/-</b></td>
-</tr>"
-    
- for (i in 1:nrow(data_canton)) {
-      tabelle <- paste0(tabelle,
-                        "<tr><td>",data_canton$shortname_de[i],"</td>",
-                        "<td style='text-align: center'>",data_canton$seats[i],"</td>")
-      
-      if (data_canton$seats_change[i] > 0) {
-        tabelle <- paste0(tabelle,"<td style='text-align: center; color: darkblue'><b>+",data_canton$seats_change[i],"</b></td>")  
-      } else if (data_canton$seats_change[i] < 0) {
-        tabelle <- paste0(tabelle,"<td style='text-align: center; color: red'><b>",data_canton$seats_change[i],"</b></td>")  
-      } else {
-        tabelle <- paste0(tabelle,"<td style='text-align: center'>-</td>")
-      }  
-      tabelle <- paste0(tabelle,
-                        "<td style='text-align: center'>",format(round2(data_canton$voter_share[i],1),nsmall=1),"%</td>")
-      
-      if (data_canton$voter_share_change[i] > 0) {
-        tabelle <- paste0(tabelle,"<td style='text-align: center; color: darkblue'><b>+",format(round2(data_canton$voter_share_change[i],1),nsmall=1),"</b></td></tr>")  
-      } else if (data_canton$voter_share_change[i] < 0) {
-        tabelle <- paste0(tabelle,"<td style='text-align: center; color: red'><b>",format(round2(data_canton$voter_share_change[i],1),nsmall=1),"</b></td></tr>")  
-      } else {
-        tabelle <- paste0(tabelle,"<td style='text-align: center'>-</td></tr>")
-      }  
-      
-    }      
-    
-  }    
-
-  if (language == "fr") {  
-  ###TO DO###
-  }
-  
-  
-  if (language == "it") {  
-  ###TO DO###
-  }
-  
-  tabelle <- paste0(tabelle,"</tbody></table>")
-  return(tabelle)    
 }    
 
 

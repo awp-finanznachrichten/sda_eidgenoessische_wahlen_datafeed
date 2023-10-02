@@ -7,6 +7,7 @@ tabelle <- paste0("<table><tbody><tr>",
                   "<td></td>",
                   "<td></td>",
                   "<td>Anzahl Stimmen</td>",
+                  "<td>Gewählt</td>",
                   "</tr>")
 
 for (e in 1:nrow(results_candidates)) {
@@ -16,6 +17,7 @@ for (e in 1:nrow(results_candidates)) {
                     "<td>",results_candidates$shortname_de[e],"</td>",
                     "<td>",results_candidates$status_text[e],"</td>",
                     "<td>",format(results_candidates$votes[e],big.mark = "'"),"</td>",
+                    "<td>",ifelse(results_candidates$elected[e] == 1,"ja","nein"),"</td>",
                     "</tr>")
 }      
 }
@@ -26,6 +28,7 @@ for (e in 1:nrow(results_candidates)) {
                       "<td></td>",
                       "<td></td>",
                       "<td>Total des voix</td>",
+                      "<td>Élu(e)</td>",
                       "</tr>")
     
     for (e in 1:nrow(results_candidates)) {
@@ -35,6 +38,7 @@ for (e in 1:nrow(results_candidates)) {
                         "<td>",results_candidates$shortname_fr[e],"</td>",
                         "<td>",results_candidates$status_text_fr[e],"</td>",
                         "<td>",format(results_candidates$votes[e],big.mark = "'"),"</td>",
+                        "<td>",ifelse(results_candidates$elected[e] == 1,"oui","non"),"</td>",
                         "</tr>")
     }
     tabelle <- gsub("Vereinzelte","Autres",tabelle)
@@ -46,6 +50,7 @@ for (e in 1:nrow(results_candidates)) {
                       "<td></td>",
                       "<td></td>",
                       "<td>voti</td>",
+                      "<td>eletti</td>",
                       "</tr>")
     for (e in 1:nrow(results_candidates)) {
       tabelle <- paste0(tabelle,
@@ -54,6 +59,7 @@ for (e in 1:nrow(results_candidates)) {
                         "<td>",results_candidates$shortname_it[e],"</td>",
                         "<td>",results_candidates$status_text_it[e],"</td>",
                         "<td>",format(results_candidates$votes[e],big.mark = "'"),"</td>",
+                        "<td>",ifelse(results_candidates$elected[e] == 1,"sì","no"),"</td>",
                         "</tr>")
     }
     tabelle <- gsub("Vereinzelte","Altri",tabelle)

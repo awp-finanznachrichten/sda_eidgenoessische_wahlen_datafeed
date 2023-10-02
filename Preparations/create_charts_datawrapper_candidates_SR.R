@@ -1,9 +1,13 @@
 ###CANDIDATES
-folders_SR <- readRDS("./Preparations/folders_SR.RDS")
+#folders_SR <- readRDS("./Preparations/folders_SR.RDS")
 
 ###Grafiken erstellen und Daten speichern
-grafiken_uebersicht <- data.frame("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
-colnames(grafiken_uebersicht) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
+#grafiken_uebersicht <- data.frame("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
+#colnames(grafiken_uebersicht) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
+
+counted_cantons_SR <- counted_cantons_SR %>%
+  filter(area_ID != "AI",
+         area_ID != "OW")
 
 for (c in 1:nrow(counted_cantons_SR)) {
   #Get parties results from Canton
@@ -38,27 +42,41 @@ for (c in 1:nrow(counted_cantons_SR)) {
            shortname_de = ifelse(grepl("Vereinzelte",name_text),"-",shortname_de)) %>%
     select(image_link,name_text,shortname_de,votes,elected)
 
+  SR_results$votes <-0
+  SR_results$elected <- ""
+
   ##Chart Candidates DE
-  data_chart <- dw_copy_chart("gmJb8")
-  dw_edit_chart(data_chart$id,
+  #data_chart <- dw_copy_chart("gmJb8")
+  #chart_id <- data_chart$id
+  
+  #Get id 
+  chart_id <- datawrapper_codes %>%
+    filter(election_ID == counted_cantons_SR$election_ID[c],
+           chart_type == "majorz_votes",
+           language == "de") %>%
+    .[,4]
+  dw_edit_chart(chart_id ,
                 title=paste0("Wahlen 2023: Ergebnis Ständeratswahl Kanton ",counted_cantons_SR$area_name_de[c]),
-                folderId = folders_SR[c])
-  dw_data_to_chart(SR_results,data_chart$id)
-  dw_publish_chart(data_chart$id)
+                intro = "&nbsp;",
+                annotate = "&nbsp;"
+                )
+                #folderId = folders_SR[c])
+  dw_data_to_chart(SR_results,chart_id)
+  dw_publish_chart(chart_id)
   print("Datawrapper-Chart updated")
   
-  metadata_chart <- dw_retrieve_chart_metadata(data_chart$id)
+ # metadata_chart <- dw_retrieve_chart_metadata(data_chart$id)
   
-new_entry <- data.frame("Ständerat Ergebnis",
-                          counted_cantons_SR$area_ID[c],
-                          metadata_chart$content$title,
-                          metadata_chart$content$language,
-                          metadata_chart$id,
-                          metadata_chart$content$publicUrl,
-                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-responsive`,
-                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-web-component`)
-  colnames(new_entry) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
-  grafiken_uebersicht <- rbind(grafiken_uebersicht,new_entry)
+#new_entry <- data.frame("Ständerat Ergebnis",
+#                          counted_cantons_SR$area_ID[c],
+#                          metadata_chart$content$title,
+#                          metadata_chart$content$language,
+#                          metadata_chart$id,
+#                          metadata_chart$content$publicUrl,
+#                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-responsive`,
+#                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-web-component`)
+#  colnames(new_entry) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
+#  grafiken_uebersicht <- rbind(grafiken_uebersicht,new_entry)
 }
 
 

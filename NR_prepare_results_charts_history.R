@@ -20,12 +20,11 @@ results_parties <- results_parties %>%
   left_join(parties_metadata,
             by = join_by(party_ID == id))
 
-
 results_parties <- results_parties %>%
-  filter(voter_share > 0,
-         seats != 0 |
-           seats_change != 0 |
-           voter_share >= 3) %>%
+#  filter(voter_share > 0,
+#         seats != 0 |
+#           seats_change != 0 |
+#           voter_share >= 3) %>%
   arrange(desc(seats),
           desc(voter_share)) %>%
   select(shortname_de,
@@ -34,6 +33,7 @@ results_parties <- results_parties %>%
          voter_share,
          party_color)
 
+#results_parties$voter_share <- 0 #REMOVE
 results_parties[results_parties == 0] <- NA
 
 ###GET HISTORY DATA###

@@ -15,7 +15,7 @@ library(zip)
 library(RCurl)
 
 #Working Directory
-MAIN_PATH <- "C:/Users/simon/OneDrive/"
+MAIN_PATH <- "C:/Users/sw/OneDrive/"
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 #Main Data URL from BFS
@@ -69,7 +69,7 @@ NR_new_results <- FALSE
 NR_new_elected <- FALSE
 SR_new_elected <- FALSE
 intermediate_done <- TRUE 
-if (minute(Sys.time()) < 25) {
+if (minute(Sys.time()) < 35) {
 intermediate_done <- FALSE 
 }  
 
