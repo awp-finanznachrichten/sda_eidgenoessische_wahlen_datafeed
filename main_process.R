@@ -62,6 +62,8 @@ texts_spreadsheet_UrLena <- texts_spreadsheet_UrLena %>%
 #Metadata Communities
 meta_gmd_kt <- read_csv("Data/MASTERFILE_GDE.csv")
 
+#Adapt Metadata
+
 #####START LOOP#####
 
 #Flags
@@ -98,10 +100,13 @@ counted_cantons_all <- counted_cantons_all  %>%
   left_join(output_overview) %>%
   filter(area_type == "canton")
 
-###NATIONALRAT###
+#Get counted cantons NR and SR
 counted_cantons <- counted_cantons_all %>%
   filter(council == "NR")
+counted_cantons_SR <- counted_cantons_all %>%
+  filter(council == "SR") 
 
+###NATIONALRAT###
 for (c in 1:nrow(counted_cantons)) {
 if (counted_cantons$status[c] != "candidates finished") {
 ##Text Results##
@@ -186,10 +191,6 @@ dbDisconnectAll()
 }
 
 ###STAENDERAT###
-#Get counted cantons SR
-counted_cantons_SR <- counted_cantons_all %>%
-  filter(council == "SR") 
-
 for (c in 1:nrow(counted_cantons_SR)) {
 
 ##Text Candidates##

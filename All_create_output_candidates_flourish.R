@@ -45,6 +45,7 @@ elected_candidates_overall <- elected_candidates_overall %>%
 
 #elected_candidates_overall$Rat[201:246] <- "Ständerat" #REMOVE
 
-write.csv(elected_candidates_overall,"./Output/elected_candidates_overall.csv",row.names = FALSE)
-
+write.csv(elected_candidates_overall,"./Output/elected_candidates_overall_de.csv",row.names = FALSE)
+write.csv(elected_candidates_overall,"./Output/elected_candidates_overall_fr.csv",row.names = FALSE)
+write.csv(elected_candidates_overall,"./Output/elected_candidates_overall_it.csv",row.names = FALSE)
 

@@ -211,7 +211,7 @@ Gemeinde_Nr,Kanton_Short,Gemeinde_d,Gemeinde_f,Gemeinde_i,Gemeinde_KT_d,Gemeinde
 372,BE,Leubringen,Evilard,Leubringen,Leubringen BE,Evilard (BE),Leubringen BE,Bern,Berne,Berna,2
 381,BE,Arch,Arch,Arch,Arch BE,Arch (BE),Arch BE,Bern,Berne,Berna,2
 382,BE,Büetigen,Büetigen,Büetigen,Büetigen BE,Büetigen (BE),Büetigen BE,Bern,Berne,Berna,2
-383,BE,Büren an der Aare,Büren an der Aare,Büren an der Aare,Büren an der Aare BE,Büren an der Aare (BE),Büren an der Aare BE,Bern,Berne,Berna,2
+383,BE,Büren an der Aare und Meienried,Büren an der Aare et Meienried,Büren an der Aare e Meienried,Büren an der Aare und Meienried BE,Büren an der Aare et Meienried (BE),Büren an der Aare e Meienried BE,Bern,Berne,Berna,2
 385,BE,Diessbach bei Büren,Diessbach bei Büren,Diessbach bei Büren,Diessbach bei Büren BE,Diessbach bei Büren (BE),Diessbach bei Büren BE,Bern,Berne,Berna,2
 386,BE,Dotzigen,Dotzigen,Dotzigen,Dotzigen BE,Dotzigen (BE),Dotzigen BE,Bern,Berne,Berna,2
 387,BE,Lengnau BE,Longeau,Lengnau BE,Lengnau BE,Longeau (BE),Lengnau BE,Bern,Berne,Berna,2
@@ -231,7 +231,7 @@ Gemeinde_Nr,Kanton_Short,Gemeinde_d,Gemeinde_f,Gemeinde_i,Gemeinde_KT_d,Gemeinde
 407,BE,Heimiswil,Heimiswil,Heimiswil,Heimiswil BE,Heimiswil (BE),Heimiswil BE,Bern,Berne,Berna,2
 408,BE,Hellsau,Hellsau,Hellsau,Hellsau BE,Hellsau (BE),Hellsau BE,Bern,Berne,Berna,2
 409,BE,Hindelbank,Hindelbank,Hindelbank,Hindelbank BE,Hindelbank (BE),Hindelbank BE,Bern,Berne,Berna,2
-410,BE,Höchstetten,Höchstetten,Höchstetten,Höchstetten BE,Höchstetten (BE),Höchstetten BE,Bern,Berne,Berna,2
+410,BE,Höchstetten und Hellsau,Höchstetten et Hellsau,Höchstetten e Hellsau,Höchstetten und Hellsau BE,Höchstetten et Hellsau (BE),Höchstetten e Hellsau BE,Bern,Berne,Berna,2
 411,BE,Kernenried,Kernenried,Kernenried,Kernenried BE,Kernenried (BE),Kernenried BE,Bern,Berne,Berna,2
 412,BE,Kirchberg BE,Kirchberg (BE),Kirchberg BE,Kirchberg BE,Kirchberg (BE),Kirchberg BE,Bern,Berne,Berna,2
 413,BE,Koppigen,Koppigen,Koppigen,Koppigen BE,Koppigen (BE),Koppigen BE,Bern,Berne,Berna,2
@@ -283,7 +283,7 @@ Gemeinde_Nr,Kanton_Short,Gemeinde_d,Gemeinde_f,Gemeinde_i,Gemeinde_KT_d,Gemeinde
 546,BE,Münchenbuchsee,Münchenbuchsee,Münchenbuchsee,Münchenbuchsee BE,Münchenbuchsee (BE),Münchenbuchsee BE,Bern,Berne,Berna,2
 551,BE,Urtenen-Schönbühl,Urtenen-Schönbühl,Urtenen-Schönbühl,Urtenen-Schönbühl BE,Urtenen-Schönbühl (BE),Urtenen-Schönbühl BE,Bern,Berne,Berna,2
 552,BE,Utzenstorf,Utzenstorf,Utzenstorf,Utzenstorf BE,Utzenstorf (BE),Utzenstorf BE,Bern,Berne,Berna,2
-553,BE,Wiggiswil,Wiggiswil,Wiggiswil,Wiggiswil BE,Wiggiswil (BE),Wiggiswil BE,Bern,Berne,Berna,2
+553,BE,Wiggiswil und Deisswil bei Münchenbuchsee,Wiggiswil et Deisswil bei Münchenbuchsee,Wiggiswil e Deisswil bei Münchenbuchsee,Wiggiswilund Deisswil bei Münchenbuchsee BE,Wiggiswil et Deisswil bei Münchenbuchsee (BE),Wiggiswil et Deisswil bei Münchenbuchsee BE,Bern,Berne,Berna,2
 554,BE,Wiler bei Utzenstorf,Wiler bei Utzenstorf,Wiler bei Utzenstorf,Wiler bei Utzenstorf BE,Wiler bei Utzenstorf (BE),Wiler bei Utzenstorf BE,Bern,Berne,Berna,2
 556,BE,Zielebach,Zielebach,Zielebach,Zielebach BE,Zielebach (BE),Zielebach BE,Bern,Berne,Berna,2
 557,BE,Zuzwil BE,Zuzwil (BE),Zuzwil BE,Zuzwil BE,Zuzwil (BE),Zuzwil BE BE,Bern,Berne,Berna,2
@@ -338,7 +338,7 @@ Gemeinde_Nr,Kanton_Short,Gemeinde_d,Gemeinde_f,Gemeinde_i,Gemeinde_KT_d,Gemeinde
 623,BE,Rubigen,Rubigen,Rubigen,Rubigen BE,Rubigen (BE),Rubigen BE,Bern,Berne,Berna,2
 626,BE,Walkringen,Walkringen,Walkringen,Walkringen BE,Walkringen (BE),Walkringen BE,Bern,Berne,Berna,2
 627,BE,Worb,Worb,Worb,Worb BE,Worb (BE),Worb BE,Bern,Berne,Berna,2
-628,BE,Zäziwil,Zäziwil,Zäziwil,Zäziwil BE,Zäziwil (BE),Zäziwil BE,Bern,Berne,Berna,2
+628,BE,Zäziwil und Oberhünigen,Zäziwil et Oberhünigen,Zäziwil e Oberhünigen,Zäziwil und Oberhünigen BE,Zäziwil et Oberhünigen (BE),Zäziwil e Oberhünigen BE,Bern,Berne,Berna,2
 629,BE,Oberhünigen,Oberhünigen,Oberhünigen,Oberhünigen BE,Oberhünigen (BE),Oberhünigen BE,Bern,Berne,Berna,2
 630,BE,Allmendingen,Allmendingen,Allmendingen,Allmendingen BE,Allmendingen (BE),Allmendingen BE,Bern,Berne,Berna,2
 632,BE,Wichtrach,Wichtrach,Wichtrach,Wichtrach BE,Wichtrach (BE),Wichtrach BE,Bern,Berne,Berna,2
@@ -438,7 +438,7 @@ Gemeinde_Nr,Kanton_Short,Gemeinde_d,Gemeinde_f,Gemeinde_i,Gemeinde_KT_d,Gemeinde
 884,BE,Toffen,Toffen,Toffen,Toffen BE,Toffen (BE),Toffen BE,Bern,Berne,Berna,2
 885,BE,Uttigen,Uttigen,Uttigen,Uttigen BE,Uttigen (BE),Uttigen BE,Bern,Berne,Berna,2
 886,BE,Wattenwil,Wattenwil,Wattenwil,Wattenwil BE,Wattenwil (BE),Wattenwil BE,Bern,Berne,Berna,2
-888,BE,Wald BE,Wald (BE),Wald BE,Wald BE,Wald (BE),Wald BE BE,Bern,Berne,Berna,2
+888,BE,Wald und Niedermuhlern BE,Wald et Niedermuhlern (BE),Wald e Niedermuhlern BE,Wald und Niedermuhlern BE,Wald et Niedermuhlern (BE),Wald e Niedermuhlern BE,Bern,Berne,Berna,2
 889,BE,Thurnen,Thurnen,Thurnen,Thurnen BE,Thurnen (BE),Thurnen BE,Bern,Berne,Berna,2
 901,BE,Eggiwil,Eggiwil,Eggiwil,Eggiwil BE,Eggiwil (BE),Eggiwil BE,Bern,Berne,Berna,2
 902,BE,Langnau im Emmental,Langnau im Emmental,Langnau im Emmental,Langnau im Emmental BE,Langnau im Emmental (BE),Langnau im Emmental BE,Bern,Berne,Berna,2

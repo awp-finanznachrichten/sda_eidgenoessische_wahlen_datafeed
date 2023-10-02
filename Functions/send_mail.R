@@ -28,15 +28,20 @@ if (type == "NR_Results") {
                  "Wähleranteile: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[4],"/\n",
                  "Sitzverteilung: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[3],"/\n",
                  "Historische Parteistärke: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[1],"/\n\n",
-                 "Es sind bereits folgende Kantone ausgezählt: ",paste(counted_cantons$area_name_de, collapse= ", "),"\n\n",
-                 "Die aktualisierten CSVs für die Flourish-Parlamentsgrafik findet ihr unter folgenden Links (zum Download Rechtsklick und 'Speichern unter' wählen):\n",
-                 "DE: https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/parliament_NR_overview_de.csv\n",
-                 "FR: https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/parliament_NR_overview_fr.csv\n",
-                 "IT: https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/parliament_NR_overview_it.csv\n\n",
                  "Liebe Grüsse\n\nLENA")
   send_notification(Subject,Body,recipients)
-}
   
+  send_attachment("Aktualisierte CSV für Flourish-Parlamentsgrafik",
+                  paste0("Liebes Keystone-SDA-Team,\n\n",
+                         "Die aktualisierten CSVs für die Flourish-Parlamentsgrafik findet ihr im Anhang.\n\n",
+                         "Es sind bereits folgende Kantone ausgezählt: ",paste(counted_cantons$area_name_de, collapse= ", "),"\n\n",
+                         "Liebe Grüsse\n\nLENA"),
+                  attachment = c(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/parliament_NR_overview_de.csv"),
+                                 paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/parliament_NR_overview_fr.csv"),
+                                 paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/parliament_NR_overview_it.csv")),
+                  recipients = "robot-notification@awp.ch")
+}
+
 if (type == "NR_Candidates") {
   selected_charts <- datawrapper_codes %>%
     filter(election_ID == counted_cantons$election_ID[c],
@@ -61,13 +66,23 @@ if (type == "NR_Candidates") {
                  "https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/elected_candidates_overall.csv\n\n",
                  "Liebe Grüsse\n\nLENA")
   send_notification(Subject,Body,recipients)
+  
+  send_attachment("Aktualisierte CSV für Flourish-Grafik der Gewählten",
+                  paste0("Liebes Keystone-SDA-Team,\n\n",
+                         "Die aktualisierten CSVs für die Flourish-Grafik der Gewählten findet ihr im Anhang.\n\n",
+                         "Es sind bereits folgende Kantone ausgezählt: ",paste(counted_cantons$area_name_de, collapse= ", "),"\n\n",
+                         "Liebe Grüsse\n\nLENA"),
+                  attachment = c(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_de.csv"),
+                                 paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_fr.csv"),
+                                 paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_it.csv")),
+                  recipients = "robot-notification@awp.ch")
 }  
  
   if (type == "NR_Overview") {
     Subject <- paste0("Nationalrat: Neue Zwischenstandsmeldung bereit")
     Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
                    "Eine neue Meldung zum Zwischenstand bei der Sitzverteilung des Nationalrates wurde erstellt. Ihr findet diese im Mars.\n\n",
-                   "Es sind bereits folgende Kantone ausgezählt: ",paste(counted_cantons$area_name_de, collapse= ", "),"\n\n",
+                   "Der Nationalrat ist in folgenden Kantonen ausgezählt: ",paste(counted_cantons$area_name_de, collapse= ", "),"\n\n",
                    "Liebe Grüsse\n\nLENA")
     send_notification(Subject,Body,recipients)
   }    
@@ -89,6 +104,16 @@ if (type == "SR_Candidates") {
                  "https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/elected_candidates_overall.csv\n\n",
                  "Liebe Grüsse\n\nLENA")
   send_notification(Subject,Body,recipients)
+  
+  send_attachment("Aktualisierte CSV für Flourish-Grafik der Gewählten",
+                  paste0("Liebes Keystone-SDA-Team,\n\n",
+                         "Die aktualisierten CSVs für die Flourish-Grafik der Gewählten findet ihr im Anhang.\n\n",
+                         "Der Ständerat ist in folgenden Kantonen ausgezählt: ",paste(counted_cantons_SR$area_name_de, collapse= ", "),"\n\n",
+                         "Liebe Grüsse\n\nLENA"),
+                  attachment = c(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_de.csv"),
+                                 paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_fr.csv"),
+                                 paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_it.csv")),
+                  recipients = "robot-notification@awp.ch")
   
 }  
 
