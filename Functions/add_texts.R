@@ -273,11 +273,17 @@ selection <- which(nationalrat_gemeinden_dw$ID == community_id)
 if (nrow(community) == 1) {
 elected_candidates <- elected_candidates_overall %>%
   filter(place_id == community_id)
-str_sub("Zürich ZH",end=-4)
+
 if (nrow(elected_candidates) == 1) {
 if (elected_candidates$gender == "f") {
-  text_one_f <- texts_spreadsheet_UrLena %>%
-    filter(Text_ID == "Add_NR_im_Wohnort_one_f")
+  
+  if(grepl("AI|AR|GL|NW|OW|UR",elected_candidates$area_id) == TRUE) {
+   text_one_f <- texts_spreadsheet_UrLena %>%
+     filter(Text_ID == "Add_small_canton_NR_im_Wohnort_f")
+ } else {
+   text_one_f <- texts_spreadsheet_UrLena %>%
+     filter(Text_ID == "Add_NR_im_Wohnort_one_f")
+ } 
   text_one_f$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde_de,end=-4),text_one_f$Text_d)
   text_one_f$Text_d <- gsub("#Names_NR_pro_Ort",
                             paste0("<b>",elected_candidates$firstname," ",elected_candidates$lastname," (",elected_candidates$shortname_de,")</b>")
@@ -289,8 +295,14 @@ if (elected_candidates$gender == "f") {
   print(nationalrat_gemeinden_dw$Text_de[selection])  
   
 } else if (elected_candidates$gender == "m") {
-  text_one_m <- texts_spreadsheet_UrLena %>%
-    filter(Text_ID == "Add_NR_im_Wohnort_one_m")
+
+  if(grepl("AI|AR|GL|NW|OW|UR",elected_candidates$area_id) == TRUE) {
+    text_one_f <- texts_spreadsheet_UrLena %>%
+      filter(Text_ID == "Add_small_canton_NR_im_Wohnort_m")
+  } else {
+    text_one_m <- texts_spreadsheet_UrLena %>%
+      filter(Text_ID == "Add_NR_im_Wohnort_one_m")
+  } 
   text_one_m$Text_d <- gsub("#Gemeinde_d",str_sub(community$Gemeinde_de,end=-4),text_one_m$Text_d)
   text_one_m$Text_d <- gsub("#Names_NR_pro_Ort",
                             paste0("<b>",elected_candidates$firstname," ",elected_candidates$lastname," (",elected_candidates$shortname_de,")</b>")
