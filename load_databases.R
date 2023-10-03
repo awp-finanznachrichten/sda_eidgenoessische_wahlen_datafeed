@@ -56,3 +56,10 @@ rs <- dbSendQuery(mydb, "SELECT * FROM datawrapper_codes")
 datawrapper_codes <- fetch(rs,n=-1)
 dbDisconnectAll()
 
+#Get Intermediate timecheck
+mydb <- connectDB(db_name="sda_elections")
+rs <- dbSendQuery(mydb, "SELECT * FROM intermediate_timecheck")
+intermediate_timecheck <- fetch(rs,n=-1)
+dbDisconnectAll()
+
+

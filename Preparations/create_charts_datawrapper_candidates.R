@@ -76,7 +76,7 @@ for (c in 1:nrow(counted_cantons)) {
 #                          counted_cantons$area_ID[c],
 #                          metadata_chart$content$title,
 #                          metadata_chart$content$language,
-#                          metachart_id,
+#                          chart_id,
 #                          metadata_chart$content$publicUrl,
 #                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-responsive`,
 #                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-web-component`)

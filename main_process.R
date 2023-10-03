@@ -15,7 +15,7 @@ library(zip)
 library(RCurl)
 
 #Working Directory
-MAIN_PATH <- "C:/Users/sw/OneDrive/"
+MAIN_PATH <- "C:/Users/simon/OneDrive/"
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 #Main Data URL from BFS
@@ -70,10 +70,6 @@ meta_gmd_kt <- read_csv("Data/MASTERFILE_GDE.csv")
 NR_new_results <- FALSE
 NR_new_elected <- FALSE
 SR_new_elected <- FALSE
-intermediate_done <- TRUE 
-if (minute(Sys.time()) < 35) {
-intermediate_done <- FALSE 
-}  
 
 #Load Databases
 source("load_databases.R")
@@ -129,7 +125,9 @@ send_mail(type="NR_Results",
 if (counted_cantons$charts_results[c] == "pending") {
 #Generate Output
 source("NR_prepare_results_charts.R")
-source("NR_publish_results_charts.R")
+source("NR_publish_results_charts_DE.R")
+source("NR_publish_results_charts_FR.R")
+source("NR_publish_results_charts_IT.R")
 #Set Status Done
 mydb <- connectDB(db_name = "sda_elections")  
 sql_qry <- paste0("UPDATE output_overview SET charts_results = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
@@ -157,7 +155,6 @@ if (counted_cantons$analytics[c] == "pending") {
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
 }
-  
 }  
 if (counted_cantons$status[c] != "parties finished") {
   ##Text Candidates##
@@ -211,7 +208,9 @@ send_mail(type="SR_Candidates",
   
 if (counted_cantons_SR$charts_candidates[c] == "pending") {
 ##Chart Candidates##
-source("SR_publish_candidates_charts.R")
+source("SR_publish_candidates_charts_DE.R")
+source("SR_publish_candidates_charts_FR.R")
+source("SR_publish_candidates_charts_IT.R")
 #Set Status Done
 mydb <- connectDB(db_name = "sda_elections")  
 sql_qry <- paste0("UPDATE output_overview SET charts_candidates = 'done' WHERE election_ID = '",counted_cantons_SR$election_ID[c],"'")
@@ -221,7 +220,8 @@ dbDisconnectAll()
 }
 
 ###INTERMEDIATE RESULTS NATIONALRAT###
-if ((minute(Sys.time()) >= 25) & (intermediate_done == FALSE)) {
+
+if ((minute(Sys.time()) >= 35) & (intermediate_done == FALSE)) {
   source("load_databases.R")
   source("All_prepare_results.R")
   source("NR_text_intermediate.R")

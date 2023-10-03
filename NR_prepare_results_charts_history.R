@@ -14,6 +14,10 @@ dbDisconnectAll()
 
 texts_chart <- get_text_charts(language="de",
                                elections_metadata = counted_cantons[c,])
+texts_chart_fr <- get_text_charts(language="fr",
+                               elections_metadata = counted_cantons[c,])
+texts_chart_it <- get_text_charts(language="it",
+                               elections_metadata = counted_cantons[c,])
 
 #Merge with party_metadata
 results_parties <- results_parties %>%
@@ -21,10 +25,10 @@ results_parties <- results_parties %>%
             by = join_by(party_ID == id))
 
 results_parties <- results_parties %>%
-#  filter(voter_share > 0,
-#         seats != 0 |
-#           seats_change != 0 |
-#           voter_share >= 3) %>%
+  filter(voter_share > 0,
+         seats != 0 |
+           seats_change != 0 |
+           voter_share >= 3) %>%
   arrange(desc(seats),
           desc(voter_share)) %>%
   select(shortname_de,
@@ -63,15 +67,15 @@ results_parties_history_cantons <- results_parties_history_cantons %>%
   left_join(parties_metadata,
             by = join_by(partei_id == bfs_id))
 
-
 #Merge with history data
 parties_history <- results_parties_history_cantons %>%
   filter(kanton_nummer == counted_cantons$bfs_ID[c],
          wahl_jahr != 2023)
 
 years <- c(seq(1991,2023,4))
-results_history <- data.frame(years)
 
+#DE
+results_history_de <- data.frame(years)
 for (p in 1:nrow(results_parties)) {
 
 party_values <- parties_history %>%
@@ -81,6 +85,35 @@ party_values <- parties_history %>%
 
 colnames(party_values) <- c("years",results_parties$shortname_de[p])
 
-results_history <- results_history %>%
+results_history_de <- results_history_de %>%
   left_join(party_values)
 } 
+
+#FR
+results_history_fr <- data.frame(years)
+for (p in 1:nrow(results_parties)) {
+  party_values <- parties_history %>%
+    filter(shortname_fr == results_parties$shortname_fr[p]) %>%
+    select(wahl_jahr,partei_staerke) %>%
+    add_row(wahl_jahr = 2023,partei_staerke = results_parties$voter_share[p])
+  
+  colnames(party_values) <- c("years",results_parties$shortname_fr[p])
+  
+  results_history_fr <- results_history_fr %>%
+    left_join(party_values)
+} 
+
+#IT
+results_history_it <- data.frame(years)
+for (p in 1:nrow(results_parties)) {
+  party_values <- parties_history %>%
+    filter(shortname_it == results_parties$shortname_it[p]) %>%
+    select(wahl_jahr,partei_staerke) %>%
+    add_row(wahl_jahr = 2023,partei_staerke = results_parties$voter_share[p])
+  
+  colnames(party_values) <- c("years",results_parties$shortname_it[p])
+  
+  results_history_it <- results_history_it %>%
+    left_join(party_values)
+} 
+

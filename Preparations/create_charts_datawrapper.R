@@ -243,7 +243,7 @@ source("NR_prepare_results_charts_history.R")
   dw_edit_chart(chart_id,
                 title=paste0("Wahlen 2023: Historische Parteistärken Nationalrat im Kanton ",counted_cantons$area_name_de[c]))
                 #folderId = folders_NR[c])
-  dw_data_to_chart(results_history,chart_id)
+  dw_data_to_chart(results_history_de,chart_id)
   dw_publish_chart(chart_id)
   metadata_chart <- dw_retrieve_chart_metadata(chart_id)
   

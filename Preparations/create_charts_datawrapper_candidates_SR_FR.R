@@ -1,14 +1,13 @@
 ###CANDIDATES
-folders_SR <- readRDS("./Preparations/folders_SR_FR.RDS")
-
+#folders_SR <- readRDS("./Preparations/folders_SR_FR.RDS")
 
 ###Grafiken erstellen und Daten speichern
-grafiken_uebersicht_fr <- data.frame("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
-colnames(grafiken_uebersicht_fr) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
+#grafiken_uebersicht_fr <- data.frame("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
+#colnames(grafiken_uebersicht_fr) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
 
-#counted_cantons_SR <- counted_cantons_SR %>%
-#  filter(area_ID != "AI",
-#         area_ID != "OW")
+counted_cantons_SR <- counted_cantons_SR %>%
+  filter(area_ID != "AI",
+         area_ID != "OW")
 
 for (c in 1:nrow(counted_cantons_SR)) {
   #Get parties results from Canton
@@ -49,17 +48,17 @@ for (c in 1:nrow(counted_cantons_SR)) {
   SR_results$elected <- ""
 
   ##Chart Candidates FR
-  data_chart <- dw_copy_chart("8Sytc")
-  chart_id <- data_chart$id
+  #data_chart <- dw_copy_chart("8Sytc")
+  #chart_id <- data_chart$id
   
   #Get id 
-  #chart_id <- datawrapper_codes %>%
-  #  filter(election_ID == counted_cantons_SR$election_ID[c],
-  #         chart_type == "majorz_votes",
-  #         language == "de") %>%
-  #  .[,4]
+  chart_id <- datawrapper_codes %>%
+    filter(election_ID == counted_cantons_SR$election_ID[c],
+           chart_type == "majorz_votes",
+           language == "fr") %>%
+    .[,4]
   
-  headline <- paste0("Fédérales 2023: résultat de l'élection pour le Conseil des Etats dans le canton de ",counted_cantons_SR$area_name_fr[c])
+  headline <- paste0("Fédérales 2023: résultat de l'élection au Conseil des Etats dans le canton de ",counted_cantons_SR$area_name_fr[c])
   headline <- str_replace_all(headline,"canton de Jura","canton du Jura")
   headline <- str_replace_all(headline,"canton de Tessin","canton du Tessin")
   headline <- str_replace_all(headline,"dans le canton de Valais","en Valais")
@@ -71,33 +70,32 @@ for (c in 1:nrow(counted_cantons_SR)) {
   headline <- str_replace_all(headline,"canton de Uri","canton d'Uri")
   
   
-  dw_edit_chart(chart_id ,
+  dw_edit_chart(chart_id,
                 title=headline,
                 intro = "&nbsp;",
-                annotate = "&nbsp;",
-                folderId = folders_SR[c]
+                annotate = "&nbsp;"#,
+                #folderId = folders_SR[c]
                 )
   dw_data_to_chart(SR_results,chart_id)
   dw_publish_chart(chart_id)
   print("Datawrapper-Chart updated")
   
-  metadata_chart <- dw_retrieve_chart_metadata(data_chart$id)
+ # metadata_chart <- dw_retrieve_chart_metadata(data_chart$id)
   
-new_entry <- data.frame("Ständerat Ergebnis FR",
-                          counted_cantons_SR$area_ID[c],
-                          metadata_chart$content$title,
-                          metadata_chart$content$language,
-                          metadata_chart$id,
-                          metadata_chart$content$publicUrl,
-                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-responsive`,
-                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-web-component`)
-  colnames(new_entry) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
-  grafiken_uebersicht_fr <- rbind(grafiken_uebersicht_fr,new_entry)
+#new_entry <- data.frame("Ständerat Ergebnis FR",
+#                          counted_cantons_SR$area_ID[c],
+#                          metadata_chart$content$title,
+#                          metadata_chart$content$language,
+#                          metadata_chart$id,
+#                          metadata_chart$content$publicUrl,
+#                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-responsive`,
+#                          metadata_chart$content$metadata$publish$`embed-codes`$`embed-method-web-component`)
+#  colnames(new_entry) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
+#  grafiken_uebersicht_fr <- rbind(grafiken_uebersicht_fr,new_entry)
 }
 
-
-saveRDS(grafiken_uebersicht_fr,"grafiken_uebersicht_fr_candidates_SR.RDS")
-write.xlsx(grafiken_uebersicht_fr,"grafiken_uebersicht_fr_candidates_SR.xlsx",row.names = FALSE)
+#saveRDS(grafiken_uebersicht_fr,"grafiken_uebersicht_fr_candidates_SR.RDS")
+#write.xlsx(grafiken_uebersicht_fr,"grafiken_uebersicht_fr_candidates_SR.xlsx",row.names = FALSE)
 
 
 

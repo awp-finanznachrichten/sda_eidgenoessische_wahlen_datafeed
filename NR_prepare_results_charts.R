@@ -46,6 +46,35 @@ results_parties$text_seats_de <- paste0("<b>",results_parties$shortname_de,"<br>
 results_parties$text_seats_de <- gsub("[+]-","-",results_parties$text_seats_de)
 results_parties$text_seats_de <- gsub("[+]0","-",results_parties$text_seats_de)
 
+results_parties$text_votes_fr <- paste0("<b>",results_parties$shortname_fr,"<br>",
+                                        trimws(format(round2(results_parties$voter_share,1),nsmall=1)),"%",
+                                        "<br>(+",trimws(format(round2(results_parties$voter_share_change,1),nsmall=1)),"%)")
+results_parties$text_votes_fr <- gsub("[+]-","-",results_parties$text_votes_fr)
+results_parties$text_votes_fr <- gsub("[+]0[.]0%","-",results_parties$text_votes_fr)  
+
+results_parties$text_seats_fr <- paste0("<b>",results_parties$shortname_fr,"<br>",
+                                        results_parties$seats,
+                                        "<br>(+",results_parties$seats_change,")")
+results_parties$text_seats_fr <- gsub("[+]-","-",results_parties$text_seats_fr)
+results_parties$text_seats_fr <- gsub("[+]0","-",results_parties$text_seats_fr)
+
+results_parties$text_votes_it <- paste0("<b>",results_parties$shortname_it,"<br>",
+                                        trimws(format(round2(results_parties$voter_share,1),nsmall=1)),"%",
+                                        "<br>(+",trimws(format(round2(results_parties$voter_share_change,1),nsmall=1)),"%)")
+results_parties$text_votes_it <- gsub("[+]-","-",results_parties$text_votes_it)
+results_parties$text_votes_it <- gsub("[+]0[.]0%","-",results_parties$text_votes_it)  
+
+results_parties$text_seats_it <- paste0("<b>",results_parties$shortname_it,"<br>",
+                                        results_parties$seats,
+                                        "<br>(+",results_parties$seats_change,")")
+results_parties$text_seats_it <- gsub("[+]-","-",results_parties$text_seats_it)
+results_parties$text_seats_it <- gsub("[+]0","-",results_parties$text_seats_it)
+
 
 texts_chart <- get_text_charts(language="de",
                                elections_metadata = counted_cantons[c,])
+texts_chart_fr <- get_text_charts(language="fr",
+                               elections_metadata = counted_cantons[c,])
+texts_chart_it <- get_text_charts(language="it",
+                                  elections_metadata = counted_cantons[c,])
+

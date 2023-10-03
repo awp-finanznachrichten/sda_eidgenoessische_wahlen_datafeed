@@ -12,6 +12,9 @@ rs <-
 results_candidates <- fetch(rs, n = -1)
 dbDisconnectAll()
 
+texts_chart_fr <- get_text_charts(language="fr",
+                                  elections_metadata = counted_cantons_SR[c,])
+
 #Get SR candidates
 SR_results <- results_candidates %>%
   left_join(people_metadata, join_by(person_id == id)) %>%
@@ -22,34 +25,22 @@ SR_results <- results_candidates %>%
          image_link = ifelse(grepl("NR",picture),
                              paste0("![](https://164.ch/grafiken_wahlen2023/Nationalrat/",picture,")"),
                              paste0("![](https://164.ch/grafiken_wahlen2023/Staenderat/",picture,")")),
-         status = ifelse(status == 2,"bisher","neu"),
+         status = ifelse(status == 2,
+                         ifelse(gender == "m","sortant","sortante"),
+                         ifelse(gender == "m","nouveau","nouvelle")),
          name_text = paste0(firstname," ",lastname,
                             "<br>(",status,")"),
          elected = ifelse(elected == 1,"&#x2714;&#xFE0F;",""),
-         name_text = ifelse(grepl("Vereinzelte",name_text),"Vereinzelte",name_text),
-         shortname_de = ifelse(grepl("Vereinzelte",name_text),"-",shortname_de)) %>%
-  select(image_link,name_text,shortname_de,votes,elected)
+         name_text = ifelse(grepl("Autres",name_text),"Autres",name_text),
+         shortname_fr = ifelse(grepl("Autres",name_text),"-",shortname_fr)) %>%
+  select(image_link,name_text,shortname_fr,votes,elected)
 
 
-###Publish Chart DE###
-intro_text <- ""
-
-if (is.na(counted_cantons_SR$absolute_majority[c]) == FALSE) {
-intro_text <- paste0("Das absolute Mehr liegt bei <b>",format(counted_cantons_SR$absolute_majority[c],big.mark ="'")," Stimmen</b>. ")
-}
-
-if (is.na(counted_cantons_SR$other_election_needed[c]) == FALSE) {
-if (counted_cantons_SR$other_election_needed[c] == "no") {
-  intro_text <- paste0(intro_text,"Es ist kein zweiter Wahlgang nötig.")  
-} else {
-  intro_text <- paste0(intro_text,"Es ist ein zweiter Wahlgang nötig.")  
-}  
-}
-  
+###Publish Chart FR###
 chart_ID <- datawrapper_codes %>%
   filter(election_ID == counted_cantons_SR$election_ID[c],
          chart_type == "majorz_votes",
-         language == "de") %>%
+         language == "fr") %>%
   .[,4]
 dw_data_to_chart(SR_results,chart_ID)
 
@@ -65,8 +56,8 @@ for (i in 1:nrow(SR_results)) {
 }
 
 dw_edit_chart(chart_ID,
-              intro = intro_text,
-              annotate = paste0("Endresultat vom ",format(Sys.Date(),"%d.%m.%Y")," ",format(Sys.time(),"%H:%M")," Uhr"),
+              intro = texts_chart_fr[1],
+              annotate = texts_chart_fr[3],
               visualize = adapted_list)
 dw_publish_chart(chart_ID)
 print("Datawrapper-Chart updated")
