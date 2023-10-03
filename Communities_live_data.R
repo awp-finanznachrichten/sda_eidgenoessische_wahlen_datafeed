@@ -1,8 +1,9 @@
 ###GET TESTDATA COMMUNITIES
-#setwd("C:/Users/sw/OneDrive/sda_eidgenoessische_wahlen_datafeed")
-#source("get_testdata_2023.R")
-
+setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_datafeed")
+source("get_testdata_2023.R")
+Testdata <- TRUE
 ###LOAD RESULT AND VOTERTURNOUT DATA
+if (Testdata == FALSE) {
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
 data_NR_results <-
   fromJSON("data_NR_results.json", flatten = TRUE)
@@ -20,9 +21,8 @@ stand_cantons <- data_NR_results$stand_kantone
 
 results_NR_communities_voterturnout <- data_NR_voterturnout$level_gemeinden %>%
   filter(gemeinde_nummer < 9000)
-
 results_NR_CH <- data_NR_results$level_ch
-
+}
 #Get elected candidates
 mydb <- connectDB(db_name = "sda_elections")
 rs <-
@@ -212,13 +212,7 @@ nationalrat_gemeinden_dw <- add_elected_candidates(elected_candidates_overall,
                                                nationalrat_gemeinden_dw,
                                                texts_spreadsheet_UrLena)
 
-###Final adaptions Texts Urlena
-nationalrat_gemeinden_dw$Text_de <- gsub("<br><br><br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_de)
-nationalrat_gemeinden_dw$Text_de <- gsub("<br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_de)
-nationalrat_gemeinden_dw$Text_fr <- gsub("<br><br><br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_fr)
-nationalrat_gemeinden_dw$Text_fr <- gsub("<br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_fr)
-nationalrat_gemeinden_dw$Text_it <- gsub("<br><br><br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_it)
-nationalrat_gemeinden_dw$Text_it <- gsub("<br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_it)
+nationalrat_gemeinden_dw <- cleanup_urlena(nationalrat_gemeinden_dw)
 
 write.csv(nationalrat_gemeinden_dw[,c(1,2,5,11)],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_de.csv",row.names = FALSE)
 write.csv(nationalrat_gemeinden_dw[,c(1,3,6,11),],file="./Output/nationalrat_ergebnisse_gemeinden_urlena_fr.csv",row.names = FALSE)

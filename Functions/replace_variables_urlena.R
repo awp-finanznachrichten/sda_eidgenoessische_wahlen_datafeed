@@ -9,9 +9,9 @@ text_urlena <- gsub("#Gemeinde_i",gemeinden$Gemeinde_i[g],text_urlena)
 ergebnisse_gemeinde_urlena  <- ergebnisse_gemeinde_urlena  %>%
   mutate(rank_current_election = rank(round2(-partei_staerke,1),ties.method = "min"),
          rank_last_election = rank(round2(-letzte_wahl_partei_staerke,1),ties.method = "min"),
-         shortname_de = paste0("<b>",shortname_de,"</b>"),
-         shortname_fr = paste0("<b>",shortname_fr,"</b>"),
-         shortname_it = paste0("<b>",shortname_it,"</b>")
+         #shortname_de = paste0("<b>",shortname_de,"</b>"),
+         #shortname_fr = paste0("<b>",shortname_fr,"</b>"),
+         #shortname_it = paste0("<b>",shortname_it,"</b>")
          )
 
 text_urlena <- gsub("#Party1_name_d",ergebnisse_gemeinde_urlena$shortname_de[1],text_urlena)

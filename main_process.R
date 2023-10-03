@@ -33,6 +33,7 @@ source("storyfinder_urlena.R")
 source("storybuilder.R")
 source("add_texts.R")
 source("replace_variables_urlena.R")
+source("cleanup_urlena.R")
 source("replace_variables_cleanup.R")
 source("replace_variables_cleanup_SR.R")
 source("winners_losers.R")
@@ -220,8 +221,10 @@ dbDisconnectAll()
 }
 
 ###INTERMEDIATE RESULTS NATIONALRAT###
+check_intermediate <- intermediate_timecheck %>%
+  filter(hour == hour(Sys.time()))
 
-if ((minute(Sys.time()) >= 35) & (intermediate_done == FALSE)) {
+if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending")) {
   source("load_databases.R")
   source("All_prepare_results.R")
   source("NR_text_intermediate.R")
@@ -231,7 +234,11 @@ if ((minute(Sys.time()) >= 35) & (intermediate_done == FALSE)) {
   #Send Mail
   send_mail(type="NR_Overview",
             recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
-  intermediate_done <- TRUE
+  #Set Intermediate news done
+  mydb <- connectDB(db_name = "sda_elections")  
+  sql_qry <- paste0("UPDATE intermediate_timecheck SET status = 'done' WHERE hour = '",hour(Sys.time()),"'")
+  rs <- dbSendQuery(mydb, sql_qry)
+  dbDisconnectAll() 
 }  
 
 ###OVERVIEW RESULTS###
