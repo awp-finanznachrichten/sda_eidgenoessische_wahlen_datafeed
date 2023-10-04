@@ -216,7 +216,11 @@ source("All_create_output_candidates_flourish.R")
 }
 
 ###ELECTION FINISHED###
-#TO DO#
+source("All_get_data_results.R")
+source("All_prepare_results_charts.R")
+source("All_publish_results_charts_DE.R")
+source("All_publish_results_charts_FR.R")
+source("All_publish_results_charts_IT.R")
 
 ###COMMUNITIES UR-LENA###
 ##Output tables and texts##
@@ -242,4 +246,4 @@ source("NR_create_visual_data.R")
 source("SR_create_visual_data.R")
 
 ###ENTER ALL CANDIDATES RESULTS
-##TO DO##
+#source("enter_complete_candidates_data.R")
