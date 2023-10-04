@@ -1,19 +1,58 @@
 cleanup_urlena <- function(nationalrat_gemeinden_dw) {
 
-all_parties <- parties_metadata %>%
-  filter(is.na(position_parliament) == FALSE,
-         shortname_de != "weitere")
-
-all_parties$shortname_de <- gsub("Grüne","Grünen",all_parties$shortname_de)
-
-
   #Adapt Grüne
+  nationalrat_gemeinden_dw$Text_de <- gsub("bleibt die Grüne ","bleiben die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne holt","Die Grünen holen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("die Grüne holt","die Grünen holen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne kann ","Die Grünen können ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("baut die Grüne ","bauen die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne festigt ","Die Grünen festigen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("verliert die Grüne ","verlieren die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("die zweitplatzierte Grüne ","die zweitplatzierten Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("verteidigt die Grüne ","verteidigen die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne ist ","Die Grünen sind ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("ist die Grüne ","sind die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("hat die Grüne ","haben die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne hat ","Die Grünen haben ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("an der Grüne ","an den Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne erhöht ","Die Grünen erhöhen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("liegt die Grüne ","liegen die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("landet die Grüne ","landen die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("ist neu die Grüne ","sind neu die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne steigert ","Die Grünen steigern ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("muss die Grüne ","müssen die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne verliert ","Die Grünen verlieren ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("belegt die Grüne ","belegen die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne landet ","Die Grünen landen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("geht an die Grüne","geht and die Grünen",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne sichert ","Die Grünen sichern ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("kann die Grüne","können die Grünen",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne verzeichnet ","Die Grünen verzeichnen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("kann sich die Grüne ","können sich die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne muss ","Die Grünen müssen sich ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne bleibt ","Die Grünen bleiben ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("gefolgt von der Grüne ","gefolgt von den Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne geht ","Die Grünen gehen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne erhielt ","Die Grünen erhielten ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("stehen die Grüne ","stehen die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne kommt ","Die Grünen kommen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("holt sich die Grüne ","holen sich die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne erreicht ","Die Grünen erreichen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("schneidet die Grüne ","schneiden die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("erzielt die Grüne ","erzielen die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  
   nationalrat_gemeinden_dw$Text_de <- gsub("die Grüne, ","die Grünen, ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("die Grüne ","die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne ","Die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("der Grüne ","den Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("der Grüne, ","der Grünen, ",nationalrat_gemeinden_dw$Text_de)
+ 
+  
+  
+  #Adapt weitere Parteien
   nationalrat_gemeinden_dw$Text_de <- gsub("die MCG ","das MCG ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die MCG ","Das MCG ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Solidarités","Bewegung Solidarités",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die MCG ","Das MCG ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("die weitere","weitere Parteien/Listen",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die weitere","Weitere Parteien/Listen",nationalrat_gemeinden_dw$Text_de)
@@ -125,7 +164,16 @@ all_parties$shortname_de <- gsub("Grüne","Grünen",all_parties$shortname_de)
   nationalrat_gemeinden_dw$Text_it <- gsub("Altro ","Altri partiti/liste ",nationalrat_gemeinden_dw$Text_it)
   nationalrat_gemeinden_dw$Text_it <- gsub("altro ","altri partiti/liste ",nationalrat_gemeinden_dw$Text_it)
 
+  
+ 
+  
+  
 #Make Parties Bold
+  all_parties <- parties_metadata %>%
+    filter(is.na(position_parliament) == FALSE,
+           shortname_de != "weitere")
+  all_parties$shortname_de <- gsub("Grüne","Grünen",all_parties$shortname_de)
+  
 for (p in 1:nrow(all_parties)) {
   nationalrat_gemeinden_dw$Text_de <- gsub(all_parties$shortname_de[p],
                                            paste0("<b>",all_parties$shortname_de[p],"</b>"),
@@ -137,7 +185,6 @@ for (p in 1:nrow(all_parties)) {
                                            paste0("<b>",all_parties$shortname_it[p],"</b>"),
                                            nationalrat_gemeinden_dw$Text_it)
 }  
-
 
   nationalrat_gemeinden_dw$Text_de <- gsub("<br><br><br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("<br><br><br><br>","<br><br>",nationalrat_gemeinden_dw$Text_de)
