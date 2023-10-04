@@ -60,7 +60,7 @@ results_NR_cantons[is.na(results_NR_cantons)] <- 0
   #Merge with status data
   ongoing_cantons_NR <- ongoing_cantons_NR %>%
     left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer))
- 
+
   for (c in 1:nrow(ongoing_cantons_NR)) {
     if (ongoing_cantons_NR$kanton_abgeschlossen[c] == TRUE) {
       

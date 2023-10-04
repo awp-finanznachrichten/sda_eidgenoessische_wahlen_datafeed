@@ -1,5 +1,13 @@
 cleanup_urlena <- function(nationalrat_gemeinden_dw) {
 
+  
+  #Add Gemeinde again (just to be sure)
+  for (i in 1:nrow(nationalrat_gemeinden_dw)) {
+    nationalrat_gemeinden_dw$Text_de[i] <- gsub("#Gemeinde_d",str_sub(nationalrat_gemeinden_dw$Gemeinde_de[i],end=-4),nationalrat_gemeinden_dw$Text_de[i])
+    nationalrat_gemeinden_dw$Text_fr[i] <- gsub("#Gemeinde_f",str_sub(nationalrat_gemeinden_dw$Gemeinde_fr[i],end=-6),nationalrat_gemeinden_dw$Text_fr[i])
+    nationalrat_gemeinden_dw$Text_it[i] <- gsub("#Gemeinde_i",str_sub(nationalrat_gemeinden_dw$Gemeinde_it[i],end=-4),nationalrat_gemeinden_dw$Text_it[i])
+    }                                                
+
   #Adapt Grüne
   nationalrat_gemeinden_dw$Text_de <- gsub("bleibt die Grüne ","bleiben die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne holt","Die Grünen holen ",nationalrat_gemeinden_dw$Text_de)
