@@ -1,69 +1,9 @@
-library(git2r)
-library(httr)
-library(XML)
-library(xlsx)
-library(jsonlite)
-library(dplyr)
-library(readr)
-library(stringi)
-library(stringr)
-library(DatawRappr)
-library(lubridate)
-library(rsvg)
-library(magick)
-library(zip)
-library(RCurl)
-
 #Working Directory
 MAIN_PATH <- "C:/Users/simon/OneDrive/"
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
-#Main Data URL from BFS
-BFS_API_URL <-
-  "https://ckan.ogdch-abnahme.clients.liip.ch/api/3/action/package_show?id=eidg-wahlen-2023"
-#BFS_API_URL <- "https://ckan.opendata.swiss/api/3/action/package_show?id=eidg-wahlen-2023"
-
-#Datawrapper Auth
-datawrapper_auth(Sys.getenv("DW_KEY"), overwrite = TRUE)
-
-#Functions
-setwd("./Functions")
-source("storyfinder.R")
-source("storyfinder_urlena.R")
-source("storybuilder.R")
-source("add_texts.R")
-source("replace_variables_urlena.R")
-source("cleanup_urlena.R")
-source("replace_variables_cleanup.R")
-source("replace_variables_cleanup_SR.R")
-source("winners_losers.R")
-source("voted_out_candidates.R")
-source("text_charts.R")
-source("create_tables_NR.R")
-source("create_tables_SR.R")
-source("create_tables_overview.R")
-source("create_table_communities.R")
-source("create_bilddaten.R")
-source("create_visual_data.R")
-source("function_reports.R")
-source("send_mail.R")
-source("github.R")
-setwd("..")
-source("./tools/Funktionen/Utils.R")
-
-#Texts
-texts_spreadsheet_NR_results <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Sitzverteilung")
-texts_spreadsheet_NR_candidates <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Gewaehlte")
-texts_spreadsheet_SR_candidates <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "SR_Resultate")
-texts_spreadsheet_NR_intermediate <- read.xlsx("./Texte/Eidgenössische Wahlen 2023_ Textbausteine.xlsx",sheetName = "NR_Zwischenstand")
-texts_spreadsheet_UrLena <- read.xlsx("./Texte/LENA Textbausteine Eidgenössische Wahlen 2023_ Gemeindeebene.xlsx", sheetName = "Textbausteine")
-texts_spreadsheet_UrLena <- texts_spreadsheet_UrLena %>%
-  filter(is.na(Text_d) == FALSE)
-
-#Metadata Communities
-meta_gmd_kt <- read_csv("Data/MASTERFILE_GDE.csv")
-
-#Adapt Metadata
+#Get Libraries and needed Data
+source("config.R")
 
 #####START LOOP#####
 
@@ -105,6 +45,8 @@ counted_cantons_SR <- counted_cantons_all %>%
 
 ###NATIONALRAT###
 for (c in 1:nrow(counted_cantons)) {
+
+##PARTIES RESULTS HERE##
 if (counted_cantons$status[c] != "candidates finished") {
 ##Text Results##
 if (counted_cantons$texts_results[c] == "pending") {
@@ -156,7 +98,20 @@ if (counted_cantons$analytics[c] == "pending") {
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
 }
+##Alerts## 
+if (counted_cantons$alerts[c] == "pending") {
+#Send VIP-Mail
+vip_alert(counted_cantons$area_ID[c],
+          "NR",
+          recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+#Set Status Done
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll() 
 }  
+}  
+##CANDIDATES RESULTS HERE##
 if (counted_cantons$status[c] != "parties finished") {
   ##Text Candidates##
   if (counted_cantons$texts_candidates[c] == "pending") {
@@ -190,7 +145,6 @@ dbDisconnectAll()
 
 ###STAENDERAT###
 for (c in 1:nrow(counted_cantons_SR)) {
-
 ##Text Candidates##
 if (counted_cantons_SR$texts_candidates[c] == "pending") {
 source("SR_text_candidates.R")
@@ -206,9 +160,8 @@ dbDisconnectAll()
 send_mail(type="SR_Candidates",
           recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
 }
-  
-if (counted_cantons_SR$charts_candidates[c] == "pending") {
 ##Chart Candidates##
+if (counted_cantons_SR$charts_candidates[c] == "pending") {
 source("SR_publish_candidates_charts_DE.R")
 source("SR_publish_candidates_charts_FR.R")
 source("SR_publish_candidates_charts_IT.R")
@@ -218,6 +171,18 @@ sql_qry <- paste0("UPDATE output_overview SET charts_candidates = 'done' WHERE e
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 }
+##Alerts## 
+if (counted_cantons_SR$alerts[c] == "pending") {
+#Send VIP-Mail
+vip_alert(counted_cantons_SR$area_ID[c],
+          "SR",
+          recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+#Set Status Done
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll() 
+}  
 }
 
 ###INTERMEDIATE RESULTS NATIONALRAT###
@@ -271,6 +236,8 @@ gitpush()
 ###CREATE VISUAL###
 counted_cantons <- counted_cantons_all %>%
   filter(council == "NR")
+counted_cantons_SR <- counted_cantons_all %>%
+  filter(council == "SR")
 source("NR_create_visual_data.R")
 source("SR_create_visual_data.R")
 

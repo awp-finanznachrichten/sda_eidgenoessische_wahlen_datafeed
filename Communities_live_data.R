@@ -63,7 +63,6 @@ gemeinden <- gemeinden %>%
 #storyboard_urlena_all <- c() #TEST
 for (g in 1:nrow(gemeinden)) {
   
-  #Filter Parteien: Stärker als 3% oder mehr als 3% verloren
   ergebnisse_gemeinde <- results_NR_communities %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(partei_staerke) == FALSE)
