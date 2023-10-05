@@ -488,3 +488,12 @@ if (elected_candidates$gender == "f") {
 return(nationalrat_gemeinden_dw)
 }  
 
+add_easteregg <- function(nationalrat_gemeinden_dw,
+                          texts_spreadsheet_UrLena) {
+  
+text_easteregg <- texts_spreadsheet_UrLena %>%
+    filter(Text_ID == "Easteregg_Normalo")
+  
+  
+return(nationalrat_gemeinden_dw)  
+}  
