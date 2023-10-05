@@ -39,6 +39,7 @@ elected_candidates <- results_candidates %>%
   mutate(amount_elected = n()) %>%
   ungroup() %>%
   arrange(desc(amount_elected),
+          shortname_de,
     desc(votes))
 
 elected_candidates$status_text <-

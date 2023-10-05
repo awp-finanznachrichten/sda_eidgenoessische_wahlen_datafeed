@@ -5,6 +5,20 @@
 #grafiken_uebersicht <- data.frame("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
 #colnames(grafiken_uebersicht) <- c("Typ","Gebiet","Titel","Sprache","ID","Link","Iframe","Script")
 
+counted_cantons_all <- election_metadata %>%
+  filter(date == "2023-10-22")
+
+#Merge with area, text and output overview
+counted_cantons_all <- counted_cantons_all  %>%
+  left_join(areas_metadata) %>%
+  left_join(status_texts) %>%
+  left_join(output_overview) %>%
+  filter(area_type == "canton")
+
+###NATIONALRAT###
+counted_cantons_SR <- counted_cantons_all %>%
+  filter(council == "SR")
+
 counted_cantons_SR <- counted_cantons_SR %>%
   filter(area_ID != "AI",
          area_ID != "OW")
@@ -42,7 +56,7 @@ for (c in 1:nrow(counted_cantons_SR)) {
            shortname_de = ifelse(grepl("Vereinzelte",name_text),"-",shortname_de)) %>%
     select(image_link,name_text,shortname_de,votes,elected)
 
-  SR_results$votes <-0
+  SR_results$votes <- 0
   SR_results$elected <- ""
 
   ##Chart Candidates DE

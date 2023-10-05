@@ -224,6 +224,8 @@ source("All_prepare_results_charts.R")
 source("All_publish_results_charts_DE.R")
 source("All_publish_results_charts_FR.R")
 source("All_publish_results_charts_IT.R")
+source("All_prepare_results_charts_history.R")
+source("All_publish_results_charts_history.R")
 }
   
 ###COMMUNITIES UR-LENA###

@@ -16,7 +16,7 @@ vorlage <- read_file("./tools/SDA/Vorlage_SDA_Meldungen.txt")
 #Abschnitte kreieren
 text <- paste0('<p class="paragraph">',texts_candidates[3],"</p>\n")
 text <- paste0(text,tabelle,"\n")
-text <- paste0(text,'<p class="paragraph">',texts_candidates[4],"</p>\n")
+#text <- paste0(text,'<p class="paragraph">',texts_candidates[4],"</p>\n")
 text <- paste0(text,'<p class="paragraph">',texts_candidates[5],"</p>\n")
 
 ###Daten einfügen
