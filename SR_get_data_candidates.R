@@ -27,7 +27,6 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   print("new candidates SR data downloaded!")
   
   #Stand CH and Kantone
-  timestamp_SR_candidates <- data_SR_candidates$timestamp
   stand_ch_candidates <- data_SR_candidates$stand
   stand_cantons_candidates <- data_SR_candidates$stand_kantone
 
@@ -52,6 +51,36 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
 
   #Replace NA with 0
   results_SR_cantons_candidates[is.na(results_SR_cantons_candidates)] <- 0
+  
+  
+  ###CHECK CORRECTIONS###
+  finished_cantons_SR <- election_metadata %>%
+    filter(
+      council == "SR",
+      date == "2023-10-22",
+        status == "finished",
+      source_update == "BFS"
+    )
+  
+  finished_cantons_SR <- finished_cantons_SR  %>%
+    left_join(areas_metadata) %>%
+    filter(area_type == "canton")
+  
+  corrected_cantons_SR <- finished_cantons_SR %>%
+    left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer)) %>%
+    filter(wahlgang_abgeschlossen == FALSE)
+  
+  if (nrow(corrected_cantons_SR) > 0) {
+    #Correction Alert
+    Subject <- paste0("Achtung: Korrektur bei den Ständerats-Resultaten des Kantons ",corrected_cantons_SR$area_name_de[1]," entdeckt!")
+    Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
+                   "Das BFS hat den bereits als ausgezählt gemeldeten Kanton ",corrected_cantons_SR$area_name_de[1],
+                   " wieder deaktiviert. Allenfalls müssen die Ständerats-Ergebnisse korrigiert werden. Bitte direkt mit dem Kanton abklären, was genau korrigiert wurde.\n\n",
+                   "Liebe Grüsse\n\nLENA")
+    recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
+    send_notification(Subject,Body,recipients)  
+  }  
+  
 
   ###UPDATE DATABASE###
   #Metadata NR
@@ -59,7 +88,8 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
     filter(
       council == "SR",
       date == "2023-10-22",
-      status != "finished"
+      status != "finished" |
+        source_update != "BFS"
     )
   
   #Merge with area data
@@ -125,7 +155,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   
 #Save Timestamp
 cat(timestamp_SR_candidates, file = "./Timestamps/timestamp_SR_candidates.txt")
-  
+
 } else {
   print("no new data for SR candidates found")
 }

@@ -27,11 +27,9 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   print("new candidates NR data downloaded!")
   
   #Stand CH and Kantone
-  timestamp_NR_candidates <- data_NR_candidates$timestamp
   stand_ch_candidates <- data_NR_candidates$stand
-  stand_cantons_candidates <- data_NR_candidates$stand_kantone %>%
-    rename(kanton_abgeschlossen_candidates = kanton_abgeschlossen)
-
+  stand_cantons_candidates <- data_NR_candidates$stand_kantone #%>%
+    #rename(kanton_abgeschlossen_candidates = kanton_abgeschlossen)
 
   #Results
   results_NR_cantons_candidates <- data_NR_candidates$level_kantone
@@ -68,14 +66,43 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   #Replace NA with 0
   results_NR_cantons_candidates[is.na(results_NR_cantons_candidates)] <- 0
 
+  ###CHECK CORRECTIONS###
+  finished_cantons_NR <- election_metadata %>%
+    filter(
+      council == "NR",
+      date == "2023-10-22",
+      status == "candidates finished" |
+        status == "finished",
+      source_update == "BFS"
+    )
+  finished_cantons_NR <- finished_cantons_NR  %>%
+    left_join(areas_metadata) %>%
+    filter(area_type == "canton")
+  corrected_cantons_NR <- finished_cantons_NR %>%
+    left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer)) %>%
+    filter(kanton_abgeschlossen == FALSE)
+  
+  if (nrow(corrected_cantons_NR) > 0) {
+    #Correction Alert
+    Subject <- paste0("Achtung: Korrektur bei den Nationalrats-Kandidierenden des Kantons ",corrected_cantons_NR$area_name_de[1]," entdeckt!")
+    Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
+                   "Das BFS hat den bereits als ausgezählt gemeldeten Kanton ",corrected_cantons_NR$area_name_de[1],
+                   " wieder deaktiviert. Allenfalls müssen die gewählten Nationalräte korrigiert werden. Bitte direkt mit dem Kanton abklären, was genau korrigiert wurde.\n\n",
+                   "Liebe Grüsse\n\nLENA")
+    recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
+    send_notification(Subject,Body,recipients)  
+  }  
+  
   ###UPDATE DATABASE###
   #Metadata NR
   ongoing_cantons_NR <- election_metadata %>%
     filter(
       council == "NR",
       date == "2023-10-22",
-      status != "candidates finished",
-      status != "finished"
+      status != "candidates finished" |
+        source_update != "BFS",
+      status != "finished" |
+        source_update != "BFS"
     )
   
   #Merge with area data

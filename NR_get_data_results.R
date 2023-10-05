@@ -27,9 +27,15 @@ NR_new_results <- TRUE
     fromJSON("data_NR_results.json", flatten = TRUE)
   setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
   print("new results NR data downloaded!")
+  
+  #Check: Election done?
+  if (data_NR_results$stand$wahl_abgeschlossen == TRUE) {
+  NR_finished <- TRUE
+  }  
+  
   #Timestamps
-  stand_cantons_results <- data_NR_results$stand_kantone #%>%
-    #rename(kanton_abgeschlossen_parties = kanton_abgeschlossen)
+  stand_cantons_results <- data_NR_results$stand_kantone
+  
 
   #Results
   results_NR_cantons <- data_NR_results$level_kantone
@@ -42,14 +48,45 @@ NR_new_results <- TRUE
 #Replace NA with 0
 results_NR_cantons[is.na(results_NR_cantons)] <- 0
 
-  ###UPDATE DATABASE###
+###CHECK CORRECTIONS###
+finished_cantons_NR <- election_metadata %>%
+  filter(
+    council == "NR",
+    date == "2023-10-22",
+    status == "parties finished" |
+    status == "finished",
+    source_update == "BFS"
+  )
+
+finished_cantons_NR <- finished_cantons_NR  %>%
+  left_join(areas_metadata) %>%
+  filter(area_type == "canton")
+corrected_cantons_NR <- finished_cantons_NR %>%
+  left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer)) %>%
+  filter(kanton_abgeschlossen == FALSE)
+
+if (nrow(corrected_cantons_NR) > 0) {
+#Correction Alert
+Subject <- paste0("Achtung: Korrektur bei den Nationalrats-Resultaten des Kantons ",corrected_cantons_NR$area_name_de[1]," entdeckt!")
+Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
+                 "Das BFS hat den bereits als ausgezählt gemeldeten Kanton ",corrected_cantons_NR$area_name_de[1],
+               " wieder deaktiviert. Allenfalls müssen die Sitzverteilung oder die Wähleranteile korrigiert werden. Bitte direkt mit dem Kanton abklären, was genau korrigiert wurde.\n\n",
+                 "Liebe Grüsse\n\nLENA")
+recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
+send_notification(Subject,Body,recipients)  
+}  
+
+
+###UPDATE DATABASE###
   #Metadata NR
   ongoing_cantons_NR <- election_metadata %>%
     filter(
       council == "NR",
       date == "2023-10-22",
-      status != "parties finished",
-      status != "finished"
+      status != "parties finished" | 
+        source_update != "BFS" ,
+      status != "finished" | 
+        source_update != "BFS"
     )
   
   #Merge with area data

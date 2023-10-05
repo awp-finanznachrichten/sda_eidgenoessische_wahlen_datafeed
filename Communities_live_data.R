@@ -1,6 +1,5 @@
 ###GET TESTDATA COMMUNITIES
-setwd("C:/Users/simon/OneDrive/sda_eidgenoessische_wahlen_datafeed")
-source("get_testdata_2023.R")
+source("./Tests/get_testdata_2023.R")
 Testdata <- TRUE
 ###LOAD RESULT AND VOTERTURNOUT DATA
 if (Testdata == FALSE) {
@@ -59,7 +58,6 @@ gemeinden <- gemeinden %>%
   left_join(meta_gmd_kt,
             by = join_by(gemeinde_nummer == Gemeinde_Nr))
 
-
 #storyboard_urlena_all <- c() #TEST
 for (g in 1:nrow(gemeinden)) {
   
@@ -84,10 +82,7 @@ for (g in 1:nrow(gemeinden)) {
     
   ergebnisse_gemeinde_tabelle <- ergebnisse_gemeinde %>%
       filter(!is.na(partei_staerke),
-             partei_staerke >= 3) %>% #|
-               #differenz_partei_staerke < -3) %>% 
-             #shortname_de != "weitere") 
-      # shortname_de != "BDP") %>%
+             partei_staerke >= 3) %>% 
       arrange(desc(partei_staerke))
   
   ergebnisse_gemeinde_urlena <- ergebnisse_gemeinde %>%

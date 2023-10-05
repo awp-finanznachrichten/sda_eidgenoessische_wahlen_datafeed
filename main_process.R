@@ -1,5 +1,5 @@
 #Working Directory
-MAIN_PATH <- "C:/Users/simon/OneDrive/"
+MAIN_PATH <- "C:/Users/sw/OneDrive/"
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 #Get Libraries and needed Data
@@ -11,6 +11,7 @@ source("config.R")
 NR_new_results <- FALSE
 NR_new_elected <- FALSE
 SR_new_elected <- FALSE
+NR_finished <- FALSE
 
 #Load Databases
 source("load_databases.R")
@@ -216,12 +217,15 @@ source("All_create_output_candidates_flourish.R")
 }
 
 ###ELECTION FINISHED###
+if (NR_finished == TRUE) {
+print("All NR results here!") 
 source("All_get_data_results.R")
 source("All_prepare_results_charts.R")
 source("All_publish_results_charts_DE.R")
 source("All_publish_results_charts_FR.R")
 source("All_publish_results_charts_IT.R")
-
+}
+  
 ###COMMUNITIES UR-LENA###
 ##Output tables and texts##
 if (NR_new_results == TRUE) {
