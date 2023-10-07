@@ -20,6 +20,7 @@ cleanup_urlena <- function(nationalrat_gemeinden_dw) {
   nationalrat_gemeinden_dw$Text_de <- gsub("verteidigt die Grüne ","verteidigen die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne ist ","Die Grünen sind ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("ist die Grüne ","sind die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("ist die Grüne[.] ","sind die Grünen. ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("hat die Grüne ","haben die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne hat ","Die Grünen haben ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("an der Grüne ","an den Grünen ",nationalrat_gemeinden_dw$Text_de)
@@ -48,8 +49,10 @@ cleanup_urlena <- function(nationalrat_gemeinden_dw) {
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne erreicht ","Die Grünen erreichen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("schneidet die Grüne ","schneiden die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("erzielt die Grüne ","erzielen die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("der Grüne[.] Diese muss ","den Grünen. Diese müssen ",nationalrat_gemeinden_dw$Text_de)
   
   nationalrat_gemeinden_dw$Text_de <- gsub("die Grüne, ","die Grünen, ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("die Grüne[.] ","die Grünen. ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("die Grüne ","die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne ","Die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("der Grüne ","den Grünen ",nationalrat_gemeinden_dw$Text_de)
