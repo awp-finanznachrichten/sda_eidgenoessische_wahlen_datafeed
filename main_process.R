@@ -33,6 +33,28 @@ if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) 
   source("All_create_output_candidates_flourish.R")
 }
 
+###INTERMEDIATE RESULTS NATIONALRAT###
+check_intermediate <- intermediate_timecheck %>%
+  filter(hour == hour(Sys.time()))
+
+if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending")) {
+  source("load_databases.R")
+  source("All_prepare_results.R")
+  source("NR_text_intermediate.R")
+  source("NR_mars_meldung_intermediate_DE.R")
+  source("NR_mars_meldung_intermediate_FR.R")
+  source("NR_mars_meldung_intermediate_IT.R")
+  #Send Mail
+  send_mail(type="NR_Overview",
+            recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+  #Set Intermediate news done
+  mydb <- connectDB(db_name = "sda_elections")  
+  sql_qry <- paste0("UPDATE intermediate_timecheck SET status = 'done' WHERE hour = '",hour(Sys.time()),"'")
+  rs <- dbSendQuery(mydb, sql_qry)
+  dbDisconnectAll() 
+}  
+
+###CANTON RESULTS###
 ##Check: Canton completed?
 #Get counted cantons
 counted_cantons_all <- election_metadata %>%
@@ -193,28 +215,6 @@ rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 }  
 }
-
-###INTERMEDIATE RESULTS NATIONALRAT###
-check_intermediate <- intermediate_timecheck %>%
-  filter(hour == hour(Sys.time()))
-
-if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending")) {
-  source("load_databases.R")
-  source("All_prepare_results.R")
-  source("NR_text_intermediate.R")
-  source("NR_mars_meldung_intermediate_DE.R")
-  source("NR_mars_meldung_intermediate_FR.R")
-  source("NR_mars_meldung_intermediate_IT.R")
-  #Send Mail
-  send_mail(type="NR_Overview",
-            recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
-  #Set Intermediate news done
-  mydb <- connectDB(db_name = "sda_elections")  
-  sql_qry <- paste0("UPDATE intermediate_timecheck SET status = 'done' WHERE hour = '",hour(Sys.time()),"'")
-  rs <- dbSendQuery(mydb, sql_qry)
-  dbDisconnectAll() 
-}  
-
 
 ###ELECTION FINISHED###
 if (NR_finished == TRUE) {
