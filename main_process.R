@@ -220,6 +220,7 @@ source("All_create_output_candidates_flourish.R")
 if (NR_finished == TRUE) {
 print("All NR results here!") 
   
+source("load_databases.R")
   ch_metadata <- election_metadata %>%
     filter(date == "2023-10-22",
            council == "NR"
@@ -232,7 +233,9 @@ print("All NR results here!")
     left_join(output_overview) %>%
     filter(area_type == "nation")
 
-source("All_get_data_results.R")
+if (ch_metadata$status != "finished") {
+  source("All_get_data_results.R")
+}  
   ##Charts Results##
   if (ch_metadata$charts_results[1] == "pending") {
 source("All_prepare_results_charts.R")
@@ -265,6 +268,11 @@ source("All_publish_results_charts_history.R")
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
   }
+  
+  ##Create Visuals##
+  counted_cantons <- ch_metadata
+  source("NR_create_visual_data.R")
+  
 }
   
 ###COMMUNITIES UR-LENA###

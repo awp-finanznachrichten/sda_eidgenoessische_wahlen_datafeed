@@ -32,6 +32,7 @@ cleanup_urlena <- function(nationalrat_gemeinden_dw) {
   nationalrat_gemeinden_dw$Text_de <- gsub("muss die Grüne ","müssen die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne verliert ","Die Grünen verlieren ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("belegt die Grüne ","belegen die Grünen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("belegt die Grüne[.] ","belegen die Grünen. ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne landet ","Die Grünen landen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("geht an die Grüne","geht and die Grünen",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne sichert ","Die Grünen sichern ",nationalrat_gemeinden_dw$Text_de)

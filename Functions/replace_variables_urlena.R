@@ -11,6 +11,11 @@ ergebnisse_gemeinde_urlena  <- ergebnisse_gemeinde_urlena  %>%
          rank_last_election = rank(round2(-letzte_wahl_partei_staerke,1),ties.method = "min")
          )
 
+###REMOVE
+ergebnisse_gemeinde_urlena$shortname_de <- "Grüne"
+ergebnisse_gemeinde_urlena$shortname_fr <- "Vert-e-s"
+ergebnisse_gemeinde_urlena$shortname_it <- "Verdi"
+
 text_urlena <- gsub("#Party1_name_d",ergebnisse_gemeinde_urlena$shortname_de[1],text_urlena)
 text_urlena <- gsub("#Party1_name_f",ergebnisse_gemeinde_urlena$shortname_fr[1],text_urlena)
 text_urlena <- gsub("#Party1_name_i",ergebnisse_gemeinde_urlena$shortname_it[1],text_urlena)
