@@ -186,7 +186,6 @@ if (stand_ch$wahl_abgeschlossen == TRUE) {
   #Easteregg average community
   nationalrat_gemeinden_dw <- add_easteregg(nationalrat_gemeinden_dw,
                 texts_spreadsheet_UrLena)
-  
 }  
 
 ##Add special texts if Canton counted

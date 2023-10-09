@@ -24,6 +24,15 @@ source("SR_get_data_candidates.R")
 #Load Databases again
 source("load_databases.R")
 
+###OVERVIEW RESULTS###
+if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) {
+  source("load_databases.R")
+  source("All_prepare_results.R")
+  source("All_publish_charts.R")
+  source("All_create_output_parliament_flourish.R")
+  source("All_create_output_candidates_flourish.R")
+}
+
 ##Check: Canton completed?
 #Get counted cantons
 counted_cantons_all <- election_metadata %>%
@@ -114,8 +123,8 @@ dbDisconnectAll()
 }  
 ##CANDIDATES RESULTS HERE##
 if (counted_cantons$status[c] != "parties finished") {
-  ##Text Candidates##
-  if (counted_cantons$texts_candidates[c] == "pending") {
+##Text Candidates##
+if (counted_cantons$texts_candidates[c] == "pending") {
     #Generate Output
     source("NR_text_candidates.R")
     source("NR_mars_meldung_candidates_DE.R")
@@ -130,7 +139,6 @@ if (counted_cantons$status[c] != "parties finished") {
     send_mail(type="NR_Candidates",
               recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
   }  
-  
 ##Charts Candidates##
 if (counted_cantons$charts_candidates[c] == "pending") {
 #Generate Output
@@ -207,14 +215,6 @@ if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending")) {
   dbDisconnectAll() 
 }  
 
-###OVERVIEW RESULTS###
-if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) {
-source("load_databases.R")
-source("All_prepare_results.R")
-source("All_publish_charts.R")
-source("All_create_output_parliament_flourish.R")
-source("All_create_output_candidates_flourish.R")
-}
 
 ###ELECTION FINISHED###
 if (NR_finished == TRUE) {
@@ -236,7 +236,7 @@ source("load_databases.R")
 if (ch_metadata$status != "finished") {
   source("All_get_data_results.R")
 }  
-  ##Charts Results##
+##Charts Results##
   if (ch_metadata$charts_results[1] == "pending") {
 source("All_prepare_results_charts.R")
 source("All_publish_results_charts_DE.R")
@@ -248,7 +248,7 @@ source("All_publish_results_charts_IT.R")
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
   }
-  ##Charts History##
+##Charts History##
   if (ch_metadata$charts_history[1] == "pending") {
 source("All_prepare_results_charts_history.R")
 source("All_publish_results_charts_history.R")
@@ -268,11 +268,9 @@ source("All_publish_results_charts_history.R")
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
   }
-  
   ##Create Visuals##
   counted_cantons <- ch_metadata
   source("NR_create_visual_data.R")
-  
 }
   
 ###COMMUNITIES UR-LENA###

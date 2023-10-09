@@ -78,7 +78,7 @@ if (type == "NR_Candidates") {
                   recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
 }  
  
-  if (type == "NR_Overview") {
+if (type == "NR_Overview") {
     Subject <- paste0("Nationalrat: Neue Zwischenstandsmeldung bereit")
     Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
                    "Eine neue Meldung zum Zwischenstand bei der Sitzverteilung des Nationalrates wurde erstellt. Ihr findet diese im Mars.\n\n",
@@ -86,7 +86,6 @@ if (type == "NR_Candidates") {
                    "Liebe Grüsse\n\nLENA")
     send_notification(Subject,Body,recipients)
   }    
-  
   
 if (type == "SR_Candidates") {
   selected_charts <- datawrapper_codes %>%

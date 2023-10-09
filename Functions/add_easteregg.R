@@ -59,6 +59,8 @@ differences_parties <- results_NR_communities %>%
   arrange(overall_difference_abs) %>%
   filter(is.na(overall_difference_abs) == FALSE)
 
+write.xlsx(differences_parties,"./Data/most_average_communities_2023.xlsx")
+
 average_community <- which(nationalrat_gemeinden_dw$ID == differences_parties$gemeinde_nummer[1])
 
 ##DE##
