@@ -86,13 +86,13 @@ intro_text <- gsub("NA","",intro_text)
 
 if (elections_metadata$type == "majorz") {
   if (language_chart == "de") {
-absolute_majority_text <- paste0("<b>absolutes Mehr: ",format(elections_metadata$absolute_majority,big.mark = "'"),"<b/>")
+absolute_majority_text <- paste0("absolutes Mehr: <b>",format(elections_metadata$absolute_majority,big.mark = "'"),"<b/>")
   }
 if (language_chart == "fr") {
-absolute_majority_text <- paste0("<b>majorité absolue: ",format(elections_metadata$absolute_majority,big.mark = "'"),"<b/>")
+absolute_majority_text <- paste0("majorité absolue: <b>",format(elections_metadata$absolute_majority,big.mark = "'"),"<b/>")
 }
 if (language_chart == "it") {
-absolute_majority_text <- paste0("<b>maggioranza assoluta: ",format(elections_metadata$absolute_majority,big.mark = "'"),"<b/>")
+absolute_majority_text <- paste0("maggioranza assoluta: <b>",format(elections_metadata$absolute_majority,big.mark = "'"),"<b/>")
 }
 }
 

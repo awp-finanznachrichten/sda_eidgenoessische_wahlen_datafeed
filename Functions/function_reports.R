@@ -23,7 +23,7 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
   ##########################      
   ##  Get Data            ##                
   ##########################
-  year <- 2019
+  year <- 2023
   con <- connectDB(db_name = 'sda_elections')
   ## Current Data
   sqlstr <- paste0("SELECT p.id, p.firstname, p.lastname, p.gender, p.birthdate, TIMESTAMPDIFF(YEAR, p.birthdate, date) as age,

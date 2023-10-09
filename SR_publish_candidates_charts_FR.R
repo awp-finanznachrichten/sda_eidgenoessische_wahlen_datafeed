@@ -56,7 +56,9 @@ for (i in 1:nrow(SR_results)) {
 }
 
 dw_edit_chart(chart_ID,
-              intro = texts_chart_fr[1],
+              intro = ifelse(grepl("NA",texts_chart_fr[2]) == TRUE,
+                             texts_chart_fr[1],
+                             paste0(texts_chart_fr[1],", ",texts_chart_fr[2])),
               annotate = texts_chart_fr[3],
               visualize = adapted_list)
 dw_publish_chart(chart_ID)
