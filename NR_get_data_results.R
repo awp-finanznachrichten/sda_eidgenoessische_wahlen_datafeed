@@ -13,7 +13,7 @@ timestamp_results_old <-
   read.csv("./Timestamps/timestamp_results.txt", header = FALSE,sep = ";")[1, 1]
 
 if (timestamp_results != timestamp_results_old) {
-  
+ 
 #Set Flag
 NR_new_results <- TRUE  
   
@@ -66,14 +66,45 @@ corrected_cantons_NR <- finished_cantons_NR %>%
   filter(kanton_abgeschlossen == FALSE)
 
 if (nrow(corrected_cantons_NR) > 0) {
+
+#Adapt Metadata
+  #Status and Remarks
+  if (corrected_cantons_NR$status[1] == "parties finished") {
+    status <- "upcoming"
+    remarks <- "BFS correction"
+  } else {
+    status <- "candidates finished"
+    remarks <- "BFS correction"
+  }
+  
+  #Adapt Metadata
+  mydb <- connectDB(db_name = "sda_elections")
+  sql_qry <- paste0(
+    "UPDATE elections_metadata SET ",
+    " status = '",
+    status,
+    "'",
+    ", source_update = 'BFS'",
+    ", remarks = '",
+    remarks,
+    "'",
+    " WHERE election_ID = '",
+    corrected_cantons_NR$election_ID[1],
+    "'"
+  )
+  rs <- dbSendQuery(mydb, sql_qry)
+  
+  dbDisconnectAll()  
+  
 #Correction Alert
+print(paste0("Achtung: Korrektur bei den Nationalrats-Resultaten des Kantons ",corrected_cantons_NR$area_name_de[1]," entdeckt!"))
 Subject <- paste0("Achtung: Korrektur bei den Nationalrats-Resultaten des Kantons ",corrected_cantons_NR$area_name_de[1]," entdeckt!")
 Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
                  "Das BFS hat den bereits als ausgezählt gemeldeten Kanton ",corrected_cantons_NR$area_name_de[1],
                " wieder deaktiviert. Allenfalls müssen die Sitzverteilung oder die Wähleranteile korrigiert werden. Bitte direkt mit dem Kanton abklären, was genau korrigiert wurde.\n\n",
                  "Liebe Grüsse\n\nLENA")
 recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
-send_notification(Subject,Body,recipients)  
+#send_notification(Subject,Body,recipients)  
 }  
 
 

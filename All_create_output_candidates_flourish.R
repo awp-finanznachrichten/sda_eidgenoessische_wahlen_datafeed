@@ -21,9 +21,14 @@ elected_candidates_overall <- elected_candidates_overall %>%
   mutate(picture = ifelse(is.na(picture),
                           "Replacement.jpg",
                           picture
-                          ))
+                          )) %>%
+  arrange(canton,
+          desc(council),
+          party_id,
+          desc(votes),
+          lastname)
 
-  #filter(is.na(picture) == FALSE) #REMOVE!
+elected_candidates_overall[is.na(elected_candidates_overall)] <- "-"
 
 #Make random selection for Testing
 #elected_candidates_overall <- elected_candidates_overall[sample(1:nrow(elected_candidates_overall),246),] #REMOVE!
@@ -31,8 +36,11 @@ elected_candidates_overall <- elected_candidates_overall %>%
 #Transform Data
 elected_candidates_overall_de <- elected_candidates_overall %>%
   mutate(Name = paste0(firstname," ",lastname),
-         Bild = paste0("https://164.ch/grafiken_wahlen2023/Nationalrat/",picture),
+         Bild = ifelse(grepl("NR",picture),
+                paste0("https://164.ch/grafiken_wahlen2023/Nationalrat/",picture),
+                paste0("https://164.ch/grafiken_wahlen2023/Staenderat/",picture)),
          `Bisher/Neu` = ifelse(status==2,"Bisher","Neu"),
+         
          Alter = round2(as.numeric(difftime(Sys.Date(),birthdate, units = "weeks"))/52.25),
          Rat = ifelse(council == "NR","Nationalrat","Ständerat")
          ) %>%
@@ -42,6 +50,7 @@ elected_candidates_overall_de <- elected_candidates_overall %>%
          Partei = shortname_de
          ) %>%
   select(Name,Bild,Kanton,`Bisher/Neu`,Beruf,Wohnort,Alter,Partei,Rat)
+
 
 elected_candidates_overall_fr <- elected_candidates_overall %>%
   mutate(Nom = paste0(firstname," ",lastname),

@@ -11,7 +11,7 @@ grafiken_uebersicht_candidates_SR <- grafiken_uebersicht_candidates_SR[-1,]
 grafiken_uebersicht_all <- rbind(grafiken_uebersicht,grafiken_uebersicht_history,grafiken_uebersicht_elected,
                                  grafiken_uebersicht_candidates_SR)
 
-
+View(grafiken_uebersicht)
 saveRDS(grafiken_uebersicht_all,"grafiken_uebersicht_all_it.RDS")
 write.xlsx(grafiken_uebersicht_all,"grafiken_uebersicht_all_it.xlsx",row.names = FALSE)
 
@@ -42,3 +42,7 @@ sql_qry <- paste0(sql_qry, paste(sprintf("('%s','%s','%s','%s')",
 }
   
 dbDisconnectAll()
+
+
+grafiken_uebersicht_all <- dw_list_charts()
+?dw_list_charts

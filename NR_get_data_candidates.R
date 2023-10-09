@@ -81,16 +81,47 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   corrected_cantons_NR <- finished_cantons_NR %>%
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer)) %>%
     filter(kanton_abgeschlossen == FALSE)
-  
+
   if (nrow(corrected_cantons_NR) > 0) {
+    #Adapt Metadata
+    #Status and Remarks
+    if (corrected_cantons_NR$status[1] == "candidates finished") {
+      status <- "upcoming"
+      remarks <- "BFS correction"
+    } else {
+      status <- "parties finished"
+      remarks <- "BFS correction"
+    }
+    
+    #Adapt Metadata
+    mydb <- connectDB(db_name = "sda_elections")
+    sql_qry <- paste0(
+      "UPDATE elections_metadata SET ",
+      " status = '",
+      status,
+      "'",
+      ", source_update = 'BFS'",
+      ", remarks = '",
+      remarks,
+      "'",
+      " WHERE election_ID = '",
+      corrected_cantons_NR$election_ID[1],
+      "'"
+    )
+    rs <- dbSendQuery(mydb, sql_qry)
+    
+    dbDisconnectAll()  
+    
+    
     #Correction Alert
+    print(paste0("Achtung: Korrektur bei den Nationalrats-Kandidierenden des Kantons ",corrected_cantons_NR$area_name_de[1]," entdeckt!"))
     Subject <- paste0("Achtung: Korrektur bei den Nationalrats-Kandidierenden des Kantons ",corrected_cantons_NR$area_name_de[1]," entdeckt!")
     Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
                    "Das BFS hat den bereits als ausgezählt gemeldeten Kanton ",corrected_cantons_NR$area_name_de[1],
                    " wieder deaktiviert. Allenfalls müssen die gewählten Nationalräte korrigiert werden. Bitte direkt mit dem Kanton abklären, was genau korrigiert wurde.\n\n",
                    "Liebe Grüsse\n\nLENA")
     recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
-    send_notification(Subject,Body,recipients)  
+    #send_notification(Subject,Body,recipients)  
   }  
   
   ###UPDATE DATABASE###

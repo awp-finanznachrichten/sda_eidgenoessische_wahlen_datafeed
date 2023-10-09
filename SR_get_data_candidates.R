@@ -71,14 +71,27 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
     filter(wahlgang_abgeschlossen == FALSE)
   
   if (nrow(corrected_cantons_SR) > 0) {
+    
+    #Adapt Metadata
+    mydb <- connectDB(db_name = "sda_elections")
+    sql_qry <- paste0(
+      "UPDATE elections_metadata SET ",
+      " status = 'upcoming'",
+      ", source_update = 'BFS' WHERE election_ID = '",
+      corrected_cantons_SR$election_ID[1],
+      "'"
+    )
+    rs <- dbSendQuery(mydb, sql_qry)
+    
     #Correction Alert
+    print(paste0("Achtung: Korrektur bei den Ständerats-Resultaten des Kantons ",corrected_cantons_SR$area_name_de[1]," entdeckt!"))
     Subject <- paste0("Achtung: Korrektur bei den Ständerats-Resultaten des Kantons ",corrected_cantons_SR$area_name_de[1]," entdeckt!")
     Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
                    "Das BFS hat den bereits als ausgezählt gemeldeten Kanton ",corrected_cantons_SR$area_name_de[1],
                    " wieder deaktiviert. Allenfalls müssen die Ständerats-Ergebnisse korrigiert werden. Bitte direkt mit dem Kanton abklären, was genau korrigiert wurde.\n\n",
                    "Liebe Grüsse\n\nLENA")
     recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
-    send_notification(Subject,Body,recipients)  
+    #send_notification(Subject,Body,recipients)  
   }  
   
 

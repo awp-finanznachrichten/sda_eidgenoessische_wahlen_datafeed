@@ -30,6 +30,7 @@ for (c in 1:nrow(counted_cantons_SR)) {
     left_join(people_metadata, join_by(person_id == id)) %>%
     left_join(parties_metadata, join_by (party_id == id)) %>%
     arrange(desc(votes),
+            shortname_de,
             lastname) %>%
     mutate(picture = ifelse(is.na(picture) == FALSE,picture,"Replacement.jpg"),
            image_link = ifelse(grepl("NR",picture),

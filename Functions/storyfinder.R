@@ -48,7 +48,12 @@ storyboard <- c(storyboard,"Outro_Tabelle_Special_BS")
 } else {
 storyboard <- c(storyboard,"")   
 }  
+
+if (counted_cantons$source_update[c] == "BFS") {
 storyboard <- c(storyboard,"Explainer","Disclaimer") 
+} else {
+storyboard <- c(storyboard,"Explainer","Disclaimer_Canton")   
+}  
 return(storyboard)
 }  
 
@@ -79,7 +84,8 @@ get_story_NR_intermediate <- function(results_ch) {
       } else {
         storyboard <- c(storyboard,"Text_ein_Verlierer_mehrere_Sitze") 
       }  
-  }  
+    }  
+    
   storyboard <- c(storyboard,"Intro_Tabelle","","Outro_Tabelle_add","Explainer","Disclaimer")
   return(storyboard)
   }  
@@ -116,9 +122,13 @@ get_story_NR_candidates <- function(seats_available,
   } else {
   storyboard <- c(storyboard,"")
   }  
-  storyboard <- c(storyboard,"Disclaimer")
-  return(storyboard)
   
+  if (counted_cantons$source_update[c] == "BFS") {
+    storyboard <- c(storyboard,"Disclaimer") 
+  } else {
+    storyboard <- c(storyboard,"Disclaimer_Canton")  
+  }  
+  return(storyboard)
 }  
 
 
@@ -137,41 +147,48 @@ get_story_SR_candidates <- function(seats_available,
   if (nrow(elected_candidates) == 2) {
   if (nrow(voted_out_candidates) == 2) {
     if (count_women_voted_out == 2) {
-      storyboard <- c("Catchword","Headline","Lead_Abgewählt_zwei_FF","Disclaimer")
+      storyboard <- c("Catchword","Headline","Lead_Abgewählt_zwei_FF")
     } else {
-    storyboard <- c("Catchword","Headline","Lead_Abgewählt_zwei","Disclaimer")    
+    storyboard <- c("Catchword","Headline","Lead_Abgewählt_zwei")    
     }  
   } else if (nrow(voted_out_candidates) == 1) {
     if (count_women_voted_out == 1) {
-      storyboard <- c("Catchword","Headline","Lead_Abgewählt_F","Disclaimer") 
+      storyboard <- c("Catchword","Headline","Lead_Abgewählt_F") 
     } else {
-      storyboard <- c("Catchword","Headline","Lead_Abgewählt","Disclaimer") 
+      storyboard <- c("Catchword","Headline","Lead_Abgewählt") 
     }  
   } else {
     if (count_women == 2) {
-      storyboard <- c("Catchword","Headline","Lead_TwoElected","Disclaimer") 
+      storyboard <- c("Catchword","Headline","Lead_TwoElected") 
     } else {
-      storyboard <- c("Catchword","Headline","Lead_TwoElected","Disclaimer") 
+      storyboard <- c("Catchword","Headline","Lead_TwoElected") 
     }
   }  
     
   } else if (nrow(elected_candidates) == 1) {
   if (seats_available == 2) {
     if (count_women == 1) {
-      storyboard <- c("Catchword","Headline","Lead_OneElected","Disclaimer")
+      storyboard <- c("Catchword","Headline","Lead_OneElected")
     } else {
-      storyboard <- c("Catchword","Headline","Lead_OneElected","Disclaimer")  
+      storyboard <- c("Catchword","Headline","Lead_OneElected")  
     }  
   } else {
     if (count_women == 1) {
-  storyboard <- c("Catchword","Headline","Lead_OneElected_Halbkanton","Disclaimer")
+  storyboard <- c("Catchword","Headline","Lead_OneElected_Halbkanton")
    } else {
-  storyboard <- c("Catchword","Headline","Lead_OneElected_Halbkanton","Disclaimer")
+  storyboard <- c("Catchword","Headline","Lead_OneElected_Halbkanton")
    }
   }  
   } else {
-  storyboard <- c("Catchword","Headline","Lead_NobodyElected","Disclaimer")
+  storyboard <- c("Catchword","Headline","Lead_NobodyElected")
   }  
+  
+  if (counted_cantons_SR$source_update[c] == "BFS") {
+    storyboard <- c(storyboard,"Disclaimer") 
+  } else {
+    storyboard <- c(storyboard,"Disclaimer_Canton")  
+  }  
+  
   return(storyboard)
 }  
 

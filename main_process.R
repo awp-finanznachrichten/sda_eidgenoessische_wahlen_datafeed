@@ -1,5 +1,5 @@
 #Working Directory
-MAIN_PATH <- "C:/Users/simon/OneDrive/"
+MAIN_PATH <- "C:/Users/sw/OneDrive/"
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 #Get Libraries and needed Data
@@ -180,7 +180,7 @@ vip_alert(counted_cantons_SR$area_ID[c],
           recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
 #Set Status Done
 mydb <- connectDB(db_name = "sda_elections")  
-sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
+sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '",counted_cantons_SR$election_ID[c],"'")
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 }  
@@ -219,13 +219,52 @@ source("All_create_output_candidates_flourish.R")
 ###ELECTION FINISHED###
 if (NR_finished == TRUE) {
 print("All NR results here!") 
+  
+  ch_metadata <- election_metadata %>%
+    filter(date == "2023-10-22",
+           council == "NR"
+    )
+  
+  #Merge with area, text and output overview
+  ch_metadata  <- ch_metadata   %>%
+    left_join(areas_metadata) %>%
+    left_join(status_texts) %>%
+    left_join(output_overview) %>%
+    filter(area_type == "nation")
+
 source("All_get_data_results.R")
+  ##Charts Results##
+  if (ch_metadata$charts_results[1] == "pending") {
 source("All_prepare_results_charts.R")
 source("All_publish_results_charts_DE.R")
 source("All_publish_results_charts_FR.R")
 source("All_publish_results_charts_IT.R")
+    #Set Status Done
+    mydb <- connectDB(db_name = "sda_elections")  
+    sql_qry <- paste0("UPDATE output_overview SET charts_results = 'done' WHERE election_ID = '2023-10-22_CH_NR'")
+    rs <- dbSendQuery(mydb, sql_qry)
+    dbDisconnectAll() 
+  }
+  ##Charts History##
+  if (ch_metadata$charts_history[1] == "pending") {
 source("All_prepare_results_charts_history.R")
 source("All_publish_results_charts_history.R")
+    #Set Status Done
+    mydb <- connectDB(db_name = "sda_elections")  
+    sql_qry <- paste0("UPDATE output_overview SET charts_history = 'done' WHERE election_ID = '2023-10-22_CH_NR'")
+    rs <- dbSendQuery(mydb, sql_qry)
+    dbDisconnectAll() 
+  }
+  ##Analytics##
+  if (ch_metadata$analytics[1] == "pending") {
+    #Generate Output
+    email_elected_report_nr(recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+    #Set Status Done
+    mydb <- connectDB(db_name = "sda_elections")  
+    sql_qry <- paste0("UPDATE output_overview SET analytics = 'done' WHERE election_ID = '2023-10-22_CH_NR'")
+    rs <- dbSendQuery(mydb, sql_qry)
+    dbDisconnectAll() 
+  }
 }
   
 ###COMMUNITIES UR-LENA###
