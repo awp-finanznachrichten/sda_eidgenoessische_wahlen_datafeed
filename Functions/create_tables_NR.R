@@ -32,10 +32,10 @@ if (language == "fr") {
   ##Create Table FR
   tabelle <- paste0("<table><tbody><tr>",
                     "<td></td>",
-                    "<td>nombre de sièges</td>",
-                    "<td>différence par rapport à 2019</td>",
-                    "<td>pourcentages des voix</td>",
-                    "<td>différence par rapport à 2019</td>",
+                    "<td>Nombre de sièges</td>",
+                    "<td>Différence par rapport à 2019</td>",
+                    "<td>Pourcentage de voix</td>",
+                    "<td>Différence par rapport à 2019</td>",
                     "</tr>")
   
   for (p in 1:nrow(results_parties)) {
@@ -60,10 +60,10 @@ if (language == "it") {
   ##Create Table FR
     tabelle <- paste0("<table><tbody><tr>",
                       "<td></td>",
-                      "<td>numero di seggi</td>",
-                      "<td>variazione rispetto al 2019</td>",
-                      "<td>percentuali di voto</td>",
-                      "<td>variazione rispetto al 2019</td>",
+                      "<td>Numero di seggi</td>",
+                      "<td>Variazione rispetto al 2019</td>",
+                      "<td>Percentuali di voto</td>",
+                      "<td>Variazione rispetto al 2019</td>",
                       "</tr>")
     
     for (p in 1:nrow(results_parties)) {
@@ -119,8 +119,8 @@ create_table_NR_overview <- function(results_ch,
     ##Create Table FR
     tabelle <- paste0("<table><tbody><tr>",
                       "<td></td>",
-                      "<td>nombre de sièges</td>",
-                      "<td>différence par rapport à 2019*</td>",
+                      "<td>Nombre de sièges</td>",
+                      "<td>Différence par rapport à 2019*</td>",
                       "</tr>")
     
     for (p in 1:nrow(results_ch)) {
@@ -143,8 +143,8 @@ create_table_NR_overview <- function(results_ch,
     ##Create Table FR
     tabelle <- paste0("<table><tbody><tr>",
                       "<td></td>",
-                      "<td>numero di seggi</td>",
-                      "<td>variazione rispetto al 2019*</td>",
+                      "<td>Numero di seggi</td>",
+                      "<td>Variazione rispetto al 2019*</td>",
                       "</tr>")
     
     for (p in 1:nrow(results_ch)) {

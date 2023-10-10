@@ -83,13 +83,12 @@ cleanup_urlena <- function(nationalrat_gemeinden_dw) {
     nationalrat_gemeinden_dw$Text_de <- gsub(" 11 "," elf ",nationalrat_gemeinden_dw$Text_de)
     nationalrat_gemeinden_dw$Text_de <- gsub(" 12 "," zwölf ",nationalrat_gemeinden_dw$Text_de)
 
-    
   nationalrat_gemeinden_dw$Text_fr <- gsub("Le Lega","La Lega",nationalrat_gemeinden_dw$Text_fr)
   nationalrat_gemeinden_dw$Text_fr <- gsub("le Lega","la Lega",nationalrat_gemeinden_dw$Text_fr)
   nationalrat_gemeinden_dw$Text_fr <- gsub("Le Solidarités","Solidarités gagne",nationalrat_gemeinden_dw$Text_fr)
   nationalrat_gemeinden_dw$Text_fr <- gsub("le Solidarités","Solidarités",nationalrat_gemeinden_dw$Text_fr)
-  nationalrat_gemeinden_dw$Text_fr <- gsub("Le divers ","Autres partis/listes ",nationalrat_gemeinden_dw$Text_fr)
-  nationalrat_gemeinden_dw$Text_fr <- gsub("le divers ","autres partis/listes ",nationalrat_gemeinden_dw$Text_fr)
+  nationalrat_gemeinden_dw$Text_fr <- gsub("Le divers ","Les petits partis et les candidats indépendants ",nationalrat_gemeinden_dw$Text_fr)
+  nationalrat_gemeinden_dw$Text_fr <- gsub("le divers ","les petits partis et les candidats indépendants ",nationalrat_gemeinden_dw$Text_fr)
   
   nationalrat_gemeinden_dw$Text_fr <- gsub("Le Vert-e-s reste","Les Vert-e-s restent",nationalrat_gemeinden_dw$Text_fr)
   nationalrat_gemeinden_dw$Text_fr <- gsub("Le Vert-e-s maintient sa","Les Vert-e-s maintiennent leur",nationalrat_gemeinden_dw$Text_fr)

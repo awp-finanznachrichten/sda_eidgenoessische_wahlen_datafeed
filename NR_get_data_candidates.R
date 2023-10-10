@@ -32,17 +32,11 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
     #rename(kanton_abgeschlossen_candidates = kanton_abgeschlossen)
 
   #Results
-  results_NR_cantons_candidates <- data_NR_candidates$level_kantone
-  
-  #Merge with parties metadata
-  results_NR_cantons_candidates <- results_NR_cantons_candidates %>%
+  results_NR_cantons_candidates <- data_NR_candidates$level_kantone %>%
     left_join(parties_metadata,
-              by = join_by(kandidat_partei_id == bfs_id))
-  
-  #Merge with location data
-  results_NR_cantons_candidates <- results_NR_cantons_candidates %>%
+              by = join_by(kandidat_partei_id == bfs_id)) %>%
     left_join(areas_metadata, join_by(kanton_nummer == bfs_ID))
-  
+
   #Create source ID
   results_NR_cantons_candidates$source_person_id <-
     paste0(
@@ -73,11 +67,10 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
       date == "2023-10-22",
       status == "candidates finished" |
         status == "finished",
-      source_update == "BFS"
-    )
-  finished_cantons_NR <- finished_cantons_NR  %>%
+      source_update == "BFS") %>%
     left_join(areas_metadata) %>%
     filter(area_type == "canton")
+  
   corrected_cantons_NR <- finished_cantons_NR %>%
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer)) %>%
     filter(kanton_abgeschlossen == FALSE)
@@ -133,16 +126,9 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
       status != "candidates finished" |
         source_update != "BFS",
       status != "finished" |
-        source_update != "BFS"
-    )
-  
-  #Merge with area data
-  ongoing_cantons_NR  <- ongoing_cantons_NR  %>%
+        source_update != "BFS") %>% 
     left_join(areas_metadata) %>%
-    filter(area_type == "canton")
-  
-  #Merge with status data
-  ongoing_cantons_NR <- ongoing_cantons_NR %>%
+    filter(area_type == "canton") %>%
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer))
 
   #Set variable elected or not

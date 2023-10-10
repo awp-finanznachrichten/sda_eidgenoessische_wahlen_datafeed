@@ -54,7 +54,8 @@ counted_cantons_SR <- counted_cantons_all %>%
 check_intermediate <- intermediate_timecheck %>%
   filter(hour == hour(Sys.time()))
 
-if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending")) {
+if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending") ){
+  if (nrow(counted_cantons) > 0) {
   source("load_databases.R")
   source("All_prepare_results.R")
   source("NR_text_intermediate.R")
@@ -64,6 +65,7 @@ if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending")) {
   #Send Mail
   send_mail(type="NR_Overview",
             recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+  }
   #Set Intermediate news done
   mydb <- connectDB(db_name = "sda_elections")  
   sql_qry <- paste0("UPDATE intermediate_timecheck SET status = 'done' WHERE hour = '",hour(Sys.time()),"'")
@@ -257,7 +259,7 @@ source("All_publish_results_charts_history.R")
   ##Analytics##
   if (ch_metadata$analytics[1] == "pending") {
     #Generate Output
-    email_elected_report_nr(recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+    email_elected_report_nr(recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch,inland@keystone-ats.ch, suisse@keystone-ats.ch")
     #Set Status Done
     mydb <- connectDB(db_name = "sda_elections")  
     sql_qry <- paste0("UPDATE output_overview SET analytics = 'done' WHERE election_ID = '2023-10-22_CH_NR'")

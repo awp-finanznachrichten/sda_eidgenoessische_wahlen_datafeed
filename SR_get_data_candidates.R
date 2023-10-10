@@ -31,16 +31,9 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   stand_cantons_candidates <- data_SR_candidates$stand_kantone
 
   #Results
-  results_SR_cantons_candidates <- data_SR_candidates$kandidierende
-  
-  #Merge with parties metadata
-  results_SR_cantons_candidates <- results_SR_cantons_candidates %>%
+  results_SR_cantons_candidates <- data_SR_candidates$kandidierende %>%
     left_join(parties_metadata,
-              by = join_by(kandidat_partei_id == bfs_id))
-  
-
-  #Merge with location data
-  results_SR_cantons_candidates <- results_SR_cantons_candidates %>%
+              by = join_by(kandidat_partei_id == bfs_id)) %>%
     left_join(areas_metadata, join_by(kanton_nummer == bfs_ID))
   
   #Create source ID
@@ -48,7 +41,6 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
                                                             results_SR_cantons_candidates$geburtsjahr,
                                                               str_replace_all(results_SR_cantons_candidates$name, " |-|'|/", ""))  
   
-
   #Replace NA with 0
   results_SR_cantons_candidates[is.na(results_SR_cantons_candidates)] <- 0
   
@@ -59,10 +51,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
       council == "SR",
       date == "2023-10-22",
         status == "finished",
-      source_update == "BFS"
-    )
-  
-  finished_cantons_SR <- finished_cantons_SR  %>%
+      source_update == "BFS") %>%
     left_join(areas_metadata) %>%
     filter(area_type == "canton")
   
@@ -102,16 +91,9 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
       council == "SR",
       date == "2023-10-22",
       status != "finished" |
-        source_update != "BFS"
-    )
-
-  #Merge with area data
-  ongoing_cantons_SR  <- ongoing_cantons_SR  %>%
+        source_update != "BFS") %>%
     left_join(areas_metadata) %>%
-    filter(area_type == "canton")
-  
-  #Merge with status data
-  ongoing_cantons_SR <- ongoing_cantons_SR %>%
+    filter(area_type == "canton") %>%
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer))
 
   #Set variable elected or not

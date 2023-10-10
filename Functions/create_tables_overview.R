@@ -44,9 +44,9 @@ create_table_overview <- function(data_canton,
     tabelle <- "<table>
 <tr>
 <td><b>Parti</b></td>
-<td><b>sièges</b></td>
+<td><b>Sièges</b></td>
 <td><b>+/-</b></td>
-<td><b>voix</b></td>
+<td><b>Voix</b></td>
 <td style='text-align: center'><b>+/-</b></td>
 </tr>"
     
@@ -82,9 +82,9 @@ create_table_overview <- function(data_canton,
     tabelle <- "<table>
 <tr>
 <td><b>Partito</b></td>
-<td><b>seggi</b></td>
+<td><b>Seggi</b></td>
 <td><b>+/-</b></td>
-<td><b>voti</b></td>
+<td><b>Voti</b></td>
 <td style='text-align: center'><b>+/-</b></td>
 </tr>"
     

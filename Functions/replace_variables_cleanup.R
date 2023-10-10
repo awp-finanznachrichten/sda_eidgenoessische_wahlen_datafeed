@@ -54,10 +54,11 @@ if (language == "fr") {
 texts <- gsub("Le Vert-e-s a","Les Vert-e-s ont",texts)
 texts <- gsub("le Vert-e-s","les Vert-e-s",texts)
 texts <- gsub("Le Vert-e-s ","Les Vert-e-s ",texts)
-texts <- gsub("Le divers ","Autres partis/listes ",texts)
-texts <- gsub("le divers ","autres partis/listes ",texts)
+texts <- gsub("Le divers ","Les petits partis et les candidats indépendants ",texts)
+texts <- gsub("le divers ","les petits partis et les candidats indépendants ",texts)
   
 ##Französisch
+texts <- str_replace_all(texts,"de 1 des ","d'un des ")
 texts <- str_replace_all(texts,"de Henniez","d'Henniez")
 texts <- str_replace_all(texts,"de Hermance","d'Hermance")
 texts <- str_replace_all(texts,"de Hermenches","d'Hermenches")

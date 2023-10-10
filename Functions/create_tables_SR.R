@@ -50,11 +50,11 @@ for (e in 1:nrow(results_candidates)) {
   
   if (language == "it") {  
     tabelle <- paste0("<table><tbody><tr>",
-                      "<td>hanno ottenuto voti</td>",
+                      "<td>Hanno ottenuto voti</td>",
                       "<td></td>",
                       "<td></td>",
-                      "<td>voti</td>",
-                      "<td>eletti</td>",
+                      "<td>Voti</td>",
+                      "<td>Eletti</td>",
                       "</tr>")
     for (e in 1:nrow(results_candidates)) {
       tabelle <- paste0(tabelle,

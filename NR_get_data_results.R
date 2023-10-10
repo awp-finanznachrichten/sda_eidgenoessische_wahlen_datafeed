@@ -54,12 +54,10 @@ finished_cantons_NR <- election_metadata %>%
     date == "2023-10-22",
     status == "parties finished" |
     status == "finished",
-    source_update == "BFS"
-  )
-
-finished_cantons_NR <- finished_cantons_NR  %>%
+    source_update == "BFS") %>%
   left_join(areas_metadata) %>%
   filter(area_type == "canton")
+
 corrected_cantons_NR <- finished_cantons_NR %>%
   left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer)) %>%
   filter(kanton_abgeschlossen == FALSE)
@@ -116,8 +114,7 @@ recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
       status != "parties finished" | 
         source_update != "BFS" ,
       status != "finished" | 
-        source_update != "BFS"
-    ) %>%
+        source_update != "BFS") %>%
     left_join(areas_metadata) %>%
     filter(area_type == "canton") %>%
     left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer))
