@@ -4,7 +4,7 @@ rs <-
   dbSendQuery(
     mydb,
     paste0(
-      "SELECT * FROM candidates_results WHERE date = '2023-10-22' AND elected = 1" #CHANGE TO elected = 1
+      "SELECT * FROM candidates_results WHERE date = '2023-10-22' AND elected = 1"
     )
   )
 elected_candidates_overall <- fetch(rs, n = -1)
@@ -12,8 +12,6 @@ dbDisconnectAll()
 
 #Get elected candidates
 elected_candidates_overall <- elected_candidates_overall %>%
-  #mutate(area_id = canton) %>%  #REMOVE!
-  #filter(is.na(source_update)) %>% #REMOVE!
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id)) %>%
   left_join(people_profession, join_by (person_id == person_id)) %>%
@@ -29,9 +27,6 @@ elected_candidates_overall <- elected_candidates_overall %>%
           lastname)
 
 elected_candidates_overall[is.na(elected_candidates_overall)] <- "-"
-
-#Make random selection for Testing
-#elected_candidates_overall <- elected_candidates_overall[sample(1:nrow(elected_candidates_overall),246),] #REMOVE!
 
 #Transform Data
 elected_candidates_overall_de <- elected_candidates_overall %>%
@@ -82,8 +77,6 @@ elected_candidates_overall_it <- elected_candidates_overall %>%
          Partito = shortname_it
   ) %>%
   select(Nome,Immagine,Canton,Stato,Occupazione,Residenza,Eta,Partito,Consiglio)
-
-#elected_candidates_overall$Rat[201:246] <- "Ständerat" #REMOVE
 
 write.csv(elected_candidates_overall_de,"./Output/elected_candidates_overall_de.csv",row.names = FALSE)
 write.csv(elected_candidates_overall_fr,"./Output/elected_candidates_overall_fr.csv",row.names = FALSE)

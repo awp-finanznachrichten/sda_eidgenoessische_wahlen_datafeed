@@ -1,4 +1,5 @@
-library(git2r)
+library(DBI)
+library(RMySQL)
 library(httr)
 library(XML)
 library(xlsx)
