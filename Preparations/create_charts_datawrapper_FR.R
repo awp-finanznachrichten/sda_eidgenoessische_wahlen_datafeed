@@ -96,8 +96,8 @@ headline <- str_replace_all(headline,"canton de Obwald","canton d'Obwald")
 headline <- str_replace_all(headline,"canton de Uri","canton d'Uri")
 
 dw_edit_chart(chart_id,
-              title=headline,
-              folderId = folders_NR_FR[c])
+              title=headline)
+              #folderId = folders_NR_FR[c])
 dw_data_to_chart(results_parties[c(2,4:7)],chart_id)
 dw_publish_chart(chart_id)
 metadata_chart <- dw_retrieve_chart_metadata(chart_id)

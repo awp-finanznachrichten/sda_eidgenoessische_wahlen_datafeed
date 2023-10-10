@@ -18,6 +18,7 @@ for ( i in 1:nrow(results_parties)) {
 
 
 dw_edit_chart(chart_id,
+              title = "Federali 2023: risultati dell'elezione per il Consiglio nazionale",
               visualize = adapted_list,
               intro = texts_chart_it[1]
 )
@@ -45,6 +46,7 @@ for ( i in 1:nrow(results_parties)) {
 
 
 dw_edit_chart(chart_id,
+              title = "Federali 2023: risultati dell'elezione per il Consiglio nazionale",
               visualize = adapted_list
 )
 

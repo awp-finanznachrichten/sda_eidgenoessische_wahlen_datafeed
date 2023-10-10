@@ -104,7 +104,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
       status != "finished" |
         source_update != "BFS"
     )
-  
+
   #Merge with area data
   ongoing_cantons_SR  <- ongoing_cantons_SR  %>%
     left_join(areas_metadata) %>%

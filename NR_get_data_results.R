@@ -117,15 +117,9 @@ recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
         source_update != "BFS" ,
       status != "finished" | 
         source_update != "BFS"
-    )
-  
-  #Merge with area data
-  ongoing_cantons_NR  <- ongoing_cantons_NR  %>%
+    ) %>%
     left_join(areas_metadata) %>%
-    filter(area_type == "canton")
-  
-  #Merge with status data
-  ongoing_cantons_NR <- ongoing_cantons_NR %>%
+    filter(area_type == "canton") %>%
     left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer))
 
   for (c in 1:nrow(ongoing_cantons_NR)) {
@@ -147,8 +141,11 @@ recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
     #                                           ), collapse = ","))
     #  rs <- dbSendQuery(mydb, sql_qry)
     #  dbDisconnectAll()
-      
+    
+    #Check if amount of distributed seats is correct  
+    seats_check <- sum(results_canton$anzahl_gewaehlte) == ongoing_cantons_NR$seats_available_NR[c]
 
+    if (seats_check == TRUE) {
       #Update party results
       mydb <- connectDB(db_name = "sda_elections")
       for (p in 1:nrow(results_canton)) {
@@ -205,6 +202,9 @@ recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
       rs <- dbSendQuery(mydb, sql_qry)
       
       dbDisconnectAll()
+    } else {
+      print(paste0("WARNING: Amount of seats does not match overall seats available in ",ongoing_cantons_NR$area_ID[c],"! The data was not entered in DB!"))
+    }  
     }
   }
   

@@ -18,6 +18,7 @@ for ( i in 1:nrow(results_parties)) {
 
 
 dw_edit_chart(chart_id,
+              title = "Wahlen 2023: Ergebnisse Nationalrat",
               visualize = adapted_list,
               intro = texts_chart[1]
 )
@@ -45,6 +46,7 @@ for ( i in 1:nrow(results_parties)) {
 
 
 dw_edit_chart(chart_id,
+              title = "Wahlen 2023: Ergebnisse Nationalrat",
               visualize = adapted_list
 )
 

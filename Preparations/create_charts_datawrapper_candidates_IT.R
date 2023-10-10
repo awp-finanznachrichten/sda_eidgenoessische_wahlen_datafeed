@@ -25,6 +25,9 @@ for (c in 1:nrow(counted_cantons)) {
     left_join(parties_metadata, join_by (party_id == id)) %>%
     .[1:counted_cantons$seats_available_NR[c],] #REMOVE!
   
+  texts_chart <- get_text_charts(language="it",
+                                 elections_metadata = counted_cantons[c,])
+  
   
   elected_candidates$image_link <- paste0("![](https://164.ch/grafiken_wahlen2023/Parlament/Replacement.jpg)")
   elected_candidates$text_it <- paste0("<b>Non ancora noto</b><br>")
@@ -66,7 +69,9 @@ for (c in 1:nrow(counted_cantons)) {
   headline <- paste0("Federali 2023: i consiglieri nazionali eletti nel canton ",counted_cantons$area_name_it[c])
   
   dw_edit_chart(chart_id,
-                title=headline)
+                title=headline,
+                intro = texts_chart[1],
+                annotate = texts_chart[3])
                 #folderId = folders_NR_IT[c])
   dw_data_to_chart(elected_candidates_images,chart_id)
   dw_publish_chart(chart_id)

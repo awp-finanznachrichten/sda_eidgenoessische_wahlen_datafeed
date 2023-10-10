@@ -18,6 +18,7 @@ for ( i in 1:nrow(results_parties)) {
 
 
 dw_edit_chart(chart_id,
+              title = "Fédérales 2023: résultat de l'élection pour le Conseil national",
               visualize = adapted_list,
               intro = texts_chart_fr[1]
 )
@@ -45,6 +46,7 @@ for ( i in 1:nrow(results_parties)) {
 
 
 dw_edit_chart(chart_id,
+              title = "Fédérales 2023: résultat de l'élection pour le Conseil national",
               visualize = adapted_list
 )
 

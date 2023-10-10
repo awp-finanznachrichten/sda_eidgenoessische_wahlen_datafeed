@@ -44,7 +44,8 @@ for ( i in 1:nrow(results_parties)) {
   adapted_list$`highlighted-series`[[i]] <- results_parties$shortname_de[i]
 }
 dw_edit_chart(chart_id,
-              visualize = adapted_list
+              visualize = adapted_list,
+              annotate = texts_chart[3]
 )
 dw_publish_chart(chart_id)
 print("Datawrapper-Chart updated")

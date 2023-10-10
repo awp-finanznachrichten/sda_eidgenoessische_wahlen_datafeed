@@ -3,7 +3,7 @@ MAIN_PATH <- "C:/Users/sw/OneDrive/"
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 #Get Libraries and needed Data
-source("config.R")
+source("CONFIG.R")
 
 #####START LOOP#####
 
@@ -33,6 +33,23 @@ if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) 
   source("All_create_output_candidates_flourish.R")
 }
 
+###CANTON RESULTS###
+##Check: Canton completed?
+#Get counted cantons
+counted_cantons_all <- election_metadata %>%
+  filter(date == "2023-10-22",
+         grepl("finished",status) == TRUE) %>% 
+  left_join(areas_metadata) %>%
+  left_join(status_texts) %>%
+  left_join(output_overview) %>%
+  filter(area_type == "canton")
+
+#Get counted cantons NR and SR
+counted_cantons <- counted_cantons_all %>%
+  filter(council == "NR")
+counted_cantons_SR <- counted_cantons_all %>%
+  filter(council == "SR") 
+
 ###INTERMEDIATE RESULTS NATIONALRAT###
 check_intermediate <- intermediate_timecheck %>%
   filter(hour == hour(Sys.time()))
@@ -53,27 +70,6 @@ if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending")) {
   rs <- dbSendQuery(mydb, sql_qry)
   dbDisconnectAll() 
 }  
-
-###CANTON RESULTS###
-##Check: Canton completed?
-#Get counted cantons
-counted_cantons_all <- election_metadata %>%
-  filter(date == "2023-10-22",
-         grepl("finished",status) == TRUE
-         )
-
-#Merge with area, text and output overview
-counted_cantons_all <- counted_cantons_all  %>%
-  left_join(areas_metadata) %>%
-  left_join(status_texts) %>%
-  left_join(output_overview) %>%
-  filter(area_type == "canton")
-
-#Get counted cantons NR and SR
-counted_cantons <- counted_cantons_all %>%
-  filter(council == "NR")
-counted_cantons_SR <- counted_cantons_all %>%
-  filter(council == "SR") 
 
 ###NATIONALRAT###
 for (c in 1:nrow(counted_cantons)) {
@@ -281,14 +277,25 @@ source("Communities_publish_charts.R")
 }
 
 ###COMMIT###
+library(git2r)
 git2r::config(user.name = "awp-finanznachrichten",user.email = "sw@awp.ch")
 token <- read.csv(paste0(MAIN_PATH,"Github_Token/token.txt"),header=FALSE)[1,1]
 git2r::cred_token(token)
 gitadd()
 gitcommit()
 gitpush()
+detach("package:git2r",unload=TRUE)
 
 ###CREATE VISUAL###
+source("load_databases.R")
+counted_cantons_all <- election_metadata %>%
+  filter(date == "2023-10-22",
+         grepl("finished",status) == TRUE) %>% 
+  left_join(areas_metadata) %>%
+  left_join(status_texts) %>%
+  left_join(output_overview) %>%
+  filter(area_type == "canton")
+
 counted_cantons <- counted_cantons_all %>%
   filter(council == "NR")
 counted_cantons_SR <- counted_cantons_all %>%
