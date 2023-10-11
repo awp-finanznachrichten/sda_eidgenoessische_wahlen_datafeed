@@ -21,9 +21,6 @@ source("NR_get_data_results.R")
 source("NR_get_data_candidates.R")
 source("SR_get_data_candidates.R")
 
-#Load Databases again
-source("load_databases.R")
-
 ###OVERVIEW RESULTS###
 if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) {
   source("load_databases.R")
@@ -32,6 +29,9 @@ if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) 
   source("All_create_output_parliament_flourish.R")
   source("All_create_output_candidates_flourish.R")
 }
+
+#Load Databases again
+source("load_databases.R")
 
 ###CANTON RESULTS###
 ##Check: Canton completed?
@@ -49,6 +49,17 @@ counted_cantons <- counted_cantons_all %>%
   filter(council == "NR")
 counted_cantons_SR <- counted_cantons_all %>%
   filter(council == "SR") 
+
+#Get intermediate results SR
+intermediate_cantons_SR <- election_metadata %>%
+  filter(date == "2023-10-22",
+         grepl("ongoing",status) == TRUE,
+         remarks == "new data available") %>% 
+  left_join(areas_metadata) %>%
+  left_join(status_texts) %>%
+  left_join(output_overview) %>%
+  filter(area_type == "canton",
+         council == "SR")
 
 ###INTERMEDIATE RESULTS NATIONALRAT###
 check_intermediate <- intermediate_timecheck %>%
@@ -172,7 +183,7 @@ dbDisconnectAll()
 }
 }
 
-###STAENDERAT###
+###STAENDERAT ENDRESULTAT###
 for (c in 1:nrow(counted_cantons_SR)) {
 ##Text Candidates##
 if (counted_cantons_SR$texts_candidates[c] == "pending") {
@@ -214,6 +225,18 @@ dbDisconnectAll()
 }  
 }
 
+###STAENDERAT ZWISCHENRESULTAT###
+for (c in 1:nrow(intermediate_cantons_SR)) {
+print(paste0("New intermediate data for ",intermediate_cantons_SR$area_ID[c]," found!"))
+source("SR_publish_candidates_charts_intermediate_DE.R")
+source("SR_publish_candidates_charts_intermediate_FR.R")
+source("SR_publish_candidates_charts_intermediate_IT.R")  
+#Set Data published
+mydb <- connectDB(db_name = "sda_elections")  
+sql_qry <- paste0("UPDATE elections_metadata SET remarks = 'intermediate data published' WHERE election_ID = '",intermediate_cantons_SR$election_ID[c],"'")
+rs <- dbSendQuery(mydb, sql_qry)
+dbDisconnectAll()   
+}  
 ###ELECTION FINISHED###
 if (NR_finished == TRUE) {
 print("All NR results here!") 

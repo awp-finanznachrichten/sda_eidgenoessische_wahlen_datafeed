@@ -29,7 +29,7 @@ rs <-
   dbSendQuery(
     mydb,
     paste0(
-      "SELECT * FROM candidates_results WHERE date = '2023-10-22' AND elected = 1" #CHANGE TO elected = 1
+      "SELECT * FROM candidates_results WHERE date = '2023-10-22' AND elected = 1 AND council = 'NR'"
     )
   )
 elected_candidates_overall <- fetch(rs, n = -1)
@@ -37,14 +37,9 @@ dbDisconnectAll()
 
 #Get elected candidates
 elected_candidates_overall <- elected_candidates_overall %>%
-  #mutate(area_id = canton) %>%  #REMOVE
-  #filter(is.na(source_update)) %>% #REMOVE!
   filter(is.na(place_id) == FALSE) %>%
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id))
-
-#Make random selection for Testing
-#elected_candidates_overall <- elected_candidates_overall[sample(1:nrow(elected_candidates_overall),246),]
 
 #Dataframe Output
 nationalrat_gemeinden_dw <- data.frame(0,"Gemeinde_de","Gemeinde_fr","Gemeinde_it","Text_de","Text_fr","Text_it","Tabelle_de","Tabelle_fr","Tabelle_it","no_data")
@@ -59,7 +54,6 @@ gemeinden <- gemeinden %>%
   left_join(meta_gmd_kt,
             by = join_by(gemeinde_nummer == Gemeinde_Nr))
 
-#storyboard_urlena_all <- c() #TEST
 for (g in 1:nrow(gemeinden)) {
   
   ergebnisse_gemeinde <- results_NR_communities %>%
@@ -228,6 +222,10 @@ selected_output <- nationalrat_gemeinden_dw %>%
 
 write.csv(selected_output,file=paste0("./Output_Cantons/nationalrat_ergebnisse_gemeinden_",canton,".csv"),row.names = FALSE)
 }  
+
+#Create output for regions
+###TO DO###
+
 #View(table(nationalrat_gemeinden_dw$Storyboard))
 #write.xlsx(nationalrat_gemeinden_dw,"./Texte/texts_urlena.xlsx",row.names = FALSE)
 

@@ -35,7 +35,7 @@ cleanup_urlena <- function(nationalrat_gemeinden_dw) {
   nationalrat_gemeinden_dw$Text_de <- gsub("belegt die Grüne ","belegen die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("belegt die Grüne[.] ","belegen die Grünen. ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne landet ","Die Grünen landen ",nationalrat_gemeinden_dw$Text_de)
-  nationalrat_gemeinden_dw$Text_de <- gsub("geht an die Grüne","geht and die Grünen",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("geht an die Grüne","geht an die Grünen",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne sichert ","Die Grünen sichern ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("kann die Grüne","können die Grünen",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne verzeichnet ","Die Grünen verzeichnen ",nationalrat_gemeinden_dw$Text_de)
@@ -52,6 +52,8 @@ cleanup_urlena <- function(nationalrat_gemeinden_dw) {
   nationalrat_gemeinden_dw$Text_de <- gsub("schneidet die Grüne ","schneiden die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("erzielt die Grüne ","erzielen die Grünen ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("der Grüne[.] Diese muss ","den Grünen. Diese müssen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("Die Grüne belegt ","Die Grünen belegen ",nationalrat_gemeinden_dw$Text_de)
+  nationalrat_gemeinden_dw$Text_de <- gsub("behält die Grüne ","behalten die Grünen ",nationalrat_gemeinden_dw$Text_de)
   
   nationalrat_gemeinden_dw$Text_de <- gsub("die Grüne, ","die Grünen, ",nationalrat_gemeinden_dw$Text_de)
   nationalrat_gemeinden_dw$Text_de <- gsub("die Grüne[.] ","die Grünen. ",nationalrat_gemeinden_dw$Text_de)
@@ -224,7 +226,7 @@ cleanup_urlena <- function(nationalrat_gemeinden_dw) {
   
   
   nationalrat_gemeinden_dw$Text_it <- gsub("Altro ","Altri partiti/liste ",nationalrat_gemeinden_dw$Text_it)
-  nationalrat_gemeinden_dw$Text_it <- gsub("altro ","altri partiti/liste ",nationalrat_gemeinden_dw$Text_it)
+  nationalrat_gemeinden_dw$Text_it <- gsub("partito altro ","altri partiti/liste ",nationalrat_gemeinden_dw$Text_it)
 
   
  

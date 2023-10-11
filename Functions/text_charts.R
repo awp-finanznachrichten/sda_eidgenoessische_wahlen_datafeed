@@ -6,8 +6,14 @@ absolute_majority_text <- ""
 annotate_text <- "&nbsp;"
   
 if (language_chart == "de") {
+  
+  if (elections_metadata$type == "majorz") {
   intro_text <- paste0(elections_metadata$status_text_de,"<br>",
-                       "Verfügbare Sitze: <b>",elections_metadata$seats_available_NR,"</b>")
+                       "Verfügbare Sitze: <b>",elections_metadata$seats_available_SR,"</b>")
+  } else {
+  intro_text <- paste0(elections_metadata$status_text_de,"<br>",
+                         "Verfügbare Sitze: <b>",elections_metadata$seats_available_NR,"</b>")  
+  }  
   if (elections_metadata$status == "ongoing") {
     intro_text <- paste0("Live-Zwischenstand von <b>",format(Sys.time(),"%H:%M")," Uhr</b>. ",intro_text)
   }
@@ -32,8 +38,15 @@ if (language_chart == "de") {
 }
 
 if (language_chart == "fr") {
-   intro_text <- paste0(elections_metadata$status_text_fr,"<br>",
-                       "Siège(s) à repourvoir: <b>",elections_metadata$seats_available_NR,"</b>")
+  
+  if (elections_metadata$type == "majorz") {
+    intro_text <- paste0(elections_metadata$status_text_fr,"<br>",
+                         "Siège(s) à repourvoir: <b>",elections_metadata$seats_available_SR,"</b>")
+  } else {
+    intro_text <- paste0(elections_metadata$status_text_fr,"<br>",
+                         "Siège(s) à repourvoir: <b>",elections_metadata$seats_available_NR,"</b>")
+  }  
+
   if (elections_metadata$status == "ongoing") {  
     intro_text <- paste0("Résultat en direct à <b>",format(Sys.time(),"%Hh%M"),"</b>. ",intro_text)
   }  
@@ -57,8 +70,13 @@ if (language_chart == "fr") {
 }
 
 if (language_chart == "it") {
-  intro_text <- paste0(elections_metadata$status_text_it,"<br>",
-                       "Seggi disponibili: <b>",elections_metadata$seats_available_NR,"</b>")
+  if (elections_metadata$type == "majorz") {
+    intro_text <- paste0(elections_metadata$status_text_it,"<br>",
+                         "Seggi disponibili: <b>",elections_metadata$seats_available_SR,"</b>")
+  } else {
+    intro_text <- paste0(elections_metadata$status_text_it,"<br>",
+                         "Seggi disponibili: <b>",elections_metadata$seats_available_NR,"</b>")  
+    }  
   if (elections_metadata$status == "ongoing") { 
     intro_text <- paste0("Risultato in diretta alle <b>",format(Sys.time(),"%H:%M"),"</b>. ",intro_text)
   }
