@@ -147,7 +147,7 @@ if (type == "canton") {
     texts <- gsub(" 12 "," dodici ",texts)  
 }    
   
-  
+texts <- gsub("di x Cantoni su ","di un cantone su ",texts)
 texts <- gsub("Altro ","Altri partiti/liste ",texts)
 texts <- gsub("altro ","altri partiti/liste ",texts)
 }    

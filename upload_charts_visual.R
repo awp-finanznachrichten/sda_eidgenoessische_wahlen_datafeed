@@ -2,7 +2,7 @@ library(RCurl)
 library(dplyr)
 
 ###Set path with the charts
-setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_charts"))
+setwd("C:/sda_eidgenoessische_wahlen_charts")
 
 ###Get Folders
 folders <- list.dirs(recursive = FALSE)
