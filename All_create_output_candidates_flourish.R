@@ -78,6 +78,7 @@ elected_candidates_overall_it <- elected_candidates_overall %>%
   ) %>%
   select(Nome,Immagine,Canton,Stato,Occupazione,Residenza,Eta,Partito,Consiglio)
 
-write.csv(elected_candidates_overall_de,"./Output/elected_candidates_overall_de.csv",row.names = FALSE)
-write.csv(elected_candidates_overall_fr,"./Output/elected_candidates_overall_fr.csv",row.names = FALSE)
-write.csv(elected_candidates_overall_it,"./Output/elected_candidates_overall_it.csv",row.names = FALSE)
+write.csv(elected_candidates_overall_de,"./Output/elected_candidates_overall_de.csv",row.names = FALSE, fileEncoding = "latin1")
+write.csv(elected_candidates_overall_fr,"./Output/elected_candidates_overall_fr.csv",row.names = FALSE, fileEncoding = "latin1")
+write.csv(elected_candidates_overall_it,"./Output/elected_candidates_overall_it.csv",row.names = FALSE, fileEncoding = "latin1")
+

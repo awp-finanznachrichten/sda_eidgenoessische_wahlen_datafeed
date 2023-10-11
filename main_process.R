@@ -85,6 +85,7 @@ if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending") ){
 }  
 
 ###NATIONALRAT###
+if (nrow(counted_cantons) > 0) {
 for (c in 1:nrow(counted_cantons)) {
 
 ##PARTIES RESULTS HERE##
@@ -182,8 +183,10 @@ dbDisconnectAll()
 }
 }
 }
+}
 
 ###STAENDERAT ENDRESULTAT###
+if (nrow(counted_cantons_SR) > 0) {
 for (c in 1:nrow(counted_cantons_SR)) {
 ##Text Candidates##
 if (counted_cantons_SR$texts_candidates[c] == "pending") {
@@ -224,8 +227,9 @@ rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 }  
 }
-
+}
 ###STAENDERAT ZWISCHENRESULTAT###
+if (nrow(intermediate_cantons_SR) > 0){
 for (c in 1:nrow(intermediate_cantons_SR)) {
 print(paste0("New intermediate data for ",intermediate_cantons_SR$area_ID[c]," found!"))
 source("SR_publish_candidates_charts_intermediate_DE.R")
@@ -237,6 +241,7 @@ sql_qry <- paste0("UPDATE elections_metadata SET remarks = 'intermediate data pu
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll()   
 }  
+}
 ###ELECTION FINISHED###
 if (NR_finished == TRUE) {
 print("All NR results here!") 

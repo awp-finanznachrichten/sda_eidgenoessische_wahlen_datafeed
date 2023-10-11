@@ -89,8 +89,8 @@ cleanup_urlena <- function(nationalrat_gemeinden_dw) {
   nationalrat_gemeinden_dw$Text_fr <- gsub("le Lega","la Lega",nationalrat_gemeinden_dw$Text_fr)
   nationalrat_gemeinden_dw$Text_fr <- gsub("Le Solidarités","Solidarités gagne",nationalrat_gemeinden_dw$Text_fr)
   nationalrat_gemeinden_dw$Text_fr <- gsub("le Solidarités","Solidarités",nationalrat_gemeinden_dw$Text_fr)
-  nationalrat_gemeinden_dw$Text_fr <- gsub("Le divers ","Les petits partis et les candidats indépendants ",nationalrat_gemeinden_dw$Text_fr)
-  nationalrat_gemeinden_dw$Text_fr <- gsub("le divers ","les petits partis et les candidats indépendants ",nationalrat_gemeinden_dw$Text_fr)
+  nationalrat_gemeinden_dw$Text_fr <- gsub("Le Divers ","Les petits partis et les candidats indépendants ",nationalrat_gemeinden_dw$Text_fr)
+  nationalrat_gemeinden_dw$Text_fr <- gsub("le Divers ","les petits partis et les candidats indépendants ",nationalrat_gemeinden_dw$Text_fr)
   
   nationalrat_gemeinden_dw$Text_fr <- gsub("Le Vert-e-s reste","Les Vert-e-s restent",nationalrat_gemeinden_dw$Text_fr)
   nationalrat_gemeinden_dw$Text_fr <- gsub("Le Vert-e-s maintient sa","Les Vert-e-s maintiennent leur",nationalrat_gemeinden_dw$Text_fr)
