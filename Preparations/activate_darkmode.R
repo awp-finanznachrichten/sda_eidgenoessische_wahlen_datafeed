@@ -24,4 +24,3 @@ dw_edit_chart(chart_id,
               publish = publish_list)
 dw_publish_chart(chart_id)
 }
-View(datawrapper_codes)

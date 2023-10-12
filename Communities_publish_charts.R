@@ -5,12 +5,18 @@ chart_id_tabelle_fr <- "1PjhW"
 chart_id_text_it <- "n1scm"
 chart_id_tabelle_it <- "a3EW0"
 
+undertitel_de <- "Es sind noch keine Gemeinden ausgezählt."
+undertitel_fr <- "Aucun résultat n'est encore connu."
+undertitel_it <- "Nessun risultato è ancora noto."
+
+if (stand_ch$gemeinden_abgeschlossen > 0) {
 undertitel_de <- paste0("Letzte Aktualisierung: ",format(Sys.time(),"%H:%M Uhr"),". ","Es sind <b>",stand_ch$gemeinden_abgeschlossen,"</b> von <b>",stand_ch$gemeinden_total,
                             "</b> Gemeinden ausgezählt.")
 undertitel_fr <- paste0("dernière mise à jour: ",format(Sys.time(),"%Hh%M"),". ","Les résultats de <b>",stand_ch$gemeinden_abgeschlossen,"</b> des <b>",stand_ch$gemeinden_total,
                             "</b> communes sont connus.")
 undertitel_it <- paste0("Ultimo aggiornamento: ",format(Sys.time(),"%H:%M"),". ","I risultati di <b>",stand_ch$gemeinden_abgeschlossen,"</b> dei <b>",stand_ch$gemeinden_total,
                             "</b> comuni sono noti.")
+}
     
 ###DE###
 undertitel_de_text <- paste0(undertitel_de,'<br><span style="line-height:30px">

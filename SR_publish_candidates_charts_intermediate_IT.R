@@ -54,7 +54,7 @@ for (i in 1:nrow(SR_results)) {
 }
 
 dw_edit_chart(chart_ID,
-              intro = ifelse(grepl("NA",texts_chart_it[2]) == TRUE,
+              intro = ifelse(intermediate_cantons_SR$absolute_majority[c] > 0,
                              texts_chart_it[1],
                              paste0(texts_chart_it[1],", ",texts_chart_it[2])),
               annotate = texts_chart_it[3],

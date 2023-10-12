@@ -137,6 +137,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
         "UPDATE elections_metadata SET ",
         " status = 'finished'",
         ", source_update = 'BFS'",
+        ", absolute_majority = 0",
         ", other_election_needed = '",other_election_needed,
         "' WHERE election_ID = '",
         ongoing_cantons_SR$election_ID[c],

@@ -14,6 +14,8 @@ texts <- gsub("#Datum_SR_d",paste0(day(metadata$second_ballot_date[c]),". Novemb
 texts <- gsub("#Datum_SR_f",paste0(day(metadata$second_ballot_date[c])," novembre"),texts)
 texts <- gsub("#Datum_SR_i",paste0(day(metadata$second_ballot_date[c])," novembre"),texts)
 
+texts <- gsub("#Absolute_Majority",format(as.numeric(metadata$absolute_majority[c]),big.mark = "'"),texts)
+
 if (nrow(elected_candidates) > 0) {
 texts <- gsub("#Vorname_SR1",elected_candidates$firstname[1],texts)
 texts <- gsub("#Nachname_SR1",elected_candidates$lastname[1],texts)

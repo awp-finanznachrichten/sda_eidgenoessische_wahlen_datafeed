@@ -51,27 +51,21 @@
   ongoing_cantons_NR <- election_metadata %>%
     filter(
       council == "NR",
-      date == "2023-10-22")
-  
-  #Merge with area data
-  ongoing_cantons_NR  <- ongoing_cantons_NR  %>%
+      date == "2023-10-22") %>%
     left_join(areas_metadata) %>%
-    filter(area_type == "canton")
-  
-  #Merge with status data
-  ongoing_cantons_NR <- ongoing_cantons_NR %>%
+    filter(area_type == "canton") %>%
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer))
   
-  #Set variable elected or not
   results_NR_cantons_candidates$flag_gewaehlt <-
     ifelse(results_NR_cantons_candidates$flag_gewaehlt == TRUE, 1, 0)
 
+
   for (c in 1:nrow(ongoing_cantons_NR)) {
-    if (ongoing_cantons_NR$kanton_abgeschlossen[c] == TRUE) {
+    if (ongoing_cantons_NR$kanton_abgeschlossen[c] == FALSE) {
       
       print(paste0("Enter complete results for canton ",ongoing_cantons_NR$area_ID[c],"!"))
       
-      #Get elected candidates results from canton
+      #Get not elected candidates results from canton
       results_canton <- results_NR_cantons_candidates %>%
         filter(kanton_nummer == ongoing_cantons_NR$bfs_ID[c],
                flag_gewaehlt == 0)
@@ -96,6 +90,7 @@
         )
         rs <- dbSendQuery(mydb, sql_qry)
       }
+      dbDisconnectAll()
 
     }
   }

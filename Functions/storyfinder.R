@@ -184,11 +184,14 @@ get_story_SR_candidates <- function(seats_available,
   }  
   
   if (counted_cantons_SR$source_update[c] == "BFS") {
-    storyboard <- c(storyboard,"Disclaimer") 
+    storyboard <- c(storyboard,"","Disclaimer") 
   } else {
-    storyboard <- c(storyboard,"Disclaimer_Canton")  
+    if (counted_cantons_SR$absolute_majority[c] > 0) {
+    storyboard <- c(storyboard,"Tabelle_Outro","Disclaimer_Canton")
+    } else {
+    storyboard <- c(storyboard,"","Disclaimer_Canton")
+    }  
   }  
-  
   return(storyboard)
 }  
 
