@@ -17,6 +17,7 @@ texts_chart_it <- get_text_charts(language="it",
 
 #Get SR candidates
 SR_results <- results_candidates %>%
+  filter(votes > 0) %>%
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id)) %>%
   arrange(desc(votes),

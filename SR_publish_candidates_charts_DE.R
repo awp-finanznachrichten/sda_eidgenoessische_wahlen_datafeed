@@ -17,6 +17,7 @@ texts_chart <- get_text_charts(language="de",
 
 #Get SR candidates
 SR_results <- results_candidates %>%
+  filter(votes > 0) %>%
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id)) %>%
   arrange(desc(votes),
@@ -32,7 +33,6 @@ SR_results <- results_candidates %>%
          name_text = ifelse(grepl("Vereinzelte",name_text),"Vereinzelte",name_text),
          shortname_de = ifelse(grepl("Vereinzelte",name_text),"-",shortname_de)) %>%
   select(image_link,name_text,shortname_de,votes,elected)
-
 
 ###Publish Chart DE###
 chart_ID <- datawrapper_codes %>%

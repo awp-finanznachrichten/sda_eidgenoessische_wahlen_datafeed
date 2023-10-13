@@ -35,7 +35,7 @@ NR_new_results <- TRUE
   
   #Timestamps
   stand_cantons_results <- data_NR_results$stand_kantone
-  
+
   #Results
   results_NR_cantons <- data_NR_results$level_kantone
 

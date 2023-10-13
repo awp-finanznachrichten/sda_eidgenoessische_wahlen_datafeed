@@ -12,7 +12,9 @@ rs <-
 results_candidates <- fetch(rs, n = -1)
 dbDisconnectAll()
 
+#All Candidates with at least 1 vote
 results_candidates <- results_candidates %>%
+  filter(votes > 0) %>%
   left_join(people_metadata, join_by(person_id == id)) %>%
   left_join(parties_metadata, join_by (party_id == id)) %>%
   arrange(desc(votes),
