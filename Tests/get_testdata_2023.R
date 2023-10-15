@@ -37,7 +37,8 @@ results_NR_communities <- results_NR_communities %>%
 
 ###Results voter turnout
 data_NR_voterturnout<- fromJSON(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten/Testdaten/Testdata_NR_2023_Completed/sd-t-17.02-NRW2023-wahlbeteiligung.json"), flatten = TRUE)
-results_NR_communities_voterturnout <- data_NR_voterturnout$level_gemeinden
+results_NR_communities_voterturnout <- data_NR_voterturnout$level_gemeinden %>%
+  filter(gemeinde_nummer < 9000)
 results_NR_cantons_voterturnout <- data_NR_voterturnout$level_kantone
 results_NR_CH_voterturnout <- data_NR_voterturnout$level_ch
 
