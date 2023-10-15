@@ -11,13 +11,13 @@ vip_alert <- function(canton = NULL, council, recipients) {
   ## Return
   ## result: Sends E-Mail with alert
   ########################
-  
+
   ## Filter for canton
   canton_filter <- ""
   if (!is.null(canton)) {
     canton_filter <- paste0(" AND area_id = ", quote_str(canton), " ")
   }
-  
+
   ## Get Data
   con <- connectDB(db_name = 'sda_elections')
   sqlstr <- paste0("SELECT * FROM 
@@ -58,6 +58,7 @@ vip_alert <- function(canton = NULL, council, recipients) {
       }
     }
     subject <- paste("Elected 'VIPS'", council, canton)
+
     #cat(alert)
     send_notification(subject, alert, recipients = recipients)
   }

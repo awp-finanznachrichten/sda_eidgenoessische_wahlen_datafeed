@@ -146,8 +146,8 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
                #,flag_gewaehlt == 1)
 
       #Check if amount of distributed seats is correct  
-      seats_check <- nrow(results_canton) == ongoing_cantons_NR$seats_available_NR[c]
-      
+      seats_check <- sum(results_canton$flag_gewaehlt == 1) == ongoing_cantons_NR$seats_available_NR[c]
+
       if (seats_check == TRUE) {
       #Update candidates results
       print(paste0("Enter the results of ",nrow(results_canton)," candidates..."))  
