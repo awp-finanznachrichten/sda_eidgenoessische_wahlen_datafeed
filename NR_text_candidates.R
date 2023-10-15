@@ -12,16 +12,6 @@ rs <-
 results_candidates <- fetch(rs, n = -1)
 dbDisconnectAll()
 
-
-#Merge with candidates metadata (to adapt!)
-#people_metadata <- results_NR_cantons_candidates %>%
-#  .[, c(38, 10, 9, 11)]
-
-#people_metadata$source_person_id <-
-#  as.numeric(people_metadata$source_person_id)
-#results_candidates$source_person_id <-
-#  as.numeric(results_candidates$source_person_id)
-
 #Merge with people data
 results_candidates <- results_candidates %>%
   left_join(people_metadata,
@@ -40,7 +30,8 @@ elected_candidates <- results_candidates %>%
   ungroup() %>%
   arrange(desc(amount_elected),
           shortname_de,
-    desc(votes))
+    desc(votes),
+    lastname) 
 
 elected_candidates$status_text <-
   ifelse(elected_candidates$status == 2, "bisher", "neu")

@@ -140,18 +140,7 @@ if (counted_cantons$analytics[c] == "pending") {
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
 }
-##Alerts## 
-if (counted_cantons$alerts[c] == "pending") {
-#Send VIP-Mail
-vip_alert(counted_cantons$area_ID[c],
-          "NR",
-          recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
-#Set Status Done
-mydb <- connectDB(db_name = "sda_elections")  
-sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
-rs <- dbSendQuery(mydb, sql_qry)
-dbDisconnectAll() 
-}  
+
 }  
 ##CANDIDATES RESULTS HERE##
 if (counted_cantons$status[c] != "parties finished") {
@@ -181,6 +170,19 @@ sql_qry <- paste0("UPDATE output_overview SET charts_candidates = 'done' WHERE e
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 }
+##Alerts## 
+if (counted_cantons$alerts[c] == "pending") {
+    #Send VIP-Mail
+    vip_alert(counted_cantons$area_ID[c],
+              "NR",
+              recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+    #Set Status Done
+    mydb <- connectDB(db_name = "sda_elections")  
+    sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
+    rs <- dbSendQuery(mydb, sql_qry)
+    dbDisconnectAll() 
+}    
+  
 }
 }
 }
@@ -333,5 +335,3 @@ counted_cantons_SR <- counted_cantons_all %>%
 source("NR_create_visual_data.R")
 source("SR_create_visual_data.R")
 
-###ENTER ALL CANDIDATES RESULTS
-#source("enter_complete_candidates_data.R")

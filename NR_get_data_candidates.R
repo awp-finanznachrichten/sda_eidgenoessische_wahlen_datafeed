@@ -28,8 +28,8 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   
   #Stand CH and Kantone
   stand_ch_candidates <- data_NR_candidates$stand
-  stand_cantons_candidates <- data_NR_candidates$stand_kantone #%>%
-    #rename(kanton_abgeschlossen_candidates = kanton_abgeschlossen)
+  stand_cantons_candidates <- data_NR_candidates$stand_kantone
+
 
   #Results
   results_NR_cantons_candidates <- data_NR_candidates$level_kantone %>%
@@ -142,14 +142,16 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
       
       #Get elected candidates results from canton
       results_canton <- results_NR_cantons_candidates %>%
-        filter(kanton_nummer == ongoing_cantons_NR$bfs_ID[c],
-               flag_gewaehlt == 1)
+        filter(kanton_nummer == ongoing_cantons_NR$bfs_ID[c])
+               #,flag_gewaehlt == 1)
 
       #Check if amount of distributed seats is correct  
       seats_check <- nrow(results_canton) == ongoing_cantons_NR$seats_available_NR[c]
       
       if (seats_check == TRUE) {
       #Update candidates results
+      print(paste0("Enter the results of ",nrow(results_canton)," candidates..."))  
+        
       mydb <- connectDB(db_name = "sda_elections")
       for (p in 1:nrow(results_canton)) {
         sql_qry <- paste0(
@@ -168,6 +170,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
           "'"
         )
         rs <- dbSendQuery(mydb, sql_qry)
+        print(p)
       }
       
       if (ongoing_cantons_NR$status[c] == "parties finished") {
