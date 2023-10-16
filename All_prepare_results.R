@@ -152,7 +152,7 @@ content_it <- paste0(content_it,"Eletto:<br>",
 if (elected_candidates_SR$seats_available_SR[1] != 1) {
 content_de <- paste0(content_de,"<br><br>Es ist ein zweiter Wahlgang nötig.")  
 content_fr <- paste0(content_fr,"<br><br>Un deuxième tour sera nécessaire.")  
-content_de <- paste0(content_it,"<br><br>Il ballottaggio si svolgerà.")  
+content_it <- paste0(content_it,"<br><br>Il ballottaggio si svolgerà.")  
 }  
 } else {
 content_de <- paste0(content_de,"Im ersten Wahlgang wurde niemand in den Ständerat gewählt. Es ist ein zweiter Wahlgang nötig.")
