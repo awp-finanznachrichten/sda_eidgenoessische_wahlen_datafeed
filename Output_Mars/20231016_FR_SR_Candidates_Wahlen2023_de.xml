@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
+  <header>
+    <sent>2023-10-16T13:41:29+02:00</sent>
+  </header>
+
+  <itemSet>
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="de" guid="urn:newsml:keystone-sda.ch:20231016:20231016134129386123759912067" version="1">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
+      <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
+
+      <itemMeta>
+        <itemClass qcode="ninat:text"/>
+        <provider qcode="nprov:KSDA">
+           <name>sda</name>
+        </provider>
+        <versionCreated>2023-10-16T13:41:29+02:00</versionCreated>
+        <pubStatus qcode="stat:withheld"/>
+        <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
+        <service qcode="sdasvc:bsd"></service>
+        <edNote role="sdanote:note">Diese Meldung wurde automatisch auf Grundlage der aktuellsten Daten vom Kanton Freiburg erstellt und vor der Publikation überprüft..</edNote>
+        <edNote role="sdalena:memo">Dies ist ein Test</edNote>
+        
+      </itemMeta>
+
+      <contentMeta>
+        <urgency>3</urgency>
+        <contentCreated>2023-10-16T13:41:29+02:00</contentCreated>
+        <creator>
+          <name>sda-robot</name>
+        </creator>
+        <altId>386123759912067</altId>
+        <dateline>Freiburg</dateline>
+        <language tag="de"/>
+        <genre qcode="sdagenre:RES">
+        </genre>
+
+        <!--storytypes-->
+        <subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>
+        
+        <!--media topics-->
+        <subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:ESU"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:UPH"></subject>
+
+        <!--locations-->
+        <located type="loctype:city" qcode="sdamarsgeo:FRI">
+<name>Freiburg</name>
+</located>
+  
+        <slugline>Wahlen 2023 - FR SR END</slugline>
+        <headline>***TEST***Die Ergebnisse der Ständeratswahl im Kanton FR</headline>
+        <description role="drol:teaser"> </description>
+        <description role="drol:catchline"></description>
+      </contentMeta>
+
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+xml">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>***TEST***Die Ergebnisse der Ständeratswahl im Kanton FR</title>
+            </head>
+            <body>
+              <p class="lead"> </p>
+              <p class="paragraph">Die Stimmberechtigen des Kantons Freiburg haben Alizée Rey (SP, neu) in den Ständerat gewählt. Für den zweiten Sitz gibt es einen zweiten Wahlgang. Dieser findet am 12. November statt.</p>
+<table><tbody><tr><td>Stimmen haben erhalten</td><td></td><td></td><td>Anzahl Stimmen</td><td>Gewählt</td></tr><tr><td>Alizée Rey</td><td>SP</td><td>neu</td><td>36'958</td><td>ja</td></tr><tr><td>Isabelle Chassot</td><td>Mitte</td><td>bisher</td><td>23'361</td><td>nein</td></tr><tr><td>Gerhard Andrey</td><td>Grüne</td><td>neu</td><td>19'543</td><td>nein</td></tr><tr><td>Johanna Gapany</td><td>FDP</td><td>bisher</td><td>18'479</td><td>nein</td></tr></tbody></table>
+<p class="paragraph">Absolutes Mehr: 31'567 Stimmen</p>
+
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>
