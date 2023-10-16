@@ -6,6 +6,7 @@ content <- httr::content(response)$result$resources
 ###GET RESULTS DATA###
 url_NR_results <-
   as.data.frame(do.call(rbind, content))$download_url[[1]]
+#url_NR_results <- trimws(content[[4]]$download_url)
 
 #Get timestamp and compare with old one
 timestamp_results <- headers(HEAD(url_NR_results))$`last-modified`
@@ -18,7 +19,6 @@ if (timestamp_results != timestamp_results_old) {
 NR_new_results <- TRUE  
   
   #Download data
-
   setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   download.file(url_NR_results,
                 destfile = "data_NR_results.json",
@@ -28,6 +28,7 @@ NR_new_results <- TRUE
   setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
   print("new results NR data downloaded!")
   
+
   #Check: Election done?
   if (data_NR_results$stand$wahl_abgeschlossen == TRUE) {
   NR_finished <- TRUE
@@ -61,6 +62,7 @@ finished_cantons_NR <- election_metadata %>%
 corrected_cantons_NR <- finished_cantons_NR %>%
   left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer)) %>%
   filter(kanton_abgeschlossen == FALSE)
+
 
 if (nrow(corrected_cantons_NR) > 0) {
 
@@ -218,6 +220,8 @@ recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
 ###GET VOTERTURNOUT DATA###
 url_NR_voterturnout <-
   as.data.frame(do.call(rbind, content))$download_url[[4]]
+#url_NR_voterturnout <- trimws(content[[8]]$download_url)
+
 
 #Get timestamp and compare with old one
 timestamp_voterturnout <- headers(HEAD(url_NR_voterturnout))$`last-modified`

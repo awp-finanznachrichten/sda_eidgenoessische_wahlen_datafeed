@@ -47,6 +47,7 @@ content <- content(response)$result$resources
 
 url_NR_history <-
   as.data.frame(do.call(rbind, content))$download_url[[8]]
+#url_NR_history <- trimws(content[[7]]$download_url)
 
 #Download data
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
@@ -116,4 +117,3 @@ for (p in 1:nrow(results_parties)) {
   results_history_it <- results_history_it %>%
     left_join(party_values)
 } 
-

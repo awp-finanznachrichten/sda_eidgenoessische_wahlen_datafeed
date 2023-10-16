@@ -6,6 +6,7 @@ content <- content(response)$result$resources
 ###GET CANDIDATES DATA###
 url_NR_candidates <-
   as.data.frame(do.call(rbind, content))$download_url[[2]]
+url_NR_candidates <- trimws(content[[5]]$download_url)
 
 #Get timestamp and compare with old one
 timestamp_candidates <- headers(HEAD(url_NR_candidates))$`last-modified`
@@ -146,8 +147,8 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
                #,flag_gewaehlt == 1)
 
       #Check if amount of distributed seats is correct  
-      seats_check <- nrow(results_canton) == ongoing_cantons_NR$seats_available_NR[c]
-      
+      seats_check <- sum(results_canton$flag_gewaehlt == 1) == ongoing_cantons_NR$seats_available_NR[c]
+
       if (seats_check == TRUE) {
       #Update candidates results
       print(paste0("Enter the results of ",nrow(results_canton)," candidates..."))  

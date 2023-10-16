@@ -39,7 +39,7 @@ if (type == "NR_Results") {
                   attachment = c(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/parliament_NR_overview_de.csv"),
                                  paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/parliament_NR_overview_fr.csv"),
                                  paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/parliament_NR_overview_it.csv")),
-                  recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+                  recipients = DEFAULT_EMAILS)
 }
 
 if (type == "NR_Candidates") {
@@ -75,7 +75,7 @@ if (type == "NR_Candidates") {
                   attachment = c(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_de.csv"),
                                  paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_fr.csv"),
                                  paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_it.csv")),
-                  recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+                  recipients = DEFAULT_EMAILS)
 }  
  
 if (type == "NR_Overview") {
@@ -112,7 +112,7 @@ if (type == "SR_Candidates") {
                   attachment = c(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_de.csv"),
                                  paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_fr.csv"),
                                  paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_it.csv")),
-                  recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+                  recipients = DEFAULT_EMAILS)
   
 }  
 

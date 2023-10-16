@@ -6,6 +6,7 @@ content <- content(response)$result$resources
 ###GET CANDIDATES DATA###
 url_SR_candidates <-
   as.data.frame(do.call(rbind, content))$download_url[[9]]
+#url_SR_candidates <- trimws(content[[6]]$download_url)
 
 #Get timestamp and compare with old one
 timestamp_SR_candidates <- headers(HEAD(url_SR_candidates))$`last-modified` 
@@ -43,7 +44,6 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   
   #Replace NA with 0
   results_SR_cantons_candidates[is.na(results_SR_cantons_candidates)] <- 0
-  
   
   ###CHECK CORRECTIONS###
   finished_cantons_SR <- election_metadata %>%

@@ -1,5 +1,5 @@
 #Working Directory
-MAIN_PATH <- "C:/Users/simon/OneDrive/"
+MAIN_PATH <- "C:/Users/sw/OneDrive/"
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 #Get Libraries and needed Data
@@ -75,7 +75,7 @@ if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending") ){
   source("NR_mars_meldung_intermediate_IT.R")
   #Send Mail
   send_mail(type="NR_Overview",
-            recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+            recipients= DEFAULT_EMAILS)
   }
   #Set Intermediate news done
   mydb <- connectDB(db_name = "sda_elections")  
@@ -104,7 +104,7 @@ rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll()  
 #Send Mail
 send_mail(type="NR_Results",
-          recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+          recipients= DEFAULT_EMAILS)
 }
 ##Charts Results##
 if (counted_cantons$charts_results[c] == "pending") {
@@ -133,7 +133,7 @@ dbDisconnectAll()
 if (counted_cantons$analytics[c] == "pending") {
     #Generate Output
     email_elected_report_nr(counted_cantons$area_ID[c],
-                            recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+                            recipients = DEFAULT_EMAILS)
     #Set Status Done
     mydb <- connectDB(db_name = "sda_elections")  
     sql_qry <- paste0("UPDATE output_overview SET analytics = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
@@ -158,7 +158,7 @@ if (counted_cantons$texts_candidates[c] == "pending") {
     dbDisconnectAll() 
     #Send Mail
     send_mail(type="NR_Candidates",
-              recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+              recipients= DEFAULT_EMAILS)
   }  
 ##Charts Candidates##
 if (counted_cantons$charts_candidates[c] == "pending") {
@@ -175,7 +175,7 @@ if (counted_cantons$alerts[c] == "pending") {
     #Send VIP-Mail
     vip_alert(counted_cantons$area_ID[c],
               "NR",
-              recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+              recipients = DEFAULT_EMAILS)
     #Set Status Done
     mydb <- connectDB(db_name = "sda_elections")  
     sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
@@ -203,7 +203,7 @@ rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll()
 #Send Mail
 send_mail(type="SR_Candidates",
-          recipients= "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+          recipients= DEFAULT_EMAILS)
 }
 ##Chart Candidates##
 if (counted_cantons_SR$charts_candidates[c] == "pending") {
@@ -221,7 +221,7 @@ if (counted_cantons_SR$alerts[c] == "pending") {
 #Send VIP-Mail
 vip_alert(counted_cantons_SR$area_ID[c],
           "SR",
-          recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch")
+          recipients = DEFAULT_EMAILS)
 #Set Status Done
 mydb <- connectDB(db_name = "sda_elections")  
 sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '",counted_cantons_SR$election_ID[c],"'")
@@ -286,10 +286,11 @@ source("All_publish_results_charts_history.R")
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
   }
+
   ##Analytics##
   if (ch_metadata$analytics[1] == "pending") {
     #Generate Output
-    email_elected_report_nr(recipients = "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch,inland@keystone-ats.ch, suisse@keystone-ats.ch")
+    email_elected_report_nr(recipients = paste0(DEFAULT_EMAILS,",inland@keystone-ats.ch, suisse@keystone-ats.ch"))
     #Set Status Done
     mydb <- connectDB(db_name = "sda_elections")  
     sql_qry <- paste0("UPDATE output_overview SET analytics = 'done' WHERE election_ID = '2023-10-22_CH_NR'")

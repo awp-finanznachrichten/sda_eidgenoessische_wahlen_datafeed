@@ -223,8 +223,19 @@ selected_output <- nationalrat_gemeinden_dw %>%
 write.csv(selected_output,file=paste0("./Output_Cantons/nationalrat_ergebnisse_gemeinden_",canton,".csv"),row.names = FALSE)
 }  
 
-#Create output for regions
-###TO DO###
+###Create output for regions
+#FM1Today
+selected_gemeinden <- gemeinden %>%
+  filter(Kanton_Short == "SG" |
+           Kanton_Short == "TG" |
+         Kanton_Short == "AI" |
+           Kanton_Short == "AR" |
+           Kanton_Short == "GR")
+
+selected_output <- nationalrat_gemeinden_dw %>%
+  filter(ID %in% selected_gemeinden$gemeinde_nummer)
+
+write.csv(selected_output,file=paste0("./Output_Regions/nationalrat_ergebnisse_gemeinden_FM1_Today.csv"),row.names = FALSE)
 
 #View(table(nationalrat_gemeinden_dw$Storyboard))
 #write.xlsx(nationalrat_gemeinden_dw,"./Texte/texts_urlena.xlsx",row.names = FALSE)
