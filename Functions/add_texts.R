@@ -86,7 +86,7 @@ add_participations <- function(nationalrat_gemeinden_dw,
       filter(is.na(wahlbeteiligung) == FALSE) %>%
       arrange(desc(wahlbeteiligung)
               )
-   
+
     highest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[1])
     lowest <- which(nationalrat_gemeinden_dw$ID == results$gemeinde_nummer[nrow(results)])
 
