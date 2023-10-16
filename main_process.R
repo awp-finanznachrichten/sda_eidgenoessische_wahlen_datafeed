@@ -344,6 +344,6 @@ counted_cantons <- counted_cantons_all %>%
   filter(council == "NR")
 counted_cantons_SR <- counted_cantons_all %>%
   filter(council == "SR")
-source("NR_create_visual_data.R")
-source("SR_create_visual_data.R")
+#source("NR_create_visual_data.R")
+#source("SR_create_visual_data.R")
 
