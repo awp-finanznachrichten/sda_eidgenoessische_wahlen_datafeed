@@ -6,7 +6,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 source("CONFIG.R")
 
 #####START LOOP#####
-
+repeat {
 #Flags
 NR_new_results <- FALSE
 NR_new_elected <- FALSE
@@ -346,4 +346,4 @@ counted_cantons_SR <- counted_cantons_all %>%
   filter(council == "SR")
 #source("NR_create_visual_data.R")
 #source("SR_create_visual_data.R")
-
+}
