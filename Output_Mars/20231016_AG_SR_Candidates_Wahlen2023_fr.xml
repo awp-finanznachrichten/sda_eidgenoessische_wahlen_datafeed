@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
+  <header>
+    <sent>2023-10-16T13:34:37+02:00</sent>
+  </header>
+
+  <itemSet>
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="fr" guid="urn:newsml:keystone-sda.ch:20231016:20231016133437561472894792775" version="1">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
+      <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
+
+      <itemMeta>
+        <itemClass qcode="ninat:text"/>
+        <provider qcode="nprov:KSDA">
+           <name>sda</name>
+        </provider>
+        <versionCreated>2023-10-16T13:34:37+02:00</versionCreated>
+        <pubStatus qcode="stat:withheld"/>
+        <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
+        <service qcode="sdasvc:bsf"></service>
+        <edNote role="sdanote:note">Cette dépêche a été générée automatiquement sur la base des données du canton d'Argovie et relue avant diffusion.</edNote>
+        <edNote role="sdalena:memo">Dies ist ein Test</edNote>
+        
+      </itemMeta>
+
+      <contentMeta>
+        <urgency>3</urgency>
+        <contentCreated>2023-10-16T13:34:37+02:00</contentCreated>
+        <creator>
+          <name>sda-robot</name>
+        </creator>
+        <altId>561472894792775</altId>
+        <dateline>Aarau</dateline>
+        <language tag="fr"/>
+        <genre qcode="sdagenre:RES">
+        </genre>
+
+        <!--storytypes-->
+        <subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>
+        
+        <!--media topics-->
+        <subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:ESU"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:UPH"></subject>
+
+        <!--locations-->
+        <located type="loctype:city" qcode="sdamarsgeo:AAR">
+<name>Aarau</name>
+</located>
+  
+        <slugline>Fédérales - AG CE END</slugline>
+        <headline>***TEST***Les résultats de l'élection au Conseil des Etats dans le canton AG</headline>
+        <description role="drol:teaser"> </description>
+        <description role="drol:catchline"></description>
+      </contentMeta>
+
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+xml">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>***TEST***Les résultats de l'élection au Conseil des Etats dans le canton AG</title>
+            </head>
+            <body>
+              <p class="lead"> </p>
+              <p class="paragraph">Les électeurs du canton d'Argovie ont désigné Irène Kälin (Vert-e-s, nouvelle) pour représenter le canton au Conseil des Etats. Un deuxième tour sera nécessaire le 19 novembre pour élire un deuxième candidat.</p>
+<table><tbody><tr><td>Ont obtenu des voix</td><td></td><td></td><td>Total des voix</td><td>Élu(e)</td></tr><tr><td>Irène Kälin</td><td>Vert-e-s</td><td>nouvelle</td><td>55'000</td><td>oui</td></tr><tr><td>Gabriela Suter</td><td>PS</td><td>nouvelle</td><td>30'000</td><td>non</td></tr><tr><td>Thierry Burkart</td><td>PLR</td><td>sortant</td><td>20'000</td><td>non</td></tr></tbody></table>
+<p class="paragraph"></p>
+
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>
