@@ -1,5 +1,7 @@
 vip_alert <- function(canton = NULL, council, recipients) {
-  
+  canton <- "ZH"
+  council <- "NR"
+  recipients <- "tt@awp.ch"
   ########################
   ## Function purpose: Sends Alerts if a candidate with a note (= VIP) is elected
   ## Important to know: Utils.R must be loaded

@@ -22,13 +22,13 @@ source("NR_get_data_candidates.R")
 source("SR_get_data_candidates.R")
 
 ###OVERVIEW RESULTS###
-if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) {
+#if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) {
   source("load_databases.R")
   source("All_prepare_results.R")
   source("All_publish_charts.R")
   source("All_create_output_parliament_flourish.R")
   source("All_create_output_candidates_flourish.R")
-}
+#}
 
 #Load Databases again
 source("load_databases.R")
@@ -119,6 +119,7 @@ sql_qry <- paste0("UPDATE output_overview SET charts_results = 'done' WHERE elec
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 }
+
 ##Charts Results History##
 if (counted_cantons$charts_history[c] == "pending") {
 source("NR_prepare_results_charts_history.R")
@@ -286,9 +287,8 @@ source("All_publish_results_charts_history.R")
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
   }
-
-  ##Analytics##
-  if (ch_metadata$analytics[1] == "pending") {
+##Analytics##
+if (ch_metadata$analytics[1] == "pending") {
     #Generate Output
     email_elected_report_nr(recipients = paste0(DEFAULT_EMAILS,",inland@keystone-ats.ch, suisse@keystone-ats.ch"))
     #Set Status Done
@@ -297,6 +297,17 @@ source("All_publish_results_charts_history.R")
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
   }
+if (ch_metadata$alerts[1] == "pending") {
+    #Send VIP-Mail
+    vip_alert(council = "NR",
+              recipients = DEFAULT_EMAILS)
+    #Set Status Done
+    mydb <- connectDB(db_name = "sda_elections")  
+    sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '2023-10-22_CH_NR'")
+    rs <- dbSendQuery(mydb, sql_qry)
+    dbDisconnectAll() 
+  }  
+  
   ##Create Visuals##
   counted_cantons <- ch_metadata
   source("NR_create_visual_data.R")
