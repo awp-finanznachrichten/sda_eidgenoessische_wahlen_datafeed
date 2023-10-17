@@ -344,7 +344,9 @@ counted_cantons <- counted_cantons_all %>%
   filter(council == "NR")
 counted_cantons_SR <- counted_cantons_all %>%
   filter(council == "SR")
+if (nrow(counted_cantons) > 0) {
 source("NR_create_visual_data.R")
+}  
 source("SR_create_visual_data.R")
 #}
 
