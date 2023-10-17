@@ -20,6 +20,9 @@ elected_candidates <- results_candidates %>%
   filter(elected == 1) %>%
   mutate(picture = ifelse(is.na(picture) == FALSE,picture,"Replacement.jpg"))
 
+#Alert if picture is missing
+
+
 #Frequency of party occurence for sorting 
 elected_candidates$frequency_party <- 0
 for (e in 1:nrow(elected_candidates)) {

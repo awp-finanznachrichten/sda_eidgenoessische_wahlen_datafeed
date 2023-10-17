@@ -38,6 +38,8 @@ texts <- gsub("die MCG ","das MCG ",texts)
 texts <- gsub("Die MCG ","Das MCG ",texts)
 texts <- gsub("die weitere","weitere Parteien/Listen",texts)
 texts <- gsub("Die weitere","Weitere Parteien/Listen",texts)
+texts <- gsub("die Solidarités ","die Bewegung Solidarités ",texts)
+texts <- gsub("Die Solidarités ","Die Bewegung Solidarités ",texts)
 
 if (type == "canton") { 
 #Adapt Numbers
@@ -63,6 +65,10 @@ texts <- gsub("Le Divers ","Les petits partis et les candidats indépendants ",t
 texts <- gsub("le Divers ","les petits partis et les candidats indépendants ",texts)
 texts <- gsub("le Grün-Alternative ","la Grün-Alternative ",texts)
 texts <- gsub("Le Grün-Alternative ","La Grün-Alternative ",texts)
+texts <- gsub("le Lega ","la Lega ",texts)
+texts <- gsub("Le Lega ","la Lega ",texts)
+texts <- gsub("Le Solidarités ","Solidarités ",texts)
+texts <- gsub("le Solidarités ","Solidarités ",texts)
 
 ##Französisch
 texts <- str_replace_all(texts,"de 1 des ","d'un des ")
@@ -154,7 +160,7 @@ if (type == "canton") {
     texts <- gsub(" 12 "," dodici ",texts)  
 }    
   
-texts <- gsub("di x Cantoni su ","di un cantone su ",texts)
+texts <- gsub("di 1 Cantoni su ","di un cantone su ",texts)
 texts <- gsub("Altro ","Altri partiti/liste ",texts)
 texts <- gsub("altro ","altri partiti/liste ",texts)
 }    

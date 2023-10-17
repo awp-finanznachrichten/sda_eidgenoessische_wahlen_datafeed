@@ -25,40 +25,15 @@ source("SR_get_data_candidates.R")
 source("load_databases.R")
 
 ###OVERVIEW RESULTS###
-#if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) {
-  source("All_prepare_results.R")
-  source("All_publish_charts.R")
-  source("All_create_output_parliament_flourish.R")
-  source("All_create_output_candidates_flourish.R")
-#}
+source("All_prepare_results.R")
+source("All_publish_charts.R")
+source("All_create_output_parliament_flourish.R")
+source("All_create_output_candidates_flourish.R")
 
 ###CANTON RESULTS###
 ##Check: Canton completed?
 #Get counted cantons
-counted_cantons_all <- election_metadata %>%
-  filter(date == "2023-10-22",
-         grepl("finished",status) == TRUE) %>% 
-  left_join(areas_metadata) %>%
-  left_join(status_texts) %>%
-  left_join(output_overview) %>%
-  filter(area_type == "canton")
-
-#Get counted cantons NR and SR
-counted_cantons <- counted_cantons_all %>%
-  filter(council == "NR")
-counted_cantons_SR <- counted_cantons_all %>%
-  filter(council == "SR") 
-
-#Get intermediate results SR
-intermediate_cantons_SR <- election_metadata %>%
-  filter(date == "2023-10-22",
-         grepl("ongoing",status) == TRUE,
-         remarks == "new data available") %>% 
-  left_join(areas_metadata) %>%
-  left_join(status_texts) %>%
-  left_join(output_overview) %>%
-  filter(area_type == "canton",
-         council == "SR")
+source("get_counted_cantons.R")
 
 ###INTERMEDIATE RESULTS NATIONALRAT###
 check_intermediate <- intermediate_timecheck %>%
@@ -74,7 +49,7 @@ if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending") ){
   source("NR_mars_meldung_intermediate_IT.R")
   #Send Mail
   send_mail(type="NR_Overview",
-            recipients= DEFAULT_EMAILS)
+            recipients= paste0(DEFAULT_EMAILS,",inland@keystone-ats.ch,suisse@keystone-ats.ch"))
   }
   #Set Intermediate news done
   mydb <- connectDB(db_name = "sda_elections")  
@@ -86,7 +61,6 @@ if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending") ){
 ###NATIONALRAT###
 if (nrow(counted_cantons) > 0) {
 for (c in 1:nrow(counted_cantons)) {
-
 ##PARTIES RESULTS HERE##
 if (counted_cantons$status[c] != "candidates finished") {
 ##Text Results##
@@ -103,7 +77,7 @@ rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll()  
 #Send Mail
 send_mail(type="NR_Results",
-          recipients= DEFAULT_EMAILS)
+          recipients= paste0(DEFAULT_EMAILS,",",counted_cantons$mail_KeySDA[c]))
 }
 ##Charts Results##
 if (counted_cantons$charts_results[c] == "pending") {
@@ -118,7 +92,6 @@ sql_qry <- paste0("UPDATE output_overview SET charts_results = 'done' WHERE elec
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll() 
 }
-
 ##Charts Results History##
 if (counted_cantons$charts_history[c] == "pending") {
 source("NR_prepare_results_charts_history.R")
@@ -133,14 +106,13 @@ dbDisconnectAll()
 if (counted_cantons$analytics[c] == "pending") {
     #Generate Output
     email_elected_report_nr(counted_cantons$area_ID[c],
-                            recipients = DEFAULT_EMAILS)
+                            recipients= paste0(DEFAULT_EMAILS,",",counted_cantons$mail_KeySDA[c]))
     #Set Status Done
     mydb <- connectDB(db_name = "sda_elections")  
     sql_qry <- paste0("UPDATE output_overview SET analytics = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
 }
-
 }  
 ##CANDIDATES RESULTS HERE##
 if (counted_cantons$status[c] != "parties finished") {
@@ -158,7 +130,7 @@ if (counted_cantons$texts_candidates[c] == "pending") {
     dbDisconnectAll() 
     #Send Mail
     send_mail(type="NR_Candidates",
-              recipients= DEFAULT_EMAILS)
+              recipients= paste0(DEFAULT_EMAILS,",",counted_cantons$mail_KeySDA[c]))
   }  
 ##Charts Candidates##
 if (counted_cantons$charts_candidates[c] == "pending") {
@@ -175,14 +147,13 @@ if (counted_cantons$alerts[c] == "pending") {
     #Send VIP-Mail
     vip_alert(counted_cantons$area_ID[c],
               "NR",
-              recipients = DEFAULT_EMAILS)
+              recipients= paste0(DEFAULT_EMAILS,",",counted_cantons$mail_KeySDA[c]))
     #Set Status Done
     mydb <- connectDB(db_name = "sda_elections")  
     sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '",counted_cantons$election_ID[c],"'")
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
 }    
-  
 }
 }
 }
@@ -203,7 +174,7 @@ rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll()
 #Send Mail
 send_mail(type="SR_Candidates",
-          recipients= DEFAULT_EMAILS)
+          recipients= paste0(DEFAULT_EMAILS,",",counted_cantons_SR$mail_KeySDA[c]))
 }
 ##Chart Candidates##
 if (counted_cantons_SR$charts_candidates[c] == "pending") {
@@ -221,7 +192,7 @@ if (counted_cantons_SR$alerts[c] == "pending") {
 #Send VIP-Mail
 vip_alert(counted_cantons_SR$area_ID[c],
           "SR",
-          recipients = DEFAULT_EMAILS)
+          recipients= paste0(DEFAULT_EMAILS,",",counted_cantons_SR$mail_KeySDA[c]))
 #Set Status Done
 mydb <- connectDB(db_name = "sda_elections")  
 sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '",counted_cantons_SR$election_ID[c],"'")
@@ -230,6 +201,7 @@ dbDisconnectAll()
 }  
 }
 }
+
 ###STAENDERAT ZWISCHENRESULTAT###
 if (nrow(intermediate_cantons_SR) > 0){
 for (c in 1:nrow(intermediate_cantons_SR)) {
@@ -244,6 +216,7 @@ rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll()   
 }  
 }
+
 ###ELECTION FINISHED###
 if (NR_finished == TRUE) {
 print("All NR results here!") 
@@ -265,7 +238,7 @@ if (ch_metadata$status != "finished") {
   source("All_get_data_results.R")
 }  
 ##Charts Results##
-  if (ch_metadata$charts_results[1] == "pending") {
+if (ch_metadata$charts_results[1] == "pending") {
 source("All_prepare_results_charts.R")
 source("All_publish_results_charts_DE.R")
 source("All_publish_results_charts_FR.R")
@@ -277,7 +250,7 @@ source("All_publish_results_charts_IT.R")
     dbDisconnectAll() 
   }
 ##Charts History##
-  if (ch_metadata$charts_history[1] == "pending") {
+if (ch_metadata$charts_history[1] == "pending") {
 source("All_prepare_results_charts_history.R")
 source("All_publish_results_charts_history.R")
     #Set Status Done
@@ -289,17 +262,18 @@ source("All_publish_results_charts_history.R")
 ##Analytics##
 if (ch_metadata$analytics[1] == "pending") {
     #Generate Output
-    email_elected_report_nr(recipients = paste0(DEFAULT_EMAILS,",inland@keystone-ats.ch, suisse@keystone-ats.ch"))
+    email_elected_report_nr(recipients = paste0(DEFAULT_EMAILS,",",ch_metadata$mail_KeySDA))
     #Set Status Done
     mydb <- connectDB(db_name = "sda_elections")  
     sql_qry <- paste0("UPDATE output_overview SET analytics = 'done' WHERE election_ID = '2023-10-22_CH_NR'")
     rs <- dbSendQuery(mydb, sql_qry)
     dbDisconnectAll() 
-  }
+}
+##Alerts##
 if (ch_metadata$alerts[1] == "pending") {
     #Send VIP-Mail
     vip_alert(council = "NR",
-              recipients = DEFAULT_EMAILS)
+              recipients= paste0(DEFAULT_EMAILS,",",ch_metadata$mail_KeySDA))
     #Set Status Done
     mydb <- connectDB(db_name = "sda_elections")  
     sql_qry <- paste0("UPDATE output_overview SET alerts = 'done' WHERE election_ID = '2023-10-22_CH_NR'")
@@ -307,17 +281,15 @@ if (ch_metadata$alerts[1] == "pending") {
     dbDisconnectAll() 
   }  
   
-  ##Create Visuals##
-  counted_cantons <- ch_metadata
-  source("NR_create_visual_data.R")
+##Create Visuals##
+counted_cantons <- ch_metadata
+source("NR_create_visual_data.R")
 }
   
 ###COMMUNITIES UR-LENA###
 ##Output tables and texts##
 if (NR_new_results == TRUE) {
 source("Communities_live_data.R")
-source("Communities_publish_charts.R")
-}
 
 ###COMMIT###
 library(git2r)
@@ -328,24 +300,11 @@ gitadd()
 gitcommit()
 gitpush()
 detach("package:git2r",unload=TRUE)
+#Publish Charts  
+source("Communities_publish_charts.R")
+}    
 
 ###CREATE VISUAL###
-source("load_databases.R")
-counted_cantons_all <- election_metadata %>%
-  filter(date == "2023-10-22",
-         grepl("finished",status) == TRUE) %>% 
-  left_join(areas_metadata) %>%
-  left_join(status_texts) %>%
-  left_join(output_overview) %>%
-  filter(area_type == "canton")
-
-counted_cantons <- counted_cantons_all %>%
-  filter(council == "NR")
-counted_cantons_SR <- counted_cantons_all %>%
-  filter(council == "SR")
-if (nrow(counted_cantons) > 0) {
-source("NR_create_visual_data.R")
-}  
-source("SR_create_visual_data.R")
+source("produce_visual_data.R")
 #}
 
