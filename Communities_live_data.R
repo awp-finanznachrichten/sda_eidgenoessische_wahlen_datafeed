@@ -238,7 +238,7 @@ selected_output <- nationalrat_gemeinden_dw %>%
 write.csv(selected_output,file=paste0("./Output_Regions/nationalrat_ergebnisse_gemeinden_FM1_Today.csv"),row.names = FALSE)
 
 selected_gemeinden <- gemeinden %>%
-  filter(gemeinde_nummer %in% c(322,324,342,953,326,954,406,331,332,333,334,985,335,336,337,338,339,340,989,344,959,960,951,952,955,956,957,958,1122,1129,1131,1135,1145,1150)
+  filter(gemeinde_nummer %in% c(322,324,329,342,953,326,954,406,331,332,333,334,985,335,336,337,338,339,340,989,344,959,960,951,952,955,956,957,958,1122,1129,1131,1135,1145,1150)
          )
 
 selected_output <- nationalrat_gemeinden_dw %>%
