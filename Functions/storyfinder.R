@@ -86,7 +86,7 @@ get_story_NR_intermediate <- function(results_ch) {
       }  
     }  
     
-  storyboard <- c(storyboard,"Intro_Tabelle","","Outro_Tabelle_add","Explainer","Disclaimer")
+  storyboard <- c(storyboard,"Intro_Tabelle","Outro_Tabelle","Outro_Tabelle_add","Explainer","Disclaimer")
   return(storyboard)
   }  
 }  

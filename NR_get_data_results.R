@@ -4,9 +4,9 @@ response <-
 content <- httr::content(response)$result$resources
 
 ###GET RESULTS DATA###
-url_NR_results <-
-  as.data.frame(do.call(rbind, content))$download_url[[1]]
-#url_NR_results <- trimws(content[[4]]$download_url)
+#url_NR_results <-
+#  as.data.frame(do.call(rbind, content))$download_url[[1]]
+url_NR_results <- trimws(content[[4]]$download_url)
 
 #Get timestamp and compare with old one
 timestamp_results <- headers(HEAD(url_NR_results))$`last-modified`
@@ -63,7 +63,6 @@ corrected_cantons_NR <- finished_cantons_NR %>%
   left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer)) %>%
   filter(kanton_abgeschlossen == FALSE)
 
-
 if (nrow(corrected_cantons_NR) > 0) {
 
 #Adapt Metadata
@@ -102,10 +101,9 @@ Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
                  "Das BFS hat den bereits als ausgezählt gemeldeten Kanton ",corrected_cantons_NR$area_name_de[1],
                " wieder deaktiviert. Allenfalls müssen die Sitzverteilung oder die Wähleranteile korrigiert werden. Bitte direkt mit dem Kanton abklären, was genau korrigiert wurde.\n\n",
                  "Liebe Grüsse\n\nLENA")
-recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
-#send_notification(Subject,Body,recipients)  
+recipients <- DEFAULT_EMAILS
+send_notification(Subject,Body,recipients)  
 }  
-
 
 ###UPDATE DATABASE###
   #Metadata NR
@@ -218,10 +216,9 @@ recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
 }
 
 ###GET VOTERTURNOUT DATA###
-url_NR_voterturnout <-
-  as.data.frame(do.call(rbind, content))$download_url[[4]]
-#url_NR_voterturnout <- trimws(content[[8]]$download_url)
-
+#url_NR_voterturnout <-
+#  as.data.frame(do.call(rbind, content))$download_url[[4]]
+url_NR_voterturnout <- trimws(content[[6]]$download_url)
 
 #Get timestamp and compare with old one
 timestamp_voterturnout <- headers(HEAD(url_NR_voterturnout))$`last-modified`
@@ -239,7 +236,6 @@ if (timestamp_voterturnout != timestamp_voterturnout_old) {
   
   #Save Timestamp
   cat(timestamp_voterturnout, file = "./Timestamps/timestamp_voterturnout.txt")
-      
 } else {
   print("no new data for NR voterturnout found")
 }

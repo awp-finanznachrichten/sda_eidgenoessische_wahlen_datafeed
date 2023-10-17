@@ -12,12 +12,17 @@ texts <- gsub("#Sitze_NR",metadata$seats_available_NR[c],texts)
 }
   
 if (type == "overview") {
+
+results_parties <- results_parties %>%
+    filter(status == "finished" |
+             status == "parties finished")  
+
 texts <- gsub("#Hour",hour(Sys.time()),texts) 
-texts <- gsub("#Cantons_counted_amount",nrow(metadata),texts)
-texts <- gsub("#Seats_distributed",sum(metadata$seats_available_NR),texts)
-texts <- gsub("#Cantons_counted_list_d",  paste(counted_cantons$area_name_de, collapse= ", "),texts)
-texts <- gsub("#Cantons_counted_list_f",  paste(counted_cantons$area_name_fr, collapse= ", "),texts)
-texts <- gsub("#Cantons_counted_list_i",  paste(counted_cantons$area_name_it, collapse= ", "),texts)
+texts <- gsub("#Cantons_counted_amount",length(unique(results_parties$area_ID)),texts)
+texts <- gsub("#Seats_distributed",sum(results_parties$seats),texts)
+texts <- gsub("#Cantons_counted_list_d",  paste(unique(results_parties$area_name_de), collapse= ", "),texts)
+texts <- gsub("#Cantons_counted_list_f",  paste(unique(results_parties$area_name_fr), collapse= ", "),texts)
+texts <- gsub("#Cantons_counted_list_i",  paste(unique(results_parties$area_name_it), collapse= ", "),texts)
 }  
 
 

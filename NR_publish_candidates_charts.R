@@ -127,7 +127,6 @@ texts_chart_fr <- get_text_charts(language="fr",
 texts_chart_it <- get_text_charts(language="it",
                                   elections_metadata = counted_cantons[c,])
 
-
 ##Chart Candidates DE
 chart_id <- datawrapper_codes %>%
   filter(election_ID == counted_cantons$election_ID[c],

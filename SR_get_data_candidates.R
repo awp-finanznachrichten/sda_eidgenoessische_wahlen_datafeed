@@ -4,9 +4,9 @@ response <-
 content <- content(response)$result$resources
 
 ###GET CANDIDATES DATA###
-url_SR_candidates <-
-  as.data.frame(do.call(rbind, content))$download_url[[9]]
-#url_SR_candidates <- trimws(content[[6]]$download_url)
+#url_SR_candidates <-
+#  as.data.frame(do.call(rbind, content))$download_url[[9]]
+url_SR_candidates <- trimws(content[[7]]$download_url)
 
 #Get timestamp and compare with old one
 timestamp_SR_candidates <- headers(HEAD(url_SR_candidates))$`last-modified` 
@@ -79,8 +79,8 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
                    "Das BFS hat den bereits als ausgezählt gemeldeten Kanton ",corrected_cantons_SR$area_name_de[1],
                    " wieder deaktiviert. Allenfalls müssen die Ständerats-Ergebnisse korrigiert werden. Bitte direkt mit dem Kanton abklären, was genau korrigiert wurde.\n\n",
                    "Liebe Grüsse\n\nLENA")
-    recipients <- "robot-notification@awp.ch, contentdevelopment@keystone-sda.ch"
-    #send_notification(Subject,Body,recipients)  
+    recipients <- DEFAULT_EMAILS
+    send_notification(Subject,Body,recipients)  
   }  
   
 

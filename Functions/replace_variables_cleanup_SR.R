@@ -16,6 +16,22 @@ texts <- gsub("#Datum_SR_i",paste0(day(metadata$second_ballot_date[c])," novembr
 
 texts <- gsub("#Absolute_Majority",format(as.numeric(metadata$absolute_majority[c]),big.mark = "'"),texts)
 
+if (nrow(voted_out_candidates) > 0) {
+  texts <- gsub("#Vorname_SR1_out",voted_out_candidates$firstname[1],texts)
+  texts <- gsub("#Nachname_SR1_out",voted_out_candidates$lastname[1],texts)
+  texts <- gsub("#Partei_SR1_out_d",voted_out_candidates$shortname_de[1],texts)
+  texts <- gsub("#Partei_SR1_out_f",voted_out_candidates$shortname_fr[1],texts)
+  texts <- gsub("#Partei_SR1_out_i",voted_out_candidates$shortname_it[1],texts)
+}
+if (nrow(voted_out_candidates) == 2) {
+  texts <- gsub("#Vorname_SR2_out",voted_out_candidates$firstname[2],texts)
+  texts <- gsub("#Nachname_SR2_out",voted_out_candidates$lastname[2],texts)
+  texts <- gsub("#Partei_SR2_out_d",voted_out_candidates$shortname_de[2],texts)
+  texts <- gsub("#Partei_SR2_out_f",voted_out_candidates$shortname_fr[2],texts)
+  texts <- gsub("#Partei_SR2_out_i",voted_out_candidates$shortname_it[2],texts)
+}
+
+
 if (nrow(elected_candidates) > 0) {
 texts <- gsub("#Vorname_SR1",elected_candidates$firstname[1],texts)
 texts <- gsub("#Nachname_SR1",elected_candidates$lastname[1],texts)
@@ -37,8 +53,7 @@ texts <- gsub("#Partei_SR2_i",elected_candidates$shortname_it[2],texts)
 texts <- gsub("#Status_SR2_i",elected_candidates$status_text_it[2],texts) 
 }
 
-##TO DO##
-#Datum
+
 
 ###Deutsch
 if (language == "de") {

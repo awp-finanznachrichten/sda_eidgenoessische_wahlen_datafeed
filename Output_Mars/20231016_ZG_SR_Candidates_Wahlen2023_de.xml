@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
   <header>
-    <sent>2023-10-16T14:06:54+02:00</sent>
+    <sent>2023-10-16T15:51:36+02:00</sent>
   </header>
 
   <itemSet>
-    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="de" guid="urn:newsml:keystone-sda.ch:20231016:20231016140654335040825388870" version="1">
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="de" guid="urn:newsml:keystone-sda.ch:20231016:20231016155136969033294927175" version="1">
       <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
       <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
 
@@ -14,22 +14,22 @@
         <provider qcode="nprov:KSDA">
            <name>sda</name>
         </provider>
-        <versionCreated>2023-10-16T14:06:54+02:00</versionCreated>
+        <versionCreated>2023-10-16T15:51:36+02:00</versionCreated>
         <pubStatus qcode="stat:withheld"/>
         <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
         <service qcode="sdasvc:bsd"></service>
-        <edNote role="sdanote:note">Diese Meldung wurde automatisch auf Grundlage der aktuellsten Daten vom Kanton Zug erstellt und vor der Publikation überprüft..</edNote>
+        <edNote role="sdanote:note">Diese Meldung wurde automatisch auf Grundlage der aktuellsten Daten vom Kanton Zug erstellt und vor der Publikation überprüft.</edNote>
         <edNote role="sdalena:memo">Dies ist ein Test</edNote>
         
       </itemMeta>
 
       <contentMeta>
         <urgency>3</urgency>
-        <contentCreated>2023-10-16T14:06:54+02:00</contentCreated>
+        <contentCreated>2023-10-16T15:51:36+02:00</contentCreated>
         <creator>
           <name>sda-robot</name>
         </creator>
-        <altId>335040825388870</altId>
+        <altId>969033294927175</altId>
         <dateline>Zug</dateline>
         <language tag="de"/>
         <genre qcode="sdagenre:RES">
@@ -62,7 +62,7 @@
             </head>
             <body>
               <p class="lead"> </p>
-              <p class="paragraph">Die Stimmberechtigen des Kantons Zug haben Manuela Weichelt (Grüne) nicht wieder in den Ständerat gewählt.</p>
+              <p class="paragraph">Die Stimmberechtigen des Kantons Zug haben Matthias Michel (FDP) nicht wieder in den Ständerat gewählt.</p>
 <table><tbody><tr><td>Stimmen haben erhalten</td><td></td><td></td><td>Anzahl Stimmen</td><td>Gewählt</td></tr><tr><td>Manuela Weichelt</td><td>Grüne</td><td>neu</td><td>66'666</td><td>ja</td></tr><tr><td>Peter Hegglin</td><td>Mitte</td><td>bisher</td><td>60'000</td><td>ja</td></tr><tr><td>Matthias Michel</td><td>FDP</td><td>bisher</td><td>40'000</td><td>nein</td></tr><tr><td>Thomas Werner</td><td>SVP</td><td>neu</td><td>30'000</td><td>nein</td></tr></tbody></table>
 <p class="paragraph">Absolutes Mehr: 50'000 Stimmen</p>
 

@@ -99,8 +99,6 @@ if (type == "SR_Candidates") {
                  "Es wurde folgende Grafik erstellt:\n",
                  "Ergebnisse Ständerat: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[1],"/\n\n",
                  "Es sind bereits folgende Ständerats-Ergebnisse bekannt: ",paste(counted_cantons_SR$area_name_de, collapse= ", "),"\n\n",
-                 "Das aktualisierte CSV für die Flourish-Grafik der Gewählten findet ihr unter folgenden Link (zum Download Rechtsklick und 'speichern unter'):\n",
-                 "https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/elected_candidates_overall.csv\n\n",
                  "Liebe Grüsse\n\nLENA")
   send_notification(Subject,Body,recipients)
   
