@@ -21,17 +21,16 @@ source("NR_get_data_results.R")
 source("NR_get_data_candidates.R")
 source("SR_get_data_candidates.R")
 
+#Load Databases again
+source("load_databases.R")
+
 ###OVERVIEW RESULTS###
 #if (NR_new_results == TRUE || NR_new_elected == TRUE || SR_new_elected == TRUE) {
-  source("load_databases.R")
   source("All_prepare_results.R")
   source("All_publish_charts.R")
   source("All_create_output_parliament_flourish.R")
   source("All_create_output_candidates_flourish.R")
 #}
-
-#Load Databases again
-source("load_databases.R")
 
 ###CANTON RESULTS###
 ##Check: Canton completed?

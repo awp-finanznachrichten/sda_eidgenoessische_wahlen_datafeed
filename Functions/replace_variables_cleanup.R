@@ -61,7 +61,9 @@ texts <- gsub("le Vert-e-s","les Vert-e-s",texts)
 texts <- gsub("Le Vert-e-s ","Les Vert-e-s ",texts)
 texts <- gsub("Le Divers ","Les petits partis et les candidats indépendants ",texts)
 texts <- gsub("le Divers ","les petits partis et les candidats indépendants ",texts)
-  
+texts <- gsub("le Grün-Alternative ","la Grün-Alternative ",texts)
+texts <- gsub("Le Grün-Alternative ","La Grün-Alternative ",texts)
+
 ##Französisch
 texts <- str_replace_all(texts,"de 1 des ","d'un des ")
 texts <- str_replace_all(texts,"de Henniez","d'Henniez")
