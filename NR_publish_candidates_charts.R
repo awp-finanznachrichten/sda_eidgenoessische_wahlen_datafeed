@@ -20,7 +20,18 @@ elected_candidates <- results_candidates %>%
   filter(elected == 1) %>%
   mutate(picture = ifelse(is.na(picture) == FALSE,picture,"Replacement.jpg"))
 
-#Alert if picture is missing
+#Alert when picture is missing
+no_picture <- elected_candidates %>%
+  filter(picture == "Replacement.jpg")
+
+if (nrow(no_picture) > 0) {
+  Subject <- paste0("Achtung: Gewählte Nationalrats-Kandidierende ohne Portrait-Bild entdeckt!")
+  Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
+                 "Zu folgenden gewählten Nationalrats-Kandidierenden gibt es kein Bild. Es wurde ein Platzhalter-Bild verwendet:\n",
+                 paste(paste0(no_picture$firstname," ",no_picture$lastname," (",no_picture$shortname_de,", ",no_picture$canton,")"),collapse = "\n"),
+                 "\n\nLiebe Grüsse\n\nLENA")
+  send_notification(Subject,Body,"robot-notification@awp.ch,laszlo.aebischer@keystone-sda.ch,contentdevelopment@keystone-sda.ch")
+}
 
 
 #Frequency of party occurence for sorting 

@@ -2,12 +2,12 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
   ## canton: Default NULL (don't filter) 
   ##         String with two-chars to indicate canton to filter results
   ## recipients: mail-adresses who should receive the report, separated by comma
-
+  
   library(dplyr)
   library(tableHTML)
   library(stringr)
   library(scales)
-
+  
   #source("C:/Automatisierungen/sda_eidgenoessische_wahlen_2023/tools/Funktionen/Utils.R")
   
   html_table <- function(df) {
@@ -20,6 +20,17 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
       add_css_row (css = list('text-align', 'center')) 
   }
   
+  runner_ups <- function(df) {
+    runnerup <- df %>%
+      group_by(party) %>%
+      filter(p_seats > 0) %>%
+      filter(elected == 0) %>%
+      filter(votes == max(votes)) %>%
+      arrange(party)
+    runnerup <- select(runnerup, c("party", "firstname", "lastname", "gender", "birthdate", "votes"))
+    return(html_table(runnerup))
+  }
+  
   ##########################      
   ##  Get Data            ##                
   ##########################
@@ -30,29 +41,32 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
   e.council, e.year, e.canton, l.Name_d AS place, l.urban_rural_3types as urbanity,
   GROUP_CONCAT(DISTINCT(pro.title) separator ', ') AS job,
   GROUP_CONCAT(DISTINCT(pro.category) separator ', ') AS job_category,
-  pa.abbreviation_de as party, p.note as special,
+  pa.abbreviation_de as party, pr.seats as p_seats, p.note as special,
   CASE WHEN e.status = 2 THEN 1
-  ELSE 0 END as incumbent, e.elected
+  ELSE 0 END as incumbent, e.elected, e.votes
   FROM 
   sda_elections.candidates_results e 
   JOIN sda_elections.people_metadata p ON p.id = e.person_id
   JOIN sda_elections.parties_metadata pa ON pa.id = e.party_id
+  LEFT JOIN sda_elections.parties_results pr ON pr.election_ID = e.election_id AND pr.area_ID = e.area_id AND pr.party_ID = e.party_id
   LEFT JOIN masterdata.locations l ON e.place_id = l.BFS_nr
   LEFT JOIN sda_elections.people_profession pro ON p.id = pro.person_id 
   	AND (pro.source = 'parlament.ch' OR pro.source = CONCAT('BFS ', e.year))
   GROUP BY p.id, p.firstname, p.lastname, p.gender, p.birthdate, 
   e.council, e.year, e.canton, l.Name_d, pa.abbreviation_de, e.status, e.elected
-  HAVING e.year = ", year, " and e.council = 'NR' AND elected = 1;")
+  HAVING e.year = ", year, " and e.council = 'NR';")
   rs <- dbGetQuery(con, sqlstr)
-  current_data <- rs
+  all_current_data <- rs
+  current_data <- all_current_data[all_current_data$elected == 1, ]
   ## Comp Data
   sqlstr <- "SELECT pe.id, pe.firstname, pe.lastname, pe.gender, pe.birthdate, TIMESTAMPDIFF(YEAR, pe.birthdate, current_date()) as age,
               par.council, CAST(year(current_date()) AS CHAR) as year, par.canton, min(l.Name_d) AS place, l.urban_rural_3types as urbanity,
               GROUP_CONCAT(DISTINCT(pro.title) separator ', ') AS job,
               GROUP_CONCAT(DISTINCT(pro.category) separator ', ') AS job_category,
-              pa.abbreviation_de party, pe.note as special, 
+              pa.abbreviation_de party, 0 as p_seats,
+              pe.note as special, 
               CASE WHEN e.status = 2 THEN 1
-              ELSE 0 END as incumbent, 1 as elected
+              ELSE 0 END as incumbent, 1 as elected, 0 as votes
               FROM sda_elections.parliament_members par
               JOIN sda_elections.people_metadata pe ON pe.id = par.person_id 
   				AND par.exitdate = '0000-00-00' OR par.exitdate >= current_date() 
@@ -75,7 +89,7 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
     comp_data <- comp_data[comp_data$canton == canton, ]
   }
   data <- rbind(current_data, comp_data)
-
+  
   ## Make sure only bigger cantons get a report
   if (nrow(current_data) >= 5) {
     
@@ -83,11 +97,11 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
     ##  Woman share         ##                
     ##########################
     woman <- data %>%
-                      group_by_at("comp") %>%
-                      filter(!is.na(gender)) %>%
-                      summarise(total = n(),
-                                female = sum(gender == "f"),
-                                share = sum(gender == "f")/n())
+      group_by_at("comp") %>%
+      filter(!is.na(gender)) %>%
+      summarise(total = n(),
+                female = sum(gender == "f"),
+                share = sum(gender == "f")/n())
     woman <- rbind(woman, c("difference", "", "", paste0(round(diff(rev(woman$share))*100, 1), " PP")))
     woman[1:2, grepl("share", colnames(woman))] <- sapply(woman[1:2, grepl("share", colnames(woman))], function(x) percent(as.numeric(x), accuracy = 0.1))
     
@@ -95,12 +109,12 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
     ##  Age                 ##                
     ##########################
     age <- data %>%
-            group_by_at("comp") %>%
-            filter(!is.na(age)) %>%
-            summarise(total = n(),
-                      avg = round(mean(age), 1),
-                      min = min(age),
-                      max = max(age))
+      group_by_at("comp") %>%
+      filter(!is.na(age)) %>%
+      summarise(total = n(),
+                avg = round(mean(age), 1),
+                min = min(age),
+                max = max(age))
     age <- rbind(age, c("difference", "", 
                         round(diff(rev(age$avg)),1), 
                         diff(rev(age$min)), 
@@ -134,10 +148,10 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
         rural = (sum(urbanity == "rural")/total),
         unknown = (sum(urbanity == "unknown")/total))
     urbanity <- rbind(urbanity, c("difference", "", 
-                        paste0(round(diff(rev(urbanity$urban))*100,1), " PP"), 
-                        paste0(round(diff(rev(urbanity$intermediary))*100,1), " PP"), 
-                        paste0(round(diff(rev(urbanity$rural))*100,1), " PP"), 
-                        paste0(round(diff(rev(urbanity$unknown))*100,1), " PP")))
+                                  paste0(round(diff(rev(urbanity$urban))*100,1), " PP"), 
+                                  paste0(round(diff(rev(urbanity$intermediary))*100,1), " PP"), 
+                                  paste0(round(diff(rev(urbanity$rural))*100,1), " PP"), 
+                                  paste0(round(diff(rev(urbanity$unknown))*100,1), " PP")))
     urbanity[1:2, 3:6] <- sapply(urbanity[1:2, 3:6], 
                                  function(x) percent(as.numeric(x), accuracy = 0.1))
     
@@ -170,6 +184,11 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
     top_jobs_comp <- top_jobs_comp[1:5, ]
     
     ##########################      
+    ##  Runner-Ups          ##                
+    ##########################
+    runnerups <- runner_ups(all_current_data)
+    
+    ##########################      
     ##  Output              ##                
     ##########################
     report_woman <- html_table(woman) 
@@ -192,13 +211,33 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
                     "<h2>New top jobs</h2>",
                     report_jobs_cur,
                     "<h2>Old top jobs</h2>",
-                    report_jobs_comp)
-    #htmlbody <- "C:/Automatisierungen/sda_eidgenoessische_wahlen_2023/Reports/email_report.html"
+                    report_jobs_comp,
+                    "<h2>Runner-Ups</h2>",
+                    runnerups)
     htmlbody <- paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Reports/email_report.html")
     subject <- paste0("Report elected National councillors ", canton)
     
     cat(report, file=file(htmlbody))
     send_html_notification(subject, htmlFilePath = htmlbody, recipients = recipients)
+  } else if (nrow(current_data) > 1) {
+    
+    ##########################      
+    ##  Runner-Ups          ##                
+    ##########################
+    runnerups <- runner_ups(all_current_data)
+    
+    ##########################      
+    ##  Send Notification   ##                
+    ##########################
+    headline <- paste0("<h1>Runner-ups National councillors ", canton, "</h1>")
+    report <- paste0(headline, "<h2>Runner-Ups</h2>", runnerups)
+    htmlbody <- paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Reports/email_report.html")
+    subject <- paste0("Runner-ups elected National councillors ", canton)
+    
+    cat(report, file=file(htmlbody))
+    send_html_notification(subject, htmlFilePath = htmlbody, recipients = recipients)
   }
+  
 }
+
 

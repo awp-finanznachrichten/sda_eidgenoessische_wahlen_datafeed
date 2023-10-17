@@ -37,6 +37,19 @@ results_candidates <- results_candidates %>%
 elected_candidates <- results_candidates %>%
   filter(elected == 1)
 
+#Alert when picture is missing
+no_picture <- elected_candidates %>%
+  filter(is.na(picture) == TRUE)
+
+if (nrow(no_picture) > 0) {
+  Subject <- paste0("Achtung: Gewählte Ständerats-Kandidierende ohne Portrait-Bild entdeckt!")
+  Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
+                 "Zu folgenden gewählten Ständerats-Kandidierenden gibt es kein Bild. Es wurde ein Platzhalter-Bild verwendet:\n",
+                 paste(paste0(no_picture$firstname," ",no_picture$lastname," (",no_picture$shortname_de,", ",no_picture$canton,")"),collapse = "\n"),
+                 "\n\nLiebe Grüsse\n\nLENA")
+  send_notification(Subject,Body,"robot-notification@awp.ch,laszlo.aebischer@keystone-sda.ch,contentdevelopment@keystone-sda.ch")
+}
+
 #Voted out candidates
 voted_out_candidates <- results_candidates %>%
   filter(elected == 0,
