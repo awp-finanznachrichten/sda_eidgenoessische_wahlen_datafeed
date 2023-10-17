@@ -33,9 +33,7 @@ elected_candidates_overall[is.na(elected_candidates_overall)] <- "-"
 #Transform Data
 elected_candidates_overall_de <- elected_candidates_overall %>%
   mutate(Name = paste0(firstname," ",lastname),
-         Bild = ifelse(grepl("NR",picture),
-                paste0("https://164.ch/grafiken_wahlen2023/Nationalrat/",picture),
-                paste0("https://164.ch/grafiken_wahlen2023/Staenderat/",picture)),
+         Bild = paste0("https://164.ch/grafiken_wahlen2023/Parlament/",picture),
          `Bisher/Neu` = ifelse(status==2,"Bisher","Neu"),
          Alter = birthdate,
          Rat = ifelse(council == "NR","Nationalrat","Ständerat"),
@@ -49,9 +47,7 @@ elected_candidates_overall_de <- elected_candidates_overall %>%
 
 elected_candidates_overall_fr <- elected_candidates_overall %>%
   mutate(Nom = paste0(firstname," ",lastname),
-         Image = ifelse(grepl("NR",picture),
-                       paste0("https://164.ch/grafiken_wahlen2023/Nationalrat/",picture),
-                       paste0("https://164.ch/grafiken_wahlen2023/Staenderat/",picture)),
+         Image = paste0("https://164.ch/grafiken_wahlen2023/Parlament/",picture),
          Etat = ifelse(status == 2,
                                ifelse(gender == "m","sortant","sortante"),
                                ifelse(gender == "m","nouveau","nouvelle")),
@@ -68,9 +64,7 @@ elected_candidates_overall_fr <- elected_candidates_overall %>%
 
 elected_candidates_overall_it <- elected_candidates_overall %>%
   mutate(Nome = paste0(firstname," ",lastname),
-         Immagine = ifelse(grepl("NR",picture),
-                        paste0("https://164.ch/grafiken_wahlen2023/Nationalrat/",picture),
-                        paste0("https://164.ch/grafiken_wahlen2023/Staenderat/",picture)),
+         Immagine = paste0("https://164.ch/grafiken_wahlen2023/Parlament/",picture),
          Stato = ifelse(status==2,"uscente","nuovo"),
          Eta = birthdate,
          Consiglio = ifelse(council == "NR","Nazionale","Consiglio degli Stati"),

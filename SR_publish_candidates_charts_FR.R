@@ -23,9 +23,7 @@ SR_results <- results_candidates %>%
   arrange(desc(votes),
           lastname) %>%
   mutate(picture = ifelse(is.na(picture) == FALSE,picture,"Replacement.jpg"),
-         image_link = ifelse(grepl("NR",picture),
-                             paste0("![](https://164.ch/grafiken_wahlen2023/Nationalrat/",picture,")"),
-                             paste0("![](https://164.ch/grafiken_wahlen2023/Staenderat/",picture,")")),
+         image_link = paste0("![](https://164.ch/grafiken_wahlen2023/Parlament/",picture,")"),
          status = ifelse(status == 2,
                          ifelse(gender == "m","sortant","sortante"),
                          ifelse(gender == "m","nouveau","nouvelle")),

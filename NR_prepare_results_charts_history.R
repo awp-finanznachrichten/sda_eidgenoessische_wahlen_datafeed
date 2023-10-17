@@ -45,9 +45,9 @@ response <-
   GET(BFS_API_URL)
 content <- content(response)$result$resources
 
-url_NR_history <-
-  as.data.frame(do.call(rbind, content))$download_url[[8]]
-#url_NR_history <- trimws(content[[7]]$download_url)
+#url_NR_history <-
+#  as.data.frame(do.call(rbind, content))$download_url[[8]]
+url_NR_history <- trimws(content[[8]]$download_url)
 
 #Download data
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))

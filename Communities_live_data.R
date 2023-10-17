@@ -1,7 +1,7 @@
 Testdata <- FALSE
 ###GET TESTDATA COMMUNITIES
-source("./Tests/get_testdata_2023.R")
-Testdata <- TRUE
+#source("./Tests/get_testdata_2023.R")
+#Testdata <- TRUE
 ###LOAD RESULT AND VOTERTURNOUT DATA
 if (Testdata == FALSE) {
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))

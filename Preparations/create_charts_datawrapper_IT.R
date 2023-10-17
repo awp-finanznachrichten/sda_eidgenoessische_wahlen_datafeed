@@ -263,7 +263,7 @@ source("NR_prepare_results_charts_history.R")
   }
   dw_edit_chart(chart_id,
                 visualize = adapted_list,
-                annotate = texts_chart_it[3]
+                annotate = "&nbsp;"
   )
   
   dw_publish_chart(chart_id)

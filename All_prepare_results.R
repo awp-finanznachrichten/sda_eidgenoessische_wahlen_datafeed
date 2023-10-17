@@ -146,7 +146,7 @@ content_de <- paste0(content_de,"Gewählt:<br>",
 content_fr <- paste0(content_fr,"Elu(e):<br>",
                      elected_candidates_SR$firstname[1]," ",elected_candidates_SR$lastname[1],
                      " (",elected_candidates_SR$shortname_fr[1],", ",elected_candidates_SR$status_text_fr[1],")")
-content_it <- paste0(content_it,"Eletto:<br>",
+content_it <- paste0(content_it,"Eletto/a:<br>",
                      elected_candidates_SR$firstname[1]," ",elected_candidates_SR$lastname[1],
                      " (",elected_candidates_SR$shortname_it[1],", ",elected_candidates_SR$status_text_it[1],")")
 if (elected_candidates_SR$seats_available_SR[1] != 1) {

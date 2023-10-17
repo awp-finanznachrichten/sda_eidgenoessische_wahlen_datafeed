@@ -32,9 +32,7 @@ elected_candidates <- elected_candidates %>%
 
 
 elected_candidates <- elected_candidates %>%
-  mutate(image_link = ifelse(grepl("NR",picture),
-                             paste0("![](https://164.ch/grafiken_wahlen2023/Nationalrat/",picture,")"),
-                             paste0("![](https://164.ch/grafiken_wahlen2023/Staenderat/",picture,")")),
+  mutate(image_link = paste0("![](https://164.ch/grafiken_wahlen2023/Parlament/",picture,")"),
          status_de = ifelse(status == 2,"bisher","neu"),
          text_de = paste0("<b>",firstname,"<br>",lastname,"</b><br>",
                            shortname_de,", ",status_de),
