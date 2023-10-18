@@ -246,8 +246,6 @@ selected_output <- nationalrat_gemeinden_dw %>%
 
 write.csv(selected_output,file=paste0("./Output_Regions/nationalrat_ergebnisse_gemeinden_Unter_Emmentaler.csv"),row.names = FALSE)
 
-#View(table(nationalrat_gemeinden_dw$Storyboard))
-#write.xlsx(nationalrat_gemeinden_dw,"./Texte/texts_urlena.xlsx",row.names = FALSE)
 
 ###INFO###
 ##The following placeholders will be replaced directly in the datawrapper maps so the data file doesn't become too large (2 MB limit):
