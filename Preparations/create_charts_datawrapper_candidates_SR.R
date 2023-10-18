@@ -68,10 +68,16 @@ for (c in 1:nrow(counted_cantons_SR)) {
            chart_type == "majorz_votes",
            language == "de") %>%
     .[,4]
+  
+  explainer <- "&nbsp;"
+  if (counted_cantons_SR$area_ID[c] == "JU" || counted_cantons_SR$area_ID[c] == "NE") {
+    explainer <- "Die Kantone Jura und Neuenburg wählen ihre Ständeräte nach dem Proporzverfahren."  
+  }  
+  
   dw_edit_chart(chart_id ,
                 title=paste0("Wahlen 2023: Ergebnis Ständeratswahl Kanton ",counted_cantons_SR$area_name_de[c]),
                 intro = "&nbsp;",
-                annotate = "&nbsp;"
+                annotate = explainer
                 )
                 #folderId = folders_SR[c])
   dw_data_to_chart(SR_results,chart_id)

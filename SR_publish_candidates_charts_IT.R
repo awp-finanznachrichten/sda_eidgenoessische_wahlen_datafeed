@@ -52,11 +52,16 @@ for (i in 1:nrow(SR_results)) {
  }
 }
 
+explainer <- texts_chart_it[3]
+if (counted_cantons_SR$area_ID[c] == "JU" || counted_cantons_SR$area_ID[c] == "NE") {
+  explainer <- paste0("I cantoni Giura e Neuchâtel eleggono i loro membri del Consiglio degli Stati con una rappresentanza proporzionale. ",texts_chart_it[3]) 
+}  
+
 dw_edit_chart(chart_ID,
               intro = ifelse(counted_cantons_SR$absolute_majority[c] > 0,
                              texts_chart_it[1],
                              paste0(texts_chart_it[1],", ",texts_chart_it[2])),
-              annotate = texts_chart_it[3],
+              annotate = explainer,
               visualize = adapted_list)
 dw_publish_chart(chart_ID)
 print("Datawrapper-Chart updated")

@@ -31,7 +31,6 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   stand_ch_candidates <- data_NR_candidates$stand
   stand_cantons_candidates <- data_NR_candidates$stand_kantone
 
-
   #Results
   results_NR_cantons_candidates <- data_NR_candidates$level_kantone %>%
     left_join(parties_metadata,
@@ -136,12 +135,13 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   results_NR_cantons_candidates$flag_gewaehlt <-
     ifelse(results_NR_cantons_candidates$flag_gewaehlt == TRUE, 1, 0)
 
+  if (nrow(ongoing_cantons_NR) > 0) {
   for (c in 1:nrow(ongoing_cantons_NR)) {
     if (ongoing_cantons_NR$kanton_abgeschlossen[c] == TRUE) {
       
       print(paste0("new candidates results for canton ",ongoing_cantons_NR$area_ID[c]," found!"))
       
-      #Get elected candidates results from canton
+      #Get candidates results from canton
       results_canton <- results_NR_cantons_candidates %>%
         filter(kanton_nummer == ongoing_cantons_NR$bfs_ID[c])
                #,flag_gewaehlt == 1)
@@ -199,12 +199,31 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
       rs <- dbSendQuery(mydb, sql_qry)
       
       dbDisconnectAll()
+      
+      if (grepl("App",ongoing_cantons_NR$source_update[c]) == TRUE) {
+        elected_mail <- results_NR_cantons_candidates %>%
+          filter(kanton_nummer == ongoing_cantons_NR$bfs_ID[c],
+                 flag_gewaehlt == 1) %>%
+          arrange(shortname_de)
+        
+        #Alert if Data from App gets overwritten
+        print(paste0("Achtung: Manuelle Eingabe der NR-Gewählten im Kanton ",ongoing_cantons_NR$area_name_de[c]," durch BFS-Daten ersetzt!"))
+        Subject <- paste0("Achtung: Manuelle Eingabe der NR-Gewählten im Kanton ",ongoing_cantons_NR$area_name_de[c]," durch BFS-Daten ersetzt!")
+        Body <- paste0("Hallo,\n\n",
+                       "Die gewählten Nationalratsmitglieder vom BFS zu dem bereits von euch manuell erfassten Kanton ",ongoing_cantons_NR$area_name_de[c],
+                       " sind eingetroffen und wurden in die Datenbank geschrieben. Bitte kontrollieren, ob die folgenden Daten mit den bereits generierten Outputs übereinstimmen:\n\n",
+                       "Gewählte Nationalratsmitglieder:\n",
+                       paste(paste0(elected_mail$vorname," ",elected_mail$name," (",elected_mail$shortname_de,")"),collapse = "\n"),
+                       "\n\nLiebe Grüsse\n\nLENA")
+        send_notification(Subject,Body,"robot-notification@awp.ch")  
+      }
+      
       } else {
         print(paste0("WARNING: Amount of elected NR candidates does not match overall seats available in ",ongoing_cantons_NR$area_ID[c],"! The data was not entered in DB!"))   
       }  
     }
   }
-  
+  }
 #Save Timestamp
 cat(timestamp_candidates, file = "./Timestamps/timestamp_candidates.txt") 
   

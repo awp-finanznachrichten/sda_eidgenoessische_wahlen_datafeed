@@ -69,10 +69,15 @@ for (c in 1:nrow(counted_cantons_SR)) {
   headline <- str_replace_all(headline,"canton de Uri","canton d'Uri")
   
   
+  explainer <- "&nbsp;"
+  if (counted_cantons_SR$area_ID[c] == "JU" || counted_cantons_SR$area_ID[c] == "NE") {
+  explainer <- "Les cantons du Jura et de Neuchâtel élisent leurs conseillers aux Etats à la proportionnelle."  
+  }  
+
   dw_edit_chart(chart_id,
                 title=headline,
                 intro = "&nbsp;",
-                annotate = "&nbsp;"#,
+                annotate = explainer#,
                 #folderId = folders_SR[c]
                 )
   dw_data_to_chart(SR_results,chart_id)

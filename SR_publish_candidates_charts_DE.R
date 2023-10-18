@@ -51,11 +51,16 @@ for (i in 1:nrow(SR_results)) {
  }
 }
 
+explainer <- texts_chart[3]
+if (counted_cantons_SR$area_ID[c] == "JU" || counted_cantons_SR$area_ID[c] == "NE") {
+explainer <- paste0("Die Kantone Jura und Neuenburg wählen ihre Ständeräte nach dem Proporzverfahren. ",texts_chart[3]) 
+} 
+
 dw_edit_chart(chart_ID,
               intro = ifelse(counted_cantons_SR$absolute_majority[c] > 0,
                              texts_chart[1],
                              paste0(texts_chart[1],", ",texts_chart[2])),
-              annotate = texts_chart[3],
+              annotate = explainer,
               visualize = adapted_list)
 dw_publish_chart(chart_ID)
 print("Datawrapper-Chart updated")

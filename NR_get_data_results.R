@@ -119,6 +119,7 @@ send_notification(Subject,Body,recipients)
     filter(area_type == "canton") %>%
     left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer))
 
+  if (nrow(ongoing_cantons_NR) > 0) {
   for (c in 1:nrow(ongoing_cantons_NR)) {
     if (ongoing_cantons_NR$kanton_abgeschlossen[c] == TRUE) {
       
@@ -143,6 +144,7 @@ send_notification(Subject,Body,recipients)
     seats_check <- sum(results_canton$anzahl_gewaehlte) == ongoing_cantons_NR$seats_available_NR[c]
 
     if (seats_check == TRUE) {
+      
       #Update party results
       mydb <- connectDB(db_name = "sda_elections")
       for (p in 1:nrow(results_canton)) {
@@ -199,12 +201,25 @@ send_notification(Subject,Body,recipients)
       rs <- dbSendQuery(mydb, sql_qry)
       
       dbDisconnectAll()
+
+      if (grepl("App",ongoing_cantons_NR$source_update[c]) == TRUE) {
+      #Alert if Data from App gets overwritten
+      print(paste0("Achtung: Manuelle Eingabe der NR-Resultate im Kanton ",ongoing_cantons_NR$area_name_de[c]," durch BFS-Daten ersetzt!"))
+      Subject <- paste0("Achtung: Manuelle Eingabe der NR-Resultate im Kanton ",ongoing_cantons_NR$area_name_de[c]," durch BFS-Daten ersetzt!")
+      Body <- paste0("Hallo,\n\n",
+                     "Die Daten vom BFS zu dem bereits von euch manuell erfassten Kanton ",ongoing_cantons_NR$area_name_de[c],
+                     " sind eingetroffen und wurden in die Datenbank geschrieben. Bitte kontrollieren, ob die folgenden Daten mit den bereits generierten Outputs übereinstimmen:\n\n",
+                     paste(paste0(results_canton$shortname_de,": Sitze ",results_canton$anzahl_gewaehlte,", Wähleranteil ",results_canton$partei_staerke),collapse = "\n"),
+                     "\n\nLiebe Grüsse\n\nLENA")
+      send_notification(Subject,Body,"robot-notification@awp.ch")  
+      }
+      
     } else {
       print(paste0("WARNING: Amount of seats does not match overall seats available in ",ongoing_cantons_NR$area_ID[c],"! The data was not entered in DB!"))
     }  
     }
   }
-  
+  }
   #Save Timestamp
   cat(timestamp_results, file = "./Timestamps/timestamp_results.txt")
   

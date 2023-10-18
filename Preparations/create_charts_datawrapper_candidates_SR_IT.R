@@ -59,10 +59,16 @@ for (c in 1:nrow(counted_cantons_SR)) {
   headline <- paste0("Federali 2023: risultati dell'elezione per il Consiglio degli Stati nel canton ",counted_cantons_SR$area_name_it[c])
   
   
+  explainer <- "&nbsp;"
+  if (counted_cantons_SR$area_ID[c] == "JU" || counted_cantons_SR$area_ID[c] == "NE") {
+    explainer <- "I cantoni Giura e Neuchâtel eleggono i loro membri del Consiglio degli Stati con una rappresentanza proporzionale."  
+  }  
+  
+  
   dw_edit_chart(chart_id ,
                 title=headline,
                 intro = "&nbsp;",
-                annotate = "&nbsp;"#,
+                annotate = explainer#,
                 #folderId = folders_SR[c]
                 )
   dw_data_to_chart(SR_results,chart_id)

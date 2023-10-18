@@ -29,7 +29,7 @@ for (c in 1:nrow(counted_cantons)) {
                                  elections_metadata = counted_cantons[c,])
   
   elected_candidates$image_link <- paste0("![](https://164.ch/grafiken_wahlen2023/Parlament/Replacement.jpg)")
-  elected_candidates$text_fr <- paste0("<b>pas encore connu</b><br>")
+  elected_candidates$text_fr <- paste0("<b>Pas encore connu</b><br>")
   
   elected_candidates_images <- data.frame("1","2","3","4")
   colnames(elected_candidates_images) <- data.frame("col_1","col_2","col_3","col_4")

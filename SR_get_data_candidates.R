@@ -58,7 +58,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   corrected_cantons_SR <- finished_cantons_SR %>%
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer)) %>%
     filter(wahlgang_abgeschlossen == FALSE)
-  
+
   if (nrow(corrected_cantons_SR) > 0) {
     
     #Adapt Metadata
@@ -99,7 +99,8 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   #Set variable elected or not
   results_SR_cantons_candidates$flag_gewaehlt <-
     ifelse(results_SR_cantons_candidates$flag_gewaehlt == TRUE, 1, 0)
-
+  
+  if (nrow(ongoing_cantons_SR) > 0) {
   for (c in 1:nrow(ongoing_cantons_SR)) {
     if (ongoing_cantons_SR$wahlgang_abgeschlossen[c] == TRUE) {
       
@@ -131,6 +132,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
       }
       
       other_election_needed <- ifelse(ongoing_cantons_SR$zweiter_wahlgang_noetig[c] == TRUE,"yes","no")
+      other_election_needed <- ifelse(is.na(other_election_needed) == TRUE,"no",other_election_needed)
 
       #Adapt Metadata
       sql_qry <- paste0(
@@ -146,9 +148,24 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
       rs <- dbSendQuery(mydb, sql_qry)
       
       dbDisconnectAll()
+
+      if ((grepl("App",ongoing_cantons_SR$source_update[c]) == TRUE) & (ongoing_cantons_SR$status[c] == "finished")) {
+        
+        #Alert if Data from App gets overwritten
+        print(paste0("Achtung: Manuelle Eingabe der SR-Endresultate im Kanton ",ongoing_cantons_SR$area_name_de[c]," durch BFS-Daten ersetzt!"))
+        Subject <- paste0("Achtung: Manuelle Eingabe der SR-Endresultate im Kanton ",ongoing_cantons_SR$area_name_de[c]," durch BFS-Daten ersetzt!")
+        Body <- paste0("Hallo,\n\n",
+                       "Die Ständerats-Endresultate vom BFS zu dem bereits von euch manuell erfassten Kanton ",ongoing_cantons_SR$area_name_de[c],
+                       " sind eingetroffen und wurden in die Datenbank geschrieben. Bitte kontrollieren, ob die folgenden Daten mit den bereits generierten Outputs übereinstimmen:\n\n",
+                       "Resultate Ständerat:\n",
+                       paste(paste0(results_canton$vorname," ",results_canton$name," (",results_canton$shortname_de,"): ",results_canton$stimmen_kandidat," Stimmen"),collapse = "\n"),
+                       "\n\nLiebe Grüsse\n\nLENA")
+        send_notification(Subject,Body,"robot-notification@awp.ch")  
+      }
+      
     }
   }
-  
+  }
 #Save Timestamp
 cat(timestamp_SR_candidates, file = "./Timestamps/timestamp_SR_candidates.txt")
 
