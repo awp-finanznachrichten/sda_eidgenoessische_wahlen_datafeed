@@ -55,7 +55,6 @@ dw_edit_chart(chart_ID,
               intro = ifelse(intermediate_cantons_SR$absolute_majority[c] > 0,
                              texts_chart_it[1],
                              paste0(texts_chart_it[1],", ",texts_chart_it[2])),
-              annotate = texts_chart_it[3],
               visualize = adapted_list)
 dw_publish_chart(chart_ID)
 print("Datawrapper-Chart updated")
