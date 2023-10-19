@@ -16,7 +16,11 @@ storyboard <- c(storyboard,"Text_Special_keineGewinnerVerlierer","")
 } else {
 #Winners
 if (sum(results_parties$seats_change > 0) > 1) {
-  storyboard <- c(storyboard,"Text_mehrere_Gewinner") 
+  if (sum(results_parties$seats_change > 1) == 0) {
+  storyboard <- c(storyboard,"Text_mehrere_Gewinner_ein_Sitz")
+  } else {
+  storyboard <- c(storyboard,"Text_mehrere_Gewinner")
+  }  
 } else if (sum(results_parties$seats_change > 0) == 1) {
   if (sum(results_parties$seats_change > 1) == 0) {
     storyboard <- c(storyboard,"Text_ein_Gewinner_ein_Sitz") 
@@ -28,7 +32,11 @@ if (sum(results_parties$seats_change > 0) > 1) {
 }  
 #Losers
 if (sum(results_parties$seats_change < 0) > 1) {
-  storyboard <- c(storyboard,"Text_mehrere_Verlierer") 
+  if (sum(results_parties$seats_change < -1) == 0) {
+    storyboard <- c(storyboard,"Text_mehrere_Verlierer_ein_Sitz")
+  } else {
+    storyboard <- c(storyboard,"Text_mehrere_Verlierer")
+  }  
 } else if (sum(results_parties$seats_change < 0) == 1) {
   if (sum(results_parties$seats_change < -1) == 0) {
   storyboard <- c(storyboard,"Text_ein_Verlierer_ein_Sitz") 

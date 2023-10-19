@@ -1,5 +1,5 @@
 #Working Directory
-MAIN_PATH <- "C:/Users/simon/OneDrive/"
+MAIN_PATH <- "C:/Users/sw/OneDrive/"
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 #Get Libraries and needed Data
@@ -291,7 +291,7 @@ source("NR_create_visual_data.R")
 if (NR_new_results == TRUE) {
 source("Communities_live_data.R")
 
-###COMMIT###
+#Commit to Github#
 library(git2r)
 git2r::config(user.name = "awp-finanznachrichten",user.email = "sw@awp.ch")
 token <- read.csv(paste0(MAIN_PATH,"Github_Token/token.txt"),header=FALSE)[1,1]
@@ -304,7 +304,7 @@ detach("package:git2r",unload=TRUE)
 source("Communities_publish_charts.R")
 }    
 
-###CREATE VISUAL###
+###CREATE VISUAL DATA###
 source("produce_visual_data.R")
 #}
 

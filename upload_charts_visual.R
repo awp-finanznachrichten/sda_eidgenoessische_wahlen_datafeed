@@ -27,5 +27,6 @@ ftpUpload(zipfile_name, ftp_adress,userpwd=Sys.getenv("ftp_visual"))
 setwd("..")
 
 print(paste0("Chart ",zipfile_name," uploaded successfully"))
+
 Sys.sleep(5)
 }

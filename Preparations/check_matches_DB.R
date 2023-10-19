@@ -102,4 +102,3 @@ non_matches_NR <- candidates_overall_NR %>%
   full_join(results_NR_cantons_candidates) %>%
   filter(is.na(kanton_nummer) |
            is.na(person_id))
-
