@@ -33,6 +33,7 @@ results_candidates <- results_candidates %>%
          status_text_it = ifelse(grepl("Vereinzelte",lastname),"-",status_text_it)
          )
 
+
 #Elected candidates
 elected_candidates <- results_candidates %>%
   filter(elected == 1)

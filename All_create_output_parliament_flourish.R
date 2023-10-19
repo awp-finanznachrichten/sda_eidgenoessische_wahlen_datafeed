@@ -7,7 +7,7 @@ overview_ch_flourish_de <- overview_ch %>%
   rename(`Sitze 2023` = seats_2023,
          `Sitze 2019` = seats_2019,
          Partei = shortname_de)
-  
+
 write.csv(overview_ch_flourish_de,"./Output/parliament_NR_overview_de.csv",row.names = FALSE)
 
 ###Filter and sort from Left to right
