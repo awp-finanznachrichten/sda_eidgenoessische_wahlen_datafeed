@@ -42,7 +42,7 @@ non_matches_SR <- candidates_overall_SR %>%
   full_join(results_SR_cantons_candidates) %>%
   filter(is.na(kanton_nummer) |
            is.na(person_id))
-
+print(non_matches_SR)
 #####NATIONALRAT######
 ###GET ALL NR CANDIDATES
 mydb <- connectDB(db_name = "sda_elections")
@@ -99,3 +99,4 @@ non_matches_NR <- candidates_overall_NR %>%
   full_join(results_NR_cantons_candidates) %>%
   filter(is.na(kanton_nummer) |
            is.na(person_id))
+print(non_matches_NR)

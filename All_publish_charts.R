@@ -2,7 +2,7 @@ counted_cantons <- sum(grepl("all_counted",overview_cantons$status))
 
 if (counted_cantons == 0) {
 intro_text_de <- paste0("Live-Zwischenstand von <b>",format(Sys.time(),"%H:%M")," Uhr</b>. Es sind noch keine Kantone komplett ausgezählt.")
-intro_text_fr <- paste0("Résultat en direct à <b>",format(Sys.time(),"%Hh%M"),"</b>. Les résultats complets d'un canton ne sont pas encore disponibles.")
+intro_text_fr <- paste0("Résultat en direct à <b>",format(Sys.time(),"%Hh%M"),"</b>. Le dépouillement est terminé dans aucun canton.")
 intro_text_it <- paste0("Risultato in diretta alle <b>",format(Sys.time(),"%H:%M"),"</b>. Non sono ancora disponibili risultati completi di un cantone.")
 } else if (counted_cantons == 26) {
 intro_text_de <- paste0("Endergebnis vom ",format(Sys.Date(),"%d.%m.%Y")," ",format(Sys.time(),"%H:%M")," Uhr.")
