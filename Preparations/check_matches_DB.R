@@ -62,9 +62,6 @@ response <-
 content <- content(response)$result$resources
 url_NR_candidates <- trimws(content[[5]]$download_url)
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
-download.file(url_NR_candidates,
-              destfile = "data_NR_candidates.json",
-              method = "curl")
 data_NR_candidates <-
   fromJSON("data_NR_candidates.json", flatten = TRUE)
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))

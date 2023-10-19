@@ -4,8 +4,7 @@ response <-
 content <- httr::content(response)$result$resources
 
 ###GET RESULTS DATA###
-url_NR_results <-
-  as.data.frame(do.call(rbind, content))$download_url[[1]]
+url_NR_results <- trimws(content[[4]]$download_url)
 
   #Download data
 
@@ -26,7 +25,7 @@ url_NR_results <-
   results_NR_ch <- results_NR_ch %>%
     left_join(parties_metadata,
               by = join_by(partei_id == bfs_id))
-  
+
 #Replace NA with 0
 results_NR_ch[is.na(results_NR_ch)] <- 0
 
