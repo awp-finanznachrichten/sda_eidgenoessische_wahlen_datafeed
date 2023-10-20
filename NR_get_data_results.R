@@ -31,7 +31,8 @@ NR_new_results <- TRUE
 
   #Check: Election done?
   if (data_NR_results$stand$wahl_abgeschlossen == TRUE) {
-  NR_finished <- TRUE
+  print("All NR results are complete!")
+  NR_results_finished <- TRUE
   }  
   
   #Timestamps

@@ -11,7 +11,9 @@ source("CONFIG.R")
 NR_new_results <- FALSE
 NR_new_elected <- FALSE
 SR_new_elected <- FALSE
-NR_finished <- FALSE
+NR_results_finished <- FALSE
+NR_candidates_finished <- FALSE
+SR_candidates_finished <- FALSE
 
 #Load Databases
 source("load_databases.R")
@@ -218,8 +220,8 @@ dbDisconnectAll()
 }
 
 ###ELECTION FINISHED###
-if (NR_finished == TRUE) {
-print("All NR results here!") 
+if (NR_results_finished == TRUE) {
+print("Create overall results charts") 
   
 source("load_databases.R")
   ch_metadata <- election_metadata %>%
@@ -260,7 +262,8 @@ source("All_publish_results_charts_history.R")
     dbDisconnectAll() 
   }
 ##Analytics##
-if (ch_metadata$analytics[1] == "pending") {
+if ((ch_metadata$analytics[1] == "pending") & (NR_candidates_finished == TRUE)) {
+  print("Create overall reports and VIP alerts of candidates") 
     #Generate Output
     email_elected_report_nr(recipients = paste0(DEFAULT_EMAILS,",",ch_metadata$mail_KeySDA))
     #Set Status Done
@@ -270,7 +273,7 @@ if (ch_metadata$analytics[1] == "pending") {
     dbDisconnectAll() 
 }
 ##Alerts##
-if (ch_metadata$alerts[1] == "pending") {
+if ((ch_metadata$alerts[1] == "pending") & (NR_candidates_finished == TRUE)) {
     #Send VIP-Mail
     vip_alert(council = "NR",
               recipients= paste0(DEFAULT_EMAILS,",",ch_metadata$mail_KeySDA))

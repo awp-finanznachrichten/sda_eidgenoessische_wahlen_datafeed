@@ -27,6 +27,12 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
   print("new candidates NR data downloaded!")
   
+  #Check: Election done?
+  if (data_NR_candidates$stand$wahl_abgeschlossen == TRUE) {
+    print("All NR candidate results are complete!")
+    NR_candidates_finished <- TRUE
+  }  
+  
   #Stand CH and Kantone
   stand_ch_candidates <- data_NR_candidates$stand
   stand_cantons_candidates <- data_NR_candidates$stand_kantone

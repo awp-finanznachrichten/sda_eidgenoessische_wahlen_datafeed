@@ -16,7 +16,7 @@ timestamp_SR_candidates_old <-
 if (timestamp_SR_candidates != timestamp_SR_candidates_old) {
 #Set Flag
 SR_new_elected <- TRUE
-  
+
   #Download data
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   download.file(url_SR_candidates,
@@ -26,6 +26,13 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
     fromJSON("data_SR_candidates.json", flatten = TRUE)
   setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
   print("new candidates SR data downloaded!")
+  
+  
+  #Check: Election done?
+  if (data_SR_candidates$stand$wahlgang_abgeschlossen == TRUE) {
+    print("All SR candidate results are complete!")
+    SR_candidates_finished <- TRUE
+  }
   
   #Stand CH and Kantone
   stand_ch_candidates <- data_SR_candidates$stand
