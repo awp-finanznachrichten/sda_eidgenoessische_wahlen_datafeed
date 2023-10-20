@@ -54,7 +54,7 @@ for (i in 1:nrow(SR_results)) {
 
 explainer <- texts_chart_it[3]
 if (counted_cantons_SR$area_ID[c] == "JU" || counted_cantons_SR$area_ID[c] == "NE") {
-  explainer <- paste0("I cantoni Giura e Neuchâtel eleggono i loro membri del Consiglio degli Stati con una rappresentanza proporzionale. ",texts_chart_it[3]) 
+  explainer <- paste0("I cantoni di Giura e Neuchâtel eleggono i loro membri del Consiglio degli Stati con il sistema proporzionale. ",texts_chart_it[3]) 
 }  
 
 dw_edit_chart(chart_ID,

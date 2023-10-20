@@ -61,7 +61,7 @@ for (c in 1:nrow(counted_cantons_SR)) {
   
   explainer <- "&nbsp;"
   if (counted_cantons_SR$area_ID[c] == "JU" || counted_cantons_SR$area_ID[c] == "NE") {
-    explainer <- "I cantoni Giura e Neuchâtel eleggono i loro membri del Consiglio degli Stati con una rappresentanza proporzionale."  
+    explainer <- "I cantoni di Giura e Neuchâtel eleggono i loro membri del Consiglio degli Stati con il sistema proporzionale."  
   }  
   
   
