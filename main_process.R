@@ -41,6 +41,7 @@ source("get_counted_cantons.R")
 check_intermediate <- intermediate_timecheck %>%
   filter(hour == hour(Sys.time()))
 
+if (nrow(check_intermediate) > 0) {
 if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending") ){
   if (nrow(counted_cantons) > 0) {
   source("load_databases.R")
@@ -59,6 +60,7 @@ if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending") ){
   rs <- dbSendQuery(mydb, sql_qry)
   dbDisconnectAll() 
 }  
+}
 
 ###NATIONALRAT###
 if (nrow(counted_cantons) > 0) {
