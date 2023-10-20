@@ -37,14 +37,15 @@ for (c in 1:nrow(counted_cantons_SR)) {
     )
   results_candidates <- fetch(rs, n = -1)
   dbDisconnectAll()
-  
+
+
   #Get SR candidates
   SR_results <- results_candidates %>%
     left_join(people_metadata, join_by(person_id == id)) %>%
     left_join(parties_metadata, join_by (party_id == id)) %>%
-    arrange(desc(votes),
-            shortname_de,
-            lastname) %>%
+    arrange(party_id,
+            candidate_id
+            ) %>%
     mutate(picture = ifelse(is.na(picture) == FALSE,picture,"Replacement.jpg"),
            image_link =paste0("![](https://164.ch/grafiken_wahlen2023/Parlament/",picture,")"),
            status = ifelse(status == 2,"bisher","neu"),

@@ -177,11 +177,11 @@ if (stand_ch$wahl_abgeschlossen == TRUE) {
                              texts_spreadsheet_UrLena,
                              area = "ch")
   
-  source("voterturnout_reporting.R")
-  
   #Easteregg average community
   nationalrat_gemeinden_dw <- add_easteregg(nationalrat_gemeinden_dw,
                 texts_spreadsheet_UrLena)
+  
+  source("voterturnout_reporting.R")
   
 }  
 
