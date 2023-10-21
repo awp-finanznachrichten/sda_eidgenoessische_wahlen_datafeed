@@ -18,6 +18,7 @@ results_NR_communities <- results_NR_communities %>%
 
 stand_ch <- data_NR_results$stand
 stand_cantons <- data_NR_results$stand_kantone
+print(paste0("Es sind ",stand_ch$gemeinden_abgeschlossen," von ",stand_ch$gemeinden_total," Gemeinden ausgezählt"))
 
 results_NR_communities_voterturnout <- data_NR_voterturnout$level_gemeinden %>%
   filter(gemeinde_nummer < 9000)
