@@ -15,7 +15,7 @@ results_NR_communities <- data_NR_results$level_gemeinden
 results_NR_communities <- results_NR_communities %>%
   left_join(parties_metadata,
             by = join_by(partei_id == bfs_id))
-View(results_NR_communities)
+
 stand_ch <- data_NR_results$stand
 stand_cantons <- data_NR_results$stand_kantone
 print(paste0("Es sind ",stand_ch$gemeinden_abgeschlossen," von ",stand_ch$gemeinden_total," Gemeinden ausgezählt"))
@@ -60,7 +60,7 @@ for (g in 1:nrow(gemeinden)) {
   ergebnisse_gemeinde <- results_NR_communities %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(partei_staerke) == FALSE)
-  
+ 
   voter_turnout <- results_NR_communities_voterturnout %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(wahlbeteiligung) == FALSE)
