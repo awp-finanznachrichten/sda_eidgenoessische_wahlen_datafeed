@@ -209,24 +209,25 @@ overview_cantons$content_it <- gsub("[;]","¢",overview_cantons$content_it)
 
 
 overview_cantons$content_de[3] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP, bisher)",overview_cantons$content_de[3])
-overview_cantons$content_de[2] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>Thomas Rechsteiner (Mitte, bisher)",overview_cantons$content_de[2])
-overview_cantons$content_de[22] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>Simon Stadler (Mitte, bisher)",overview_cantons$content_de[22])
-
 overview_cantons$content_fr[3] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):<br>David Zuberbühler (UDC, sortant)",overview_cantons$content_fr[3])
-overview_cantons$content_fr[2] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):br>Thomas Rechsteiner (Centre, sortant)",overview_cantons$content_fr[2])
-overview_cantons$content_fr[22] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):<br>Simon Stadler (Centre, sortant)",overview_cantons$content_fr[22])
-
 overview_cantons$content_it[3] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>David Zuberbühler (PLR, uscenti)",overview_cantons$content_it[3])
+
+
+overview_cantons$content_de[2] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>Thomas Rechsteiner (Mitte, bisher)",overview_cantons$content_de[2])
+overview_cantons$content_fr[2] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):br>Thomas Rechsteiner (Centre, sortant)",overview_cantons$content_fr[2])
 overview_cantons$content_it[2] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>Thomas Rechsteiner (Centro, uscenti)",overview_cantons$content_it[2])
+
+overview_cantons$content_de[22] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>Simon Stadler (Mitte, bisher)",overview_cantons$content_de[22])
+overview_cantons$content_fr[22] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):<br>Simon Stadler (Centre, sortant)",overview_cantons$content_fr[22])
 overview_cantons$content_it[22] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>Simon Stadler (Centro, uscenti)",overview_cantons$content_it[22])
 
 overview_cantons$content_de[9] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>Markus Schnyder (SVP, neu)",overview_cantons$content_de[9])
-overview_cantons$content_it[9] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br> Markus Schnyder (PLR, nuovi)",overview_cantons$content_it[3])
 overview_cantons$content_fr[9] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):<br> Markus Schnyder (UDC, nouveau)",overview_cantons$content_fr[3])
+overview_cantons$content_it[9] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br> Markus Schnyder (PLR, nuovi)",overview_cantons$content_it[3])
 
 overview_cantons$content_de[18] <- gsub("Es sind noch keine Resultate vorhanden.","Sitzerverteilung:<br>SVP 2, SP 1, FDP 1, Mitte 1, Grüne 1",overview_cantons$content_de[18])
-overview_cantons$content_it[18] <- gsub("Non ci sono ancora risultati.","UDC 2, PS 1, PLR 1, Centro 1, Verdi 1",overview_cantons$content_it[18])
 overview_cantons$content_fr[18] <- gsub("Aucun résultat n'est encore disponible."," Distribution des sièges:<br> UDC 2, PS 1, PLR 1, Centre 1, Vert-e-s 1",overview_cantons$content_fr[18])
+overview_cantons$content_it[18] <- gsub("Non ci sono ancora risultati.","UDC 2, PS 1, PLR 1, Centro 1, Verdi 1",overview_cantons$content_it[18])
 
 overview_cantons$status[3] <- "all_counted"
 overview_cantons$status[2] <- "all_counted"
