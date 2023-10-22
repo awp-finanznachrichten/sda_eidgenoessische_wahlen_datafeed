@@ -27,10 +27,10 @@ source("SR_get_data_candidates.R")
 source("load_databases.R")
 
 ###OVERVIEW RESULTS###
-source("All_prepare_results.R")
-source("All_publish_charts.R")
-source("All_create_output_parliament_flourish.R")
-source("All_create_output_candidates_flourish.R")
+#source("All_prepare_results.R")
+#source("All_publish_charts.R")
+#source("All_create_output_parliament_flourish.R")
+#source("All_create_output_candidates_flourish.R")
 
 ###CANTON RESULTS###
 ##Check: Canton completed?
