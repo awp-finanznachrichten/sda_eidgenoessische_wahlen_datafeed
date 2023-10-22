@@ -205,9 +205,9 @@ for (c in 1:nrow(stand_cantons)) {
 }  
 
 ##Add Nationalräte
-nationalrat_gemeinden_dw <- add_elected_candidates(elected_candidates_overall,
-                                               nationalrat_gemeinden_dw,
-                                               texts_spreadsheet_UrLena)
+#nationalrat_gemeinden_dw <- add_elected_candidates(elected_candidates_overall,
+#                                               nationalrat_gemeinden_dw,
+#                                               texts_spreadsheet_UrLena)
 
 nationalrat_gemeinden_dw <- cleanup_urlena(nationalrat_gemeinden_dw)
 

@@ -63,7 +63,7 @@ corrected_cantons_NR <- finished_cantons_NR %>%
   left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer)) %>%
   filter(kanton_abgeschlossen == FALSE)
 
-if (nrow(corrected_cantons_NR) > 0) {
+if (nrow(corrected_cantons_NR) > 25) {
 
 #Adapt Metadata
   #Status and Remarks

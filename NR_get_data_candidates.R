@@ -81,7 +81,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer)) %>%
     filter(kanton_abgeschlossen == FALSE)
 
-  if (nrow(corrected_cantons_NR) > 0) {
+  if (nrow(corrected_cantons_NR) > 25) {
     #Adapt Metadata
     #Status and Remarks
     if (corrected_cantons_NR$status[1] == "candidates finished") {

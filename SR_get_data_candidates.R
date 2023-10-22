@@ -65,7 +65,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer)) %>%
     filter(wahlgang_abgeschlossen == FALSE)
   
-  if (nrow(corrected_cantons_SR) > 0) {
+  if (nrow(corrected_cantons_SR) > 25) {
     
     #Adapt Metadata
     mydb <- connectDB(db_name = "sda_elections")
