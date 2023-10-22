@@ -1,12 +1,12 @@
 #Working Directory
-MAIN_PATH <- "C:/Users/sw/OneDrive/"
+MAIN_PATH <- "C:/Users/simon/OneDrive/"
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 #Get Libraries and needed Data
 source("CONFIG.R")
 
 #####START LOOP#####
-repeat {
+#repeat {
 #Flags
 NR_new_results <- FALSE
 NR_new_elected <- FALSE
@@ -311,5 +311,5 @@ source("Communities_publish_charts.R")
 
 ###CREATE VISUAL DATA###
 #source("produce_visual_data.R")
-}
+#}
 
