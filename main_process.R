@@ -1,5 +1,5 @@
 #Working Directory
-MAIN_PATH <- "C:/Users/simon/OneDrive/"
+MAIN_PATH <- "C:/Users/sw/OneDrive/"
 setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
 
 #Get Libraries and needed Data
