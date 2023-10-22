@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
+  <header>
+    <sent>2023-10-22T17:36:06+02:00</sent>
+  </header>
+
+  <itemSet>
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="de" guid="urn:newsml:keystone-sda.ch:20231022:20231022173606165316780265495" version="1">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
+      <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
+
+      <itemMeta>
+        <itemClass qcode="ninat:text"/>
+        <provider qcode="nprov:KSDA">
+           <name>sda</name>
+        </provider>
+        <versionCreated>2023-10-22T17:36:06+02:00</versionCreated>
+        <pubStatus qcode="stat:withheld"/>
+        <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
+        <service qcode="sdasvc:bsd"></service>
+        <edNote role="sdanote:note">Diese Meldung wurde automatisch auf Grundlage der aktuellsten Daten vom Kanton Neuenburg erstellt und vor der Publikation überprüft.</edNote>
+        <edNote role="sdalena:memo"></edNote>
+        
+      </itemMeta>
+
+      <contentMeta>
+        <urgency>3</urgency>
+        <contentCreated>2023-10-22T17:36:06+02:00</contentCreated>
+        <creator>
+          <name>sda-robot</name>
+        </creator>
+        <altId>165316780265495</altId>
+        <dateline>Neuenburg</dateline>
+        <language tag="de"/>
+        <genre qcode="sdagenre:RES">
+        </genre>
+
+        <!--storytypes-->
+        <subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>
+        
+        <!--media topics-->
+        <subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:ESU"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:UPH"></subject>
+
+        <!--locations-->
+        <located type="loctype:city" qcode="sdamarsgeo:NEU">
+<name>Neuenburg</name>
+</located>
+  
+        <slugline>Wahlen 2023 - NE SR END</slugline>
+        <headline>Die Ergebnisse der Ständeratswahl im Kanton NE</headline>
+        <description role="drol:teaser"> </description>
+        <description role="drol:catchline"></description>
+      </contentMeta>
+
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+xml">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>Die Ergebnisse der Ständeratswahl im Kanton NE</title>
+            </head>
+            <body>
+              <p class="lead"> </p>
+              <p class="paragraph">Die Stimmberechtigen des Kantons Neuenburg haben Philippe Bauer (FDP) nicht wieder in den Ständerat gewählt.</p>
+<table><tbody><tr><td>Stimmen haben erhalten</td><td></td><td></td><td>Anzahl Stimmen</td><td>Gewählt</td></tr><tr><td>Baptiste Hurni</td><td>SP</td><td>neu</td><td>13'914</td><td>ja</td></tr><tr><td>Céline Vara</td><td>Grüne</td><td>bisher</td><td>12'167</td><td>ja</td></tr><tr><td>Philippe Bauer</td><td>FDP</td><td>bisher</td><td>11'900</td><td>nein</td></tr><tr><td>Fabien Fivaz</td><td>Grüne</td><td>neu</td><td>9306</td><td>nein</td></tr><tr><td>Théo Huguenin-Elie</td><td>SP</td><td>neu</td><td>8339</td><td>nein</td></tr><tr><td>Pascale Leutwiler</td><td>FDP</td><td>neu</td><td>8186</td><td>nein</td></tr><tr><td>Daniel Berger</td><td>SVP</td><td>neu</td><td>7938</td><td>nein</td></tr><tr><td>Grégoire Cario</td><td>SVP</td><td>neu</td><td>7001</td><td>nein</td></tr><tr><td>Denis de la Reussille</td><td>PdA</td><td>neu</td><td>6091</td><td>nein</td></tr><tr><td>Sarah Blum</td><td>PdA</td><td>neu</td><td>4039</td><td>nein</td></tr><tr><td>Brigitte Leitenberg</td><td>GLP</td><td>neu</td><td>3265</td><td>nein</td></tr><tr><td>Jennifer Hirter</td><td>GLP</td><td>neu</td><td>2367</td><td>nein</td></tr><tr><td>Jean-Luc Pieren</td><td>weitere</td><td>neu</td><td>202</td><td>nein</td></tr></tbody></table>
+<p class="paragraph"></p>
+
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>
