@@ -306,7 +306,7 @@ gitcommit()
 gitpush()
 detach("package:git2r",unload=TRUE)
 #Publish Charts  
-#source("Communities_publish_charts.R")
+source("Communities_publish_charts.R")
 }    
 
 ###CREATE VISUAL DATA###
