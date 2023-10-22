@@ -386,7 +386,7 @@ if (elected_candidates$gender == "f") {
 } else if (elected_candidates$gender == "m") {
 
   if(grepl("AI|AR|GL|NW|OW|UR",elected_candidates$area_id) == TRUE) {
-    text_one_f <- texts_spreadsheet_UrLena %>%
+    text_one_m <- texts_spreadsheet_UrLena %>%
       filter(Text_ID == "Add_small_canton_NR_im_Wohnort_m")
   } else {
     text_one_m <- texts_spreadsheet_UrLena %>%
