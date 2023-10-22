@@ -51,6 +51,8 @@ if (language == "it") {
 
 texts <- gsub("#Sitze_Gewinn",winner$seats_change,texts) 
 } 
+  grepl("#Partei_Verlierer",texts[4])
+  
 
 #Verlierer Parteien
 if (grepl("#Parteien_Verlierer",texts[4]) == TRUE) {

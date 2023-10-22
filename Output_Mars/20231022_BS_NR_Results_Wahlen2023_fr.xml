@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
   <header>
-    <sent>2023-10-22T21:29:50+02:00</sent>
+    <sent>2023-10-22T21:46:46+02:00</sent>
   </header>
 
   <itemSet>
-    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="fr" guid="urn:newsml:keystone-sda.ch:20231022:20231022212950824109885130228" version="1">
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="fr" guid="urn:newsml:keystone-sda.ch:20231022:20231022214646783682491621360" version="1">
       <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
       <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
 
@@ -14,7 +14,7 @@
         <provider qcode="nprov:KSDA">
            <name>sda</name>
         </provider>
-        <versionCreated>2023-10-22T21:29:50+02:00</versionCreated>
+        <versionCreated>2023-10-22T21:46:46+02:00</versionCreated>
         <pubStatus qcode="stat:withheld"/>
         <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
         <service qcode="sdasvc:bsf"></service>
@@ -25,11 +25,11 @@
 
       <contentMeta>
         <urgency>3</urgency>
-        <contentCreated>2023-10-22T21:29:50+02:00</contentCreated>
+        <contentCreated>2023-10-22T21:46:46+02:00</contentCreated>
         <creator>
           <name>sda-robot</name>
         </creator>
-        <altId>824109885130228</altId>
+        <altId>783682491621360</altId>
         <dateline>Bâle</dateline>
         <language tag="fr"/>
         <genre qcode="sdagenre:RES">
@@ -63,8 +63,8 @@
             </head>
             <body>
               <p class="lead"> </p>
-              <p class="paragraph">Comme le canton de Bâle-Ville ne dispose plus que de quatre conseillers nationaux au lieu de cinq, aucun parti n'a gagné de siège. #Partei_Verlierer_f a perdu un siège. </p>
-<p class="paragraph">Le #Partei_Verlierer_f a perdu un siège.</p>
+              <p class="paragraph">Comme le canton de Bâle-Ville ne dispose plus que de quatre conseillers nationaux au lieu de cinq, aucun parti n'a gagné de siège. PS a perdu un siège. </p>
+<p class="paragraph">Le PS a perdu un siège.</p>
 <table><tbody><tr><td></td><td>Nombre de sièges</td><td>Différence par rapport à 2019</td><td>Pourcentage de voix</td><td>Différence par rapport à 2019</td></tr><tr><td>PS</td><td>1</td><td>-1</td><td>31,8%</td><td>-0,8</td></tr><tr><td>Vert-e-s</td><td>1</td><td>-</td><td>17,1%</td><td>-0,6</td></tr><tr><td>PL</td><td>1</td><td>-</td><td>10,3%</td><td>-5,0</td></tr><tr><td>PVL</td><td>1</td><td>-</td><td>9,1%</td><td>+3,4</td></tr><tr><td>UDC</td><td>0</td><td>-</td><td>13,6%</td><td>+1,3</td></tr><tr><td>PLR</td><td>0</td><td>-</td><td>6,9%</td><td>+0,9</td></tr><tr><td>Centre</td><td>0</td><td>-</td><td>5,8%</td><td>+0,9</td></tr></tbody></table>
 <p class="paragraph">Les résultats de l'élection au Conseil national dans le canton de Bâle-Ville: Nombre de siège(s) en 2023: 4.</p>
 <p class="paragraph">Le canton compte un siège de moins qu'en 2019.</p>
