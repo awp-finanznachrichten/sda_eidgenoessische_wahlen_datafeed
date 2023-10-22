@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
+  <header>
+    <sent>2023-10-22T13:31:03+02:00</sent>
+  </header>
+
+  <itemSet>
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="de" guid="urn:newsml:keystone-sda.ch:20231022:20231022133103168736116297475" version="1">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
+      <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
+
+      <itemMeta>
+        <itemClass qcode="ninat:text"/>
+        <provider qcode="nprov:KSDA">
+           <name>sda</name>
+        </provider>
+        <versionCreated>2023-10-22T13:31:03+02:00</versionCreated>
+        <pubStatus qcode="stat:withheld"/>
+        <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
+        <service qcode="sdasvc:bsd"></service>
+        <edNote role="sdanote:note">Diese Meldung wurde automatisch auf Grundlage der aktuellsten Daten vom Kanton Obwalden erstellt und vor der Publikation überprüft.</edNote>
+        <edNote role="sdalena:memo"></edNote>
+        
+      </itemMeta>
+
+      <contentMeta>
+        <urgency>3</urgency>
+        <contentCreated>2023-10-22T13:31:03+02:00</contentCreated>
+        <creator>
+          <name>sda-robot</name>
+        </creator>
+        <altId>168736116297475</altId>
+        <dateline>Sarnen</dateline>
+        <language tag="de"/>
+        <genre qcode="sdagenre:RES">
+        </genre>
+
+        <!--storytypes-->
+        <subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>
+        
+        <!--media topics-->
+        <subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:LOH"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:ESU"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:PRT"></subject>
+
+        <!--locations-->
+        <located type="loctype:city" qcode="sdamarsgeo:SAR">
+<name>Sarnen</name>
+</located>
+  
+        <slugline>Wahlen 2023 - OW NR END</slugline>
+        <headline>Die Zuteilung des Sitzes im Kanton Obwalden</headline>
+        <description role="drol:teaser"> </description>
+        <description role="drol:catchline"></description>
+      </contentMeta>
+
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+xml">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>Die Zuteilung des Sitzes im Kanton Obwalden</title>
+            </head>
+            <body>
+              <p class="lead"> </p>
+              <p class="paragraph">Die Sitzverteilung im Kanton Obwalden bleibt unverändert. </p>
+<p class="paragraph">Das Resultat der Nationalratswahlen im Kanton Obwalden im Überblick:</p>
+<table><tbody><tr><td></td><td>Sitze</td><td>Veränderung zu 2019</td><td>Wähleranteil</td><td>Veränderung zu 2019</td></tr><tr><td>SVP</td><td>1</td><td>-</td><td>52,3%</td><td>+15,0</td></tr><tr><td>FDP</td><td>0</td><td>-</td><td>47,7%</td><td>+36,1</td></tr></tbody></table>
+<p class="paragraph">Anzahl Sitze 2023: 1. </p>
+<p class="paragraph">Berücksichtigt wurden alle Parteien, die einen Wähleranteil von mindestens drei Prozent aufweisen.</p>
+
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>

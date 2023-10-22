@@ -26,8 +26,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
     fromJSON("data_SR_candidates.json", flatten = TRUE)
   setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
   print("new candidates SR data downloaded!")
-  
-  
+
   #Check: Election done?
   if (data_SR_candidates$stand$wahlgang_abgeschlossen == TRUE) {
     print("All SR candidate results are complete!")
@@ -65,7 +64,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   corrected_cantons_SR <- finished_cantons_SR %>%
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer)) %>%
     filter(wahlgang_abgeschlossen == FALSE)
-
+  
   if (nrow(corrected_cantons_SR) > 0) {
     
     #Adapt Metadata
