@@ -70,7 +70,14 @@ $/tr£$tr£$td£UDC$/td£$td style='text-align: center'£1$/td£$td style='text-
 "BS","no_data","Basel-Stadt","$b£Nationalrat (4 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (1 Sitz)$/b£$br£Es sind noch keine Resultate vorhanden.","Bâle-Ville","$b£Conseil national (4 sièges)$/b£$br£Aucun résultat n'est encore disponible.$br£$br£$b£Conseil des Etats (1 siège)$/b£$br£Aucun résultat n'est encore disponible.","Basilea Città","$b£Consiglio nazionale (4 seggi)$/b£$br£Non ci sono ancora risultati.$br£$br£$b£Consiglio degli Stati (1 seggio)$/b£$br£Non ci sono ancora risultati."
 "FR","SR_counted","Freiburg","$b£Nationalrat (7 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (2 Sitze)$/b£$br£Im ersten Wahlgang wurde niemand in den Ständerat gewählt. Es ist ein zweiter Wahlgang nötig.","Fribourg","$b£Conseil national (7 sièges)$/b£$br£Aucun résultat n'est encore disponible.$br£$br£$b£Conseil des Etats (2 sièges)$/b£$br£Aucun candidat n'a été élu lors du premier tour. Un deuxième tour sera nécessaire","Friburgo","$b£Consiglio nazionale (7 seggi)$/b£$br£Non ci sono ancora risultati.$br£$br£$b£Consiglio degli Stati (2 seggi)$/b£$br£Nessuno è stato eletto agli Stati al primo turno. Il ballottaggio si svolgerà."
 "GE","no_data","Genf","$b£Nationalrat (12 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (2 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.","Genève","$b£Conseil national (12 sièges)$/b£$br£Aucun résultat n'est encore disponible.$br£$br£$b£Conseil des Etats (2 sièges)$/b£$br£Aucun résultat n'est encore disponible.","Ginevra","$b£Consiglio nazionale (12 seggi)$/b£$br£Non ci sono ancora risultati.$br£$br£$b£Consiglio degli Stati (2 seggi)$/b£$br£Non ci sono ancora risultati."
-"GL","all_counted","Glarus","$b£Nationalrat (1 Sitz)$/b£$br£Gewählt:<br>Markus Schnyder (SVP, neu)$br£$br£$b£Ständerat (2 Sitze)$/b£$br£Gewählt sind:$br£Benjamin Mühlemann (FDP, neu)$br£Mathias Zopfi (Grüne, bisher)","Glaris","$b£Conseil national (1 siège)$/b£$br£$table£
+"GL","all_counted","Glarus","$b£Nationalrat (1 Sitz)$/b£$br£$table£
+$tr£
+$td£$b£Partei$/b£$/td£
+$td£$b£Sitze$/b£$/td£
+$td£$b£+/-$/b£$/td£
+$td£$b£Wähleranteil$/b£$/td£
+$td style='text-align: center'£$b£+/-$/b£$/td£
+$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£0$/td£$td style='text-align: center¢ color: red'£$b£-1$/b£$/td£$td style='text-align: center'£31.2%$/td£$td style='text-align: center¢ color: red'£$b£-31.8$/b£$/td£$/tr£$tr£$td£SP$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£23.4%$/td£$td style='text-align: center¢ color: red'£$b£-4.8$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (2 Sitze)$/b£$br£Gewählt sind:$br£Benjamin Mühlemann (FDP, neu)$br£Mathias Zopfi (Grüne, bisher)","Glaris","$b£Conseil national (1 siège)$/b£$br£$table£
 $tr£
 $td£$b£Parti$/b£$/td£
 $td£$b£Sièges$/b£$/td£
