@@ -119,6 +119,7 @@ send_notification(Subject,Body,recipients)
     filter(area_type == "canton") %>%
     left_join(stand_cantons_results, join_by(bfs_ID == kanton_nummer))
 
+
   if (nrow(ongoing_cantons_NR) > 0) {
   for (c in 1:nrow(ongoing_cantons_NR)) {
     if (ongoing_cantons_NR$kanton_abgeschlossen[c] == TRUE) {
