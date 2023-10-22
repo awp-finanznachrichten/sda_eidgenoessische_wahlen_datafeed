@@ -207,4 +207,6 @@ overview_cantons$content_it <- gsub("[<]","$",overview_cantons$content_it)
 overview_cantons$content_it <- gsub("[>]","£",overview_cantons$content_it)
 overview_cantons$content_it <- gsub("[;]","¢",overview_cantons$content_it)
 
+
 write.csv(overview_cantons,file="./Output/ergebnisse_kantone_uebersicht.csv",row.names = FALSE)
+
