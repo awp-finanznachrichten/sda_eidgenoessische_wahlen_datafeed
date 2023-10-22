@@ -21,7 +21,6 @@ voterturnout_cantons <- data_NR_voterturnout$level_kantone %>%
 
 voterturnout_ch <- data_NR_voterturnout$level_ch
 
-
 text_intro <- paste0("<h2>Wahlbeteiligung Wahlen 2023</h2>",
                      "<h3>Gesamt: ",round2(voterturnout_ch$wahlbeteiligung,1),"%, ",
                      ifelse(voterturnout_ch$differenz_wahlbeteiligung > 0,
