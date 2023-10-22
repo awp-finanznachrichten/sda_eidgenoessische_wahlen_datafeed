@@ -57,7 +57,7 @@ explainer <- paste0("Die Kantone Jura und Neuenburg wählen ihre Ständeräte na
 } 
 
 dw_edit_chart(chart_ID,
-              intro = ifelse(counted_cantons_SR$absolute_majority[c] > 0,
+              intro = ifelse(counted_cantons_SR$absolute_majority[c] == 0,
                              texts_chart[1],
                              paste0(texts_chart[1],", ",texts_chart[2])),
               annotate = explainer,

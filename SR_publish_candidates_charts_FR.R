@@ -60,7 +60,7 @@ if (counted_cantons_SR$area_ID[c] == "JU" || counted_cantons_SR$area_ID[c] == "N
 }  
 
 dw_edit_chart(chart_ID,
-              intro = ifelse(counted_cantons_SR$absolute_majority[c] > 0,
+              intro = ifelse(counted_cantons_SR$absolute_majority[c] == 0,
                              texts_chart_fr[1],
                              paste0(texts_chart_fr[1],", ",texts_chart_fr[2])),
               annotate = explainer,
