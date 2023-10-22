@@ -60,11 +60,6 @@ for (g in 1:nrow(gemeinden)) {
   ergebnisse_gemeinde <- results_NR_communities %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(partei_staerke) == FALSE)
- 
-  if (ergebnisse_gemeinde$gemeinde_nummer == 1630 | ergebnisse_gemeinde$gemeinde_nummer == 1631 | ergebnisse_gemeinde$gemeinde_nummer == 1632) {
-  ergebnisse_gemeinde <- ergebnisse_gemeinde %>%
-    filter()
-  }  
   
   voter_turnout <- results_NR_communities_voterturnout %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
@@ -81,6 +76,11 @@ for (g in 1:nrow(gemeinden)) {
   #Check: Daten schon da?
   if (nrow(ergebnisse_gemeinde) > 0) {
 
+    if (ergebnisse_gemeinde$gemeinde_nummer[1] == 1630 | ergebnisse_gemeinde$gemeinde_nummer[1] == 1631 | ergebnisse_gemeinde$gemeinde_nummer[1] == 1632) {
+      ergebnisse_gemeinde <- ergebnisse_gemeinde %>%
+        filter(id != 84)
+    }  
+    
   ergebnisse_gemeinde_tabelle <- ergebnisse_gemeinde %>%
       filter(!is.na(partei_staerke),
              partei_staerke >= 3) %>% 

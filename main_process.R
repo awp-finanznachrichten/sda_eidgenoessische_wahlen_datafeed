@@ -294,7 +294,7 @@ source("NR_create_visual_data.R")
 ###COMMUNITIES UR-LENA###
 ##Output tables and texts##
 if (NR_new_results == TRUE) {
-#source("Communities_live_data.R")
+source("Communities_live_data.R")
 
 #Commit to Github#
 library(git2r)
