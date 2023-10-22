@@ -207,30 +207,22 @@ overview_cantons$content_it <- gsub("[<]","$",overview_cantons$content_it)
 overview_cantons$content_it <- gsub("[>]","£",overview_cantons$content_it)
 overview_cantons$content_it <- gsub("[;]","¢",overview_cantons$content_it)
 
-#AR
-overview_cantons$content_de[3] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_de[3])
-overview_cantons$content_fr[3] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_fr[3])
-overview_cantons$content_it[3] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_it[3])
+
+overview_cantons$content_de[3] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP, bisher)",overview_cantons$content_de[3])
+overview_cantons$content_de[2] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>Thomas Rechsteiner (Mitte, bisher)",overview_cantons$content_de[2])
+overview_cantons$content_de[22] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>Simon Stadler (Mitte, bisher)",overview_cantons$content_de[22])
+
+overview_cantons$content_fr[3] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):<br>David Zuberbühler (UDC, sortant)",overview_cantons$content_fr[3])
+overview_cantons$content_fr[2] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):br>Thomas Rechsteiner (Centre, sortant)",overview_cantons$content_fr[2])
+overview_cantons$content_fr[22] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):<br>Simon Stadler (Centre, sortant)",overview_cantons$content_fr[22])
+
+overview_cantons$content_it[3] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>David Zuberbühler (UDC, sortant)",overview_cantons$content_it[3])
+overview_cantons$content_it[2] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>Thomas Rechsteiner (Centre, sortant)",overview_cantons$content_it[2])
+overview_cantons$content_it[22] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>Simon Stadler (Centre, sortant)",overview_cantons$content_it[22])
+
 overview_cantons$status[3] <- "all_counted"
-
-#AI
-overview_cantons$content_de[2] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_de[2])
-overview_cantons$content_fr[2] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_fr[2])
-overview_cantons$content_it[2] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_it[2])
 overview_cantons$status[2] <- "all_counted"
-
-#UR
-overview_cantons$content_de[22] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_de[22])
-overview_cantons$content_fr[22] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_fr[22])
-overview_cantons$content_it[22] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_it[22])
 overview_cantons$status[22] <- "all_counted"
-
-#GL
-overview_cantons$content_de[9] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_de[9])
-overview_cantons$content_fr[9] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_fr[9])
-overview_cantons$content_it[9] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_it[9])
-overview_cantons$status[9] <- "all_counted"
-
 
 
 
