@@ -294,7 +294,7 @@ source("NR_create_visual_data.R")
 ###COMMUNITIES UR-LENA###
 ##Output tables and texts##
 if (NR_new_results == TRUE) {
-#source("Communities_live_data.R")
+source("Communities_live_data.R")
 
 #Commit to Github#
 library(git2r)
@@ -306,7 +306,7 @@ gitcommit()
 gitpush()
 detach("package:git2r",unload=TRUE)
 #Publish Charts  
-#source("Communities_publish_charts.R")
+source("Communities_publish_charts.R")
 }    
 
 ###CREATE VISUAL DATA###
