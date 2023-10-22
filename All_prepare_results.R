@@ -216,14 +216,18 @@ overview_cantons$content_fr[3] <- gsub("Aucun résultat n'est encore disponible.
 overview_cantons$content_fr[2] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):br>Thomas Rechsteiner (Centre, sortant)",overview_cantons$content_fr[2])
 overview_cantons$content_fr[22] <- gsub("Aucun résultat n'est encore disponible."," Elu(e):<br>Simon Stadler (Centre, sortant)",overview_cantons$content_fr[22])
 
-overview_cantons$content_it[3] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>David Zuberbühler (UDC, uscente)",overview_cantons$content_it[3])
-overview_cantons$content_it[2] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>Thomas Rechsteiner (Centre, uscente)",overview_cantons$content_it[2])
-overview_cantons$content_it[22] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>Simon Stadler (Centre, uscente)",overview_cantons$content_it[22])
+overview_cantons$content_it[3] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>David Zuberbühler (PLR, uscenti)",overview_cantons$content_it[3])
+overview_cantons$content_it[2] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>Thomas Rechsteiner (Centro, uscenti)",overview_cantons$content_it[2])
+overview_cantons$content_it[22] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br>Simon Stadler (Centro, uscenti)",overview_cantons$content_it[22])
+
+overview_cantons$content_de[9] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>Markus Schnyder (SVP, neu)",overview_cantons$content_de[9])
+overview_cantons$content_it[9] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br> Markus Schnyder (PLR, nuovi)",overview_cantons$content_it[3])
+overview_cantons$content_fr[9] <- gsub("Non ci sono ancora risultati."," Eletto/a:<br> Markus Schnyder (UDC, nouveau)",overview_cantons$content_it[3])
 
 overview_cantons$status[3] <- "all_counted"
 overview_cantons$status[2] <- "all_counted"
 overview_cantons$status[22] <- "all_counted"
-
+overview_cantons$status[9] <- "all_counted"
 
 
 write.csv(overview_cantons,file="./Output/ergebnisse_kantone_uebersicht.csv",row.names = FALSE)
