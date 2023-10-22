@@ -64,7 +64,7 @@ for (g in 1:nrow(gemeinden)) {
   voter_turnout <- results_NR_communities_voterturnout %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(wahlbeteiligung) == FALSE)
-  
+
   text_urlena_de <- "Resultat liegt noch nicht vor."
   text_urlena_fr <- "Résultats non encore disponibles."
   text_urlena_it <- "Risultato non ancora disponibile."
