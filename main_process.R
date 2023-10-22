@@ -41,26 +41,26 @@ source("get_counted_cantons.R")
 check_intermediate <- intermediate_timecheck %>%
   filter(hour == hour(Sys.time()))
 
-if (nrow(check_intermediate) > 0) {
-if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending") ){
-  if (nrow(counted_cantons) > 0) {
-  source("load_databases.R")
-  source("All_prepare_results.R")
-  source("NR_text_intermediate.R")
-  source("NR_mars_meldung_intermediate_DE.R")
-  source("NR_mars_meldung_intermediate_FR.R")
-  source("NR_mars_meldung_intermediate_IT.R")
-  #Send Mail
-  send_mail(type="NR_Overview",
-            recipients= paste0(DEFAULT_EMAILS,",inland@keystone-ats.ch,suisse@keystone-ats.ch"))
-  }
-  #Set Intermediate news done
-  mydb <- connectDB(db_name = "sda_elections")  
-  sql_qry <- paste0("UPDATE intermediate_timecheck SET status = 'done' WHERE hour = '",hour(Sys.time()),"'")
-  rs <- dbSendQuery(mydb, sql_qry)
-  dbDisconnectAll() 
-}  
-}
+# if (nrow(check_intermediate) > 0) {
+# if ((minute(Sys.time()) >= 35) & (check_intermediate$status == "pending") ){
+#   if (nrow(counted_cantons) > 0) {
+#   source("load_databases.R")
+#   source("All_prepare_results.R")
+#   source("NR_text_intermediate.R")
+#   source("NR_mars_meldung_intermediate_DE.R")
+#   source("NR_mars_meldung_intermediate_FR.R")
+#   source("NR_mars_meldung_intermediate_IT.R")
+#   #Send Mail
+#   send_mail(type="NR_Overview",
+#             recipients= paste0(DEFAULT_EMAILS,",inland@keystone-ats.ch,suisse@keystone-ats.ch"))
+#   }
+#   #Set Intermediate news done
+#   mydb <- connectDB(db_name = "sda_elections")  
+#   sql_qry <- paste0("UPDATE intermediate_timecheck SET status = 'done' WHERE hour = '",hour(Sys.time()),"'")
+#   rs <- dbSendQuery(mydb, sql_qry)
+#   dbDisconnectAll() 
+# }  
+# }
 
 ###NATIONALRAT###
 if (nrow(counted_cantons) > 0) {
