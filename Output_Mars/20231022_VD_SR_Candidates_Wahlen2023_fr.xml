@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
+  <header>
+    <sent>2023-10-22T17:21:01+02:00</sent>
+  </header>
+
+  <itemSet>
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="fr" guid="urn:newsml:keystone-sda.ch:20231022:20231022172101280372694911838" version="1">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
+      <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
+
+      <itemMeta>
+        <itemClass qcode="ninat:text"/>
+        <provider qcode="nprov:KSDA">
+           <name>sda</name>
+        </provider>
+        <versionCreated>2023-10-22T17:21:01+02:00</versionCreated>
+        <pubStatus qcode="stat:withheld"/>
+        <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
+        <service qcode="sdasvc:bsf"></service>
+        <edNote role="sdanote:note">Cette dépêche a été générée automatiquement sur la base des données du canton de Vaud et relue avant diffusion.</edNote>
+        <edNote role="sdalena:memo"></edNote>
+        
+      </itemMeta>
+
+      <contentMeta>
+        <urgency>3</urgency>
+        <contentCreated>2023-10-22T17:21:01+02:00</contentCreated>
+        <creator>
+          <name>sda-robot</name>
+        </creator>
+        <altId>280372694911838</altId>
+        <dateline>Lausanne</dateline>
+        <language tag="fr"/>
+        <genre qcode="sdagenre:RES">
+        </genre>
+
+        <!--storytypes-->
+        <subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>
+        
+        <!--media topics-->
+        <subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:ESU"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:UPH"></subject>
+
+        <!--locations-->
+        <located type="loctype:city" qcode="sdamarsgeo:LAU">
+<name>Lausanne</name>
+</located>
+  
+        <slugline>Fédérales - VD CE FIN</slugline>
+        <headline>VD: résultats de l'élection au Conseil des Etats </headline>
+        <description role="drol:teaser"> </description>
+        <description role="drol:catchline"></description>
+      </contentMeta>
+
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+xml">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>VD: résultats de l'élection au Conseil des Etats </title>
+            </head>
+            <body>
+              <p class="lead"> </p>
+              <p class="paragraph">Les électeurs du canton de Vaud ont désigné Pierre-Yves Maillard (PS, nouveau) pour représenter le canton au Conseil des Etats. Un deuxième tour sera nécessaire le 12 novembre pour élire un deuxième candidat.</p>
+<table><tbody><tr><td>Ont obtenu des voix</td><td></td><td></td><td>Total des voix</td><td>Élu(e)</td></tr><tr><td>Pierre-Yves Maillard</td><td>PS</td><td>nouveau</td><td>101'880</td><td>oui</td></tr><tr><td>Pascal Broulis</td><td>PLR</td><td>nouveau</td><td>85'171</td><td>non</td></tr><tr><td>Michaël Buffat</td><td>UDC</td><td>nouveau</td><td>52'518</td><td>non</td></tr><tr><td>Raphaël Mahaim</td><td>Vert-e-s</td><td>nouveau</td><td>48'087</td><td>non</td></tr><tr><td>Céline Weber</td><td>PVL</td><td>nouvelle</td><td>26'243</td><td>non</td></tr><tr><td>Angela Zimmermann</td><td>Vert-e-s</td><td>nouvelle</td><td>14'070</td><td>non</td></tr><tr><td>Ella-Mona Chevalley</td><td>PST-POP</td><td>nouvelle</td><td>8896</td><td>non</td></tr><tr><td>Emmanuel Gétaz</td><td>Divers</td><td>nouveau</td><td>7176</td><td>non</td></tr><tr><td>Hadrien Buclin</td><td>PST-POP</td><td>nouveau</td><td>6485</td><td>non</td></tr><tr><td>Anaïs Timofte</td><td>PST-POP</td><td>nouvelle</td><td>5583</td><td>non</td></tr><tr><td>François Meylan</td><td>Divers</td><td>nouveau</td><td>4918</td><td>non</td></tr><tr><td>Zakaria Dridi</td><td>PST-POP</td><td>nouveau</td><td>2509</td><td>non</td></tr><tr><td>Margarida Janeiro</td><td>PS</td><td>nouvelle</td><td>1346</td><td>non</td></tr></tbody></table>
+<p class="paragraph">Majorité absolue: 97'407 voix</p>
+
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>
