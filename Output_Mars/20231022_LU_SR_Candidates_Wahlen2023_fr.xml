@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/">
+  <header>
+    <sent>2023-10-22T14:31:42+02:00</sent>
+  </header>
+
+  <itemSet>
+    <newsItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://iptc.org/std/nar/2006-10-01/" standard="NewsML-G2" standardversion="2.28" conformance="power" xml:lang="fr" guid="urn:newsml:keystone-sda.ch:20231022:20231022143142754278631784148" version="1">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_34.xml"/>
+      <catalogRef href="http://www.keystone-sda.ch/NewsML_G2/SDA-G2-Catalog.xml"/>
+
+      <itemMeta>
+        <itemClass qcode="ninat:text"/>
+        <provider qcode="nprov:KSDA">
+           <name>sda</name>
+        </provider>
+        <versionCreated>2023-10-22T14:31:42+02:00</versionCreated>
+        <pubStatus qcode="stat:withheld"/>
+        <generator versioninfo="0.3.4">XML::NewsML_G2</generator>
+        <service qcode="sdasvc:bsf"></service>
+        <edNote role="sdanote:note">Cette dépêche a été générée automatiquement sur la base des données du canton de Lucerne et relue avant diffusion.</edNote>
+        <edNote role="sdalena:memo"></edNote>
+        
+      </itemMeta>
+
+      <contentMeta>
+        <urgency>3</urgency>
+        <contentCreated>2023-10-22T14:31:42+02:00</contentCreated>
+        <creator>
+          <name>sda-robot</name>
+        </creator>
+        <altId>754278631784148</altId>
+        <dateline>Lucerne</dateline>
+        <language tag="fr"/>
+        <genre qcode="sdagenre:RES">
+        </genre>
+
+        <!--storytypes-->
+        <subject type="cpnat:abstract" qcode="sdastorytype:tble"></subject>
+        
+        <!--media topics-->
+        <subject type="cpnat:abstract" qcode="sdamarschannel:ELE"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:ESU"></subject>
+<subject type="cpnat:abstract" qcode="sdamarschannel:UPH"></subject>
+
+        <!--locations-->
+        <located type="loctype:city" qcode="sdamarsgeo:LUZ">
+<name>Lucerne</name>
+</located>
+  
+        <slugline>Fédérales - LU CE FIN</slugline>
+        <headline>LU: résultats de l'élection au Conseil des Etats </headline>
+        <description role="drol:teaser"> </description>
+        <description role="drol:catchline"></description>
+      </contentMeta>
+
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+xml">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>LU: résultats de l'élection au Conseil des Etats </title>
+            </head>
+            <body>
+              <p class="lead"> </p>
+              <p class="paragraph">Les ayants droit du canton de Lucerne ont choisi Damian Müller (PLR, sortant) et Andrea Gmür-Schönenberger (Centre, nouvelle) pour représenter le canton au Conseil des Etats.</p>
+<table><tbody><tr><td>Ont obtenu des voix</td><td></td><td></td><td>Total des voix</td><td>Élu(e)</td></tr><tr><td>Damian Müller</td><td>PLR</td><td>sortant</td><td>72'978</td><td>oui</td></tr><tr><td>Andrea Gmür-Schönenberger</td><td>Centre</td><td>nouvelle</td><td>69'578</td><td>oui</td></tr><tr><td>Dieter Haller</td><td>UDC</td><td>nouveau</td><td>32'292</td><td>non</td></tr><tr><td>David Roth</td><td>PS</td><td>nouveau</td><td>30'359</td><td>non</td></tr><tr><td>Laura Spring</td><td>Vert-e-s</td><td>nouvelle</td><td>29'049</td><td>non</td></tr><tr><td>Roland Fischer</td><td>PVL</td><td>nouveau</td><td>9875</td><td>non</td></tr><tr><td>Peter Regli</td><td>Divers</td><td>nouveau</td><td>2531</td><td>non</td></tr><tr><td>Yannick Hagmann</td><td>Divers</td><td>nouveau</td><td>1090</td><td>non</td></tr></tbody></table>
+<p class="paragraph">Majorité absolue: 68'616 voix</p>
+
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>
