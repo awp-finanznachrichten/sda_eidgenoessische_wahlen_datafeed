@@ -33,7 +33,7 @@ NR_new_results <- TRUE
   print("All NR results are complete!")
   NR_results_finished <- TRUE
   }  
-  
+
   #Timestamps
   stand_cantons_results <- data_NR_results$stand_kantone
 
