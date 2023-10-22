@@ -87,6 +87,7 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
   if (!is.null(canton)) {
     current_data <- current_data[current_data$canton == canton, ]
     comp_data <- comp_data[comp_data$canton == canton, ]
+    all_current_data <- all_current_data[all_current_data$canton == canton, ]
   }
   data <- rbind(current_data, comp_data)
   
@@ -214,6 +215,7 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
                     report_jobs_comp,
                     "<h2>Runner-Ups</h2>",
                     runnerups)
+    
     htmlbody <- paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Reports/email_report.html")
     subject <- paste0("Report elected National councillors ", canton)
     
