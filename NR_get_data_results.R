@@ -27,7 +27,6 @@ NR_new_results <- TRUE
     fromJSON("data_NR_results.json", flatten = TRUE)
   setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
   print("new results NR data downloaded!")
-  
 
   #Check: Election done?
   if (data_NR_results$stand$wahl_abgeschlossen == TRUE) {
