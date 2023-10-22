@@ -1,6 +1,27 @@
 "area_ID","status","title_de","content_de","title_fr","content_fr","title_it","content_it"
 "AG","SR_counted","Aargau","$b£Nationalrat (16 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (2 Sitze)$/b£$br£Gewählt:$br£Thierry Burkart (FDP, bisher)$br£$br£Es ist ein zweiter Wahlgang nötig.","Argovie","$b£Conseil national (16 sièges)$/b£$br£Aucun résultat n'est encore disponible.$br£$br£$b£Conseil des Etats (2 sièges)$/b£$br£Elu(e):$br£Thierry Burkart (PLR, sortant)$br£$br£Un deuxième tour sera nécessaire.","Argovia","$b£Consiglio nazionale (16 seggi)$/b£$br£Non ci sono ancora risultati.$br£$br£$b£Consiglio degli Stati (2 seggi)$/b£$br£Eletto/a:$br£Thierry Burkart (PLR, uscente)$br£$br£Il ballottaggio si svolgerà."
-"AI","all_counted","Appenzell Innerrhoden","$b£Nationalrat (1 Sitz)$/b£$br£Gewählt:<br>Thomas Rechsteiner (Mitte, bisher)$br£$br£$b£Ständerat (1 Sitz)$/b£$br£Gewählt:$br£Daniel Fässler (Mitte, bisher)","Appenzell Rhodes-Intérieures","$b£Conseil national (1 siège)$/b£$br£ Elu(e):br>Thomas Rechsteiner (Centre, sortant)$br£$br£$b£Conseil des Etats (1 siège)$/b£$br£Elu(e):$br£Daniel Fässler (Centre, sortant)","Appenzello Interno","$b£Consiglio nazionale (1 seggio)$/b£$br£ Eletto/a:<br>Thomas Rechsteiner (Centre, uscente)$br£$br£$b£Consiglio degli Stati (1 seggio)$/b£$br£Eletto/a:$br£Daniel Fässler (Centro, uscente)"
+"AI","all_counted","Appenzell Innerrhoden","$b£Nationalrat (1 Sitz)$/b£$br£$table£
+$tr£
+$td£$b£Partei$/b£$/td£
+$td£$b£Sitze$/b£$/td£
+$td£$b£+/-$/b£$/td£
+$td£$b£Wähleranteil$/b£$/td£
+$td style='text-align: center'£$b£+/-$/b£$/td£
+$/tr£$tr£$td£Mitte$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£86.7%$/td£$td style='text-align: center¢ color: darkblue'£$b£+25.4$/b£$/td£$/tr£$tr£$td£weitere$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£10.9%$/td£$td style='text-align: center¢ color: darkblue'£$b£+10.0$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Ständerat (1 Sitz)$/b£$br£Gewählt:$br£Daniel Fässler (Mitte, bisher)","Appenzell Rhodes-Intérieures","$b£Conseil national (1 siège)$/b£$br£$table£
+$tr£
+$td£$b£Parti$/b£$/td£
+$td£$b£Sièges$/b£$/td£
+$td£$b£+/-$/b£$/td£
+$td£$b£Voix$/b£$/td£
+$td style='text-align: center'£$b£+/-$/b£$/td£
+$/tr£$tr£$td£Centre$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£86.7%$/td£$td style='text-align: center¢ color: darkblue'£$b£+25.4$/b£$/td£$/tr£$tr£$td£Divers$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£10.9%$/td£$td style='text-align: center¢ color: darkblue'£$b£+10.0$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Conseil des Etats (1 siège)$/b£$br£Elu(e):$br£Daniel Fässler (Centre, sortant)","Appenzello Interno","$b£Consiglio nazionale (1 seggio)$/b£$br£$table£
+$tr£
+$td£$b£Partito$/b£$/td£
+$td£$b£Seggi$/b£$/td£
+$td£$b£+/-$/b£$/td£
+$td£$b£Voti$/b£$/td£
+$td style='text-align: center'£$b£+/-$/b£$/td£
+$/tr£$tr£$td£Centro$/td£$td style='text-align: center'£1$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£86.7%$/td£$td style='text-align: center¢ color: darkblue'£$b£+25.4$/b£$/td£$/tr£$tr£$td£altro$/td£$td style='text-align: center'£0$/td£$td style='text-align: center'£-$/td£$td style='text-align: center'£10.9%$/td£$td style='text-align: center¢ color: darkblue'£$b£+10.0$/b£$/td£$/tr£$/tbody£$/table£$br£$b£Consiglio degli Stati (1 seggio)$/b£$br£Eletto/a:$br£Daniel Fässler (Centro, uscente)"
 "AR","all_counted","Appenzell Ausserrhoden","$b£Nationalrat (1 Sitz)$/b£$br£Gewählt:<br>David Zuberbühler (SVP, bisher)$br£$br£$b£Ständerat (1 Sitz)$/b£$br£Gewählt:$br£Andrea Caroni (FDP, bisher)","Appenzell Rhodes-Extérieures","$b£Conseil national (1 siège)$/b£$br£ Elu(e):<br>David Zuberbühler (UDC, sortant)$br£$br£$b£Conseil des Etats (1 siège)$/b£$br£Elu(e):$br£Andrea Caroni (PLR, sortant)","Appenzello Esterno","$b£Consiglio nazionale (1 seggio)$/b£$br£ Eletto/a:<br>David Zuberbühler (UDC, uscente)$br£$br£$b£Consiglio degli Stati (1 seggio)$/b£$br£Eletto/a:$br£Andrea Caroni (PLR, uscente)"
 "BE","no_data","Bern","$b£Nationalrat (24 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (2 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.","Berne","$b£Conseil national (24 sièges)$/b£$br£Aucun résultat n'est encore disponible.$br£$br£$b£Conseil des Etats (2 sièges)$/b£$br£Aucun résultat n'est encore disponible.","Berna","$b£Consiglio nazionale (24 seggi)$/b£$br£Non ci sono ancora risultati.$br£$br£$b£Consiglio degli Stati (2 seggi)$/b£$br£Non ci sono ancora risultati."
 "BL","no_data","Basel-Landschaft","$b£Nationalrat (7 Sitze)$/b£$br£Es sind noch keine Resultate vorhanden.$br£$br£$b£Ständerat (1 Sitz)$/b£$br£Es sind noch keine Resultate vorhanden.","Bâle-Campagne","$b£Conseil national (7 sièges)$/b£$br£Aucun résultat n'est encore disponible.$br£$br£$b£Conseil des Etats (1 siège)$/b£$br£Aucun résultat n'est encore disponible.","Basilea Campagna","$b£Consiglio nazionale (7 seggi)$/b£$br£Non ci sono ancora risultati.$br£$br£$b£Consiglio degli Stati (1 seggio)$/b£$br£Non ci sono ancora risultati."
