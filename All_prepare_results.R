@@ -207,8 +207,32 @@ overview_cantons$content_it <- gsub("[<]","$",overview_cantons$content_it)
 overview_cantons$content_it <- gsub("[>]","£",overview_cantons$content_it)
 overview_cantons$content_it <- gsub("[;]","¢",overview_cantons$content_it)
 
+#AR
 overview_cantons$content_de[3] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_de[3])
+overview_cantons$content_fr[3] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_fr[3])
+overview_cantons$content_it[3] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_it[3])
 overview_cantons$status[3] <- "all_counted"
+
+#AI
+overview_cantons$content_de[2] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_de[2])
+overview_cantons$content_fr[2] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_fr[2])
+overview_cantons$content_it[2] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_it[2])
+overview_cantons$status[2] <- "all_counted"
+
+#UR
+overview_cantons$content_de[22] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_de[22])
+overview_cantons$content_fr[22] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_fr[22])
+overview_cantons$content_it[22] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_it[22])
+overview_cantons$status[22] <- "all_counted"
+
+#GL
+overview_cantons$content_de[9] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_de[9])
+overview_cantons$content_fr[9] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_fr[9])
+overview_cantons$content_it[9] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_it[9])
+overview_cantons$status[9] <- "all_counted"
+
+
+
 
 write.csv(overview_cantons,file="./Output/ergebnisse_kantone_uebersicht.csv",row.names = FALSE)
 
