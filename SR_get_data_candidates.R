@@ -97,7 +97,8 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
       council == "SR",
       date == "2023-10-22",
       status != "finished" |
-        source_update != "BFS") %>%
+        source_update != "BFS",
+      election_ID != "2023-10-22_SO_SR") %>%
     left_join(areas_metadata) %>%
     filter(area_type == "canton") %>%
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer))
