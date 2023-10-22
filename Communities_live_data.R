@@ -61,6 +61,11 @@ for (g in 1:nrow(gemeinden)) {
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(partei_staerke) == FALSE)
  
+  if (ergebnisse_gemeinde$gemeinde_nummer == 1630 | ergebnisse_gemeinde$gemeinde_nummer == 1631 | ergebnisse_gemeinde$gemeinde_nummer == 1632) {
+  ergebnisse_gemeinde <- ergebnisse_gemeinde %>%
+    filter()
+  }  
+  
   voter_turnout <- results_NR_communities_voterturnout %>%
     filter(gemeinde_nummer == gemeinden$gemeinde_nummer[g],
            is.na(wahlbeteiligung) == FALSE)
