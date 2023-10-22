@@ -28,5 +28,5 @@ setwd("..")
 
 print(paste0("Chart ",zipfile_name," uploaded successfully"))
 
-Sys.sleep(5)
+Sys.sleep(2)
 }
