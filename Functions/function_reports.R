@@ -69,10 +69,10 @@ email_elected_report_nr <- function(canton = NULL, recipients = "robot-notificat
               ELSE 0 END as incumbent, 1 as elected, 0 as votes
               FROM sda_elections.parliament_members par
               JOIN sda_elections.people_metadata pe ON pe.id = par.person_id 
-  				AND par.exitdate = '0000-00-00' OR par.exitdate >= current_date() 
+  				AND par.active = 1
               JOIN sda_elections.parties_metadata pa ON pa.id = par.party_id
               JOIN sda_elections.candidates_results e ON e.person_id = par.person_id AND e.council = par.council AND e.year = 2019
-              JOIN masterdata.locations l ON e.place_id = l.BFS_Nr
+              LEFT JOIN masterdata.locations l ON e.place_id = l.BFS_Nr
               LEFT JOIN sda_elections.people_profession pro ON pe.id = pro.person_id 
   	          AND (pro.source = 'parlament.ch' OR pro.source = 'BFS 2023' OR pro.source = 'BFS 2019')
               GROUP BY pe.id, pe.firstname, pe.lastname, pe.gender, pe.birthdate, 
