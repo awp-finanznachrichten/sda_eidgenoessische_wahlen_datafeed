@@ -207,6 +207,8 @@ overview_cantons$content_it <- gsub("[<]","$",overview_cantons$content_it)
 overview_cantons$content_it <- gsub("[>]","£",overview_cantons$content_it)
 overview_cantons$content_it <- gsub("[;]","¢",overview_cantons$content_it)
 
+overview_cantons$content_de[3] <- gsub("Es sind noch keine Resultate vorhanden.","Gewählt:<br>David Zuberbühler (SVP)",overview_cantons$content_de[3])
+overview_cantons$status[3] <- "all_counted"
 
 write.csv(overview_cantons,file="./Output/ergebnisse_kantone_uebersicht.csv",row.names = FALSE)
 
