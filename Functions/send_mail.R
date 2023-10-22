@@ -62,8 +62,6 @@ if (type == "NR_Candidates") {
                  weitere_text,
                  "Es wurde folgende Grafik erstellt:\n",
                  "Gewählte Nationalratsmitglieder: https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[1],"/\n\n",
-                 "Das aktualisierte CSV für die Flourish-Grafik der Gewählten findet ihr unter folgenden Link (zum Download Rechtsklick und 'Speichern unter' wählen):\n",
-                 "https://raw.githubusercontent.com/awp-finanznachrichten/sda_eidgenoessische_wahlen_datafeed/main/Output/elected_candidates_overall.csv\n\n",
                  "Liebe Grüsse\n\nLENA")
   send_notification(Subject,Body,recipients)
   
