@@ -107,12 +107,16 @@ text_easteregg$Text_d <- gsub("#Party3_voter_share",gsub("[.]",",",round2(result
 text_easteregg$Text_d <- gsub("#Party3_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[5],1)),text_easteregg$Text_d)
 text_easteregg$Text_d <- gsub("#Party4_name_d",results_parties$shortname_de[4],text_easteregg$Text_d)
 text_easteregg$Text_d <- gsub("#Party4_voter_share",gsub("[.]",",",round2(results_parties$voter_share[4]+differences_parties$diff_FDP[1],1)),text_easteregg$Text_d)
+text_easteregg$Text_d <- gsub("#Party4_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[4],1)),text_easteregg$Text_d)
 text_easteregg$Text_d <- gsub("#Party5_name_d",results_parties$shortname_de[6],text_easteregg$Text_d)
 text_easteregg$Text_d <- gsub("#Party5_voter_share",gsub("[.]",",",round2(results_parties$voter_share[6]+differences_parties$diff_GP[1],1)),text_easteregg$Text_d)
+text_easteregg$Text_d <- gsub("#Party5_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[6],1)),text_easteregg$Text_d)
 text_easteregg$Text_d <- gsub("#Party6_name_d",results_parties$shortname_de[3],text_easteregg$Text_d)
 text_easteregg$Text_d <- gsub("#Party6_voter_share",gsub("[.]",",",round2(results_parties$voter_share[3]+differences_parties$diff_GLP[1],1)),text_easteregg$Text_d)
+text_easteregg$Text_d <- gsub("#Party6_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[3],1)),text_easteregg$Text_d)
 
 text_easteregg$Text_d <- gsub("die Grüne","die Grünen",text_easteregg$Text_d)
+
 
 nationalrat_gemeinden_dw$Text_de[average_community] <- text_easteregg$Text_d
 print(nationalrat_gemeinden_dw$Text_de[average_community])
@@ -154,10 +158,13 @@ text_easteregg$Text_i <- gsub("#Party3_voter_share",gsub("[.]",",",round2(result
 text_easteregg$Text_i <- gsub("#Party3_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[5],1)),text_easteregg$Text_i)
 text_easteregg$Text_i <- gsub("#Party4_name_i",results_parties$shortname_it[4],text_easteregg$Text_i)
 text_easteregg$Text_i <- gsub("#Party4_voter_share",gsub("[.]",",",round2(results_parties$voter_share[4]+differences_parties$diff_FDP[1],1)),text_easteregg$Text_i)
+text_easteregg$Text_i <- gsub("#Party4_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[4],1)),text_easteregg$Text_i)
 text_easteregg$Text_i <- gsub("#Party5_name_i",results_parties$shortname_it[6],text_easteregg$Text_i)
 text_easteregg$Text_i <- gsub("#Party5_voter_share",gsub("[.]",",",round2(results_parties$voter_share[6]+differences_parties$diff_GP[1],1)),text_easteregg$Text_i)
+text_easteregg$Text_i <- gsub("#Party5_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[6],1)),text_easteregg$Text_i)
 text_easteregg$Text_i <- gsub("#Party6_name_i",results_parties$shortname_it[3],text_easteregg$Text_i)
 text_easteregg$Text_i <- gsub("#Party6_voter_share",gsub("[.]",",",round2(results_parties$voter_share[3]+differences_parties$diff_GLP[1],1)),text_easteregg$Text_i)
+text_easteregg$Text_i <- gsub("#Party6_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[3],1)),text_easteregg$Text_i)
 
 nationalrat_gemeinden_dw$Text_it[average_community] <- text_easteregg$Text_i
 
