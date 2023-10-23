@@ -129,10 +129,13 @@ text_easteregg$Text_f <- gsub("#Party3_voter_share",gsub("[.]",",",round2(result
 text_easteregg$Text_f <- gsub("#Party3_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[5],1)),text_easteregg$Text_f)
 text_easteregg$Text_f <- gsub("#Party4_name_f",results_parties$shortname_fr[4],text_easteregg$Text_f)
 text_easteregg$Text_f <- gsub("#Party4_voter_share",gsub("[.]",",",round2(results_parties$voter_share[4]+differences_parties$diff_FDP[1],1)),text_easteregg$Text_f)
+text_easteregg$Text_f <- gsub("#Party4_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[4],1)),text_easteregg$Text_f)
 text_easteregg$Text_f <- gsub("#Party5_name_f",results_parties$shortname_fr[6],text_easteregg$Text_f)
 text_easteregg$Text_f <- gsub("#Party5_voter_share",gsub("[.]",",",round2(results_parties$voter_share[6]+differences_parties$diff_GP[1],1)),text_easteregg$Text_f)
+text_easteregg$Text_f <- gsub("#Party5_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[6],1)),text_easteregg$Text_f)
 text_easteregg$Text_f <- gsub("#Party6_name_f",results_parties$shortname_fr[3],text_easteregg$Text_f)
 text_easteregg$Text_f <- gsub("#Party6_voter_share",gsub("[.]",",",round2(results_parties$voter_share[3]+differences_parties$diff_GLP[1],1)),text_easteregg$Text_f)
+text_easteregg$Text_f <- gsub("#Party6_overall_voter_share",gsub("[.]",",",round2(results_parties$voter_share[3],1)),text_easteregg$Text_f)
 
 text_easteregg$Text_f <- gsub("le Vert-e-s","les Vert-e-s",text_easteregg$Text_f)
 
