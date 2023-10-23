@@ -84,5 +84,3 @@ texts_chart_fr <- get_text_charts(language="fr",
                                   elections_metadata = counted_ch)
 texts_chart_it <- get_text_charts(language="it",
                                   elections_metadata = counted_ch)
-
-

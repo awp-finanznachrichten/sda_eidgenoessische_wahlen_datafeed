@@ -169,7 +169,7 @@ write.csv(nationalrat_gemeinden_dw[,c(1,4,10,11)],file="./Output/nationalrat_erg
 included_communities <- c()
 
 ##Add special texts if CH counted
-if (stand_ch$wahl_abgeschlossen == TRUE) {
+#if (stand_ch$wahl_abgeschlossen == TRUE) {
   
   #Parties
   nationalrat_gemeinden_dw <- add_parties(nationalrat_gemeinden_dw,
@@ -187,9 +187,9 @@ if (stand_ch$wahl_abgeschlossen == TRUE) {
   nationalrat_gemeinden_dw <- add_easteregg(nationalrat_gemeinden_dw,
                 texts_spreadsheet_UrLena)
   
-  source("voterturnout_reporting.R")
+  #source("voterturnout_reporting.R")
   
-}  
+#}  
 
 ##Add special texts if Canton counted
 for (c in 1:nrow(stand_cantons)) {

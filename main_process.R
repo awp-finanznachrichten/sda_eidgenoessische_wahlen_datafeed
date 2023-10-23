@@ -241,6 +241,7 @@ source("load_databases.R")
 if (ch_metadata$status != "finished") {
   source("All_get_data_results.R")
 }  
+  
 ##Charts Results##
 if (ch_metadata$charts_results[1] == "pending") {
 source("All_prepare_results_charts.R")

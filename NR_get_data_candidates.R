@@ -13,7 +13,7 @@ timestamp_candidates <- headers(HEAD(url_NR_candidates))$`last-modified`
 timestamp_candidates_old <-
   read.csv("./Timestamps/timestamp_candidates.txt", header = FALSE,sep = ";")[1, 1]
 
-if (timestamp_candidates != timestamp_candidates_old) {
+if (timestamp_candidates == timestamp_candidates_old) {
 #Set Flag
 NR_new_elected <- TRUE
   
@@ -128,11 +128,7 @@ setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_daten"))
   ongoing_cantons_NR <- election_metadata %>%
     filter(
       council == "NR",
-      date == "2023-10-22",
-      status != "candidates finished" |
-        source_update != "BFS",
-      status != "finished" |
-        source_update != "BFS") %>% 
+      date == "2023-10-22") %>% 
     left_join(areas_metadata) %>%
     filter(area_type == "canton") %>%
     left_join(stand_cantons_candidates, join_by(bfs_ID == kanton_nummer))
