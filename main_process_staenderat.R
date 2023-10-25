@@ -13,7 +13,7 @@ source("load_databases.R")
 
 ###CANTON RESULTS###
 ##Check: Canton completed?
-#Get counted cantons
+#Get counted or partly counted cantons
 source("get_counted_cantons_staenderat.R")
 
 ###STAENDERAT ENDRESULTAT###
@@ -38,12 +38,12 @@ selected_charts <- datawrapper_codes %>%
 Subject <- paste0("Kanton ",counted_cantons_SR$area_name_de[c],": Endergebnis Ständerat zweiter Wahlgang")
 Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
                "Die Ständeratergebnisse des Kantons ",counted_cantons_SR$area_name_de[c]," sind bekannt. ",
-               "Es wurde folgende Grafiken erstellt:\n",
+               "Es wurden folgende Grafiken erstellt:\n",
                "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[1],"/\n",
                "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[2],"/\n",
                "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[3],"/\n\n",
                "Liebe Grüsse\n\nLENA")
-send_notification(Subject,Body,"robot-notification@awp.ch") #DEFAULT_MAILS
+send_notification(Subject,Body,DEFAULT_EMAILS) 
 }
 }
 }
@@ -59,8 +59,24 @@ mydb <- connectDB(db_name = "sda_elections")
 sql_qry <- paste0("UPDATE elections_metadata SET remarks = 'intermediate data published' WHERE election_ID = '",intermediate_cantons_SR$election_ID[c],"'")
 rs <- dbSendQuery(mydb, sql_qry)
 dbDisconnectAll()   
-}  
+#Send Mail
+selected_charts <- datawrapper_codes %>%
+  filter(election_ID == intermediate_cantons_SR$election_ID[c],
+         chart_type == "majorz_votes")
+
+Subject <- paste0("Kanton ",intermediate_cantons_SR$area_name_de[c],": Zwischenergebnis Ständerat zweiter Wahlgang")
+Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
+               "Ein Zwischenstand zur Ständeratswahl in ",intermediate_cantons_SR$area_name_de[c]," wurde erfasst. ",
+               "Die daten wurden in folgenden Grafiken eingelesen:\n",
+               "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[1],"/\n",
+               "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[2],"/\n",
+               "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[3],"/\n\n",
+               "Liebe Grüsse\n\nLENA")
+send_notification(Subject,Body,DEFAULT_EMAILS) 
 }
+
+}  
+
 Sys.sleep(10)
 if (hour(Sys.time()) > 22) {
 break

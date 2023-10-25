@@ -1,0 +1,796 @@
+
+R version 4.2.2 (2022-10-31 ucrt) -- "Innocent and Trusting"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> #Working Directory
+> MAIN_PATH <- "C:/Automatisierungen/"
+> setwd(paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed"))
+> 
+> #Get Libraries and needed Data
+> source("CONFIG.R")
+
+Attaching package: 'dplyr'
+
+The following objects are masked from 'package:stats':
+
+    filter, lag
+
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: 'lubridate'
+
+The following objects are masked from 'package:base':
+
+    date, intersect, setdiff, union
+
+Linking to librsvg 2.48.8
+Linking to ImageMagick 6.9.12.3
+Enabled features: cairo, freetype, fftw, ghostscript, heic, lcms, pango, raw, rsvg, webp
+Disabled features: fontconfig, x11
+
+Attaching package: 'zip'
+
+The following objects are masked from 'package:utils':
+
+    unzip, zip
+
+Rows: 2218 Columns: 12
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (10): Kanton_Short, Gemeinde_d, Gemeinde_f, Gemeinde_i, Gemeinde_KT_d, G...
+dbl  (2): Gemeinde_Nr, Kantons_Nr
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning messages:
+1: package 'xlsx' was built under R version 4.2.3 
+2: package 'rsvg' was built under R version 4.2.3 
+> 
+> #####START LOOP#####
+> repeat {
++ 
++ #Load Databases
++ source("load_databases.R")
++ 
++ ###CANTON RESULTS###
++ ##Check: Canton completed?
++ #Get counted cantons
++ source("get_counted_cantons_staenderat.R")
++ 
++ ###STAENDERAT ENDRESULTAT###
++ if (nrow(counted_cantons_SR) > 0) {
++ for (c in 1:nrow(counted_cantons_SR)) {
++ ##Chart Candidates##
++ if (counted_cantons_SR$charts_candidates[c] == "pending") {
++ source("SR_publish_candidates_charts_DE.R")
++ source("SR_publish_candidates_charts_FR.R")
++ source("SR_publish_candidates_charts_IT.R")
++ #Set Status Done
++ mydb <- connectDB(db_name = "sda_elections")  
++ sql_qry <- paste0("UPDATE output_overview SET charts_candidates = 'done' WHERE election_ID = '",counted_cantons_SR$election_ID[c],"'")
++ rs <- dbSendQuery(mydb, sql_qry)
++ dbDisconnectAll() 
++ 
++ #Send Mail
++ selected_charts <- datawrapper_codes %>%
++   filter(election_ID == counted_cantons_SR$election_ID[c],
++          chart_type == "majorz_votes")
++ 
++ Subject <- paste0("Kanton ",counted_cantons_SR$area_name_de[c],": Endergebnis Ständerat zweiter Wahlgang")
++ Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
++                "Die Ständeratergebnisse des Kantons ",counted_cantons_SR$area_name_de[c]," sind bekannt. ",
++                "Es wurden folgende Grafiken erstellt:\n",
++                "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[1],"/\n",
++                "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[2],"/\n",
++                "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[3],"/\n\n",
++                "Liebe Grüsse\n\nLENA")
++ send_notification(Subject,Body,DEFAULT_EMAILS) 
++ }
++ }
++ }
++ ###STAENDERAT ZWISCHENRESULTAT###
++ if (nrow(intermediate_cantons_SR) > 0){
++ for (c in 1:nrow(intermediate_cantons_SR)) {
++ print(paste0("New intermediate data for ",intermediate_cantons_SR$area_ID[c]," found!"))
++ source("SR_publish_candidates_charts_intermediate_DE.R")
++ source("SR_publish_candidates_charts_intermediate_FR.R")
++ source("SR_publish_candidates_charts_intermediate_IT.R")  
++ #Set Data published
++ mydb <- connectDB(db_name = "sda_elections")  
++ sql_qry <- paste0("UPDATE elections_metadata SET remarks = 'intermediate data published' WHERE election_ID = '",intermediate_cantons_SR$election_ID[c],"'")
++ rs <- dbSendQuery(mydb, sql_qry)
++ dbDisconnectAll()   
++ #Send Mail
++ selected_charts <- datawrapper_codes %>%
++   filter(election_ID == intermediate_cantons_SR$election_ID[c],
++          chart_type == "majorz_votes")
++ 
++ Subject <- paste0("Kanton ",intermediate_cantons_SR$area_name_de[c],": Zwischenergebnis Ständerat zweiter Wahlgang")
++ Body <- paste0("Liebes Keystone-SDA-Team,\n\n",
++                "Ein Zwischenstand zur Ständeratswahl in ",intermediate_cantons_SR$area_name_de[c]," wurde erfasst. ",
++                "Die daten wurden in folgenden Grafiken eingelesen:\n",
++                "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[1],"/\n",
++                "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[2],"/\n",
++                "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[3],"/\n\n",
++                "Liebe Grüsse\n\nLENA")
++ send_notification(Subject,Body,DEFAULT_EMAILS) 
++ }
++ 
++ }  
++ 
++ Sys.sleep(10)
++ if (hour(Sys.time()) > 22) {
++ break
++ }  
++ }
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+[1] "New intermediate data for ZH found!"
+1 connection(s) closed.
+Data in tr7ew successfully updated.
+
+Chart tr7ew succesfully updated.
+
+Chart tr7ew published!
+### Responsive iFrame-code: ###
+<iframe title="Wahlen 2023: Ergebnis zweiter Wahlgang Ständerat Kanton Zürich" aria-label="Tabelle" id="datawrapper-chart-tr7ew" src="https://datawrapper.dwcdn.net/tr7ew/3/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="350" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r=0;r<e.length;r++)if(e[r].contentWindow===a.source){var i=a.data["datawrapper-height"][t]+"px";e[r].style.height=i}}}))}();
+</script>
+
+### Chart-URL:###
+https://datawrapper.dwcdn.net/tr7ew/3/
+[1] "Datawrapper-Chart updated"
+1 connection(s) closed.
+Data in ajjhk successfully updated.
+
+Chart ajjhk succesfully updated.
+
+Chart ajjhk published!
+### Responsive iFrame-code: ###
+<iframe title="Fédérales 2023: résultat du second tour de l'élection au Conseil des Etats dans le canton de Zurich" aria-label="Tableau" id="datawrapper-chart-ajjhk" src="https://datawrapper.dwcdn.net/ajjhk/3/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="350" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r=0;r<e.length;r++)if(e[r].contentWindow===a.source){var i=a.data["datawrapper-height"][t]+"px";e[r].style.height=i}}}))}();
+</script>
+
+### Chart-URL:###
+https://datawrapper.dwcdn.net/ajjhk/3/
+[1] "Datawrapper-Chart updated"
+1 connection(s) closed.
+Data in JIKkI successfully updated.
+
+Chart JIKkI succesfully updated.
+
+Chart JIKkI published!
+### Responsive iFrame-code: ###
+<iframe title="Federali 2023: risultati del secondo turno dell'elezione per il Consiglio degli Stati nel canton Zurigo" aria-label="Tabella" id="datawrapper-chart-JIKkI" src="https://datawrapper.dwcdn.net/JIKkI/3/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="335" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r=0;r<e.length;r++)if(e[r].contentWindow===a.source){var i=a.data["datawrapper-height"][t]+"px";e[r].style.height=i}}}))}();
+</script>
+
+### Chart-URL:###
+https://datawrapper.dwcdn.net/JIKkI/3/
+[1] "Datawrapper-Chart updated"
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+Data in tr7ew successfully updated.
+
+Chart tr7ew succesfully updated.
+
+Chart tr7ew published!
+### Responsive iFrame-code: ###
+<iframe title="Wahlen 2023: Ergebnis zweiter Wahlgang Ständerat Kanton Zürich" aria-label="Tabelle" id="datawrapper-chart-tr7ew" src="https://datawrapper.dwcdn.net/tr7ew/4/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="350" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r=0;r<e.length;r++)if(e[r].contentWindow===a.source){var i=a.data["datawrapper-height"][t]+"px";e[r].style.height=i}}}))}();
+</script>
+
+### Chart-URL:###
+https://datawrapper.dwcdn.net/tr7ew/4/
+[1] "Datawrapper-Chart updated"
+1 connection(s) closed.
+Data in ajjhk successfully updated.
+
+Chart ajjhk succesfully updated.
+
+Chart ajjhk published!
+### Responsive iFrame-code: ###
+<iframe title="Fédérales 2023: résultat du second tour de l'élection au Conseil des Etats dans le canton de Zurich" aria-label="Tableau" id="datawrapper-chart-ajjhk" src="https://datawrapper.dwcdn.net/ajjhk/4/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="350" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r=0;r<e.length;r++)if(e[r].contentWindow===a.source){var i=a.data["datawrapper-height"][t]+"px";e[r].style.height=i}}}))}();
+</script>
+
+### Chart-URL:###
+https://datawrapper.dwcdn.net/ajjhk/4/
+[1] "Datawrapper-Chart updated"
+1 connection(s) closed.
+Data in JIKkI successfully updated.
+
+Chart JIKkI succesfully updated.
+
+Chart JIKkI published!
+### Responsive iFrame-code: ###
+<iframe title="Federali 2023: risultati del secondo turno dell'elezione per il Consiglio degli Stati nel canton Zurigo" aria-label="Tabella" id="datawrapper-chart-JIKkI" src="https://datawrapper.dwcdn.net/JIKkI/4/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="335" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r=0;r<e.length;r++)if(e[r].contentWindow===a.source){var i=a.data["datawrapper-height"][t]+"px";e[r].style.height=i}}}))}();
+</script>
+
+### Chart-URL:###
+https://datawrapper.dwcdn.net/JIKkI/4/
+[1] "Datawrapper-Chart updated"
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+1 connection(s) closed.
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(area_ID)`
+Joining with `by = join_by(election_ID)`
+Joining with `by = join_by(election_ID)`
