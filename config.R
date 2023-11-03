@@ -15,6 +15,9 @@ library(magick)
 library(zip)
 library(RCurl)
 
+#Test switch
+test <- TRUE
+
 #Main Data URL from BFS
 #BFS_API_URL <-
 #  "https://ckan.ogdch-abnahme.clients.liip.ch/api/3/action/package_show?id=eidg-wahlen-2023"
@@ -22,6 +25,9 @@ BFS_API_URL <- "https://ckan.opendata.swiss/api/3/action/package_show?id=eidg-wa
 
 #Main Emails
 DEFAULT_EMAILS <- "robot-notification@awp.ch,contentdevelopment@keystone-sda.ch"
+if (test) {
+  DEFAULT_EMAILS <- "tt@awp.ch"
+}
 
 #Datawrapper Auth
 datawrapper_auth(Sys.getenv("DW_KEY"), overwrite = TRUE)

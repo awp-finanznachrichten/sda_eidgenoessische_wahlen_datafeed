@@ -4,7 +4,7 @@ rs <-
   dbSendQuery(
     mydb,
     paste0(
-      "SELECT * FROM candidates_results WHERE date = '2023-10-22' AND elected = 1"
+      "SELECT * FROM candidates_results WHERE date >= '2023-10-22' AND elected = 1"
     )
   )
 elected_candidates_overall <- fetch(rs, n = -1)

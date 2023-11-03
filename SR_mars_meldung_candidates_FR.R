@@ -56,7 +56,9 @@ cat(vorlage, file = (con <- file(filename, "w", encoding="UTF-8"))); close(con)
 
 Sys.sleep(5)
 ###FTP-Upload
-ftpUpload(filename, paste0("ftp://awp-lena.sda-ats.ch/",filename),userpwd=Sys.getenv("ftp_sda"))
+if (!test) {
+  ftpUpload(filename, paste0("ftp://awp-lena.sda-ats.ch/",filename),userpwd=Sys.getenv("ftp_sda"))
+}
 
 setwd("..")
 
