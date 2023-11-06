@@ -11,7 +11,7 @@ counted_cantons_SR <- election_metadata %>%
   left_join(output_overview) %>%
   filter(area_type == "canton",
          council == "SR") %>%
-  mutate(seats_available_SR = ifelse(grepl("FR|GE|VD|VS|AG|SH|SO|ZH|TI",area_ID) == TRUE,
+  mutate(seats_available_SR = ifelse(grepl("VD|AG|SH|SO|ZH",area_ID) == TRUE,
                                      seats_available_SR-1,
                                      seats_available_SR))
 
@@ -25,6 +25,6 @@ intermediate_cantons_SR <- election_metadata %>%
   left_join(output_overview) %>%
   filter(area_type == "canton",
          council == "SR") %>%
-  mutate(seats_available_SR = ifelse(grepl("FR|GE|VD|VS|AG|SH|SO|ZH|TI",area_ID) == TRUE,
+  mutate(seats_available_SR = ifelse(grepl("VD|AG|SH|SO|ZH",area_ID) == TRUE,
                                      seats_available_SR-1,
                                      seats_available_SR))
