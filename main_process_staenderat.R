@@ -44,11 +44,20 @@ repeat {
                        "https://www.datawrapper.de/_/",selected_charts$datawrapper_ID[3],"/\n\n",
                        "Liebe Grüsse\n\nLENA")
         send_notification(Subject,Body,DEFAULT_EMAILS) 
+      } 
+      if (counted_cantons_SR$texts_candidates[c] == "pending") {
         ###Text meldung
         source("SR_text_candidates.R")
         source("SR_mars_meldung_candidates_DE.R")
         source("SR_mars_meldung_candidates_FR.R")
         source("SR_mars_meldung_candidates_IT.R")
+        #Set Status Done
+        mydb <- connectDB(db_name = "sda_elections")  
+        sql_qry <- paste0("UPDATE output_overview SET texts_candidates = 'done' WHERE election_ID = '",counted_cantons_SR$election_ID[c],"'")
+        rs <- dbSendQuery(mydb, sql_qry)
+        dbDisconnectAll() 
+      }
+      if (counted_cantons_SR$charts_results[c] == "pending") {
         ###Flourish-CSV-Files
         source("All_create_output_candidates_flourish.R")
         #Send Mail
@@ -61,6 +70,11 @@ repeat {
                                        paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_fr.csv"),
                                        paste0(MAIN_PATH,"sda_eidgenoessische_wahlen_datafeed/Output/elected_candidates_overall_it.csv")),
                         recipients = DEFAULT_EMAILS)
+        #Set Status Done
+        mydb <- connectDB(db_name = "sda_elections")  
+        sql_qry <- paste0("UPDATE output_overview SET charts_results = 'done' WHERE election_ID = '",counted_cantons_SR$election_ID[c],"'")
+        rs <- dbSendQuery(mydb, sql_qry)
+        dbDisconnectAll() 
       }
     }
   }
